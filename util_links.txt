@@ -1,0 +1,4 @@
+https://web.mit.edu/gnu/doc/html/rlman_2.html 
+
+https://tiswww.case.edu/php/chet/readline/readline.html
+
