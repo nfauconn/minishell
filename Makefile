@@ -6,7 +6,8 @@ INCLUDES = -I includes -I libft/includes
 LD_FLAGS = -L libft -ltinfo -lreadline
 COMP = ${CC} ${CFLAGS}
 RM	 = rm -rf
-SRCS = test.c
+SRCS =	main.c \
+		signals.c
 OBJS = ${addprefix ${OBJ_DIR}/,${SRCS:.c=.o}}
 
 ${OBJ_DIR}/%.o: %.c

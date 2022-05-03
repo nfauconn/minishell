@@ -1,0 +1,1 @@
+ENTER if line is empty=========================================================SHOULD NOT EXIT (but how to handle ctrl-D then)
