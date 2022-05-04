@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 18:25:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/05/03 17:17:56 by user42           ###   ########.fr       */
+/*   Updated: 2022/05/04 15:15:38 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # define _GNU_SOURCE
 
+# include "builtins.h"
 # include "extern_libs.h"
 # include "ft_printf.h"
 # include "libft.h"

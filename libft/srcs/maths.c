@@ -6,11 +6,20 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 12:26:13 by user42            #+#    #+#             */
-/*   Updated: 2021/10/14 18:40:24 by user42           ###   ########.fr       */
+/*   Updated: 2022/05/04 13:51:48 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+float	ft_negative_power(int nb, int power)
+{
+	float	res;
+
+	power *= -1;
+	res = 1 / ft_power(nb, power);
+	return (res);
+}
 
 t_ull	ft_power(int nb, int power)
 {
@@ -19,19 +28,10 @@ t_ull	ft_power(int nb, int power)
 
 	i = 1;
 	if (power < 0)
-		ft_putstr_fd("ft_power : for neg power, use ft_negative_power", 2);
+		ft_negative_power(nb, power);
 	res = nb;
 	while (i++ < power)
 		res = res * nb;
-	return (res);
-}
-
-float	ft_negative_power(int nb, int power)
-{
-	float	res;
-
-	power *= -1;
-	res = 1 / ft_power(nb, power);
 	return (res);
 }
 
