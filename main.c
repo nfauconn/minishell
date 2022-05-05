@@ -7,7 +7,13 @@ char	*get_input()
 	line_read = readline("minishell> ");
 	if (line_read && *line_read)
 		add_history(line_read);
-	else// if ((int)line_read == EOF)
+	if (line_read && *line_read == '\0')
+	{
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+	}
+	else// if (line_read != // if ((int)line_read == EOF)
 	{
 		ft_putstr_fd("exit\n", 1);
 		free(line_read);
