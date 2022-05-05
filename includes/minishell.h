@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 18:25:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/05/05 18:08:13 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/05/05 18:48:48 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 typedef struct s_input
 {
 	char	*line_read;
-	char	cmd;
+	char	*cmd;
 	char	**args;
 	int		is_stdin_redir;
 	char	*stdin_file;

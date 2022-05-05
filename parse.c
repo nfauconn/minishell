@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 16:17:26 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/05/05 18:32:57 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/05/05 18:48:48 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,4 @@ void	parse_line(t_input *input, char *line)
 			input->stdin_file = ft_substr(tmp, 0, line - tmp);
 	}
 	go_forward_whitespaces(&line);
-	
 }
