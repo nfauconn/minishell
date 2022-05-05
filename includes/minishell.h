@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 18:25:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/05/05 12:09:24 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/05/05 18:08:13 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,22 @@
 # define STDIN 0
 # define STDOUT 1
 # define STDERR 2
+# define QUOTE 34
+# define DOUBLE_QUOTE 39
 
-typedef struct s_line
+typedef struct s_input
 {
 	char	*line_read;
 	char	cmd;
 	char	**args;
-	int		stdin;
-	int		stdout;
+	int		is_stdin_redir;
+	char	*stdin_file;
+	int		is_stdout_redir;
+	char	*stdout_file;
 
-}				t_line;
+}	t_input;
 
+void	end(t_input *input);
+void	parse_line(t_input *input, char *line);
 
 #endif

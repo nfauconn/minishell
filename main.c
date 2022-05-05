@@ -6,14 +6,21 @@ char	*get_input()
 
 	line_read = readline("minishell> ");
 	if (line_read && *line_read)
+	{
+		if (ft_strncmp(line_read, "exit", 4) == 0)
+		{
+			free(line_read);
+			exit(1);
+		}
 		add_history(line_read);
-	if (line_read && *line_read == '\0')
+	}
+	else if (line_read && *line_read == '\0')
 	{
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
 	}
-	else// if (line_read != // if ((int)line_read == EOF)
+	else
 	{
 		ft_putstr_fd("exit\n", 1);
 		free(line_read);
@@ -24,12 +31,13 @@ char	*get_input()
 
 int	main()
 {
-	char	*input;
+	t_input	input;
 
 	while (1)
 	{
 		get_signals();
-		input = get_input();
-		free(input);
+		input.line_read = get_input();
+		parse_line(&input, input.line_read);
+		end(&input);
 	}
 }
