@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 18:25:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/05/05 18:48:48 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/05/07 17:40:55 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,6 @@ typedef struct s_input
 }	t_input;
 
 void	end(t_input *input);
-void	parse_line(t_input *input, char *line);
+char	**tokenized_cmd(t_input *input, char *cmd);
 
 #endif
