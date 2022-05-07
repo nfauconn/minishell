@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 16:17:26 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/05/07 17:41:21 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/05/07 19:33:00 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,46 @@
 
 #include "minishell.h"
 
-static void	go_through_print_whithout_ws(char **s)
-{
-	while (ft_isprint(**s) && !ft_is_whitespace(**s))
-		(*s)++;
-}
-
 static void	go_through_whitespaces(char **s)
 {
 	while (ft_is_whitespace(**s))
 		(*s)++;
+}
+
+static int	is_ending_quote(char **s, char c)
+{
+	while (**s && **s != '|')
+	{
+		(*s)++;
+		if (**s == c)
+			return (1);
+	}
+	return (0);
+}
+
+static char	*find_end_token(char *s)
+{
+	char	*tmp;
+
+	if (*s++ == '\"')
+	{
+		tmp = s;
+		if (!is_ending_quote(&s, '\"'))
+			s = tmp;
+		s++;
+		return (s);
+	}
+	else if (*s++ == '\'')
+	{
+		tmp = s;
+		if (!is_ending_quote(&s, '\''))
+			s = tmp;
+		s++;
+		return (s);
+	}
+	while (ft_isprint(*s) && !ft_is_whitespace(*s) && *s != '\'' && *s != '\"')
+		s++;
+	return (s);
 }
 
 static int	word_count(char *s)
@@ -47,7 +77,7 @@ static int	word_count(char *s)
 	{
 		count++;
 		go_through_whitespaces(&s);
-		go_through_print_whithout_ws(&s);
+		s = find_end_token(s);
 	}
 	return (count);
 }
@@ -67,14 +97,13 @@ char	**tokenized_cmd(t_input *input, char *cmd)
 	{
 		go_through_whitespaces(&cmd);
 		tmp = cmd;
-		go_through_print_whithout_ws(&cmd);
+		cmd = find_end_token(cmd);
 		tokenized[i] = ft_substr(tmp, 0, cmd - tmp);
 		i++;
 	}
 	tokenized[size] = NULL;
 	return (tokenized);
 }
-
 
 /* static void	go_forward_whitespaces(char **line)
 {
