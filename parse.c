@@ -1,28 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/05 16:17:26 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/05/07 19:33:00 by nfauconn         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include "minishell.h"
-
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   tokenizer.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/06 13:17:14 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/05/07 17:09:53 by nfauconn         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -36,36 +11,31 @@ static int	is_ending_quote(char **s, char c)
 {
 	while (**s && **s != '|')
 	{
-		(*s)++;
 		if (**s == c)
 			return (1);
 	}
 	return (0);
 }
 
-static char	*find_end_token(char *s)
+static void	find_end_token(char **s)
 {
 	char	*tmp;
+	char	c;
 
-	if (*s++ == '\"')
+	c = **s;
+	if (c == '\"' || c == '\'')
 	{
-		tmp = s;
-		if (!is_ending_quote(&s, '\"'))
-			s = tmp;
-		s++;
-		return (s);
+		(*s)++;
+		tmp = (*s);
+		if (is_ending_quote(s, c))
+			return ;
+		else
+		{
+			(*s) = tmp;
+			while (ft_isprint(**s) && !ft_is_whitespace(**s) && (**s) != '\'' && (**s) != '\"')
+				(*s)++;
+		}
 	}
-	else if (*s++ == '\'')
-	{
-		tmp = s;
-		if (!is_ending_quote(&s, '\''))
-			s = tmp;
-		s++;
-		return (s);
-	}
-	while (ft_isprint(*s) && !ft_is_whitespace(*s) && *s != '\'' && *s != '\"')
-		s++;
-	return (s);
 }
 
 static int	word_count(char *s)
@@ -77,7 +47,7 @@ static int	word_count(char *s)
 	{
 		count++;
 		go_through_whitespaces(&s);
-		s = find_end_token(s);
+		find_end_token(&s);
 	}
 	return (count);
 }
@@ -97,7 +67,7 @@ char	**tokenized_cmd(t_input *input, char *cmd)
 	{
 		go_through_whitespaces(&cmd);
 		tmp = cmd;
-		cmd = find_end_token(cmd);
+		find_end_token(&cmd);
 		tokenized[i] = ft_substr(tmp, 0, cmd - tmp);
 		i++;
 	}

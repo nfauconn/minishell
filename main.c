@@ -41,7 +41,8 @@ int	main()
 		int i = 0;
 		while (input.args[i])
 			printf("|%s| ", input.args[i++]);
-		printf("\n");
+		if (i > 0)
+			printf("\n");
 		end(&input);
 	}
 }
