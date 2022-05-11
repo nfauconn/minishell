@@ -36,13 +36,9 @@ int	main()
 	while (1)
 	{
 		get_signals();
+		init(&input);
 		input.line_read = get_input();
-		input.args = tokenized_cmd(&input, input.line_read);
-		int i = 0;
-		while (input.args[i])
-			printf("|%s| ", input.args[i++]);
-		if (i > 0)
-			printf("\n");
+		tokenize_input(&input, input.line_read);
 		end(&input);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 18:25:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/05/07 17:40:55 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/05/11 17:29:59 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,12 @@
 typedef struct s_input
 {
 	char	*line_read;
-	char	*cmd;
-	char	**args;
-	int		is_stdin_redir;
-	char	*stdin_file;
-	int		is_stdout_redir;
-	char	*stdout_file;
-
+	t_list	*token_line;
 }	t_input;
 
 void	end(t_input *input);
-char	**tokenized_cmd(t_input *input, char *cmd);
+void	init(t_input *input);
+void	tokenize_input(t_input *input, char *line);
+//char	**tokenized_cmd(t_input *input, char *cmd);
 
 #endif

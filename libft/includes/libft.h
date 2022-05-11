@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 16:22:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/05/11 16:20:35 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/05/11 16:58:47 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ typedef struct s_double_vector
 typedef struct s_list
 {
 	void			*content;
-	struct s_list	*prev;
 	struct s_list	*next;
 }	t_list;
 

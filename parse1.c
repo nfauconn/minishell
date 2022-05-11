@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   parse1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 16:54:56 by user42            #+#    #+#             */
-/*   Updated: 2022/05/11 16:31:10 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/05/11 17:45:29 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,14 @@ static void	find_end_token(char **s)
 		(*s)++;
 }
 
+static void	find_end_token()
+{
+	end_of_token = cmd;
+	find_end_token(&end_of_token);
+	if (ft_is_quote(*end_of_token))
+		end_of_token++;
+}
+
 static int	word_count(char *s)
 {
 	int		count;
@@ -105,10 +113,7 @@ char	**tokenized_cmd(t_input *input, char *cmd)
 		while (ft_is_whitespace(*cmd))
 			cmd++;
 		start = cmd;
-		end_of_token = cmd;
-		find_end_token(&end_of_token);
-		if (ft_is_quote(*end_of_token))
-			end_of_token++;
+		end_of_token = find_end_token(&cmd);
 		tokenized[i] = ft_substr(end_of_token, 0, end_of_token - start);
 		i++;
 	}
