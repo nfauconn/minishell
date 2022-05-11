@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 16:54:56 by user42            #+#    #+#             */
-/*   Updated: 2022/05/10 17:15:09 by user42           ###   ########.fr       */
+/*   Updated: 2022/05/11 16:31:10 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,30 @@ static int	ft_is_quote(int c)
 
 static int	is_ending_quote(char **s, char c)
 {
+	char	*tmp;
+
 	while (**s && **s != '|')
 	{
 		if (**s == c)
-			return (1);
-		(*s)++;
+		{
+			tmp = *s;
+			while (**s && ft_isprint(**s) && !ft_is_whitespace(**s) && **s != c && **s != '|')
+			{
+				(*s)++;
+				if (ft_is_quote(**s))
+				{
+					(*s)++;
+					break;
+				}
+				else if (!(**s))
+				{
+					(*s) = tmp;
+					return (1);
+				}
+			}
+		}
+		else
+			(*s)++;
 	}
 	return (0);
 }
@@ -47,7 +66,7 @@ static void	find_end_token(char **s)
 		else
 			(*s) = tmp;
 	}
-	while (ft_isprint(**s) && !ft_is_whitespace(**s) && (**s) != '\'' && (**s) != '\"')
+	while (**s && ft_isprint(**s) && !ft_is_whitespace(**s) && !ft_is_quote(**s))
 		(*s)++;
 }
 
@@ -71,7 +90,8 @@ static int	word_count(char *s)
 
 char	**tokenized_cmd(t_input *input, char *cmd)
 {
-	char	*tmp;
+	char	*start;
+	char	*end_of_token;
 	char	**tokenized;
 	int		size;
 	int		i;
@@ -84,11 +104,12 @@ char	**tokenized_cmd(t_input *input, char *cmd)
 	{
 		while (ft_is_whitespace(*cmd))
 			cmd++;
-		tmp = cmd;
-		find_end_token(&cmd);
-		if (ft_is_quote(*cmd))
-			cmd++;
-		tokenized[i] = ft_substr(tmp, 0, cmd - tmp);
+		start = cmd;
+		end_of_token = cmd;
+		find_end_token(&end_of_token);
+		if (ft_is_quote(*end_of_token))
+			end_of_token++;
+		tokenized[i] = ft_substr(end_of_token, 0, end_of_token - start);
 		i++;
 	}
 	tokenized[size] = NULL;
