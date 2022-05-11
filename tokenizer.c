@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 16:59:04 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/05/11 19:36:11 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/05/11 20:00:27 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,17 @@ static int	ft_is_quote(int c)
 
 static void	find_end(char **s)
 {
-	while (**s && (**s != '|') && !ft_is_whitespace(**s) && !ft_is_quote(**s))
-		(*s)++;
-	if (ft_is_quote(**s))
+	while (**s && (**s != '|') && !ft_is_whitespace(**s))
 	{
-		/*  tmp = *s (to keep the address of exploring start)
-			is closing quote ? 
-			> yes -> end = after this quote
-			> no -> 
-		*/
+		if (ft_is_quote(**s))
+		{
+			/*  tmp = *s (to keep the address in case no closing quote : restart the exploring)
+				go forward *s while **s != '|' to find the same quote /!\ if quote then no whitespace then quote : still go forward
+				> if found same quote -> return ; (because end of token is found)
+				> if didnt -> *s = tmp ; (*s)++; continue to search a whitespace to end token
+			*/
+		}
+		(*s)++;
 	}
 }
 
@@ -67,34 +69,3 @@ void	tokenize_input(t_input *input, char *line)
 	ft_lstiter(input->token_line, display_list);
 	printf("\n");
 }
-
-/* 	
-
-static void	one_token()
-{
-	char	*token;
-	t_list	*new;
-
-	token = ft_substr(jefheri);
-	new = lst_new(token);
-	ft_lst_add_back(input->token_line, new);
-}	
-
-void	tokenize_input
-{	
-	while (*line)
-	{
-		while (line = whitespace)
-			line++;
-		if (line)
-		{
-			- QUOTE
-			- caracteres --> avancer jusqua - whitespace ou /0 ou '|'= END OF TOKEN
-											- quote -->
-
-											
-		}
-		
-	}
-}
- */
