@@ -13,7 +13,8 @@ ft_strdel.c ft_strdup.c ft_strfdup.c ft_strfjoin.c ft_strjoin.c ft_strlcat.c ft_
 ft_strnstr.c ft_strrchr.c ft_strtrim.c ft_substr.c ft_tolower.c ft_toupper.c ft_ulltoa_base.c get_next_line.c maths.c \
 rev_int_tab.c sort_int_tab.c str_isdigit.c strfjoinchar.c pf_conv_c.c ft_strend_cmp.c \
 pf_conv_s.c pf_conv_p.c pf_conv_d_i.c pf_conv_u.c pf_conv_x.c pf_conv_mx.c pf_conv_percent.c pf_convert.c pf_fill_nb.c\
-pf_isflag.c pf_ft_printf.c pf_init.c pf_insert_into_buffer.c pf_main_loop.c pf_parse_printf.c
+pf_isflag.c pf_ft_printf.c pf_init.c pf_insert_into_buffer.c pf_main_loop.c pf_parse_printf.c \
+ft_lstadd_back.c  ft_lstadd_front.c  ft_lstclear.c  ft_lstdelone.c  ft_lstiter.c  ft_lstlast.c	ft_lstmap.c  ft_lstnew.c  ft_lstsize.c
 
 OBJS  = ${addprefix ${OBJ_DIR}/,${SRCS:%.c=%.o}}
 

@@ -9,7 +9,8 @@ RM	 = rm -rf
 SRCS =	end.c \
 		main.c \
 		parse.c \
-		signals.c
+		signals.c \
+		builtins.c
 OBJS = ${addprefix ${OBJ_DIR}/,${SRCS:.c=.o}}
 
 ${OBJ_DIR}/%.o: %.c

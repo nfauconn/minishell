@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.h                                         :+:      :+:    :+:   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdankou <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/11 15:52:13 by mdankou           #+#    #+#             */
-/*   Updated: 2022/05/11 15:53:58 by mdankou          ###   ########.fr       */
+/*   Created: 2021/12/01 09:21:10 by mdankou           #+#    #+#             */
+/*   Updated: 2021/12/01 09:21:28 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTINS_H
-# define BUILTINS_H
+#include "libft.h"
 
-int pwd(char **args);
-int cd(char **args);
-int echo(char **args);
-int env(void *env);
-int unset(void *env, char **var_name);
-int export(void *env, char **var_assign);
-
-#endif
+void	ft_lstiter(t_list *lst, void (*f)(void *))
+{
+	while (lst)
+	{
+		f(lst->content);
+		lst = lst->next;
+	}
+}
