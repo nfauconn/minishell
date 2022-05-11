@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.h                                         :+:      :+:    :+:   */
+/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdankou <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/11 15:52:13 by mdankou           #+#    #+#             */
-/*   Updated: 2022/05/11 15:53:58 by mdankou          ###   ########.fr       */
+/*   Created: 2021/12/01 09:15:56 by mdankou           #+#    #+#             */
+/*   Updated: 2021/12/01 09:16:44 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTINS_H
-# define BUILTINS_H
+#include <stdlib.h>
+#include "libft.h"
 
-int pwd(char **args);
-int cd(char **args);
-int echo(char **args);
-int env(void *env);
-int unset(void *env, char **var_name);
-int export(void *env, char **var_assign);
-
-#endif
+void	ft_lstadd_front(t_list **lst, t_list *new)
+{
+	new->next = (*lst);
+	*lst = new;
+}

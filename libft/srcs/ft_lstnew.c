@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.h                                         :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdankou <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/11 15:52:13 by mdankou           #+#    #+#             */
-/*   Updated: 2022/05/11 15:53:58 by mdankou          ###   ########.fr       */
+/*   Created: 2021/12/01 09:15:08 by mdankou           #+#    #+#             */
+/*   Updated: 2021/12/08 13:20:24 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTINS_H
-# define BUILTINS_H
+#include <stdlib.h>
+#include "libft.h"
 
-int pwd(char **args);
-int cd(char **args);
-int echo(char **args);
-int env(void *env);
-int unset(void *env, char **var_name);
-int export(void *env, char **var_assign);
+t_list	*ft_lstnew(void *content)
+{
+	t_list	*elm;
 
-#endif
+	elm = (t_list *)malloc(sizeof(t_list));
+	if (!elm)
+		return (0);
+	elm->content = content;
+	elm->next = NULL;
+	return (elm);
+}
