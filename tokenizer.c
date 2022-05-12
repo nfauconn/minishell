@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 16:59:04 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/05/12 16:23:13 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/05/12 17:48:56 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,13 @@ static int	ft_is_quote(int c)
 
 static int	quote_is_surrounding_next_word(char **s, char quote)
 {
-	char	*tmp;
-
-	while (**s && )
+	while (**s && **s != '$' && !ft_is_whitespace(**s) )
+	{
+		(*s)++;
+		if (**s == quote)
+			return (1);
+	}
+	return (0);
 }
 
 static int	find_closing_quote(char **s, char quote)
@@ -29,11 +33,12 @@ static int	find_closing_quote(char **s, char quote)
 	char	*tmp;
 
 	(*s)++;
-	while (**s && **s != '|')
+	while (**s)
 	{
 		if (**s == quote)
 		{
 			/*
+			** go forward *s while **s != '|' to find the same quote /!\
 			** if this is a quote surrounding a word with no whitespaces (OR METACHAR !!!!!!!!!!! $ en tout cas) 
 			** 	> continue to search a closing quote
 			** else
@@ -60,14 +65,14 @@ static void	find_end(char **s)
 		if (ft_is_quote(**s))
 		{
 			/*  tmp = *s (to keep the address in case no closing quote : restart the exploring)
-				go forward *s while **s != '|' to find the same quote /!\ if quote then no whitespace then quote : still go forward
 				> if found same quote -> return ; (because end of token is found)
 				> if didnt -> *s = tmp ; (*s)++; continue to search a whitespace to end token
 			*/
 			tmp = (*s);
 			if (find_closing_quote(s, **s))
 				return ;
-			(*s) = tmp;
+			else
+				(*s) = tmp;
 		}
 		(*s)++;
 	}
@@ -99,7 +104,8 @@ void	tokenize_input(t_input *input, char *line)
 		start = line;
 		find_end(&line);
 		end = line;
-		token = ft_substr(start, 0, end - start);
+		printf("end = |%c|\n", *line);
+		token = ft_substr(start, 0, end - start + 1);
 		if (token)
 		{
 			new = ft_lstnew(token);
