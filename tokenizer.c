@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 16:59:04 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/05/11 20:00:27 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/05/12 16:23:13 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,44 @@ static int	ft_is_quote(int c)
 	return (c == QUOTE || c == DOUBLE_QUOTE);
 }
 
+static int	quote_is_surrounding_next_word(char **s, char quote)
+{
+	char	*tmp;
+
+	while (**s && )
+}
+
+static int	find_closing_quote(char **s, char quote)
+{
+	char	*tmp;
+
+	(*s)++;
+	while (**s && **s != '|')
+	{
+		if (**s == quote)
+		{
+			/*
+			** if this is a quote surrounding a word with no whitespaces (OR METACHAR !!!!!!!!!!! $ en tout cas) 
+			** 	> continue to search a closing quote
+			** else
+			** 	> go back to the found quote and return (1);
+			*/
+			tmp = (*s);
+			if (!quote_is_surrounding_next_word(s, quote)) //return a pointer to the location / NULL if didnt found ? maybe easier to use
+			{
+				(*s) = tmp;
+				return (1);
+			}
+		}
+		(*s)++;
+	}
+	return (0);
+}
+
 static void	find_end(char **s)
 {
+	char	*tmp;
+
 	while (**s && (**s != '|') && !ft_is_whitespace(**s))
 	{
 		if (ft_is_quote(**s))
@@ -28,6 +64,10 @@ static void	find_end(char **s)
 				> if found same quote -> return ; (because end of token is found)
 				> if didnt -> *s = tmp ; (*s)++; continue to search a whitespace to end token
 			*/
+			tmp = (*s);
+			if (find_closing_quote(s, **s))
+				return ;
+			(*s) = tmp;
 		}
 		(*s)++;
 	}
