@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 16:59:04 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/05/13 16:28:33 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/05/13 17:55:08 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static char	*find_end(char **s)
 {
 	char	*tmp;
 
-	while (**s && !ft_is_shell_separator(**s) && !ft_iswhitespace(**s))
+	while (**s && !ft_iswhitespace(**s) && !ft_is_shell_separator(**s))
 	{
 		if (ft_is_quote(**s) && (*((*s) + 1) != '\0'))
 		{
@@ -108,16 +108,21 @@ void	tokenize_input(t_input *input, char *line)
 	while (*line)
 	{
 		start = find_start(&line);
-		end = find_end(&line);
-		token = ft_substr(start, 0, end - start);
-		printf("token = |%s|\n", token);
+		if (*line == '|')
+		{
+			line++;
+			token = ft_strdup("|");
+		}
+		else
+		{
+			end = find_end(&line);
+			token = ft_substr(start, 0, end - start);
+		}
 		if (token)
 		{
 			new = ft_lstnew(token);
 			ft_lstadd_back(&input->token_line, new);
 		}
-		line++;
-//		line += end - start;
 	}
 	ft_lstiter(input->token_line, display_list);
 	printf("\n");
