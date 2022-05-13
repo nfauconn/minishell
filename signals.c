@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 17:55:15 by user42            #+#    #+#             */
-/*   Updated: 2022/05/03 18:14:53 by user42           ###   ########.fr       */
+/*   Updated: 2022/05/13 15:42:18 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,20 @@ static void	set_sigact(int signum, struct sigaction *s)
 	sigaction(signum, s, NULL);
 }
 
-void	get_signals(void)
+void	signal_catching_mode(int mode)
 {
 	struct sigaction	ctrl_c;
 	struct sigaction	ctrl_backslash;
 
-	ctrl_c.sa_sigaction = new_line;
-	ctrl_backslash.sa_handler = SIG_IGN;
-	set_sigact(SIGINT, &ctrl_c);
-	set_sigact(SIGQUIT, &ctrl_backslash);
+	if (mode == INTERACTIVE)
+	{
+		ctrl_c.sa_handler = NULL;
+		ctrl_c.sa_sigaction = new_line;
+		set_sigact(SIGINT, &ctrl_c);
+		ctrl_backslash.sa_handler = SIG_IGN;
+	}
+	else if (mode == PGM_EXEC)
+	{
+		ctrl_c.sa_handler = SIG_DFL;
+	}
 }

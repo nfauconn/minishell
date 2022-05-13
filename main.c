@@ -35,7 +35,7 @@ int	main()
 
 	while (1)
 	{
-		get_signals();
+		signal_catching_mode(INTERACTIVE);
 		init(&input);
 		input.line_read = get_input();
 		tokenize_input(&input, input.line_read);

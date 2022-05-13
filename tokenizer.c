@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 16:59:04 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/05/13 11:47:19 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/05/13 15:46:58 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,14 @@ static int	ft_is_quote(int c)
 	return (c == QUOTE || c == DOUBLE_QUOTE);
 }
 
+static int	ft_is_shell_separator(int c)
+{
+	return (c == '|');
+}
+
 static int	quote_is_surrounding_next_word(char **s, char quote)
 {
+	(*s)++;
 	while (**s && **s != '$' && !ft_iswhitespace(**s) )
 	{
 		if (**s == quote)
@@ -28,69 +34,52 @@ static int	quote_is_surrounding_next_word(char **s, char quote)
 	return (0);
 }
 
-static int	find_closing_quote(char **s, char quote)
+static char	*find_closing_quote(char *s, char quote)
 {
 	char	*tmp;
 
-	while (**s)
+	while (*s)
 	{
-		(*s)++;
-		if (**s == quote)
+		if (*s == quote)
 		{
-			printf("**s (%c) == quote\n", **s);
-			/*
-			** go forward *s while **s to find the same quote /!\ dont care about pipes in this case because they would not be interpreted if they are btww quotes
-			** if this is a quote surrounding a word with no whitespaces (OR METACHAR !!!!!!!!!!! $ en tout cas) 
-			** 	> continue to search a closing quote
-			** else
-			** 	> go back to the found quote and return (1);
-			*/
-			tmp = (*s);
-			(*s)++;
-			if (!quote_is_surrounding_next_word(s, quote)) //return a pointer to the location / NULL if didnt found ? maybe easier to use
-			{
-				printf("quote is not surrounding next word, search for closing quote continues \n");
-				(*s) = tmp;
-				return (1);
-			}
-			else
-				printf("quote was surrounding next word, here is *s : %s\n", *s);
+			tmp = s;
+			if (!quote_is_surrounding_next_word(&s, quote))
+				return (tmp);
 		}
+		s++;
 	}
-	return (0);
+	return (NULL);
 }
 
-static void	find_end(char **s)
+static char	*find_end(char *s)
 {
 	char	*tmp;
 
-	while (**s && (**s != '|') && !ft_iswhitespace(**s))
+	while (*s && !ft_is_shell_separator(*s) && !ft_iswhitespace(*s))
 	{
-		if (ft_is_quote(**s))
+		if (ft_is_quote(*s) && (*(s + 1) != '\0'))
 		{
-			/*  tmp = *s (to keep the address in case no closing quote : restart the exploring)
-				> if found same quote -> return ; (because end of token is found)
-				> if didnt -> *s = tmp ; (*s)++; continue to search a whitespace to end token
-			*/
-//			printf("found a quote\n");
-			tmp = (*s);
-			if (find_closing_quote(s, **s))
-			{
-				printf("found a closing quote\n");
-				return ;
-			}
+			tmp = s;
+			if (quote_is_surrounding_next_word(&s, *s))
+				return (s);
+			s = ++tmp;
+			s = find_closing_quote(s, *s);
+			if (s)
+				return (s);
 			else
-				(*s) = tmp;
+				s = tmp;
 		}
 		else
-			(*s)++;
+			s++;
 	}
+	return (s);
 }
 
-static void	find_start(char **s)
+static char	*find_start(char *s)
 {
-	while (ft_iswhitespace(**s))
-		(*s)++;
+	while (ft_iswhitespace(*s))
+		s++;
+	return (s);
 }
 
 static void	display_list(void *content)
@@ -105,22 +94,19 @@ void	tokenize_input(t_input *input, char *line)
 	char	*token;
 	t_list	*new;
 
+	signal_catching_mode(PGM_EXEC);
 	while (*line)
 	{
-		find_start(&line);
-		if (*line == '\0')
-			break ;
-		start = line;
-		find_end(&line);
-		end = line;
-		printf("end = |%c|\n", *line);
-		token = ft_substr(start, 0, end - start + 1);
+		start = find_start(line);
+		end = find_end(line);
+		token = ft_substr(start, 0, end - start);
 		printf("token = |%s|\n", token);
 		if (token)
 		{
 			new = ft_lstnew(token);
 			ft_lstadd_back(&input->token_line, new);
 		}
+		line += end - start;
 	}
 	ft_lstiter(input->token_line, display_list);
 	printf("\n");
