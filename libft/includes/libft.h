@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 16:22:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/05/13 11:57:55 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/05/13 12:00:45 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ float		ft_negative_power(int nb, int power);
 t_v			ft_operate_vector(t_v vector, char operation, int nb);
 t_ull		ft_power(int nb, int power);
 void		ft_rev_int_tab(int *tab, int size);
-int			*ft_sort_int_array(int *tab, int size);
+int			*ft_sort_int_tab(int *tab, int size);
 int			ft_square_root(int nb);
 
 /* MEMORY */
