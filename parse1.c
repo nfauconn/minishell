@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 16:54:56 by user42            #+#    #+#             */
-/*   Updated: 2022/05/11 17:45:29 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/05/13 11:47:19 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	is_ending_quote(char **s, char c)
 		if (**s == c)
 		{
 			tmp = *s;
-			while (**s && ft_isprint(**s) && !ft_is_whitespace(**s) && **s != c && **s != '|')
+			while (**s && ft_isprint(**s) && !ft_iswhitespace(**s) && **s != c && **s != '|')
 			{
 				(*s)++;
 				if (ft_is_quote(**s))
@@ -66,7 +66,7 @@ static void	find_end_token(char **s)
 		else
 			(*s) = tmp;
 	}
-	while (**s && ft_isprint(**s) && !ft_is_whitespace(**s) && !ft_is_quote(**s))
+	while (**s && ft_isprint(**s) && !ft_iswhitespace(**s) && !ft_is_quote(**s))
 		(*s)++;
 }
 
@@ -86,7 +86,7 @@ static int	word_count(char *s)
 	count = 0;
 	while (*s)
 	{
-		while (ft_is_whitespace(*s))
+		while (ft_iswhitespace(*s))
 			s++;
 		tmp = s;
 		if (tmp)
@@ -110,7 +110,7 @@ char	**tokenized_cmd(t_input *input, char *cmd)
 	i = 0;
   	while (i < size)
 	{
-		while (ft_is_whitespace(*cmd))
+		while (ft_iswhitespace(*cmd))
 			cmd++;
 		start = cmd;
 		end_of_token = find_end_token(&cmd);

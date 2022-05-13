@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strfjoinchar.c                                     :+:      :+:    :+:   */
+/*   ft_strfjoinchar.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nfauconn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-char	*strfjoinchar(char *str, char c)
+char	*ft_strfjoinchar(char *str, char c)
 {
 	char	*new_str;
 	int		i;

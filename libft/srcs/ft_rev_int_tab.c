@@ -1,24 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   str_isdigit.c                                      :+:      :+:    :+:   */
+/*   ft_rev_int_tab.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nfauconn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/04 15:38:38 by nfauconn          #+#    #+#             */
-/*   Updated: 2021/09/08 10:46:54 by nfauconn         ###   ########.fr       */
+/*   Created: 2021/07/29 19:48:27 by nfauconn          #+#    #+#             */
+/*   Updated: 2021/09/08 10:20:21 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	str_isdigit(char *str)
+void	ft_rev_int_tab(int *tab, int size)
 {
-	while (*str)
+	int	i;
+	int	j;
+	int	temp;
+
+	i = 0;
+	j = size - 1;
+	while (i < size / 2)
 	{
-		if (!ft_isdigit(*str))
-			return (0);
-		str++;
+		temp = tab[i];
+		tab[i] = tab[j];
+		tab[j] = temp;
+		i++;
+		j--;
 	}
-	return (1);
 }

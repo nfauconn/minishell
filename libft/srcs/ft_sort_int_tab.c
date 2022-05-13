@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_int_tab.c                                     :+:      :+:    :+:   */
+/*   ft_sort_int_array.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nfauconn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-int	*sort_int_tab(int *tab, int size)
+int	*ft_sort_int_array(int *tab, int size)
 {
 	int	temp;
 	int	i;

@@ -1,1 +1,3 @@
-ENTER if line is empty=========================================================SHOULD NOT EXIT (but how to handle ctrl-D then)
+SIGNALS when prgram launched=========================================================seems to be reset->need to handle it 
+
+QUOTES --> infinite loop after tokenize it ('echo 'bonjour'')========================need to handle signals first, to be able to cltr-C
