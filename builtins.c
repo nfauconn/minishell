@@ -6,7 +6,7 @@
 /*   By: mdankou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 13:41:03 by mdankou           #+#    #+#             */
-/*   Updated: 2022/05/11 16:24:09 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/05/11 17:38:11 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,9 @@ int env(void *env)
 }
 
 /*False: Incomplete*/
-/*
+
+/*Faire une fontion search_previous pourrait etre une bonne idee*/
+
 int unset(void *env, char **var_name)
 {
 	size_t	j;
@@ -114,26 +116,40 @@ int unset(void *env, char **var_name)
 	int	var_len;
 
 	j = 0;
+	l = (t_list *)env;
+	str = (char *)l->content;
+	var_len = strlen(var_name[j]);
+	if (!((t_list *)env)->next && !ft_strncmp(var_name[j], str, var_len)
+		&& str[var_len] == '\0')
+	{
+		ft_lstclear((t_list **)&env, free);
+		return (0);
+	}
 	while (var_name[j])
 	{
 		l = (t_list *)env;
-		while (l && l->next)
+		while (l)
 		{
-			str = (char *)l->content;
-			var_len = strlen(var_name[j]);
-			if (!ft_strncmp(var_name[j], str, var_len)
-				&& str[var_len] == '\0')
+			elm = l->next;
+			if (elm)
 			{
-				
-				break;	
+				str = (char *)elm->content;
+				var_len = strlen(var_name[j]);
+				if (!ft_strncmp(var_name[j], str, var_len)
+					&& str[var_len] == '\0')
+				{
+					break;	
+				}
 			}
 			l = l->next;
 		}
+		l->next = elm->next;
+		ft_lstdelone(elm, free);
 		++j;
 	}
 	return (0);
 }
-*/
+
 int export(void *env, char **var_assign)
 {
 	size_t	j;
