@@ -40,6 +40,6 @@ int	main()
 		input.line_read = get_input();
 		tokenize_input(&input, input.line_read);
 		end(&input);
-//		printf("input.token_line = %p\n", input.token_line);
+//		printf("input.token_list = %p\n", input.token_list);
 	}
 }

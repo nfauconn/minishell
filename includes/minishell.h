@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 18:25:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/05/15 16:03:24 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/05/15 17:23:20 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,14 @@
 # define QUOTE 34
 # define DOUBLE_QUOTE 39
 # define PIPE 124
-# define COMMAND 0
+# define IN_REDIR 60
+# define OUT_REDIR 62 
 
 typedef struct s_input
 {
 	char	*line_read;
 	int		type;
-	t_list	*token_line;
+	t_list	*token_list;
 }	t_input;
 
 void	end(t_input *input);

@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   end.c                                              :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/05 16:09:54 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/05/15 17:09:52 by nfauconn         ###   ########.fr       */
+/*   Created: 2022/05/15 18:49:09 by nfauconn          #+#    #+#             */
+/*   Updated: 2022/05/15 18:59:44 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	end(t_input *input)
+void	clean_exit(t_input *input, char *s)
 {
-	if (input->line_read)
-		ft_strdel(&input->line_read);
-	if (input->token_list)
-		ft_lstclear(&input->token_list, free);
+	write(2, "minish: ", 8);
+	write(2, s, ft_stlren(s));
+	
+	end(input);
 }
