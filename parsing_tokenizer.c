@@ -1,21 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenizer.c                                        :+:      :+:    :+:   */
+/*   parsing_tokenizer.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 16:59:04 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/05/15 19:32:47 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/05/16 20:40:21 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static int	ft_is_quote(int c)
-{
-	return (c == QUOTE || c == DOUBLE_QUOTE);
-}
 
 static char	*find_closing_quote(char **s, char quote)
 {
@@ -30,14 +25,12 @@ static char	*find_end(char **s)
 	char	found_c;
 	char	*tmp;
 
-	if (ft_is_quote(**s) && (*((*s) + 1) != '\0'))
+	if (is_quote(**s) && (*((*s) + 1)))
 	{
 		tmp = (*s)++;
-		*s = find_closing_quote(s, *tmp);
-		if (*s)
+		if (find_closing_quote(s, *tmp))
 			return (*s);
-		else
-			*s = tmp;
+		*s = tmp;
 	}
 	if (**s == IN_REDIR || **s == OUT_REDIR || **s == PIPE)
 	{
@@ -46,12 +39,11 @@ static char	*find_end(char **s)
 			(*s)++;
 		return (*s);
 	}
-	while (**s && !ft_iswhitespace(**s) && **s != PIPE)
-	{
-		(*s)++;
-		if (ft_is_quote(**s) || **s == IN_REDIR || **s == OUT_REDIR)
-			return (*s) ;
-	}
+	(*s)++;
+	if (**s == '\0' || ft_iswhitespace(**s) || is_quote(**s)
+		|| **s == IN_REDIR || **s == OUT_REDIR || **s == PIPE)
+		return (*s);
+	find_end(s);
 	return (*s);
 }
 
@@ -60,19 +52,6 @@ static char	*find_start(char **s)
 	while (ft_iswhitespace(**s))
 		(*s)++;
 	return (*s);
-}
-
-static void	display_list(void *content)
-{
-	printf("token : (%s)\n", (char *)content);
-}
-
-static void	add_token_to_list(t_list **token_list, char *token)
-{
-	t_list	*new;
-
-	new = ft_lstnew(token);
-	ft_lstadd_back(token_list, new);
 }
 
 void	tokenize_input(t_input *input, char *line)
@@ -91,8 +70,8 @@ void	tokenize_input(t_input *input, char *line)
 		{
 			end = find_end(&line);
 			token = ft_substr(start, 0, end - start);
+			add_token_to_list(&input->token_list, token);
 		}
-		add_token_to_list(&input->token_list, token);
 		if (ft_iswhitespace(*line))
 		{
 			token = ft_strdup(" ");
@@ -101,5 +80,5 @@ void	tokenize_input(t_input *input, char *line)
 		start = NULL;
 		end = NULL;
 	}
-	ft_lstiter(input->token_list, display_list);
+	ft_lstiter(input->token_list, display_token_list);
 }

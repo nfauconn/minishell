@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/16 20:04:06 by user42            #+#    #+#             */
+/*   Updated: 2022/05/16 20:06:24 by user42           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include"minishell.h"
 
-char	*get_input()
+char	*get_input(void)
 {
 	char	*line_read;
 
@@ -29,7 +41,7 @@ char	*get_input()
 	return (line_read);
 }
 
-int	main()
+int	main(void)
 {
 	t_input	input;
 
@@ -40,6 +52,5 @@ int	main()
 		input.line_read = get_input();
 		tokenize_input(&input, input.line_read);
 		end(&input);
-//		printf("input.token_list = %p\n", input.token_list);
 	}
 }

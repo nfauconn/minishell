@@ -11,8 +11,9 @@ SRCS =	builtins.c \
 		init.c \
 		main.c \
 		signals.c \
-		tokenizer.c \
-		parse.c
+		parsing.c \
+		parsing_tokenizer.c \
+		parsing_utils.c
 OBJS = ${addprefix ${OBJ_DIR}/,${SRCS:.c=.o}}
 
 ${OBJ_DIR}/%.o: %.c

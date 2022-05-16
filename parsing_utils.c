@@ -1,23 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.h                                         :+:      :+:    :+:   */
+/*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/11 15:52:13 by mdankou           #+#    #+#             */
-/*   Updated: 2022/05/16 20:01:10 by user42           ###   ########.fr       */
+/*   Created: 2022/05/16 19:57:56 by user42            #+#    #+#             */
+/*   Updated: 2022/05/16 20:42:29 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTINS_H
-# define BUILTINS_H
+#include "minishell.h"
 
-int	pwd(char **args);
-int	cd(char **args);
-int	echo(char **args);
-int	env(void *env);
-int	unset(void *env, char **var_name);
-int	export(void *env, char **var_assign);
+int	is_quote(int c)
+{
+	return (c == QUOTE || c == DOUBLE_QUOTE);
+}
 
-#endif
+void	display_token_list(void *content)
+{
+	printf("token : (%s)\n", (char *)content);
+}
+
+void	add_token_to_list(t_list **token_list, char *token)
+{
+	t_list	*new;
+
+	new = ft_lstnew(token);
+	ft_lstadd_back(token_list, new);
+}

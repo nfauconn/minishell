@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 17:55:15 by user42            #+#    #+#             */
-/*   Updated: 2022/05/15 14:47:54 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/05/16 20:02:11 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
 /*
 ** SIGINT = CTRL-C
-** write '\n' moves to a new line (if not : prompt displayed on the same line as ^C)
+** write '\n' moves to a new line (if not : prompt displayed on the 
+**															same line as ^C)
 ** rl_on_new_line() regenerates the prompt on a newline
-** rl_replace_line() clears the previous text if ctrl-C pressed in a non-empty line
+** rl_replace_line() clears the previous text if ctrl-C pressed in a 
+**																non-empty line
 ** rl_redisplay() displays the new prompt
 */
 
