@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   extern_libs.h                                      :+:      :+:    :+:   */
+/*   builtins_cd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/16 20:00:30 by user42            #+#    #+#             */
-/*   Updated: 2022/05/18 17:50:22 by nfauconn         ###   ########.fr       */
+/*   Created: 2022/05/18 17:52:52 by nfauconn          #+#    #+#             */
+/*   Updated: 2022/05/18 17:52:55 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXTERN_LIBS_H
-# define EXTERN_LIBS_H
+#include "minishell.h"
 
-# include <dirent.h>
-# include <errno.h>
-# include <fcntl.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <signal.h>
-# include <stdio.h>
-# include <string.h>
-# include <sys/stat.h>
-# include <sys/types.h>
-# include <sys/wait.h>
+int cd(char **args)
+{
+	DIR*	dir;
 
-#endif
+	if (!args[0])
+		errno = EINVAL;
+	else if (args[1])
+		errno = E2BIG;
+	else
+	{
+		dir = opendir(args[0]);
+		if (!dir)
+			perror("pwd");
+		else
+			chdir(args[0]);
+	}
+	return (errno);
+}

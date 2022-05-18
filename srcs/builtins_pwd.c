@@ -1,18 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_iswhitespace.c                                 :+:      :+:    :+:   */
+/*   builtins_pwd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/06 13:47:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/05/06 13:50:00 by nfauconn         ###   ########.fr       */
+/*   Created: 2022/05/18 17:51:19 by nfauconn          #+#    #+#             */
+/*   Updated: 2022/05/18 17:51:36 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+# include "minishell.h"
 
-int	ft_iswhitespace(int c)
+int pwd(char **args)
 {
-	return (c == 32 || (c >= 9 && c <= 13));
+	char	*name;
+
+	(void)args;
+	name = getcwd(NULL, 0);
+	if (!name)
+	{
+		perror("pwd");
+		return (errno);
+	}
+	printf("%s\n", name);
+	return (0);
 }

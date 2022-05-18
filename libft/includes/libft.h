@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 16:22:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/05/13 12:00:45 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/05/18 15:12:00 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ int			ft_isalnum(int c);
 int			ft_isalpha(int c);
 int			ft_isascii(int c);
 int			ft_isdigit(int c);
-int			ft_iswhitespace(int c);
 int			ft_isflagpf(int c);
 int			ft_isprint(int c);
 char		*ft_itoa(int n);

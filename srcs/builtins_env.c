@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   extern_libs.h                                      :+:      :+:    :+:   */
+/*   builtins_env.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/16 20:00:30 by user42            #+#    #+#             */
-/*   Updated: 2022/05/18 17:50:22 by nfauconn         ###   ########.fr       */
+/*   Created: 2022/05/18 17:53:16 by nfauconn          #+#    #+#             */
+/*   Updated: 2022/05/18 17:53:19 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXTERN_LIBS_H
-# define EXTERN_LIBS_H
+#include "minishell.h"
 
-# include <dirent.h>
-# include <errno.h>
-# include <fcntl.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <signal.h>
-# include <stdio.h>
-# include <string.h>
-# include <sys/stat.h>
-# include <sys/types.h>
-# include <sys/wait.h>
+int env(void *env)
+{
+	t_list *l;
 
-#endif
+	l = (t_list *)env;
+	while (l)
+	{
+		printf("%s\n", (char *)l->content);
+		l = l->next;
+	}
+	return (0);
+}

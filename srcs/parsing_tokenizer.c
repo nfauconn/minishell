@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_tokenizer.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 16:59:04 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/05/18 12:27:52 by user42           ###   ########.fr       */
+/*   Updated: 2022/05/18 15:31:55 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static char	*find_closing_quote(char **s, char quote)
 
 static char	*find_end(char **s)
 {
+	char	found_c;
 	char	*tmp;
 
 	if (is_quote(**s) && (*((*s) + 1)))
@@ -31,14 +32,15 @@ static char	*find_end(char **s)
 			return (*s);
 		*s = tmp;
 	}
-	if (**s == IN_REDIR || **s == OUT_REDIR || **s == PIPE)
+	if (is_meta(**s))
 	{
-		(*s)++;
+		found_c = **s;
+		while (**s == found_c)
+			(*s)++;
 		return (*s);
 	}
 	(*s)++;
-	if (**s == '\0' || ft_iswhitespace(**s) || is_quote(**s)
-		|| **s == IN_REDIR || **s == OUT_REDIR || **s == PIPE)
+	if (**s == '\0' || is_blank(**s) || is_quote(**s) || is_meta(**s))
 		return (*s);
 	find_end(s);
 	return (*s);
@@ -46,7 +48,7 @@ static char	*find_end(char **s)
 
 static char	*find_start(char **s)
 {
-	while (ft_iswhitespace(**s))
+	while (is_blank(**s))
 		(*s)++;
 	return (*s);
 }
@@ -69,7 +71,7 @@ void	tokenizer(t_input *input, char *line)
 			token = ft_substr(start, 0, end - start);
 			add_token_to_list(&input->token_list, token);
 		}
-		if (ft_iswhitespace(*line))
+		if (is_blank(*line))
 		{
 			token = ft_strdup(" ");
 			add_token_to_list(&input->token_list, token);
