@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 18:49:09 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/05/16 20:03:16 by user42           ###   ########.fr       */
+/*   Updated: 2022/05/18 12:44:34 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	clean_exit(t_input *input, char *s)
 {
 	write(2, "minish: ", 8);
-	write(2, s, ft_stlren(s));
+	write(2, s, ft_strlen(s));
+	write(2, "\n", 1);
 	end(input);
 }

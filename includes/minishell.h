@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 18:25:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/05/16 20:41:49 by user42           ###   ########.fr       */
+/*   Updated: 2022/05/18 12:42:55 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,9 @@ typedef struct s_input
 }	t_input;
 
 void	end(t_input *input);
+void	clean_exit(t_input *input, char *s);
+void	lexer(t_input *input, t_list *tokens);
 void	init(t_input *input);
-void	tokenize_input(t_input *input, char *line);
+void	tokenizer(t_input *input, char *line);
 
 #endif

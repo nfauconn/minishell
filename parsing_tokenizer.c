@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 16:59:04 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/05/16 20:40:21 by user42           ###   ########.fr       */
+/*   Updated: 2022/05/18 12:27:52 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ static char	*find_closing_quote(char **s, char quote)
 
 static char	*find_end(char **s)
 {
-	char	found_c;
 	char	*tmp;
 
 	if (is_quote(**s) && (*((*s) + 1)))
@@ -34,9 +33,7 @@ static char	*find_end(char **s)
 	}
 	if (**s == IN_REDIR || **s == OUT_REDIR || **s == PIPE)
 	{
-		found_c = **s;
-		while (**s == found_c)
-			(*s)++;
+		(*s)++;
 		return (*s);
 	}
 	(*s)++;
@@ -54,7 +51,7 @@ static char	*find_start(char **s)
 	return (*s);
 }
 
-void	tokenize_input(t_input *input, char *line)
+void	tokenizer(t_input *input, char *line)
 {
 	char	*start;
 	char	*end;

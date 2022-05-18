@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 20:04:06 by user42            #+#    #+#             */
-/*   Updated: 2022/05/16 20:06:24 by user42           ###   ########.fr       */
+/*   Updated: 2022/05/18 12:27:49 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ int	main(void)
 		signal_catching_mode(INTERACTIVE);
 		init(&input);
 		input.line_read = get_input();
-		tokenize_input(&input, input.line_read);
+		tokenizer(&input, input.line_read);
+		lexer(&input, input.token_list);
 		end(&input);
 	}
 }

@@ -8,10 +8,12 @@ COMP = ${CC} ${CFLAGS}
 RM	 = rm -rf
 SRCS =	builtins.c \
 		end.c \
+		error.c \
 		init.c \
 		main.c \
 		signals.c \
 		parsing.c \
+		parsing_lexer.c \
 		parsing_tokenizer.c \
 		parsing_utils.c
 OBJS = ${addprefix ${OBJ_DIR}/,${SRCS:.c=.o}}
