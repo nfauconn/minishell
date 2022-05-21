@@ -24,3 +24,20 @@ bash: syntax error near unexpected token `>'
 $ echo ????oooOOOooo??/>|lol.txt
 $ cat lol.txt
 ????oooOOOooo??/
+
+
+
+
+
+
+valgrind --suppressions=ignoreleak --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes --verbose ./minishell
+
+
+
+
+
+
+
+
+
+https://codes-sources.commentcamarche.net/forum/affich-10047436-developper-un-shell-de-base

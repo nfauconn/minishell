@@ -6,11 +6,11 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:51:19 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/05/18 17:51:36 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/05/18 17:58:24 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minishell.h"
+#include "minishell.h"
 
 int pwd(char **args)
 {
