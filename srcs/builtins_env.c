@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_env.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:53:16 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/05/18 17:53:19 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/05/22 18:54:30 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int env(void *env)
+int	env(void *env)
 {
-	t_list *l;
+	t_list	*l;
 
 	l = (t_list *)env;
 	while (l)

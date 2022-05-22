@@ -20,7 +20,7 @@ SRCS := \
 		./srcs/parsing_lexer.c \
 		./srcs/parsing_tokenizer.c \
 		./srcs/parsing_utils.c \
-		./srcs/parsing.c \
+		./srcs/parsing_expand.c \
 		./srcs/signals.c
 OBJS := $(subst $(SRC_DIR), $(BUILD_DIR), $(SRCS:%.c=%.o))
 VPATH = $(SRC_DIR):$(INC_DIR):$(BUILD_DIR)

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_pwd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:51:19 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/05/18 17:58:24 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/05/22 18:56:39 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int pwd(char **args)
+int	pwd(char **args)
 {
 	char	*name;
 
