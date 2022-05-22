@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 20:08:30 by user42            #+#    #+#             */
-/*   Updated: 2022/05/18 15:23:17 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/05/22 17:52:13 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@ typedef struct s_input
 	t_list	*token_list;
 }	t_input;
 
+/* INIT */
+void		init_input(t_input *input);
+
 /* CHAR CHECK */
 int			is_blank(int c);
 int			is_meta(int c);
@@ -31,6 +34,6 @@ void		display_token_list(void *content);
 void		tokenizer(t_input *input, char *line);
 
 /* LEXER */
-void		lexer(t_input *input, t_list *tokens);
+int		lexer(t_list *tokens);
 
 #endif

@@ -3,19 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 18:49:09 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/05/18 12:44:34 by user42           ###   ########.fr       */
+/*   Updated: 2022/05/22 17:07:39 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	clean_exit(t_input *input, char *s)
+void	perror_and_free(t_input *input, char *s)
 {
-	write(2, "minish: ", 8);
-	write(2, s, ft_strlen(s));
-	write(2, "\n", 1);
+	ft_printerror("minish: %s\n", s);
 	end(input);
 }

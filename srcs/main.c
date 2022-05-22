@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 20:04:06 by user42            #+#    #+#             */
-/*   Updated: 2022/05/18 12:27:49 by user42           ###   ########.fr       */
+/*   Updated: 2022/05/22 17:54:24 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*get_input(void)
 		if (ft_strncmp(line_read, "exit", 4) == 0)
 		{
 			free(line_read);
-			exit(1);
+			exit(0);
 		}
 		add_history(line_read);
 	}
@@ -36,7 +36,7 @@ char	*get_input(void)
 	{
 		ft_putstr_fd("exit\n", 1);
 		free(line_read);
-		exit(1);
+		exit(0);
 	}
 	return (line_read);
 }
@@ -44,14 +44,18 @@ char	*get_input(void)
 int	main(void)
 {
 	t_input	input;
+	t_sh	sh;
 
 	while (1)
 	{
 		signal_catching_mode(INTERACTIVE);
-		init(&input);
+		init_input(&input);
 		input.line_read = get_input();
 		tokenizer(&input, input.line_read);
-		lexer(&input, input.token_list);
+		if (lexer(input.token_list) == SUCCESS)
+		{
+			init_sh(&sh);
+		}		
 		end(&input);
 	}
 }

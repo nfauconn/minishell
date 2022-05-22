@@ -23,7 +23,6 @@ SRCS := \
 		./srcs/parsing.c \
 		./srcs/signals.c
 OBJS := $(subst $(SRC_DIR), $(BUILD_DIR), $(SRCS:%.c=%.o))
-DEPS := $(OBJS:.o=.d)
 VPATH = $(SRC_DIR):$(INC_DIR):$(BUILD_DIR)
 
 CC = clang
@@ -42,16 +41,6 @@ ${BUILD_DIR}/%.o: %.c
 	@mkdir -p ${BUILD_DIR}
 	@echo create: ${@:%=%}
 	@${COMP} ${INCLUDES} -c $< -o $@
-
-# Place dependency files in build directory
-# automatically generate dependency rules
-$(BUILD_DIR)%.d: %.c
-	$(CXX) $(CXXFLAGS) -MF"$@" -MG -MM -MD -MP -MT"$@" -MT"$(OBJS)" "$<"
-# -MF  write the generated dependency rule to a file
-# -MG  assume missing headers will be generated and don't stop with an error
-# -MM  generate dependency rule for prerequisite, skipping system headers
-# -MP  add phony target for each header to prevent errors when header is missing
-# -MT  add a target to the generated dependency
 
 clean:
 	@make clean -C libft
