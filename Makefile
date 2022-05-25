@@ -13,6 +13,7 @@ SRCS := \
 		./srcs/builtins_export.c \
 		./srcs/builtins_pwd.c \
 		./srcs/builtins_unset.c \
+		./srcs/data_env_list.c \
 		./srcs/end.c \
 		./srcs/error.c \
 		./srcs/init.c \
