@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 19:57:56 by user42            #+#    #+#             */
-/*   Updated: 2022/05/18 18:30:01 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/05/25 18:07:17 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	is_meta(int c)
 
 int	is_quote(int c)
 {
-	return (c == QUOTE || c == DOUBLE_QUOTE);
+	return (c == QUOTE || c == DB_QUOTE);
 }
 
 void	display_token_list(void *content)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 20:11:25 by user42            #+#    #+#             */
-/*   Updated: 2022/05/16 20:12:05 by user42           ###   ########.fr       */
+/*   Updated: 2022/05/25 18:26:20 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 # define STDOUT 1
 # define STDERR 2
 
-# define QUOTE 34
-# define DOUBLE_QUOTE 39
+# define QUOTE 39
+# define DB_QUOTE 34
 # define PIPE 124
 # define IN_REDIR 60
 # define OUT_REDIR 62 

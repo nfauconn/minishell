@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 20:04:06 by user42            #+#    #+#             */
-/*   Updated: 2022/05/22 17:54:24 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/05/25 17:18:48 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,21 +41,29 @@ char	*get_input(void)
 	return (line_read);
 }
 
-int	main(void)
+int	main(int ac, char **av, char **env)
 {
 	t_input	input;
 	t_sh	sh;
 
+	(void)ac;
+	(void)av;
+	(void)env;
 	while (1)
 	{
 		signal_catching_mode(INTERACTIVE);
 		init_input(&input);
 		input.line_read = get_input();
-		tokenizer(&input, input.line_read);
+/* 		printf("line_read = %s\n", input.line_read);
+ */		input.token_list = tokenizer(input.line_read);
+
 		if (lexer(input.token_list) == SUCCESS)
 		{
 			init_sh(&sh);
-		}		
+			sh.env = env_list(env);
+			var_expand(&input.token_list, sh.env);
+ 			ft_lstiter(input.token_list, display_token_list);
+		}
 		end(&input);
 	}
 }

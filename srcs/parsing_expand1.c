@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_expand.c                                   :+:      :+:    :+:   */
+/*   parsing_expand1.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/25 15:13:37 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/05/25 18:29:08 by nfauconn         ###   ########.fr       */
+/*   Created: 2022/05/15 13:27:49 by mdankou           #+#    #+#             */
+/*   Updated: 2022/05/25 16:43:53 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-/* 
-static t_list	*search_token(char *str, size_t start, size_t len, t_list *env)
+#include "libft.h"
+#include <stdio.h>
+
+t_list	*search_token(char *str, size_t start, size_t len, t_list *env)
 {
 	while (env)
 	{
@@ -24,7 +25,7 @@ static t_list	*search_token(char *str, size_t start, size_t len, t_list *env)
 	return (env);
 }
 
-static char	*get_token_value(char *str, size_t start, size_t len, t_list *env)
+char	*get_token_value(char *str, size_t start, size_t len, t_list *env)
 {
 	t_list	*l;
 	char	*res;
@@ -37,7 +38,7 @@ static char	*get_token_value(char *str, size_t start, size_t len, t_list *env)
 	return (res);
 }
 
-static char	*ft_strnextend(char *alloc_str, char *str, size_t n)
+char	*ft_strnextend(char *alloc_str, char *str, size_t n)
 {
 	size_t	len;
 	size_t	old_len;
@@ -67,7 +68,7 @@ static char	*ft_strnextend(char *alloc_str, char *str, size_t n)
 	return (new);
 }
 
-static char	*do_expand(char *token, t_list *env)
+char	*do_expand(char *token, t_list *env)
 {
 	size_t	i;
 	ssize_t	len;
@@ -78,8 +79,6 @@ static char	*do_expand(char *token, t_list *env)
 	i = (token[0] == '\"' || token[0] == '\'');
 	while (token[i] && token[i] != '\"')
 	{
-			printf("token = %s\n", token);
-
 		len = ft_strchr(token + i, '$') - (token + i);
 		if (len >= 0)
 		{
@@ -100,7 +99,6 @@ static char	*do_expand(char *token, t_list *env)
 		else
 		{
 			len = ft_strlen(token + i) - 1;
-			printf("BLABLA len = %zd\n", len);
 			res = ft_strnextend(res, token + i, len);
 		}
 		i += len;
@@ -108,7 +106,7 @@ static char	*do_expand(char *token, t_list *env)
 	return (res);
 }
 
-static char	*token_expand(char *token, t_list *env)
+char	*var_expand(char *token, t_list *env)
 {
 	char	*str;
 
@@ -121,42 +119,4 @@ static char	*token_expand(char *token, t_list *env)
 		return (str);
 	}
 	return (do_expand(token, env));
-} */
-
-void	var_expand(t_list **token_list, t_list *env)
-{
-	int	i = 0;
-	t_list	**head;
-	char	*tok;
-
-	(void)env;
-	head = token_list;
-	while (*token_list)
-	{
-		tok = (char *)(*token_list)->content;
-		if (*tok == '$')
-		{
-			printf("tok n%d has a $!\n", i);
-			/* expand tok */
-		}
-		else if (*tok == DB_QUOTE)
-		{
-			tok++;
-			if (*tok && tok[ft_strlen(tok) - 1] == DB_QUOTE)
-				printf("tok n%d has double quotes!\n", i);
-			/* if $ in string */
-					/* expand tok */
-			/* cut out quotes */
-		}
-		else if (*tok == QUOTE)
-		{
-			tok++;
-			if (*tok && tok[ft_strlen(tok) - 1] == QUOTE)
-				printf("tok n%d has simple quotes!\n", i);
-			/* cut out quotes */
-		}
-		(*token_list) = (*token_list)->next;
-		i++;
-	}
-	token_list = head;
 }

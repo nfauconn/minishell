@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 18:25:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/05/25 15:16:11 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/05/25 17:59:34 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,17 @@
 # include "parsing.h"
 # include "signals.h"
 
+typedef struct s_cmd
+{
+	char			*token;
+	int				type;
+	int				fd[2];
+	struct s_cmd	*next;
+}	t_cmd;
+
 typedef struct s_sh
 {
+	t_cmd	*cmd;
 	t_list	*env;
 }	t_sh;
 
@@ -32,5 +41,6 @@ void	end(t_input *input);
 t_list	*env_list(char **env);
 void	init_sh(t_sh *sh);
 void	perror_and_free(t_input *input, char *s);
+void	var_expand(t_list **token_list, t_list *env);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 20:08:30 by user42            #+#    #+#             */
-/*   Updated: 2022/05/22 17:52:13 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/05/25 18:00:26 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 typedef struct s_input
 {
 	char	*line_read;
-	int		type;
 	t_list	*token_list;
 }	t_input;
 
@@ -31,7 +30,7 @@ int			is_quote(int c);
 /* TOKENIZER */
 void		add_token_to_list(t_list **token_list, char *token);
 void		display_token_list(void *content);
-void		tokenizer(t_input *input, char *line);
+t_list		*tokenizer(char *line);
 
 /* LEXER */
 int		lexer(t_list *tokens);
