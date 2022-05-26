@@ -3,58 +3,64 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_unset.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:53:50 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/05/18 17:53:51 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/05/26 13:18:06 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*False: Incomplete*/
+void	del_elm_mid(t_list	*l, char *var_name)
+{
+	t_list	*elm;
+	char	*str;
+	int		var_len;
 
-/*Faire une fontion search_previous pourrait etre une bonne idee*/
+	while (l)
+	{
+		elm = l->next;
+		if (elm)
+		{
+			str = (char *)elm->content;
+			var_len = strlen(var_name);
+			if (!ft_strncmp(var_name, str, var_len) && str[var_len] == '=')
+				break ;
+		}
+		l = l->next;
+	}
+	if (elm)
+	{
+		l->next = elm->next;
+		ft_lstdelone(elm, free);
+	}
+}
 
-int unset(void *env, char **var_name)
+int	unset(t_list **env, char **var_name)
 {
 	size_t	j;
 	t_list	*l;
 	t_list	*elm;
 	char	*str;
-	int	var_len;
+	int		var_len;
 
-	j = 0;
-	l = (t_list *)env;
-	str = (char *)l->content;
-	var_len = strlen(var_name[j]);
-	if (!((t_list *)env)->next && !ft_strncmp(var_name[j], str, var_len)
-		&& str[var_len] == '\0')
+	j = -1;
+	while (var_name[++j])
 	{
-		ft_lstclear((t_list **)&env, free);
-		return (0);
-	}
-	while (var_name[j])
-	{
-		l = (t_list *)env;
-		while (l)
+		if (!*env)
+			return (0);
+		l = (t_list *)(*env);
+		str = (char *)l->content;
+		var_len = ft_strlen(var_name[j]);
+		if (!ft_strncmp(var_name[j], str, var_len) && str[var_len] == '=')
 		{
-			elm = l->next;
-			if (elm)
-			{
-				str = (char *)elm->content;
-				var_len = strlen(var_name[j]);
-				if (!ft_strncmp(var_name[j], str, var_len)
-					&& str[var_len] == '\0')
-				{
-					break;	
-				}
-			}
-			l = l->next;
+			elm = (*env);
+			(*env) = (*env)->next;
+			ft_lstdelone(elm, free);
 		}
-		l->next = elm->next;
-		ft_lstdelone(elm, free);
-		++j;
+		else
+			del_elm_mid(l, var_name[j]);
 	}
 	return (0);
 }
