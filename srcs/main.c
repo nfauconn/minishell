@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 20:04:06 by user42            #+#    #+#             */
-/*   Updated: 2022/05/25 17:18:48 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/05/30 18:13:04 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,16 @@ int	main(int ac, char **av, char **env)
 		input.line_read = get_input();
 /* 		printf("line_read = %s\n", input.line_read);
  */		input.token_list = tokenizer(input.line_read);
-
-		if (lexer(input.token_list) == SUCCESS)
+		if (input.token_list)
 		{
-			init_sh(&sh);
-			sh.env = env_list(env);
-			var_expand(&input.token_list, sh.env);
- 			ft_lstiter(input.token_list, display_token_list);
+			if (lexer(input.token_list) == SUCCESS)// !!!!cas du heredoc a remplir meme si syntax error 
+			{
+				init_sh(&sh);
+				sh.env = env_list(env);
+				var_expand(input.token_list, sh.env);
+				ft_lstiter(input.token_list, display_token_list);
+			}
 		}
-		end(&input);
+		end(&input, &sh);
 	}
 }

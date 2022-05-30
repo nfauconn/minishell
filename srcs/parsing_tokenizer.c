@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 16:59:04 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/05/25 16:45:50 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/05/30 17:29:01 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,17 @@ static char	*find_end(char **s)
 	char	found_c;
 	char	*tmp;
 
-	if (is_quote(**s) && (*((*s) + 1)))
+	if (**s == '$')
+		(*s)++;
+	if (is_quote(**s))// && (*((*s) + 1)))
 	{
 		tmp = (*s)++;
 		if (find_closing_quote(s, *tmp))
 			return (*s);
-		*s = tmp;
+		ft_printerror("minish does not handle non closed quotes\n");
+		return (NULL);
 	}
-	if (is_meta(**s))
+	if (is_separator(**s))
 	{
 		found_c = **s;
 		while (**s == found_c)
@@ -40,7 +43,7 @@ static char	*find_end(char **s)
 		return (*s);
 	}
 	(*s)++;
-	if (**s == '\0' || is_blank(**s) || is_quote(**s) || is_meta(**s))
+	if (**s == '\0' || is_blank(**s) || is_quote(**s) || is_separator(**s))
 		return (*s);
 	find_end(s);
 	return (*s);
@@ -70,7 +73,10 @@ t_list	*tokenizer(char *line)
 		else
 		{
 			end = find_end(&line);
+			if (end == NULL)
+				return (NULL);
 			token = ft_substr(start, 0, end - start);
+			// find_type(token);
 			add_token_to_list(&token_list, token);
 		}
 		if (is_blank(*line))

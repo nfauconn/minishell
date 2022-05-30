@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 20:08:30 by user42            #+#    #+#             */
-/*   Updated: 2022/05/25 18:00:26 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/05/30 13:46:32 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void		init_input(t_input *input);
 
 /* CHAR CHECK */
 int			is_blank(int c);
-int			is_meta(int c);
+int			is_separator(int c);
 int			is_quote(int c);
 
 /* TOKENIZER */

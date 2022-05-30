@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 19:57:56 by user42            #+#    #+#             */
-/*   Updated: 2022/05/25 18:07:17 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/05/30 15:25:53 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	is_blank(int c)
 	return (c == 32 || (c >= 9 && c <= 13));
 }
 
-int	is_meta(int c)
+int	is_separator(int c)
 {
 	return (c == PIPE || c == IN_REDIR || c == OUT_REDIR);
 }
