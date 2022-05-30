@@ -6,13 +6,13 @@
 /*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:53:50 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/05/26 13:47:12 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/05/30 14:28:39 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	export(t_list **env, char **var_assign)
+int	builtin_export(t_list **env, char **var_assign)
 {
 	size_t	j;
 	t_list	*l;

@@ -6,7 +6,7 @@
 /*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:53:50 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/05/26 13:18:06 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/05/30 14:29:09 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	del_elm_mid(t_list	*l, char *var_name)
 	}
 }
 
-int	unset(t_list **env, char **var_name)
+int	builtin_unset(t_list **env, char **var_name)
 {
 	size_t	j;
 	t_list	*l;

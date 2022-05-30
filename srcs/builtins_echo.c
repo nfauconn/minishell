@@ -6,7 +6,7 @@
 /*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:48:38 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/05/22 19:17:52 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/05/30 14:29:32 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	echo_handle_nlflag(char **args, size_t *j)
 	return (nl_flag);
 }
 
-int	echo(char **args)
+int	builtin_echo(char **args)
 {
 	int		nl_flag;
 	size_t	j;

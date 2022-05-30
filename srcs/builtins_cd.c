@@ -6,13 +6,13 @@
 /*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:52:52 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/05/22 18:50:24 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/05/30 14:29:19 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	cd(char **args)
+int	builtin_cd(char **args)
 {
 	DIR	*dir;
 
