@@ -6,11 +6,18 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:13:37 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/05/30 18:14:02 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/01 17:33:26 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static int	is_identifier(int c)
+{
+	if (ft_isalnum(c) || c == '_')
+		return (1);
+	return (0);
+}
 
 static t_list	*search_token(char *str, size_t start, size_t len, t_list *env)
 {
@@ -33,23 +40,17 @@ static char	*get_token_value(char *str, size_t start, size_t len, t_list *env)
 	if (l)
 		res = ft_strdup(ft_strchr((char *)l->content, '=') + 1);
 	else
-		res = ft_strdup("\0");
+		res = ft_strdup("");
 	return (res);
 }
 
-static char	*ft_strnextend(char *alloc_str, char *str, size_t n)
+static char	*ft_strnextend(char *alloc_str, char *str, size_t len)
 {
-	size_t	len;
 	size_t	old_len;
 	char	*new;
 
-	if (str == NULL)
+	if (str == NULL || len == 0)
 		return (alloc_str);
-	len = ft_strlen(str);
-	if (n == 0 || len == 0)
-		return (alloc_str);
-	if (len > n)
-		len = n;
 	if (alloc_str != NULL)
 		old_len = ft_strlen(alloc_str);
 	else
@@ -69,8 +70,7 @@ static char	*ft_strnextend(char *alloc_str, char *str, size_t n)
 
 static char	*do_expand(char *token, t_list *env)
 {
-	size_t	i;
-	ssize_t	len;
+	ssize_t	i;
 	char	*res;
 	char	*token_val;
 
@@ -78,32 +78,25 @@ static char	*do_expand(char *token, t_list *env)
 	i = 0;
 	while (token[i])
 	{
-		len = ft_strchr(token, '$') - token;
-		if (len >= 0)
+		/* i = ft_strchr(token, '$') - token; */
+		while (token[i] && token[i] != '$')
+			i++;
+		res = ft_strnextend(res, token, i);
+		if (token[i] == '$')
 		{
-			res = ft_strnextend(res, token, len);
-			i += len + 1;
-			len = 0;
-			while (token[i + len] && token[i + len] != '\"'
-				&& (ft_isalnum(token[i + len]) || token[i + len] == '_'))
-				++len;
-			if (len == 0)
-				res = ft_strnextend(res, token + i + ++len, 1);
+			token += i + 1;
+			i = 0;
+			while (is_identifier(token[i]))
+				i++;
+			if (i == 0)
+				res = ft_strnextend(res, token - 1, 1);
 			else
 			{
-				token_val = get_token_value(token, i, len, env);
+				token_val = get_token_value(token, 0, i, env);
 				res = ft_strnextend(res, token_val, ft_strlen(token_val));
 			}
 		}
-		else
-		{
-			len = ft_strlen(token + i) - 1;
-			printf("BLABLA len = %zd\n", len);
-			res = ft_strnextend(res, token + i, len);
-		}
-		if (len == 0)
-			len = 1;
-		i += len;
+		i++;
 	}
 	return (res);
 }
@@ -146,9 +139,9 @@ void	var_expand(t_list *token_list, t_list *env)
 		}
 		else
 		{
-			tmp = token_list->content;
-			token_list->content = do_expand(tok, env);
-			free(tmp);
+			token_list->content = do_expand((char *)token_list->content, env);
+/* 			token_list->content = tmp;
+			free(tmp); */
 		}
 		token_list = token_list->next;
 		i++;
