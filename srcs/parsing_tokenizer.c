@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 16:59:04 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/01 17:26:19 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/01 18:15:39 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static char	*find_end(char **s)
 	char	found_c;
 	char	*tmp;
 
-	if (**s == '$')
+	if (**s == '$' && (!is_blank(*((*s) + 1)) || is_quote(*((*s) + 1))))
 		(*s)++;
 	if (is_quote(**s))// && (*((*s) + 1)))
 	{

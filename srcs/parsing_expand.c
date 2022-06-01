@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:13:37 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/01 17:33:26 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/01 18:21:45 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ static char	*do_expand(char *token, t_list *env)
 	i = 0;
 	while (token[i])
 	{
-		/* i = ft_strchr(token, '$') - token; */
 		while (token[i] && token[i] != '$')
 			i++;
 		res = ft_strnextend(res, token, i);
@@ -96,7 +95,6 @@ static char	*do_expand(char *token, t_list *env)
 				res = ft_strnextend(res, token_val, ft_strlen(token_val));
 			}
 		}
-		i++;
 	}
 	return (res);
 }
@@ -108,6 +106,7 @@ void	var_expand(t_list *token_list, t_list *env)
 	char	*tok;
 	char	*tmp;
 
+	tmp = NULL;
 	while (token_list)
 	{
 		start = 0;
@@ -122,14 +121,14 @@ void	var_expand(t_list *token_list, t_list *env)
 		{
 			tok++;
 		}
-		if (*tok == DB_QUOTE)
+/* 		if (*tok == DB_QUOTE)
 		{
 			tok++;
 			printf("tok n%d has double quotes!\n", i);
-			/* if $ in string */
-					/* expand tok */
-			/* cut out quotes */
-		}
+			if $ in string
+					expand tok
+			cut out quotes
+		} */
 		else if (*tok == QUOTE)
 		{
 			tok++;
@@ -139,11 +138,10 @@ void	var_expand(t_list *token_list, t_list *env)
 		}
 		else
 		{
-			token_list->content = do_expand((char *)token_list->content, env);
-/* 			token_list->content = tmp;
-			free(tmp); */
+			tmp = token_list->content;
+			token_list->content = do_expand(tmp, env);
 		}
-		token_list = token_list->next;
+ 		token_list = token_list->next;
 		i++;
 	}
 }

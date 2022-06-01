@@ -27,7 +27,7 @@ OBJS := $(subst $(SRC_DIR), $(BUILD_DIR), $(SRCS:%.c=%.o))
 VPATH = $(SRC_DIR):$(INC_DIR):$(BUILD_DIR)
 
 CC = clang
-CFLAGS = -Wall -Wextra -Werror -g3 #-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
 COMP = ${CC} ${CFLAGS}
 RM	 = rm -rf
 
