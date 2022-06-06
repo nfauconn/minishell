@@ -18,6 +18,7 @@ SRCS := \
 		./srcs/error.c \
 		./srcs/init.c \
 		./srcs/main.c \
+		./srcs/execute_redirection.c \
 		./srcs/parsing_lexer.c \
 		./srcs/parsing_tokenizer.c \
 		./srcs/parsing_utils.c \
