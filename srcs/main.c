@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 20:04:06 by user42            #+#    #+#             */
-/*   Updated: 2022/06/07 16:41:19 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/07 19:04:24 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,13 @@ int	main(int ac, char **av, char **env)
 /* 		printf("line_read = %s\n", input.line_read);
  */		if (tokenizer(&input, input.line_read) == SUCCESS)
 		{
+			get_parsing_types(input.token_list);
 			if (lexer(input.token_list) == SUCCESS)// !!!!cas du heredoc a remplir meme si syntax error 
 			{
 				sh.env = env_list(env);
-				ft_lstiter(input.token_list, display_token_list);
 				cmd_list_expand(input.token_list, sh.env);
-//				ft_lstiter(input.token_list, display_token_list);
+	//			apply_redirections(input.token_list);
+				ft_lstiter(input.token_list, display_token_list);
 			}
 		}
 		end(&input, &sh);

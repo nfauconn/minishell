@@ -19,6 +19,7 @@ SRCS := \
 		./srcs/init.c \
 		./srcs/main.c \
 		./srcs/execute_redirection.c \
+		./srcs/parsing_get_types.c \
 		./srcs/parsing_lexer.c \
 		./srcs/parsing_tokenizer.c \
 		./srcs/parsing_utils.c \
@@ -34,7 +35,7 @@ RM	 = rm -rf
 
 all: ${TARGET}
 
-$(TARGET): ${OBJS}
+$(TARGET): ${OBJS} Makefile
 	@make -C libft
 	@${COMP} ${LD_FLAGS} ${OBJS} -o ${TARGET} -lft
 	@echo "${TARGET} created"

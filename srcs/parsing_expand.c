@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:13:37 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/07 16:00:25 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/07 19:39:33 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,26 +112,17 @@ void	cmd_list_expand(t_list *token, t_list *env)
 	{
 		start = 0;
 		tok = (char *)token->content;
-		if (ft_strcmp(tok, "<<")  == 0)
+		if (token->type == HEREDOC)
 		{
 			token = token->next;
-			if (!ft_strcmp(token->content, " "))
+			if (token->type == BLANK)
 				token = token->next;
 			if (token->next)
-			{
 				token = token->next;
-				tok = (char *)token->content;
-			}
-			else
-				break ;
 		}
-		if (*tok == '$' && is_quote(*(tok + 1)))
+		if (is_quote(token->type))
 		{
-			tok++;
-		}
-		if (is_quote(*tok))
-		{
-			if (*tok == DB_QUOTE)
+			if (token->type == DB_QUOTE)
 			{
 				tmp = token->content;
 				token->content = var_expand(tok, env);
@@ -141,7 +132,7 @@ void	cmd_list_expand(t_list *token, t_list *env)
 			token->content = ft_substr(tmp, 1, ft_strlen(tmp) - 2);
 			free(tmp);
 		}
-		else if (*tok == '$')
+		else if (token->type == TO_EXPAND)
 		{
 			tmp = token->content;
 			token->content = var_expand(tmp, env);

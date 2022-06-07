@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 18:25:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/07 12:49:26 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/07 17:51:12 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 # include "builtins.h"
 # include "defines.h"
+# include "execute.h"
 # include "extern_libs.h"
 # include "ft_printf.h"
 # include "libft.h"

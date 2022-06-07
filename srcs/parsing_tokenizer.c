@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 16:59:04 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/07 16:41:45 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/07 19:20:16 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ static char	*find_closing_quote(char **s, char quote)
 
 static char	*find_end(t_input *input, char **s)
 {
-	char	found_c;
 	char	*tmp;
 
 	if (**s == '$' && (!is_blank(*((*s) + 1)) || is_quote(*((*s) + 1))))
@@ -32,15 +31,24 @@ static char	*find_end(t_input *input, char **s)
 		tmp = (*s)++;
 		if (find_closing_quote(s, *tmp))
 			return (*s);
-		else
-			perror_and_free(input, "minish does not handle non closed quotes");
+		perror_and_free(input, "minish does not handle non closed quotes");
 		return (NULL);
 	}
 	if (is_separator(**s))
 	{
-		found_c = **s;
-		while (**s == found_c)
+		tmp = *s;
+		while (**s == *tmp)
 			(*s)++;
+		if ((*s) - tmp == 3 && *tmp == '<')
+		{
+			perror_and_free(input, "minish does not handle here words");
+			return (NULL);
+		}
+		if ((*s) - tmp == 2 && *tmp == '|')
+		{
+			perror_and_free(input, "minish does not handle double pipes");
+			return (NULL);			
+		}
 		return (*s);
 	}
 	(*s)++;
@@ -77,6 +85,7 @@ int	tokenizer(t_input *input, char *line)
 				return (FAILURE);
 			token = ft_substr(start, 0, end - start);
 			add_token_to_list(&input->token_list, token);
+			
 		}
 		if (is_blank(*line))
 		{

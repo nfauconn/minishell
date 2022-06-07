@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdankou < mdankou@student.42.fr >          +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:22:26 by mdankou           #+#    #+#             */
-/*   Updated: 2022/06/06 17:01:07 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/06/07 17:53:27 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@
 typedef struct s_cmdinfo
 {
 	int				redir[2];
-	struct s_cmd	*next;
+	struct s_cmdinfo	*next;
 }	t_cmdinfo;
+
+void	apply_redirections(t_list *token_list);
 
 #endif
