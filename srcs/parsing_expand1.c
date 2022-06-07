@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 13:27:49 by mdankou           #+#    #+#             */
-/*   Updated: 2022/06/07 12:49:26 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/07 13:29:23 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ char	*ft_strnextend(char *alloc_str, char *str, size_t n)
 	return (new);
 }
 
-char	*do_expand(char *token, t_list *env)
+char	*var_expand(char *token, t_list *env)
 {
 	size_t	i;
 	ssize_t	len;
@@ -118,5 +118,5 @@ char	*cmd_list_expand(char *token, t_list *env)
 		ft_strlcpy(str, token + 1, ft_strlen(token) - 1);
 		return (str);
 	}
-	return (do_expand(token, env));
+	return (var_expand(token, env));
 }

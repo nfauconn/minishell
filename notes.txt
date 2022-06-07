@@ -53,3 +53,9 @@ EXPAND
 
 
 https://codes-sources.commentcamarche.net/forum/affich-10047436-developper-un-shell-de-base
+
+
+HEREDOC
+	end of parsing -> parcourir pour voir si type d'un token = heredoc --> dans ce cas, prompt et reparsing (expand en tt cas)
+	!!!!!!!! if delimiter has quotes -> delimiter is set without it
+									 -> strings will be expanded considering the quoting rule
