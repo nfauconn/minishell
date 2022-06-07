@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 13:27:49 by mdankou           #+#    #+#             */
-/*   Updated: 2022/05/25 16:43:53 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/07 12:49:26 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ char	*do_expand(char *token, t_list *env)
 	return (res);
 }
 
-char	*var_expand(char *token, t_list *env)
+char	*cmd_list_expand(char *token, t_list *env)
 {
 	char	*str;
 

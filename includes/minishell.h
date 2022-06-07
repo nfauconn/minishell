@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 18:25:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/01 16:12:26 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/07 12:49:26 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,6 @@ void	end_sh(t_sh *sh);
 t_list	*env_list(char **env);
 void	init_sh(t_sh *sh);
 void	perror_and_free(t_input *input, char *s);
-void	var_expand(t_list *token_list, t_list *env);
+void	cmd_list_expand(t_list *token_list, t_list *env);
 
 #endif

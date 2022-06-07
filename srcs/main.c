@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 20:04:06 by user42            #+#    #+#             */
-/*   Updated: 2022/06/01 16:12:42 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/07 12:49:26 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char	*get_input(void)
 {
 	char	*line_read;
 
-	line_read = readline("minishell> ");
+	line_read = readline("minish> ");
 	if (line_read && *line_read)
 	{
 		if (ft_strncmp(line_read, "exit", 4) == 0)
@@ -53,16 +53,15 @@ int	main(int ac, char **av, char **env)
 	{
 		signal_catching_mode(INTERACTIVE);
 		init_input(&input);
+		init_sh(&sh);
 		input.line_read = get_input();
 /* 		printf("line_read = %s\n", input.line_read);
- */		input.token_list = tokenizer(input.line_read);
-		if (input.token_list)
+ */		if (tokenizer(&input, input.line_read) == SUCCESS)
 		{
 			if (lexer(input.token_list) == SUCCESS)// !!!!cas du heredoc a remplir meme si syntax error 
 			{
-				init_sh(&sh);
 				sh.env = env_list(env);
-				var_expand(input.token_list, sh.env);
+				cmd_list_expand(input.token_list, sh.env);
 				ft_lstiter(input.token_list, display_token_list);
 			}
 		}

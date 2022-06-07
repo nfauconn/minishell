@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_expand.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdankou < mdankou@student.42.fr >          +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:13:37 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/06 17:25:26 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/06/07 12:49:37 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static char	*ft_strnextend(char *alloc_str, char *str, size_t len)
 	return (new);
 } 
 
-static char	*do_expand(char *token, t_list *env)
+static char	*var_expand(char *token, t_list *env)
 {
 	ssize_t	i;
 	char	*res;
@@ -99,23 +99,34 @@ static char	*do_expand(char *token, t_list *env)
 	return (res);
 }
 
-void	var_expand(t_list *token_list, t_list *env)
+void	cmd_list_expand(t_list *token, t_list *env)
 {
-	int	i = 1;
 	int	start;
 	char	*tok;
 	char	*tmp;
 
 	tmp = NULL;
-	while (token_list)
+	while (token)
 	{
 		start = 0;
-		tok = (char *)token_list->content;
-		if (!ft_strcmp(tok, "<<"))
+		tok = (char *)token->content;
+		if (ft_strcmp(tok, "<<")  == 0)
 		{
-			token_list = token_list->next;
-			if (!ft_strcmp(token_list->content, " "))
-				token_list = token_list->next;
+			token = token->next;
+			if (!ft_strcmp(token->content, " "))
+				token = token->next;
+			tmp = (char *)token->content;
+			if (is_quote(*tmp))
+			{
+				// specific case --> delimiter will be without quotes +++++ heredoc strings will not be expanded
+			}
+			if (token->next)
+			{
+				token = token->next;
+				tok = (char *)token->content;
+			}
+			else
+				break ;
 		}
 		if (*tok == '$' && is_quote(*(tok + 1)))
 		{
@@ -123,24 +134,23 @@ void	var_expand(t_list *token_list, t_list *env)
 		}
  		if (*tok == DB_QUOTE)
 		{
-			tmp = token_list->content;
-			token_list->content = do_expand(tok, env);
+			tmp = token->content;
+			token->content = do_expand(tok, env);
 			free(tmp);
-			tok = token_list->content;
+			tok = token->content;
 		}
 		if (is_quote(*tok))
 		{
-			tok++;
-			tmp = token_list->content;
-			token_list->content = ft_substr(tok, 0, ft_strlen(tok) - 1);
+			tmp = token->content;
+			token->content = ft_substr(tok, 1, ft_strlen(tok) - 2);
 			free(tmp);
 		}
 		else
 		{
-			tmp = token_list->content;
-			token_list->content = do_expand(tmp, env);
+			tmp = token->content;
+			token->content = do_expand(tmp, env);
+			free(tmp);
 		}
- 		token_list = token_list->next;
-		i++;
+ 		token = token->next;
 	}
 }
