@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 20:04:06 by user42            #+#    #+#             */
-/*   Updated: 2022/06/07 19:04:24 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/08 14:41:47 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*get_input(void)
 		rl_replace_line("", 0);
 		rl_redisplay();
 	}
-	else
+	else if (!line_read)
 	{
 		ft_putstr_fd("exit\n", 1);
 		free(line_read);
@@ -48,25 +48,24 @@ int	main(int ac, char **av, char **env)
 
 	(void)ac;
 	(void)av;
-	(void)env;
+	init_sh(&sh);
+	sh.env = env_list(env);
 	while (1)
 	{
 		signal_catching_mode(INTERACTIVE);
 		init_input(&input);
-		init_sh(&sh);
 		input.line_read = get_input();
-/* 		printf("line_read = %s\n", input.line_read);
- */		if (tokenizer(&input, input.line_read) == SUCCESS)
+		if (tokenizer(&input, input.line_read) == SUCCESS)
 		{
 			get_parsing_types(input.token_list);
 			if (lexer(input.token_list) == SUCCESS)// !!!!cas du heredoc a remplir meme si syntax error 
 			{
-				sh.env = env_list(env);
 				cmd_list_expand(input.token_list, sh.env);
-	//			apply_redirections(input.token_list);
+				apply_redirections(input.token_list);
 				ft_lstiter(input.token_list, display_token_list);
 			}
 		}
 		end(&input, &sh);
 	}
+	ft_lstclear(&sh.env, free);
 }

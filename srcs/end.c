@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 16:09:54 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/01 16:11:02 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/08 14:17:50 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 void	end_sh(t_sh *sh)
 {
-	if (sh->env)
-		ft_lstclear(&sh->env, free);	
+	(void)sh;
+/* 	if (sh->env)
+		ft_lstclear(&sh->env, free);	 */
 }
 
 void	end_input(t_input *input)

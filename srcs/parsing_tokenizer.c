@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 16:59:04 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/07 19:20:16 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/08 15:09:51 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	tokenizer(t_input *input, char *line)
 	char	*end;
 	char	*token;
 
-	signal_catching_mode(PGM_EXEC);
+//	signal_catching_mode(PGM_EXEC);
 	input->token_list = NULL;
 	while (*line)
 	{
@@ -85,9 +85,9 @@ int	tokenizer(t_input *input, char *line)
 				return (FAILURE);
 			token = ft_substr(start, 0, end - start);
 			add_token_to_list(&input->token_list, token);
-			
+			input->token_list->type = *token;
 		}
-		if (is_blank(*line))
+		if (is_blank(*line) && !is_separator(input->token_list->type))
 		{
 			token = ft_strdup(" ");
 			add_token_to_list(&input->token_list, token);

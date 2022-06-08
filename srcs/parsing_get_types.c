@@ -6,11 +6,21 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 18:10:00 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/07 19:41:50 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/08 13:33:26 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static int	check_double(char *s, int c)
+{
+	s++;
+	if (*s && *s == c)
+		s++;
+	if (*s && *s == '\0')
+		return (1);
+	return (0);
+}
 
 void	get_parsing_types(t_list *token)
 {
@@ -20,27 +30,17 @@ void	get_parsing_types(t_list *token)
 	{
 		tmp = (char *)token->content;
 		token->type = *tmp;
-		if (token->type == '<')
+		if (token->type == IN_REDIR)
 		{
-			tmp++;
-			if (*tmp && *tmp == '<')
-			{
-				tmp++;
-				if (*tmp == '\0')
-					token->type = HEREDOC;
-			}
+			if (check_double(tmp, *tmp))
+				token->type = HEREDOC;
 		}
-		if (token->type == '>')
+		else if (token->type == OUT_REDIR)
 		{
-			tmp++;
-			if (*tmp && *tmp == '>')
-			{
-				tmp++;
-				if (*tmp == '\0')
-					token->type = APPEND_REDIR;
-			}
+			if (check_double(tmp, *tmp))
+				token->type = APPEND_REDIR;
 		}
-		if (token->type == '$')
+		else if (token->type == '$')
 		{
 			tmp++;
 			if (*tmp == '\0')
@@ -48,6 +48,8 @@ void	get_parsing_types(t_list *token)
 			else
 				token->type = TO_EXPAND;
 		}
-		token = token->next;	
+		else
+			token->type = WORD;
+		token = token->next;
 	}
 }

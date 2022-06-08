@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:13:37 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/07 19:39:33 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/08 13:04:27 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static t_list	*search_token(char *str, size_t start, size_t len, t_list *env)
 	return (env);
 }
 
-static char	*get_token_value(char *str, size_t start, size_t len, t_list *env)
+static char	*get_expand_value(char *str, size_t start, size_t len, t_list *env)
 {
 	t_list	*l;
 	char	*res;
@@ -81,14 +81,13 @@ static char	*var_expand(char *token, t_list *env)
 		while (*token && *token != '$')
 			token++;
 		res = ft_strnextend(res, start, token - start);
-		printf("res = |%s|\n", res);
 		if (*token == '$' && is_identifier(*(token + 1)))
 		{
 			token++;
 			start = token;
 			while (is_identifier(*token))
 				token++;
-			token_val = get_token_value(start, 0, token - start, env);
+			token_val = get_expand_value(start, 0, token - start, env);
 			res = ft_strnextend(res, token_val, ft_strlen(token_val));
 			free(token_val);
 		}
@@ -115,12 +114,10 @@ void	cmd_list_expand(t_list *token, t_list *env)
 		if (token->type == HEREDOC)
 		{
 			token = token->next;
-			if (token->type == BLANK)
-				token = token->next;
 			if (token->next)
 				token = token->next;
 		}
-		if (is_quote(token->type))
+		if (token->type == QUOTE || token->type == DB_QUOTE)
 		{
 			if (token->type == DB_QUOTE)
 			{

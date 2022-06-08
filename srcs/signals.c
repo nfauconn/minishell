@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 17:55:15 by user42            #+#    #+#             */
-/*   Updated: 2022/05/16 20:02:11 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/08 15:07:17 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,8 @@
 ** rl_redisplay() displays the new prompt
 */
 
-static void	new_line(int sig_num, siginfo_t *info, void *context)
+static void	new_line(int sig_num)
 {
-	(void)info;
-	(void)context;
 	if (sig_num == SIGINT)
 	{
 		write(1, "\n", 1);
@@ -35,27 +33,14 @@ static void	new_line(int sig_num, siginfo_t *info, void *context)
 	}
 }
 
-static void	set_sigact(int signum, struct sigaction *s)
-{
-	s->sa_flags = SA_SIGINFO;
-	sigemptyset(&s->sa_mask);
-	sigaction(signum, s, NULL);
-}
-
 void	signal_catching_mode(int mode)
 {
-	struct sigaction	ctrl_c;
-	struct sigaction	ctrl_backslash;
-
 	if (mode == INTERACTIVE)
 	{
-		ctrl_c.sa_handler = NULL;
-		ctrl_c.sa_sigaction = new_line;
-		set_sigact(SIGINT, &ctrl_c);
-		ctrl_backslash.sa_handler = SIG_IGN;
+		signal(SIGINT, new_line);
+		signal(SIGQUIT, SIG_IGN);
 	}
 	else if (mode == PGM_EXEC)
 	{
-		ctrl_c.sa_handler = SIG_DFL;
 	}
 }

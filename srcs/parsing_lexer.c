@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 11:36:22 by user42            #+#    #+#             */
-/*   Updated: 2022/06/07 19:48:43 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/08 15:10:21 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,24 @@
 int	lexer(t_list *token)
 {
 	char	*tok;
+	size_t	len;
 
+	if (token->type == PIPE)
+	{
+		return(lex_error("|"));
+	}
 	while (token)
 	{
 		tok = (char *)token->content;
-//		if (is_separator(sign) && ft_strlen((char *)token->content) > 2)
-		if (is_separator(token->type) && ft_strlen(tok) > 1)
+		len = ft_strlen(tok);
+		if (is_separator(token->type))
 		{
-			ft_printerror("minish: syntax error near unexpected token `%c'\n", token->type);
+			if (token->type == IN_REDIR && len > 2)
+				return(lex_error("<<"));
+			else if (token->type == OUT_REDIR && len > 3)
+				return (lex_error(">>"));
+			if (!token->next)
+				return (lex_error("new_line"));
 			return (FAILURE);
 		}
 		token = token->next;
