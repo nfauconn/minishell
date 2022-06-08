@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 11:36:22 by user42            #+#    #+#             */
-/*   Updated: 2022/06/08 15:10:21 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/08 15:40:45 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	lexer(t_list *token)
 	char	*tok;
 	size_t	len;
 
-	if (token->type == PIPE)
+	if (token && token->type == PIPE)
 	{
 		return(lex_error("|"));
 	}
@@ -32,8 +32,7 @@ int	lexer(t_list *token)
 			else if (token->type == OUT_REDIR && len > 3)
 				return (lex_error(">>"));
 			if (!token->next)
-				return (lex_error("new_line"));
-			return (FAILURE);
+				return (lex_error("newline"));
 		}
 		token = token->next;
 	}

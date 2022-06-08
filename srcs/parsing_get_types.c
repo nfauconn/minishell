@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 18:10:00 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/08 13:33:26 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/08 15:26:48 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	get_parsing_types(t_list *token)
 			else
 				token->type = TO_EXPAND;
 		}
-		else
+		else if (token->type != PIPE && !is_quote(token->type))
 			token->type = WORD;
 		token = token->next;
 	}
