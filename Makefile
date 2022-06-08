@@ -19,6 +19,7 @@ SRCS := \
 		./srcs/init.c \
 		./srcs/main.c \
 		./srcs/execute_redirection.c \
+		./srcs/execute_utils.c \
 		./srcs/parsing_get_types.c \
 		./srcs/parsing_lexer.c \
 		./srcs/parsing_tokenizer.c \
