@@ -6,11 +6,28 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 11:36:22 by user42            #+#    #+#             */
-/*   Updated: 2022/06/08 16:03:55 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/08 17:03:09 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "minishell.h"
+
+static int	check_nb_sign(t_list *token, size_t len)
+{
+	char	*tok;
+
+	tok = (char *)token->content;
+	if (is_separator(*tok))
+	{
+		if (token->type == IN_REDIR && len > 2)
+			return(lex_error("<<"));
+		else if (token->type == OUT_REDIR && len > 2)
+			return (lex_error(">>"));
+		else if (token->type == PIPE && len > 1)
+			return (lex_error("|"));
+	}
+	return (SUCCESS);
+}
 
 int	lexer(t_list *token)
 {
@@ -25,15 +42,15 @@ int	lexer(t_list *token)
 		len = ft_strlen(tok);
 		if (is_separator(token->type))
 		{
-			if (token->type == IN_REDIR && len > 2)
-				return(lex_error("<<"));
-			else if (token->type == OUT_REDIR && len > 3)
-				return (lex_error(">>"));
-			if (token->next)
+			if (check_nb_sign(token, len) == FAILURE)
+				return (FAILURE);
+			if (token->next && is_separator(token->next->type))
 			{
-				tok = (char *)token->next->content;
-				if (is_separator(*tok))
-					return (lex_error(tok));
+				len = ft_strlen((char *)token->next->content);
+				if (check_nb_sign(token->next, len) == FAILURE)
+					return (FAILURE);
+				else
+					return (lex_error((char *)token->next->content));
 			}
 			else if (!token->next)
 				return (lex_error("newline"));
