@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 19:57:56 by user42            #+#    #+#             */
-/*   Updated: 2022/06/08 13:01:42 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/08 16:02:29 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int	is_blank(int c)
 
 int	is_separator(int c)
 {
-	return (c == PIPE || c == IN_REDIR || c == OUT_REDIR);
+	return (c == PIPE || c == IN_REDIR || c == OUT_REDIR || c == HEREDOC
+		|| c == APPEND_REDIR);
 }
 
 int	is_quote(int c)
