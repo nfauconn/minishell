@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   rev_int_tab.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/11 17:25:43 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/09 18:49:42 by user42           ###   ########.fr       */
+/*   Created: 2021/07/29 19:48:27 by nfauconn          #+#    #+#             */
+/*   Updated: 2021/09/08 10:20:21 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	init_input(t_input *input)
+void	rev_int_tab(int *tab, int size)
 {
-	input->line_read = get_input();
-	input->token_list = NULL;
-}
+	int	i;
+	int	j;
+	int	temp;
 
-void	init_sh(t_sh *sh, char **env)
-{
-	sh->cmd_nb = 0;
-	sh->cmd = NULL;
-	sh->env = NULL;
-	sh->env = tab_to_lst(env);
+	i = 0;
+	j = size - 1;
+	while (i < size / 2)
+	{
+		temp = tab[i];
+		tab[i] = tab[j];
+		tab[j] = temp;
+		i++;
+		j--;
+	}
 }

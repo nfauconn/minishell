@@ -13,18 +13,19 @@ SRCS := \
 		./srcs/builtins_export.c \
 		./srcs/builtins_pwd.c \
 		./srcs/builtins_unset.c \
-		./srcs/data_env_list.c \
 		./srcs/end.c \
 		./srcs/error.c \
 		./srcs/init.c \
 		./srcs/main.c \
 		./srcs/execute_redirection.c \
 		./srcs/execute_utils.c \
-		./srcs/parsing_get_types.c \
-		./srcs/parsing_lexer.c \
-		./srcs/parsing_tokenizer.c \
-		./srcs/parsing_utils.c \
 		./srcs/parsing_expand.c \
+		./srcs/parsing_get.c \
+		./srcs/parsing_lexer.c \
+		./srcs/parsing_parser.c \
+		./srcs/parsing_tokenizer.c \
+		./srcs/parsing_types.c \
+		./srcs/parsing_utils.c \
 		./srcs/signals.c
 OBJS := $(subst $(SRC_DIR), $(BUILD_DIR), $(SRCS:%.c=%.o))
 VPATH = $(SRC_DIR):$(INC_DIR):$(BUILD_DIR)

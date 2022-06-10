@@ -1,27 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   ft_tab_to_lst.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/11 17:25:43 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/09 18:49:42 by user42           ###   ########.fr       */
+/*   Created: 2022/06/09 17:44:34 by user42            #+#    #+#             */
+/*   Updated: 2022/06/09 17:45:23 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	init_input(t_input *input)
+t_list	*tab_to_lst(char **tab)
 {
-	input->line_read = get_input();
-	input->token_list = NULL;
-}
+	int		i;
+	int		len;
+	t_list	*lst;
+	t_list	*new;
 
-void	init_sh(t_sh *sh, char **env)
-{
-	sh->cmd_nb = 0;
-	sh->cmd = NULL;
-	sh->env = NULL;
-	sh->env = tab_to_lst(env);
+	len = 0;
+	while (tab[len])
+		len++;
+	lst = NULL;
+	i = 0;
+	while (tab[i])
+	{
+		new = (t_list *)malloc(sizeof(t_list));
+	 	new->content = ft_strdup(tab[i]);
+		new->next = NULL;
+		ft_lstadd_back(&lst, new);
+		i++;
+	}
+	return (lst);
 }

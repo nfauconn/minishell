@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:13:37 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/08 13:04:27 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/10 13:29:04 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ static char	*var_expand(char *token, t_list *env)
 	return (res);
 }
 
-void	cmd_list_expand(t_list *token, t_list *env)
+char	*token_expand(t_list *token, t_list *env)
 {
 	int	start;
 	char	*tok;
@@ -137,4 +137,22 @@ void	cmd_list_expand(t_list *token, t_list *env)
 		}
  		token = token->next;
 	}
+/* 	char	*tok;
+	char	*tmp;
+	char	*ret;
+
+	ret = NULL;
+	tmp = NULL;
+	tok = (char *)token->content;
+	if (token->type == QUOTE || token->type == DB_QUOTE)
+	{
+		if (token->type == DB_QUOTE)
+			ret = var_expand((char *)token->content, env);
+		tmp = ret;
+		ret = ft_substr(tmp, 1, ft_strlen(tmp) - 2);
+		free(tmp);
+	}
+	else if (token->type == TO_EXPAND)
+		ret = var_expand(token->content, env);
+	return (ret); */
 }

@@ -3,17 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_expand1.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/15 13:27:49 by mdankou           #+#    #+#             */
-/*   Updated: 2022/06/07 13:29:23 by nfauconn         ###   ########.fr       */
+/*   Created: 2022/05/25 15:13:37 by nfauconn          #+#    #+#             */
+/*   Updated: 2022/06/09 19:06:04 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdio.h>
+#include "minishell.h"
 
-t_list	*search_token(char *str, size_t start, size_t len, t_list *env)
+static int	is_identifier(int c)
+{
+	if (ft_isalnum(c) || c == '_')
+		return (1);
+	return (0);
+}
+
+static t_list	*search_token(char *str, size_t start, size_t len, t_list *env)
 {
 	while (env)
 	{
@@ -25,7 +31,7 @@ t_list	*search_token(char *str, size_t start, size_t len, t_list *env)
 	return (env);
 }
 
-char	*get_token_value(char *str, size_t start, size_t len, t_list *env)
+static char	*get_expand_value(char *str, size_t start, size_t len, t_list *env)
 {
 	t_list	*l;
 	char	*res;
@@ -34,25 +40,19 @@ char	*get_token_value(char *str, size_t start, size_t len, t_list *env)
 	if (l)
 		res = ft_strdup(ft_strchr((char *)l->content, '=') + 1);
 	else
-		res = ft_strdup("\0");
+		res = ft_strdup("");
 	return (res);
 }
 
-char	*ft_strnextend(char *alloc_str, char *str, size_t n)
+static char	*ft_strnextend(char *alloc_str, char *str, size_t len)
 {
-	size_t	len;
 	size_t	old_len;
 	char	*new;
 
-	if (str == NULL)
+	if (str == NULL || len == 0)
 		return (alloc_str);
-	len = ft_strlen(str);
-	if (n == 0 || len == 0)
-		return (alloc_str);
-	if (len > n)
-		len = n;
 	if (alloc_str != NULL)
-	old_len = ft_strlen(alloc_str);
+		old_len = ft_strlen(alloc_str);
 	else
 		old_len = 0;
 	new = (char *)malloc(sizeof(char) * (len + old_len + 1));
@@ -66,57 +66,75 @@ char	*ft_strnextend(char *alloc_str, char *str, size_t n)
 	ft_strlcpy(new + old_len, str, len + 1);
 	free(alloc_str);
 	return (new);
-}
+} 
 
-char	*var_expand(char *token, t_list *env)
+static char	*var_expand(char *token, t_list *env)
 {
-	size_t	i;
-	ssize_t	len;
+	char	*start;
 	char	*res;
 	char	*token_val;
 
 	res = NULL;
-	i = (token[0] == '\"' || token[0] == '\'');
-	while (token[i] && token[i] != '\"')
+	while (*token)
 	{
-		len = ft_strchr(token + i, '$') - (token + i);
-		if (len >= 0)
+		start = token;
+		while (*token && *token != '$')
+			token++;
+		res = ft_strnextend(res, start, token - start);
+		if (*token == '$' && is_identifier(*(token + 1)))
 		{
-			res = ft_strnextend(res, token + i, len);
-			i += len + 1;
-			len = 0;
-			while (token[i + len] && token[i + len] != '\"'
-				&& (ft_isalnum(token[i + len]) || token[i + len] == '_'))
-				++len;
-			if (len == 0)
-				res = ft_strnextend(res, token + i + ++len, 1);
-			else
-			{
-				token_val = get_token_value(token, i, len, env);
-				res = ft_strnextend(res, token_val, ft_strlen(token_val));
-			}
+			token++;
+			start = token;
+			while (is_identifier(*token))
+				token++;
+			token_val = get_expand_value(start, 0, token - start, env);
+			res = ft_strnextend(res, token_val, ft_strlen(token_val));
+			free(token_val);
 		}
-		else
+		else if (*token == '$' && !is_identifier(*(token + 1)))
 		{
-			len = ft_strlen(token + i) - 1;
-			res = ft_strnextend(res, token + i, len);
+			res = ft_strnextend(res, token, 1);
+			token++;
 		}
-		i += len;
 	}
 	return (res);
 }
 
-char	*cmd_list_expand(char *token, t_list *env)
+void	cmd_list_expand(t_list *token, t_list *env)
 {
-	char	*str;
+	int	start;
+	char	*tok;
+	char	*tmp;
 
-	if (token[0] == token[ft_strlen(token) - 1] && token[0] == '\'')
+	tmp = NULL;
+	while (token)
 	{
-		str = (char *)malloc(sizeof(char) * ft_strlen(token) - 1);
-		if (!str)
-			return (NULL);
-		ft_strlcpy(str, token + 1, ft_strlen(token) - 1);
-		return (str);
+		start = 0;
+		tok = (char *)token->content;
+		if (token->type == HEREDOC)
+		{
+			token = token->next;
+			if (token->next)
+				token = token->next;
+		}
+		if (token->type == QUOTE || token->type == DB_QUOTE)
+		{
+			if (token->type == DB_QUOTE)
+			{
+				tmp = token->content;
+				token->content = var_expand(tok, env);
+				free(tmp);
+			}
+			tmp = token->content;
+			token->content = ft_substr(tmp, 1, ft_strlen(tmp) - 2);
+			free(tmp);
+		}
+		else if (token->type == TO_EXPAND)
+		{
+			tmp = token->content;
+			token->content = var_expand(tmp, env);
+			free(tmp);
+		}
+ 		token = token->next;
 	}
-	return (var_expand(token, env));
 }

@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 16:59:04 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/08 15:57:05 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/10 11:36:06 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static char	*find_end(t_input *input, char **s)
 		perror_and_free(input, "minish does not handle non closed quotes");
 		return (NULL);
 	}
-	if (is_separator(**s))
+	if (is_separator(**s) || is_redir(**s))
 	{
 		tmp = *s;
 		while (**s == *tmp)
@@ -52,7 +52,7 @@ static char	*find_end(t_input *input, char **s)
 		return (*s);
 	}
 	(*s)++;
-	if (**s == '\0' || is_blank(**s) || is_quote(**s) || is_separator(**s))
+	if (**s == '\0' || is_blank(**s) || is_quote(**s) || is_separator(**s) || is_redir(**s))
 		return (*s);
 	find_end(input, s);
 	return (*s);
@@ -71,7 +71,6 @@ int	tokenizer(t_input *input, char *line)
 	char	*end;
 	char	*token;
 
-//	signal_catching_mode(PGM_EXEC);
 	input->token_list = NULL;
 	while (*line)
 	{
@@ -86,13 +85,11 @@ int	tokenizer(t_input *input, char *line)
 			token = ft_substr(start, 0, end - start);
 			add_token_to_list(&input->token_list, token);
 		}
-		if (is_blank(*line) && !is_separator(*token))
+		if (is_blank(*line) && !is_separator(*token) && !is_redir(*token))
 		{
 			token = ft_strdup(" ");
 			add_token_to_list(&input->token_list, token);
 		}
-		start = NULL;
-		end = NULL;
 	}
 	return (SUCCESS);
 }

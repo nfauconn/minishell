@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   ft_tab_display.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/11 17:25:43 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/09 18:49:42 by user42           ###   ########.fr       */
+/*   Created: 2022/05/31 16:40:26 by nfauconn          #+#    #+#             */
+/*   Updated: 2022/05/31 17:59:34 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	init_input(t_input *input)
+void	ft_tab_display(char **tab)
 {
-	input->line_read = get_input();
-	input->token_list = NULL;
-}
+	int	i;
 
-void	init_sh(t_sh *sh, char **env)
-{
-	sh->cmd_nb = 0;
-	sh->cmd = NULL;
-	sh->env = NULL;
-	sh->env = tab_to_lst(env);
+	i = 0;
+	while (tab[i])
+	{
+		ft_printf("line[%d] = |%s|\n", i, tab[i]);
+		i++;
+	}
 }

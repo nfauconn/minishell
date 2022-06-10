@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_lexer.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 11:36:22 by user42            #+#    #+#             */
-/*   Updated: 2022/06/08 17:03:09 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/09 18:39:12 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,16 @@ static int	check_nb_sign(t_list *token, size_t len)
 	char	*tok;
 
 	tok = (char *)token->content;
-	if (is_separator(*tok))
+	if (is_redir(*tok))
 	{
 		if (token->type == IN_REDIR && len > 2)
 			return(lex_error("<<"));
 		else if (token->type == OUT_REDIR && len > 2)
 			return (lex_error(">>"));
-		else if (token->type == PIPE && len > 1)
+	}
+	else if (is_separator(*tok))
+	{
+		if (token->type == PIPE && len > 1)
 			return (lex_error("|"));
 	}
 	return (SUCCESS);
@@ -40,19 +43,23 @@ int	lexer(t_list *token)
 	{
 		tok = (char *)token->content;
 		len = ft_strlen(tok);
-		if (is_separator(token->type))
+		if (is_redir(token->type) || is_separator(token->type))
 		{
 			if (check_nb_sign(token, len) == FAILURE)
 				return (FAILURE);
-			if (token->next && is_separator(token->next->type))
+			token = token->next;
+			if (token)
 			{
-				len = ft_strlen((char *)token->next->content);
-				if (check_nb_sign(token->next, len) == FAILURE)
-					return (FAILURE);
-				else
-					return (lex_error((char *)token->next->content));
+				if (is_redir(token->type) || is_separator(token->type))
+				{
+					len = ft_strlen((char *)token->content);
+					if (check_nb_sign(token, len) == FAILURE)
+						return (FAILURE);
+					else
+						return (lex_error((char *)token->content));
+				}
 			}
-			else if (!token->next)
+			else if (!token)
 				return (lex_error("newline"));
 		}
 		token = token->next;

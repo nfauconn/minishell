@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_redirection.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:21:51 by mdankou           #+#    #+#             */
-/*   Updated: 2022/06/08 18:32:02 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/06/10 13:29:08 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,11 @@ void	apply_redirections(t_list *token)
 		errno = 0;
 		if (token->type == IN_REDIR)
 		{
-			if (token->next)
-				redir[0] = open((char *)token->next->content, O_RDONLY);
+			redir[0] = open((char *)token->next->content, O_RDONLY);
 		}
 		else if (token->type == OUT_REDIR)
 		{
-			if (token->next)
-				redir[1] = open((char *)token->next->content, O_CREAT | O_TRUNC | O_WRONLY, 0644);
+			redir[1] = open((char *)token->next->content, O_CREAT | O_TRUNC | O_WRONLY, 0644);
 		}
 		else if (token->type == HEREDOC)
 		{

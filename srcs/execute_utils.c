@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:38:14 by mdankou           #+#    #+#             */
-/*   Updated: 2022/06/08 15:20:20 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/06/09 18:35:20 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,9 @@ void grab_command(t_list *token)
 		{
 			start = token->next->next;
 			if (start)
-			while (start && !is_separator(*(char *)start->content)
-				&& !!is_blank(*(char *)start->content))
+			while (start && !is_redir(*(char *)start->content)
+				&& !is_blank(*(char *)start->content) 
+				&& !is_separator(*(char *)start->content))
 			{
 				ft_lstadd_back(&l, ft_lstnew(ft_strdup(start->content)));
 				start = start->next;
