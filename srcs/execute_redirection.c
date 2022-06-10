@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   execute_redirection.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:21:51 by mdankou           #+#    #+#             */
-/*   Updated: 2022/06/10 14:47:22 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/10 15:59:04 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-/*
+
 static void	run_heredoc(int *fd, char *delim)
 {
 	char	*line;
@@ -20,7 +20,6 @@ static void	run_heredoc(int *fd, char *delim)
 	if (*fd < 0)
 		return ;
 	line = readline("heredoc> ");
-	//printf("readline: %s\n", line);
 	while (line && (line[0] == '\n' || ft_strcmp(line, delim)))
 	{
 		write(*fd, line, ft_strlen(line));
@@ -38,7 +37,7 @@ static void	run_heredoc(int *fd, char *delim)
 		ft_printerror("minish: here_doc: %s\n", strerror(errno));
 	}
 }
-*/
+
 void	cmd_redirections(t_cmd *cmd, t_list *token)
 {
 	cmd->redir[0] = -1;
@@ -52,11 +51,6 @@ void	cmd_redirections(t_cmd *cmd, t_list *token)
 				close(cmd->redir[0]);
 			if (token->type == INFILE_PATH)
 				cmd->redir[0] = open((char *)token->content, O_RDONLY);
-			else if (token->type == HEREDOC)
-			{
-				/*DONT WORK AAAAAAAAAAAAAAH*/
-				//run_heredoc(&cmd->redir[0], token->content);
-			}
 		}
 		else if (is_out_redir_path(token->type))
 		{
@@ -67,10 +61,10 @@ void	cmd_redirections(t_cmd *cmd, t_list *token)
 			else if (token->type == TRUNC_OUTFILE_PATH)
 				cmd->redir[1] = open((char *)token->content, O_CREAT | O_TRUNC | O_WRONLY, 0644);
 		}
+		else if (token->type == HEREDOC)
+				run_heredoc(&cmd->redir[0], token->next->content);
 		if (errno)
-		{
 			ft_printerror("minish: %s: %s\n", (char *)token->content, strerror(errno));
-		}
 		token = token->next;
 	}
 }
