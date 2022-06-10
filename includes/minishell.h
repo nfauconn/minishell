@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 18:25:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/10 13:07:52 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/10 14:44:34 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,6 @@ typedef struct s_input
 	t_list	*token_list;
 }	t_input;
 
-typedef struct s_cmd
-{
-	char			**cmd_tab;
-	int				redir[2];
-	int				in_redir_type;
-	int				out_redir_type;
-/* 	char			*infile_path;
-	char			*outfile_path; */
-	struct s_cmd	*next;
-}	t_cmd;
-
 typedef struct s_sh
 {
 	size_t		cmd_nb;
@@ -54,6 +43,8 @@ void	init_sh(t_sh *sh, char **env);
 
 /* PARSING_TOKENIZER */
 int		is_blank(int c);
+int		is_in_redir_path(int c);
+int		is_out_redir_path(int c);
 int		is_redir(int c);
 int		is_redir_path(int c);
 int		is_separator(int c);
@@ -71,7 +62,7 @@ int		lex_error(char *s);
 size_t	get_cmd_nb(t_list *token);
 size_t	get_cmd_tab_sz(t_list *token);
 int		parser(t_input *input, t_sh *sh);
-char	*token_expand(t_list *token_list, t_list *env);
+void	token_expand(t_list *token_list, t_list *env);
 
 /* END */
 void	end(t_input *input, t_sh *sh);

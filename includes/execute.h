@@ -3,25 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   execute.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:22:26 by mdankou           #+#    #+#             */
-/*   Updated: 2022/06/08 14:49:27 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/06/10 14:40:16 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXECUTE_H
 # define EXECUTE_H
 
-# include "libft.h"
+# include "minishell.h"
 
-typedef struct s_cmdinfo
+typedef struct s_cmd
 {
+	char			**cmd_tab;
 	int				redir[2];
-	t_list			*cmd;
-	struct s_cmdinfo	*next;
-}	t_cmdinfo;
+	int				in_redir_type;
+	int				out_redir_type;
+	struct s_cmd	*next;
+}	t_cmd;
 
-void	apply_redirections(t_list *token_list);
+void	cmd_redirections(t_cmd *cmd, t_list *token);
 
 #endif

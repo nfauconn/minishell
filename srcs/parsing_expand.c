@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:13:37 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/10 13:29:04 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/10 14:09:14 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ static char	*var_expand(char *token, t_list *env)
 	return (res);
 }
 
-char	*token_expand(t_list *token, t_list *env)
+void	token_expand(t_list *token, t_list *env)
 {
 	int	start;
 	char	*tok;

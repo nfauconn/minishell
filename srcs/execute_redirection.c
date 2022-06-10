@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:21:51 by mdankou           #+#    #+#             */
-/*   Updated: 2022/06/10 13:29:08 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/10 14:47:22 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,35 +39,38 @@ static void	run_heredoc(int *fd, char *delim)
 	}
 }
 */
-void	apply_redirections(t_list *token)
+void	cmd_redirections(t_cmd *cmd, t_list *token)
 {
-	int		redir[2];
-
+	cmd->redir[0] = -1;
+	cmd->redir[1] = -1;
 	errno = 0;
-	while (token && !errno)
+	while (token && !is_separator(token->type) && !errno)
 	{
-		if (token->type == IN_REDIR || token->type == HEREDOC)
-			close(redir[0]);
-		else if (token->type == OUT_REDIR)
-			close(redir[1]);
-		errno = 0;
-		if (token->type == IN_REDIR)
+		if (is_in_redir_path(token->type))
 		{
-			redir[0] = open((char *)token->next->content, O_RDONLY);
+			if (cmd->redir[0] >= 0)
+				close(cmd->redir[0]);
+			if (token->type == INFILE_PATH)
+				cmd->redir[0] = open((char *)token->content, O_RDONLY);
+			else if (token->type == HEREDOC)
+			{
+				/*DONT WORK AAAAAAAAAAAAAAH*/
+				//run_heredoc(&cmd->redir[0], token->content);
+			}
 		}
-		else if (token->type == OUT_REDIR)
+		else if (is_out_redir_path(token->type))
 		{
-			redir[1] = open((char *)token->next->content, O_CREAT | O_TRUNC | O_WRONLY, 0644);
+			if (cmd->redir[1] >= 0)
+				close(cmd->redir[1]);
+			if (token->type == APPEND_OUTFILE_PATH)
+				cmd->redir[1] = open((char *)token->content, O_CREAT | O_APPEND | O_WRONLY, 0644);
+			else if (token->type == TRUNC_OUTFILE_PATH)
+				cmd->redir[1] = open((char *)token->content, O_CREAT | O_TRUNC | O_WRONLY, 0644);
 		}
-		else if (token->type == HEREDOC)
+		if (errno)
 		{
-			/*DONT WORK AAAAAAAAAAAAAAH*/
-			//run_heredoc(&redir[0], token->next->content);
+			ft_printerror("minish: %s: %s\n", (char *)token->content, strerror(errno));
 		}
 		token = token->next;
-	}
-	if (errno)
-	{
-		ft_printerror("minish: %s: %s\n", (char *)token->content, strerror(errno));
 	}
 }
