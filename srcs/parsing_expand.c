@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_expand.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:13:37 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/10 14:09:14 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/11 09:59:59 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ void	token_expand(t_list *token, t_list *env)
 			token->content = ft_substr(tmp, 1, ft_strlen(tmp) - 2);
 			free(tmp);
 		}
-		else if (token->type == TO_EXPAND)
+		else if (token->type == WORD)
 		{
 			tmp = token->content;
 			token->content = var_expand(tmp, env);

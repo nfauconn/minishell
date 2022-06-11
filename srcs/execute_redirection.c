@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_redirection.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:21:51 by mdankou           #+#    #+#             */
-/*   Updated: 2022/06/10 15:59:04 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/06/11 09:31:35 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,11 @@ void	cmd_redirections(t_cmd *cmd, t_list *token)
 		}
 		else if (token->type == HEREDOC)
 				run_heredoc(&cmd->redir[0], token->next->content);
+		else
+		{
+			cmd->redir[0] = 0;
+			cmd->redir[1] = 1;
+		}
 		if (errno)
 			ft_printerror("minish: %s: %s\n", (char *)token->content, strerror(errno));
 		token = token->next;

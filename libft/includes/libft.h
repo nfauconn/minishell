@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 16:22:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/09 17:48:34 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/11 10:10:59 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,8 @@ void		ft_memdel(void **ap);
 void		*ft_memmove(void *dst, const void *src, size_t len);
 void		*ft_memset(void *b, int c, size_t len);
 
+void		ft_free_mode(char *(*f)(char *, char *), char **to_free, char *to_add);
+
 /* PRINT */
 void		ft_putchar_fd(char c, int fd);
 void		ft_putendl_fd(char *s, int fd);
@@ -131,7 +133,7 @@ int			ft_strend_cmp(char *name, char *end);
 char		*ft_strdup(const char *s1);
 void		ft_strfdup(char **over, char *buff);
 int			ft_str_isdigit(char *str);
-void		ft_strfjoin(char **over, char *buff);
+void		ft_strfjoin(char **to_free, char *to_add);
 char		*ft_strjoin(char const *s1, char const *s2);
 char		*ft_strfjoinchar(char *str, char c);
 size_t		ft_strlcat(char *dst, const char *src, size_t dstsize);
