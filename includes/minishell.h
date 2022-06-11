@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 18:25:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/10 14:44:34 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/11 11:49:16 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,20 @@ int		tokenizer(t_input *input, char *line);
 void	set_types_to_expand(t_list *token);
 void	complete_types(t_list *token);
 
-/* PARSING_LEX_PARSE */
+/* PARSING_LEX */
 int		lexer(t_list *tokens);
 int		lex_error(char *s);
 
-size_t	get_cmd_nb(t_list *token);
-size_t	get_cmd_tab_sz(t_list *token);
+/* PARSING_PARSER */
 int		parser(t_input *input, t_sh *sh);
 void	token_expand(t_list *token_list, t_list *env);
+
+/* PARSING_CONV_TO_CMD */
+size_t	get_cmd_nb(t_list *token);
+size_t	get_cmd_tab_sz(t_list *token);
+void	add_cmd_to_list(t_cmd **head, t_cmd *new);
+t_cmd	*create_new_cmd(t_list *token);
+void	token_to_cmd_lst(t_sh *sh, t_list *token);
 
 /* END */
 void	end(t_input *input, t_sh *sh);

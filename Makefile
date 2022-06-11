@@ -6,27 +6,30 @@ LD_FLAGS = -L libft -ltinfo -lreadline
 BUILD_DIR  = ./objs
 SRC_DIR  = ./srcs
 
-SRCS := \
-		./srcs/builtins_cd.c \
-		./srcs/builtins_echo.c \
-		./srcs/builtins_env.c \
-		./srcs/builtins_export.c \
-		./srcs/builtins_pwd.c \
-		./srcs/builtins_unset.c \
-		./srcs/end.c \
-		./srcs/error.c \
-		./srcs/init.c \
-		./srcs/main.c \
-		./srcs/execute_redirection.c \
-		./srcs/execute_utils.c \
-		./srcs/parsing_expand.c \
-		./srcs/parsing_get.c \
-		./srcs/parsing_lexer.c \
-		./srcs/parsing_parser.c \
-		./srcs/parsing_tokenizer.c \
-		./srcs/parsing_types.c \
-		./srcs/parsing_utils.c \
-		./srcs/signals.c
+SRCS := ${addprefix ${SRC_DIR}/, \
+		builtins_cd.c \
+		builtins_echo.c \
+		builtins_env.c \
+		builtins_export.c \
+		builtins_pwd.c \
+		builtins_unset.c \
+		end.c \
+		error.c \
+		init.c \
+		main.c \
+		execute_redirection.c \
+		execute_utils.c \
+		parsing_conv_to_cmd.c \
+		parsing_conv_utils.c \
+		parsing_expand.c \
+		parsing_input.c \
+		parsing_lexer.c \
+		parsing_parser.c \
+		parsing_tokenizer.c \
+		parsing_types.c \
+		parsing_utils.c \
+		signals.c}
+	
 OBJS := $(subst $(SRC_DIR), $(BUILD_DIR), $(SRCS:%.c=%.o))
 VPATH = $(SRC_DIR):$(INC_DIR):$(BUILD_DIR)
 
@@ -42,10 +45,10 @@ $(TARGET): ${OBJS} Makefile
 	@${COMP} ${LD_FLAGS} ${OBJS} -o ${TARGET} -lft
 	@echo "${TARGET} created"
 
-${BUILD_DIR}/%.o: %.c
+${BUILD_DIR}/%.o: ${SRCS}/%.c
 	@mkdir -p ${BUILD_DIR}
 	@echo create: ${@:%=%}
-	@${COMP} ${INCLUDES} -c $< -o $@
+	@${COMP} ${INCLUDES} -c $? -o $@
 
 clean:
 	@make clean -C libft

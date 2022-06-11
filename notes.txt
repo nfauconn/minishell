@@ -1,9 +1,5 @@
 SIGNALS when prgram launched=============================seems to be reset->need to handle it 
 
-ERROR if pipe at first, or 3 pipes for ex================bash: syntax error near unexpected token `|'
-
-
-
 
 $ echo lol |
 >
