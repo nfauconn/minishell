@@ -29,7 +29,6 @@ SRCS := ${addprefix ${SRC_DIR}/, \
 		parsing_types.c \
 		parsing_utils.c \
 		signals.c}
-	
 OBJS := $(subst $(SRC_DIR), $(BUILD_DIR), $(SRCS:%.c=%.o))
 VPATH = $(SRC_DIR):$(INC_DIR):$(BUILD_DIR)
 
@@ -45,10 +44,10 @@ $(TARGET): ${OBJS} Makefile
 	@${COMP} ${LD_FLAGS} ${OBJS} -o ${TARGET} -lft
 	@echo "${TARGET} created"
 
-${BUILD_DIR}/%.o: ${SRCS}/%.c
+${BUILD_DIR}/%.o: %.c
 	@mkdir -p ${BUILD_DIR}
 	@echo create: ${@:%=%}
-	@${COMP} ${INCLUDES} -c $? -o $@
+	@${COMP} ${INCLUDES} -c $< -o $@
 
 clean:
 	@make clean -C libft
