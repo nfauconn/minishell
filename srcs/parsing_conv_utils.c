@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 11:37:25 by user42            #+#    #+#             */
-/*   Updated: 2022/06/11 11:48:03 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/11 13:21:15 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ static char	**cmd_tab(t_list *token)
 				free(tmp);
 //				ft_free_mode(ft_strjoin, &cmd_tab[i], (char *)token->content);
 			}
+			printf("cmd_tab[%zu] = %s\n", i, cmd_tab[i]);
+			i++;
 		}
 		token = token->next;
 	}
@@ -95,5 +97,6 @@ t_cmd	*create_new_cmd(t_list *token)
 	new->cmd_tab = cmd_tab(token);
 	new->next = NULL;
 	cmd_redirections(new, token);
+	printf("cmd_tab[0] = %s\n", new->cmd_tab[0]);
 	return (new);
 }

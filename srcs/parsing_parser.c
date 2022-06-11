@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 17:41:07 by user42            #+#    #+#             */
-/*   Updated: 2022/06/11 11:48:41 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/11 13:18:42 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,5 @@ int	parser(t_input *input, t_sh *sh)
 
 	token_to_cmd_lst(sh, input->token_list);
 
-
-//	cmd_redirections(input->token_list);
 	return (1);
 }
