@@ -6,7 +6,7 @@
 /*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:38:14 by mdankou           #+#    #+#             */
-/*   Updated: 2022/06/12 15:37:35 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/06/12 19:15:17 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,27 @@ void	clean_string_array(char **array)
 	while (array[i])
 		free(array[i++]);
 	free(array);
+}
+
+char	*join_path(char const *penv, char const *pexec)
+{
+	char	*dst;
+	size_t	len1;
+	size_t	len2;
+	size_t	sep;
+
+	len1 = ft_strlen(penv);
+	len2 = ft_strlen(pexec);
+	sep = penv[len1 - 1] != '/';
+	dst = (char *)malloc(sizeof(char)
+			* (len1 + len2 + sep + 1));
+	if (!dst)
+		return (NULL);
+	ft_strlcpy(dst, penv, len1 + 1);
+	if (penv[len1 - 1] != '/')
+		dst[len1] = '/';
+	ft_strlcpy(dst + len1 + (penv[len1 - 1] != '/'), pexec, len2 + 1);
+	return (dst);
 }
 
 /*
