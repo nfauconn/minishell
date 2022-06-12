@@ -18,6 +18,7 @@ SRCS := \
 		./srcs/init.c \
 		./srcs/main.c \
 		./srcs/execute_redirection.c \
+		./srcs/execute_run.c \
 		./srcs/execute_utils.c \
 		./srcs/parsing_expand.c \
 		./srcs/parsing_get.c \

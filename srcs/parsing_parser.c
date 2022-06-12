@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_parser.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 17:41:07 by user42            #+#    #+#             */
-/*   Updated: 2022/06/10 14:40:52 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/12 17:16:14 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ static t_cmd	*create_new_cmd(t_list *token)
 	new = (t_cmd *)malloc(sizeof(t_cmd));
 	new->cmd_tab = cmd_tab(token);
 	new->next = NULL;
+	new->redir[0] = -1;
+	new->redir[1] = -1;
 	ft_tab_display(new->cmd_tab);
 	cmd_redirections(new, token);
 	return (new);

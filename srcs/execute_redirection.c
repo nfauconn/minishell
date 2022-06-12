@@ -6,7 +6,7 @@
 /*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:21:51 by mdankou           #+#    #+#             */
-/*   Updated: 2022/06/10 15:59:04 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/06/10 16:02:07 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ static void	run_heredoc(int *fd, char *delim)
 
 void	cmd_redirections(t_cmd *cmd, t_list *token)
 {
-	cmd->redir[0] = -1;
-	cmd->redir[1] = -1;
 	errno = 0;
 	while (token && !is_separator(token->type) && !errno)
 	{

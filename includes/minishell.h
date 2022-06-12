@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 18:25:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/10 14:44:34 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/12 15:09:49 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ size_t	get_cmd_tab_sz(t_list *token);
 int		parser(t_input *input, t_sh *sh);
 void	token_expand(t_list *token_list, t_list *env);
 
+/*EXECUTE*/
+int		cmd_execute(t_sh *sh);
 /* END */
 void	end(t_input *input, t_sh *sh);
 void	end_input(t_input *input);
