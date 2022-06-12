@@ -6,7 +6,7 @@
 /*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 18:25:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/12 15:09:49 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/06/12 17:23:54 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,17 +55,23 @@ int		tokenizer(t_input *input, char *line);
 void	set_types_to_expand(t_list *token);
 void	complete_types(t_list *token);
 
-/* PARSING_LEX_PARSE */
+/* PARSING_LEX */
 int		lexer(t_list *tokens);
 int		lex_error(char *s);
 
-size_t	get_cmd_nb(t_list *token);
-size_t	get_cmd_tab_sz(t_list *token);
+/* PARSING_PARSER */
 int		parser(t_input *input, t_sh *sh);
 void	token_expand(t_list *token_list, t_list *env);
 
 /*EXECUTE*/
 int		cmd_execute(t_sh *sh);
+/* PARSING_CONV_TO_CMD */
+size_t	get_cmd_nb(t_list *token);
+size_t	get_cmd_tab_sz(t_list *token);
+void	add_cmd_to_list(t_cmd **head, t_cmd *new);
+t_cmd	*create_new_cmd(t_list *token);
+void	token_to_cmd_lst(t_sh *sh, t_list *token);
+
 /* END */
 void	end(t_input *input, t_sh *sh);
 void	end_input(t_input *input);

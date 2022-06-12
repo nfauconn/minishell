@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/06 16:21:51 by mdankou           #+#    #+#             */
-/*   Updated: 2022/06/10 16:02:07 by mdankou          ###   ########.fr       */
+/*   Created: 2022/06/12 17:20:37 by mdankou           #+#    #+#             */
+/*   Updated: 2022/06/12 17:20:41 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,11 @@ void	cmd_redirections(t_cmd *cmd, t_list *token)
 		}
 		else if (token->type == HEREDOC)
 				run_heredoc(&cmd->redir[0], token->next->content);
+		else
+		{
+			cmd->redir[0] = 0;
+			cmd->redir[1] = 1;
+		}
 		if (errno)
 			ft_printerror("minish: %s: %s\n", (char *)token->content, strerror(errno));
 		token = token->next;

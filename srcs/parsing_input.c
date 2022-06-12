@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_get.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 18:10:00 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/10 11:55:45 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/11 11:40:58 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,35 +40,6 @@ char	*get_input(void)
 	}
 	return (line_read);
 }
-
-size_t	get_cmd_tab_sz(t_list *token)
-{
-	size_t	count;
-
-	count = 0;
-	while (token && !is_separator(token->type))
-	{
-		if ((token->type == WORD || is_quote(token->type)) && !is_blank(token->type))
-			count++;
-		token = token->next;
-	}
-	return (count);
-}
-
-size_t	get_cmd_nb(t_list *token)
-{
-	size_t	cmd_nb;
-
-	cmd_nb = 1;
-	while (token)
-	{
-		if (is_separator(token->type))
-			cmd_nb++;
-		token = token->next;
-	}
-	return (cmd_nb);
-}
-
 
 
 /*void	set_types_to_expand(t_list *token)
