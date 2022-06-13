@@ -6,7 +6,7 @@
 /*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 17:20:37 by mdankou           #+#    #+#             */
-/*   Updated: 2022/06/12 17:20:41 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/06/13 17:16:32 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,32 +15,43 @@
 static void	run_heredoc(int *fd, char *delim)
 {
 	char	*line;
+	pid_t	pid;
 
-	*fd = open("/tmp/.here_doc", O_CREAT | O_TRUNC | O_WRONLY, 0644);
-	if (*fd < 0)
-		return ;
-	line = readline("heredoc> ");
-	while (line && (line[0] == '\n' || ft_strcmp(line, delim)))
+	pid = fork();
+	if (pid == 0)
 	{
-		write(*fd, line, ft_strlen(line));
-		write(*fd, "\n", 1);
-		free(line);
+		signal(SIGINT, SIG_DFL);
+		*fd = open("/tmp/.here_doc", O_CREAT | O_TRUNC | O_WRONLY, 0644);
+		if (*fd < 0)
+			return ;
 		line = readline("heredoc> ");
-		if (!line)
-			break ;
+		while (line && (line[0] == '\n' || ft_strcmp(line, delim)))
+		{
+			write(*fd, line, ft_strlen(line));
+			write(*fd, "\n", 1);
+			free(line);
+			line = readline("heredoc> ");
+			if (!line)
+				break ;
+		}
+		free(line);
+		close(*fd);
+		*fd = open("/tmp/.here_doc", O_RDONLY);
+		if (*fd < 0)
+		{
+			ft_printerror("minish: here_doc: %s\n", strerror(errno));
+		}
+		exit(0);
 	}
-	free(line);
-	close(*fd);
-	*fd = open("/tmp/.here_doc", O_RDONLY);
-	if (*fd < 0)
-	{
-		ft_printerror("minish: here_doc: %s\n", strerror(errno));
-	}
+	else
+		wait(NULL);
 }
 
 void	cmd_redirections(t_cmd *cmd, t_list *token)
 {
 	errno = 0;
+	cmd->redir[0] = -1;
+	cmd->redir[1] = -1;
 	while (token && !is_separator(token->type) && !errno)
 	{
 		if (is_in_redir_path(token->type))
@@ -61,11 +72,12 @@ void	cmd_redirections(t_cmd *cmd, t_list *token)
 		}
 		else if (token->type == HEREDOC)
 				run_heredoc(&cmd->redir[0], token->next->content);
-		else
+		/*else
 		{
 			cmd->redir[0] = 0;
 			cmd->redir[1] = 1;
 		}
+		*/
 		if (errno)
 			ft_printerror("minish: %s: %s\n", (char *)token->content, strerror(errno));
 		token = token->next;

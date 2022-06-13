@@ -6,7 +6,7 @@
 /*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 15:32:33 by mdankou           #+#    #+#             */
-/*   Updated: 2022/06/12 20:49:10 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/06/13 23:30:57 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,22 @@ char	**get_path_tab(t_list *env)
 	return (ft_split(env->content + 5, ':'));
 }
 
+void handle_redironly_cmd(t_cmd *cmd)
+{
+	ssize_t	ret;
+	char	buf[BUFFER_SIZE];
+
+	//ret = read(STDIN_FILENO, buf, BUFFER_SIZE);
+	ret = read(cmd->redir[0], buf, BUFFER_SIZE);
+	while (ret > 0)
+	{
+		write(cmd->redir[1], buf, ret);
+		ret = read(cmd->redir[0], buf, BUFFER_SIZE);
+		//ret = read(STDIN_FILENO, buf, BUFFER_SIZE);
+	}
+	exit(0);
+}
+
 void	cmd_run_com(t_sh *sh, t_cmd *cmd)
 {
 	int		i;
@@ -72,31 +88,34 @@ void	cmd_run_com(t_sh *sh, t_cmd *cmd)
 	path_tab = get_path_tab(sh->env);
 	cmd_args = cmd->cmd_tab;
 	
-	if (cmd_args && path_tab)
+	if (cmd_args && cmd_args[0] && path_tab)
 	{
 		execve(cmd_args[0], cmd_args, env_tab);
-		while (path_tab[i] != NULL)
-		{
-			path_exec = join_path(path_tab[i], cmd_args[0]);
-			if (!path_exec)
-				break ;
-			execve(path_exec, cmd_args, env_tab);
-			free(path_exec);
-			++i;
-		}
+			while (path_tab[i] != NULL)
+			{
+				path_exec = join_path(path_tab[i], cmd_args[0]);
+				if (!path_exec)
+					break ;
+				execve(path_exec, cmd_args, env_tab);
+				free(path_exec);
+				++i;
+			}
+	if (errno)
+		ft_printerror("minish: %s: %s\n", cmd_args[0], strerror(errno));
 	}
-	//perror(cmd_args[0]);
+	else if (cmd_args && !cmd_args[0] && cmd->redir[1] != -1)
+	{
+		handle_redironly_cmd(cmd);
+	}
 	clean_string_array(path_tab);
-	ft_printerror("minish: %s: %s\n", cmd_args[0], strerror(errno));
 	clean_string_array(env_tab);
 }
 
 int	cmd_proc_main_job(t_sh *sh, pid_t pid, t_cmd **cmd, int fd[2])
 {
-	/*NE MARCHE PAS POUR LES PIPES*/
+	/*MARCHE MAIS A CHECKER FD NON FERMEE*/
 	if (pid)
 	{
-		
 		if ((*cmd)->redir[0] != STDIN_FILENO)
 			close ((*cmd)->redir[0]);
 		close (fd[STDOUT_FILENO]);
@@ -104,18 +123,18 @@ int	cmd_proc_main_job(t_sh *sh, pid_t pid, t_cmd **cmd, int fd[2])
 		*cmd = (*cmd)->next;
 		return (0);
 	}
-	if ((*cmd)->redir[0] != -1)
+	if ((*cmd)->redir[0] > -1)
 	{
-		//close(fd[STDIN_FILENO]);
+		close(fd[STDIN_FILENO]);
 		fd[STDIN_FILENO] = (*cmd)->redir[0];
-		dup2(fd[STDIN_FILENO], STDIN_FILENO);
 	}
-	if ((*cmd)->redir[1] != -1)
+	if ((*cmd)->redir[1] > -1)
 	{
-		//close(fd[STDOUT_FILENO]);
+		close(fd[STDOUT_FILENO]);
 		fd[STDOUT_FILENO] = (*cmd)->redir[1];
-		dup2(fd[STDOUT_FILENO], STDOUT_FILENO);
 	}
+	dup2(fd[STDIN_FILENO], STDIN_FILENO);
+	dup2(fd[STDOUT_FILENO], STDOUT_FILENO);
 	cmd_run_com(sh, *cmd);
 	exit(-1);
 }

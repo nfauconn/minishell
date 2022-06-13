@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 20:04:06 by user42            #+#    #+#             */
-/*   Updated: 2022/06/10 13:25:23 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/13 15:18:08 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	main(int ac, char **av, char **env)
 		init_input(&input);
 		if (tokenizer(&input, input.line_read) && lexer(input.token_list) && parser(&input, &sh))
 		{
-			//exec_cmd;
+			cmd_execute(&sh);
 		}
 		end(&input, &sh);
 	}
