@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:22:26 by mdankou           #+#    #+#             */
-/*   Updated: 2022/06/14 16:35:26 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/14 18:29:05 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 typedef struct s_cmd
 {
 	char			**cmd_tab;
+	size_t			index;
 	int				redir[2];
 	int				in_redir_type;
 	int				out_redir_type;

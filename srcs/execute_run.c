@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 15:32:33 by mdankou           #+#    #+#             */
-/*   Updated: 2022/06/14 17:08:45 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/14 18:53:50 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,16 @@ void handle_redironly_cmd(t_cmd *cmd)
 
 	//ret = read(STDIN_FILENO, buf, BUFFER_SIZE);
 	ret = read(cmd->redir[0], buf, BUFFER_SIZE);
+	if (ret < 0)
+		exit(exec_error("read: ", strerror(errno)));
 	while (ret > 0)
 	{
 		write(cmd->redir[1], buf, ret);
 		ret = read(cmd->redir[0], buf, BUFFER_SIZE);
+		if (ret < 0)
+			exit(exec_error("read: ", strerror(errno)));
 		//ret = read(STDIN_FILENO, buf, BUFFER_SIZE);
 	}
-	exit(0);
 }
 
 void	cmd_run_com(t_sh *sh, t_cmd *cmd)
@@ -102,9 +105,9 @@ void	cmd_run_com(t_sh *sh, t_cmd *cmd)
 			++i;
 		}
 		if (path_tab[i] == NULL)
-			ft_printerror("minish: %s: %s\n", cmd_args[0], "command not found");
+			ft_printerror("%s: %s\n", cmd_args[0], "command not found");
 		else if (errno)
-			ft_printerror("minish: %s: %s\n", cmd_args[0], strerror(errno));
+			ft_printerror("%s: %s\n", cmd_args[0], strerror(errno));
 	}
 	else if (cmd_args && !cmd_args[0] && cmd->redir[1] != -42)
 	{
@@ -119,36 +122,40 @@ int	cmd_proc_main_job(t_sh *sh, pid_t pid, t_cmd **cmd, int fd[2])
 	/*MARCHE MAIS A CHECKER FD NON FERMEE*/
 	if (pid)
 	{
-/* 		if ((*cmd)->redir[0] > STDERR_FILENO)
-		{
-			if (close ((*cmd)->redir[0]) == -1)
-				return (exec_error("close: ", strerror(errno)));
-		} */
-		if (close(fd[1]) == -1)
-			return (exec_error("close: ", strerror(errno)));
+		ft_printerror("I AM THE PARENT\n");
+/* 		if (close(fd[1]) == -1)
+			return (exec_error("close: ", strerror(errno))); */
 		(*cmd)->redir[0] = fd[0];
 		*cmd = (*cmd)->next;
 		return (0);
 	}
-	if ((*cmd)->redir[0] > STDERR_FILENO)
-	{
-		close(fd[1]);
-		fd[0] = (*cmd)->redir[0];
-		if (dup2(fd[0], STDIN_FILENO) == -1)
-			return (exec_error("dup2: ", strerror(errno)));
-	}
-	if ((*cmd)->redir[1] > STDERR_FILENO)
-	{
-		if (close(fd[1]) == -1)
-			return (exec_error("close: ", strerror(errno)));
-		fd[1] = (*cmd)->redir[1];
-		if (dup2(fd[1], STDOUT_FILENO) == -1)
-			return (exec_error("dup2: ", strerror(errno)));
-	}
-	cmd_run_com(sh, *cmd);
-//	exit(exec_error("NLABLAk: ", strerror(errno)));
 
-	exit(-1);
+ft_printerror("I AM A CHILD\n");
+
+	if ((*cmd)->redir[0] <= STDERR_FILENO && (*cmd)->index == 0)
+		(*cmd)->redir[0] = STDIN_FILENO;
+	else 
+	{
+		if ((*cmd)->redir[0] <= STDERR_FILENO && (*cmd)->index != 0)
+			(*cmd)->redir[0] = fd[0];
+		if (dup2((*cmd)->redir[0], STDIN_FILENO) == -1)
+			return (exec_error("dup2: ", strerror(errno)));
+	}
+
+
+	if ((*cmd)->redir[1] <= STDERR_FILENO && (*cmd)->index == sh->cmd_nb - 1)
+		(*cmd)->redir[1] = STDOUT_FILENO;
+	else
+	{
+		if ((*cmd)->redir[1] <= STDERR_FILENO && (*cmd)->index != sh->cmd_nb - 1)
+			(*cmd)->redir[1] = fd[1];		
+		if (dup2((*cmd)->redir[1], STDOUT_FILENO) == -1)
+			return (exec_error("dup2: ", strerror(errno)));
+	}
+
+	cmd_run_com(sh, *cmd);
+	exit(FAILURE);
+//	exit(exec_error("NLABLAk: ", strerror(errno)));
 }
 
 int	cmd_execute(t_sh *sh)
@@ -158,19 +165,17 @@ int	cmd_execute(t_sh *sh)
 	t_cmd	*cmd;
 
 	cmd = sh->cmd_list;
+	fd[0] = 0;
+	fd[1] = 1;
 	while (cmd)
 	{
 		if (cmd->next && pipe(fd) < 0)
-		{
 			return (exec_error("pipe: ", strerror(errno)));
-		}
 		pid = fork();
 		if (pid < 0)
-		{
 			return (exec_error("fork: ", strerror(errno)));
-		}
 		if (cmd_proc_main_job(sh, pid, &cmd, fd))
-			return (exec_error("parent failure: ", strerror(errno)));
+			return (FAILURE);
 	}
 	while (waitpid(-1, NULL, 0) >= 0)
 		;

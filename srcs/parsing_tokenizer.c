@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 16:59:04 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/14 16:22:19 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/14 18:10:37 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ int	tokenizer(t_input *input, char *line)
 	char	*token;
 
 	input->token_list = NULL;
+	if (!line)
+		return(exec_error("no_line\n", ""));
 	while (*line)
 	{
 		start = find_start(&line);

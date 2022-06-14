@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 20:04:06 by user42            #+#    #+#             */
-/*   Updated: 2022/06/14 16:54:26 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/14 18:23:35 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	main(int ac, char **av, char **env)
 			&& lexer(input.token_list) == SUCCESS
 			&& parser(&input, &sh) == SUCCESS)
 		{
-			cmd_execute(&sh) ;
+			cmd_execute(&sh);
 		}
 		else
 			printf("error\n");

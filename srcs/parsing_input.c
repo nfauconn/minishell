@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_get.c                                      :+:      :+:    :+:   */
+/*   parsing_input.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 18:10:00 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/11 11:40:58 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/14 18:16:51 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ char	*get_input(void)
 		rl_replace_line("", 0);
 		rl_redisplay();
 	}
-	else if (!line_read)
+/* 	else if (!line_read)
 	{
 		ft_putstr_fd("exit\n", 1);
 		free(line_read);
 		exit(0);
-	}
+	} */
 	return (line_read);
 }
 

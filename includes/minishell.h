@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 18:25:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/12 17:23:54 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/06/14 18:17:00 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 # include "libft.h"
 # include "signals.h"
 
+//#define DEBUG
+
 typedef struct s_input
 {
 	char	*line_read;
@@ -37,7 +39,7 @@ typedef struct s_sh
 }	t_sh;
 
 /* INIT */
-void	init_input(t_input *input);
+int	init_input(t_input *input);
 char	*get_input(void);
 void	init_sh(t_sh *sh, char **env);
 

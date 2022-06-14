@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 11:37:25 by user42            #+#    #+#             */
-/*   Updated: 2022/06/14 15:06:19 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/14 18:32:27 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,9 @@ static char	**cmd_tab(t_list *token)
 				free(tmp);
 //				ft_free_mode(ft_strjoin, &cmd_tab[i], (char *)token->content);
 			}
+			#ifdef DEBUG
 			printf("cmd_tab[%zu] = %s\n", i, cmd_tab[i]);
+			#endif
 			i++;
 		}
 		token = token->next;
