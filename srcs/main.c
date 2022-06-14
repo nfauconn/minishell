@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 20:04:06 by user42            #+#    #+#             */
-/*   Updated: 2022/06/13 15:18:08 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/06/14 16:54:26 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,14 @@ int	main(int ac, char **av, char **env)
 	{
 		signal_catching_mode(INTERACTIVE);
 		init_input(&input);
-		if (tokenizer(&input, input.line_read) && lexer(input.token_list) && parser(&input, &sh))
+		if (tokenizer(&input, input.line_read) == SUCCESS
+			&& lexer(input.token_list) == SUCCESS
+			&& parser(&input, &sh) == SUCCESS)
 		{
-			cmd_execute(&sh);
+			cmd_execute(&sh) ;
 		}
+		else
+			printf("error\n");
 		end(&input, &sh);
 	}
 	ft_lstclear(&sh.env, free);

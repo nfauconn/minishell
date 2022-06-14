@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 16:22:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/11 10:10:59 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/14 15:57:44 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ typedef unsigned long long	t_ull;
 
 typedef enum e_bool
 {
-	SUCCESS = 1,
-	FAILURE = 0
+	SUCCESS = 0,
+	FAILURE = 1
 }	t_bool;
 
 typedef struct s_vector

@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:22:26 by mdankou           #+#    #+#             */
-/*   Updated: 2022/06/10 14:40:16 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/14 16:35:26 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ typedef struct s_cmd
 }	t_cmd;
 
 void	cmd_redirections(t_cmd *cmd, t_list *token);
+int		exec_error(char *s1, char *s2);
 
 #endif

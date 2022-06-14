@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 18:49:09 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/08 15:27:40 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/14 16:36:13 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,11 @@ void	perror_and_free(t_input *input, char *s)
 int	lex_error(char *s)
 {
 	ft_printerror("minish: syntax error near unexpected token `%s'\n", s);
+	return (FAILURE);
+}
+
+int	exec_error(char *s1, char *s2)
+{
+	ft_printerror("minish: %s%s\n", s1, s2);
 	return (FAILURE);
 }

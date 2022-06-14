@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 15:32:33 by mdankou           #+#    #+#             */
-/*   Updated: 2022/06/14 15:31:23 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/14 17:08:45 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,26 +119,35 @@ int	cmd_proc_main_job(t_sh *sh, pid_t pid, t_cmd **cmd, int fd[2])
 	/*MARCHE MAIS A CHECKER FD NON FERMEE*/
 	if (pid)
 	{
-		if ((*cmd)->redir[0] != STDIN_FILENO)
-			close ((*cmd)->redir[0]);
-		close (fd[STDOUT_FILENO]);
-		(*cmd)->redir[0] = fd[STDIN_FILENO];
+/* 		if ((*cmd)->redir[0] > STDERR_FILENO)
+		{
+			if (close ((*cmd)->redir[0]) == -1)
+				return (exec_error("close: ", strerror(errno)));
+		} */
+		if (close(fd[1]) == -1)
+			return (exec_error("close: ", strerror(errno)));
+		(*cmd)->redir[0] = fd[0];
 		*cmd = (*cmd)->next;
 		return (0);
 	}
 	if ((*cmd)->redir[0] > STDERR_FILENO)
 	{
-		close(fd[STDIN_FILENO]);
-		fd[STDIN_FILENO] = (*cmd)->redir[0];
+		close(fd[1]);
+		fd[0] = (*cmd)->redir[0];
+		if (dup2(fd[0], STDIN_FILENO) == -1)
+			return (exec_error("dup2: ", strerror(errno)));
 	}
 	if ((*cmd)->redir[1] > STDERR_FILENO)
 	{
-		close(fd[STDOUT_FILENO]);
-		fd[STDOUT_FILENO] = (*cmd)->redir[1];
+		if (close(fd[1]) == -1)
+			return (exec_error("close: ", strerror(errno)));
+		fd[1] = (*cmd)->redir[1];
+		if (dup2(fd[1], STDOUT_FILENO) == -1)
+			return (exec_error("dup2: ", strerror(errno)));
 	}
-	dup2(fd[STDIN_FILENO], STDIN_FILENO);
-	dup2(fd[STDOUT_FILENO], STDOUT_FILENO);
 	cmd_run_com(sh, *cmd);
+//	exit(exec_error("NLABLAk: ", strerror(errno)));
+
 	exit(-1);
 }
 
@@ -153,19 +162,25 @@ int	cmd_execute(t_sh *sh)
 	{
 		if (cmd->next && pipe(fd) < 0)
 		{
-			perror("minishell");
-			return (-1);
+			return (exec_error("pipe: ", strerror(errno)));
 		}
 		pid = fork();
 		if (pid < 0)
 		{
-			perror("minishell");
-			return (-1);
+			return (exec_error("fork: ", strerror(errno)));
 		}
 		if (cmd_proc_main_job(sh, pid, &cmd, fd))
-			return (errno);
+			return (exec_error("parent failure: ", strerror(errno)));
 	}
 	while (waitpid(-1, NULL, 0) >= 0)
 		;
-	return (0);
+	return (SUCCESS);
 }
+
+/*		if (cmd->next && pipe(fd) < 0)
+			return(exec_error("pipe: ", strerror(errno)));
+		pid = fork();
+		if (pid < 0)
+			
+		if (cmd_proc_main_job(sh, pid, &cmd, fd) == -1)
+			return (errno);*/
