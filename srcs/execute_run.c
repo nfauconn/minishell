@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 15:32:33 by mdankou           #+#    #+#             */
-/*   Updated: 2022/06/14 15:18:45 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/14 15:31:23 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,19 +89,21 @@ void	cmd_run_com(t_sh *sh, t_cmd *cmd)
 	cmd_args = cmd->cmd_tab;
 	if (cmd_args && cmd_args[0] && path_tab)
 	{
-		if (access(cmd_args[0], X_OK))
+		if (access(cmd_args[0], X_OK) != -1)
 			execve(cmd_args[0], cmd_args, env_tab);
 		while (path_tab[i] != NULL)
 		{
 			path_exec = join_path(path_tab[i], cmd_args[0]);
 			if (!path_exec)
 				break ;
-			if (access(path_exec, X_OK))
+			if (access(path_exec, X_OK) != -1)
 				execve(path_exec, cmd_args, env_tab);
 			free(path_exec);
 			++i;
 		}
-		if (errno)
+		if (path_tab[i] == NULL)
+			ft_printerror("minish: %s: %s\n", cmd_args[0], "command not found");
+		else if (errno)
 			ft_printerror("minish: %s: %s\n", cmd_args[0], strerror(errno));
 	}
 	else if (cmd_args && !cmd_args[0] && cmd->redir[1] != -42)
