@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_run.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 15:32:33 by mdankou           #+#    #+#             */
-/*   Updated: 2022/06/13 23:30:57 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/06/14 15:18:45 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,23 +87,24 @@ void	cmd_run_com(t_sh *sh, t_cmd *cmd)
 	env_tab = get_env_tab(sh->env);
 	path_tab = get_path_tab(sh->env);
 	cmd_args = cmd->cmd_tab;
-	
 	if (cmd_args && cmd_args[0] && path_tab)
 	{
-		execve(cmd_args[0], cmd_args, env_tab);
-			while (path_tab[i] != NULL)
-			{
-				path_exec = join_path(path_tab[i], cmd_args[0]);
-				if (!path_exec)
-					break ;
+		if (access(cmd_args[0], X_OK))
+			execve(cmd_args[0], cmd_args, env_tab);
+		while (path_tab[i] != NULL)
+		{
+			path_exec = join_path(path_tab[i], cmd_args[0]);
+			if (!path_exec)
+				break ;
+			if (access(path_exec, X_OK))
 				execve(path_exec, cmd_args, env_tab);
-				free(path_exec);
-				++i;
-			}
-	if (errno)
-		ft_printerror("minish: %s: %s\n", cmd_args[0], strerror(errno));
+			free(path_exec);
+			++i;
+		}
+		if (errno)
+			ft_printerror("minish: %s: %s\n", cmd_args[0], strerror(errno));
 	}
-	else if (cmd_args && !cmd_args[0] && cmd->redir[1] != -1)
+	else if (cmd_args && !cmd_args[0] && cmd->redir[1] != -42)
 	{
 		handle_redironly_cmd(cmd);
 	}
@@ -123,12 +124,12 @@ int	cmd_proc_main_job(t_sh *sh, pid_t pid, t_cmd **cmd, int fd[2])
 		*cmd = (*cmd)->next;
 		return (0);
 	}
-	if ((*cmd)->redir[0] > -1)
+	if ((*cmd)->redir[0] > STDERR_FILENO)
 	{
 		close(fd[STDIN_FILENO]);
 		fd[STDIN_FILENO] = (*cmd)->redir[0];
 	}
-	if ((*cmd)->redir[1] > -1)
+	if ((*cmd)->redir[1] > STDERR_FILENO)
 	{
 		close(fd[STDOUT_FILENO]);
 		fd[STDOUT_FILENO] = (*cmd)->redir[1];

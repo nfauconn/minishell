@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_redirection.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 17:20:37 by mdankou           #+#    #+#             */
-/*   Updated: 2022/06/13 17:16:32 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/06/14 14:51:00 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ static void	run_heredoc(int *fd, char *delim)
 void	cmd_redirections(t_cmd *cmd, t_list *token)
 {
 	errno = 0;
-	cmd->redir[0] = -1;
-	cmd->redir[1] = -1;
+	cmd->redir[0] = -42;
+	cmd->redir[1] = -42;
 	while (token && !is_separator(token->type) && !errno)
 	{
 		if (is_in_redir_path(token->type))
@@ -71,13 +71,12 @@ void	cmd_redirections(t_cmd *cmd, t_list *token)
 				cmd->redir[1] = open((char *)token->content, O_CREAT | O_TRUNC | O_WRONLY, 0644);
 		}
 		else if (token->type == HEREDOC)
-				run_heredoc(&cmd->redir[0], token->next->content);
-		/*else
+			run_heredoc(&cmd->redir[0], token->next->content);
+/* 		else
 		{
 			cmd->redir[0] = 0;
 			cmd->redir[1] = 1;
-		}
-		*/
+		} */
 		if (errno)
 			ft_printerror("minish: %s: %s\n", (char *)token->content, strerror(errno));
 		token = token->next;

@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 16:59:04 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/10 11:36:06 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/14 15:22:59 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,7 @@ int	tokenizer(t_input *input, char *line)
 			add_token_to_list(&input->token_list, token);
 		}
 	}
+	set_types_to_expand(input->token_list);
+
 	return (SUCCESS);
 }

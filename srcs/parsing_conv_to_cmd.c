@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_conv_to_cmd.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 11:36:26 by user42            #+#    #+#             */
-/*   Updated: 2022/06/11 13:20:03 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/14 14:35:54 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	token_to_cmd_lst(t_sh *sh, t_list *token)
 	t_cmd	*new_cmd;
 	t_cmd 	**head;
 
+	sh->cmd_nb = get_cmd_nb(token);
+	printf("cmd_nb = %zu\n", sh->cmd_nb);
 	head = &sh->cmd_list;
 	while (token)
 	{

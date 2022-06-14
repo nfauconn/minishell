@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_conv_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 11:37:25 by user42            #+#    #+#             */
-/*   Updated: 2022/06/11 13:21:15 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/14 15:06:19 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,5 @@ t_cmd	*create_new_cmd(t_list *token)
 	new->cmd_tab = cmd_tab(token);
 	new->next = NULL;
 	cmd_redirections(new, token);
-	printf("cmd_tab[0] = %s\n", new->cmd_tab[0]);
 	return (new);
 }
