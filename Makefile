@@ -1,59 +1,77 @@
 TARGET = minishell
 
-INCLUDES = -I includes -I libft/includes
-LD_FLAGS = -L libft -ltinfo -lreadline
-
-BUILD_DIR  = ./objs
+INC_DIR = ./includes
 SRC_DIR  = ./srcs
+BUILD_DIR  = ./objs
 
-SRCS := ${addprefix ${SRC_DIR}/, \
-		builtins_cd.c \
-		builtins_echo.c \
-		builtins_env.c \
-		builtins_export.c \
-		builtins_pwd.c \
-		builtins_unset.c \
-		end.c \
-		error.c \
-		file_utils.c \
-		init.c \
-		main.c \
-		execute_redirection.c \
-		execute_run.c \
-		execute_utils.c \
-		parsing_conv_to_cmd.c \
-		parsing_conv_utils.c \
-		parsing_expand.c \
-		parsing_input.c \
-		parsing_lexer.c \
-		parsing_parser.c \
-		parsing_tokenizer.c \
-		parsing_types.c \
-		parsing_utils.c \
-		signals.c}
-OBJS := $(subst $(SRC_DIR), $(BUILD_DIR), $(SRCS:%.c=%.o))
-VPATH = $(SRC_DIR):$(INC_DIR):$(BUILD_DIR)
+LIBFT_DIR = ./libft
+LIBFT_INC_DIR = ./libft/includes
+
+L_EXT = .a
+H_EXT = .h
+S_EXT = .c
+
+LIBS := ${addsuffix ${L_EXT}, ${addprefix ${LIBFT_DIR}, \
+		libft}}
+
+SRCS := ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
+		builtins_cd \
+		builtins_echo \
+		builtins_env \
+		builtins_export \
+		builtins_pwd \
+		builtins_unset \
+		end \
+		error \
+		file_utils \
+		init \
+		main \
+		execute_redirection \
+		execute_run \
+		execute_utils \
+		${addprefix parsing/, \
+		conv_to_cmd \
+		conv_utils \
+		expand \
+		input \
+		lexer \
+		parser \
+		tokenizer \
+		types \
+		utils} \
+		signals}}
+
+DEPS := ${subst ${SRC_DIR}, ${BUILD_DIR}, ${SRCS:%.c=%.d}}
+OBJS := ${subst ${SRC_DIR}, ${BUILD_DIR}, ${SRCS:%.c=%.o}}
+VPATH = ${SRC_DIR}:${INC_DIR}:${BUILD_DIR}
 
 CC = clang
 CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
+INCLUDES = -I ${INC_DIR} -I ${LIBFT_INC_DIR}
+LD_FLAGS = -L ${LIBFT_DIR} -ltinfo -lreadline
 COMP = ${CC} ${CFLAGS}
 RM	 = rm -rf
 
-all: ${TARGET}
+all: libftcreat ${TARGET}
 
-$(TARGET): ${OBJS} Makefile
-	@make -C libft
+libftcreat: 
+	@make -C ${LIBFT_DIR}
+
+${TARGET}: ${OBJS} Makefile
 	@${COMP} ${LD_FLAGS} ${OBJS} -o ${TARGET} -lft
 	@echo "${TARGET} created"
 
+-include ${DEPS}
+
 ${BUILD_DIR}/%.o: %.c
-	@mkdir -p ${BUILD_DIR}
+	@mkdir -p ${dir $@}
 	@echo create: ${@:%=%}
-	@${COMP} ${INCLUDES} -c $< -o $@
+	@${COMP} -MMD ${INCLUDES} -c $< -o $@
 
 clean:
 	@make clean -C libft
 	@${RM} ${BUILD_DIR}
+	@${RM} ${DEPS}
 	@echo "objs deleted"
 
 fclean: clean
@@ -64,11 +82,11 @@ fclean: clean
 re: fclean all
 
 TIME = `date +"%d/%m/%Y %Hh%M %Z"`
-USER := $(shell env | grep USER | tail --bytes=+6)
+USER := ${shell env | grep USER | tail --bytes=+6}
 
 git: fclean
 	git add .
-	git commit -m "by $(USER) at $(TIME)"
+	git commit -m "by ${USER} at ${TIME}"
 	git push
 
 .PHONY: all clean fclean re

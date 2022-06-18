@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 15:32:33 by mdankou           #+#    #+#             */
-/*   Updated: 2022/06/18 17:04:54 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/18 19:41:56 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,14 +117,14 @@ void	cmd_run_com(t_sh *sh, t_cmd *cmd)
 int	child_proc_job(t_sh *sh, t_cmd *cmd, int p[2], int fd_in)
 {
 	close(p[0]);
-	if (cmd->redir[0] > STDIN_FILENO)
-		dup2_close_old(cmd->redir[0], STDIN_FILENO);
-	else if (fd_in != STDIN_FILENO)
-		dup2_close_old(fd_in, STDIN_FILENO);
-	if (cmd->redir[1] > STDOUT_FILENO)
-		dup2_close_old(cmd->redir[1], STDOUT_FILENO);
-	else if (cmd->index != sh->cmd_nb - 1)
-		dup2_close_old(p[1], STDOUT_FILENO);
+	if (cmd->redir[0] > -1)
+		dup2(cmd->redir[0], STDIN_FILENO);
+	else
+		dup2(fd_in, STDIN_FILENO);
+	if (cmd->redir[1] > -1)
+		dup2(cmd->redir[1], STDOUT_FILENO);
+	else if (cmd->next)
+		dup2(p[1], STDOUT_FILENO);
 	cmd_run_com(sh, cmd);
 	exit(127);
 //	exit(exec_error("NLABLAk: ", strerror(errno)));
@@ -150,6 +150,7 @@ int	cmd_execute(t_sh *sh)
 	fd_in = 0;
 	while (cmd)
 	{
+		ft_printerror("cmd->redir[0] = %d, cmd->redir[1] = %d\n", cmd->redir[0], cmd->redir[1]);
 		if (cmd->next && pipe(p) < 0)
 			return (exec_error("pipe: ", strerror(errno)));
 		pid = fork();
@@ -161,15 +162,15 @@ int	cmd_execute(t_sh *sh)
 			parent_proc_job(p, &fd_in);
 		cmd = cmd->next;
 	}
-	int status = 0;
+/* 	int status = 0;
 	size_t	i = 0;
-	while (i < sh->cmd_nb -1 )
+	while (i < sh->cmd_nb)
 	{
-		pid = waitpid(-1, &status, WUNTRACED);
+		if (waitpid(-1, &status, WUNTRACED);
 		if (WIFEXITED(status) && status == 139)
 			ft_printerror("segfault\n");
 		i++;
-	}
+	} */
 	return (SUCCESS);
 }
 
