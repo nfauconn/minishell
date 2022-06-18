@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 15:32:33 by mdankou           #+#    #+#             */
-/*   Updated: 2022/06/18 19:41:56 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/18 19:44:05 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,14 +117,14 @@ void	cmd_run_com(t_sh *sh, t_cmd *cmd)
 int	child_proc_job(t_sh *sh, t_cmd *cmd, int p[2], int fd_in)
 {
 	close(p[0]);
-	if (cmd->redir[0] > -1)
-		dup2(cmd->redir[0], STDIN_FILENO);
-	else
-		dup2(fd_in, STDIN_FILENO);
-	if (cmd->redir[1] > -1)
-		dup2(cmd->redir[1], STDOUT_FILENO);
+	if (cmd->redir[0] > STDIN_FILENO)
+		dup2_close_old(cmd->redir[0], STDIN_FILENO);
+	else if (fd_in != STDIN_FILENO)
+		dup2_close_old(fd_in, STDIN_FILENO);
+	if (cmd->redir[1] > STDOUT_FILENO)
+		dup2_close_old(cmd->redir[1], STDOUT_FILENO);
 	else if (cmd->next)
-		dup2(p[1], STDOUT_FILENO);
+		dup2_close_old(p[1], STDOUT_FILENO);
 	cmd_run_com(sh, cmd);
 	exit(127);
 //	exit(exec_error("NLABLAk: ", strerror(errno)));
@@ -162,15 +162,15 @@ int	cmd_execute(t_sh *sh)
 			parent_proc_job(p, &fd_in);
 		cmd = cmd->next;
 	}
-/* 	int status = 0;
+	int status = 0;
 	size_t	i = 0;
 	while (i < sh->cmd_nb)
 	{
-		if (waitpid(-1, &status, WUNTRACED);
+		pid = waitpid(-1, &status, WUNTRACED);
 		if (WIFEXITED(status) && status == 139)
 			ft_printerror("segfault\n");
 		i++;
-	} */
+	}
 	return (SUCCESS);
 }
 
