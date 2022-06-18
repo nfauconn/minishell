@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 11:36:22 by user42            #+#    #+#             */
-/*   Updated: 2022/06/14 15:21:12 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/18 16:58:02 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ int	lexer(t_list *token)
 		len = ft_strlen(tok);
 		if (is_redir(token->type) || is_separator(token->type))
 		{
-			printf("coucou\n");
 			if (check_nb_sign(token, len) == FAILURE)
 				return (FAILURE);
 			token = token->next;

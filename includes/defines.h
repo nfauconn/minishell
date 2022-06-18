@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 20:11:25 by user42            #+#    #+#             */
-/*   Updated: 2022/06/09 19:33:05 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/18 16:07:50 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,7 @@
 # define TRUNC_OUTFILE_PATH 134
 # define DELIMITER 135
 # define APPEND_OUTFILE_PATH 136
+# define FILE_NOT_USED -42
+# define FILE_OPEN_FAIL -1
 
 #endif

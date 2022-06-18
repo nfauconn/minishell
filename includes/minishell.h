@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 18:25:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/14 18:17:00 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/18 16:57:26 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	token_expand(t_list *token_list, t_list *env);
 
 /*EXECUTE*/
 int		cmd_execute(t_sh *sh);
+
 /* PARSING_CONV_TO_CMD */
 size_t	get_cmd_nb(t_list *token);
 size_t	get_cmd_tab_sz(t_list *token);
@@ -79,5 +80,6 @@ void	end(t_input *input, t_sh *sh);
 void	end_input(t_input *input);
 void	end_sh(t_sh *sh);
 void	perror_and_free(t_input *input, char *s);
+void	error_display(char *s1, char *s2);
 
 #endif

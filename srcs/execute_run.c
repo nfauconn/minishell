@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 15:32:33 by mdankou           #+#    #+#             */
-/*   Updated: 2022/06/14 18:53:50 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/18 17:04:54 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,12 +104,9 @@ void	cmd_run_com(t_sh *sh, t_cmd *cmd)
 			free(path_exec);
 			++i;
 		}
-		if (path_tab[i] == NULL)
-			ft_printerror("%s: %s\n", cmd_args[0], "command not found");
-		else if (errno)
-			ft_printerror("%s: %s\n", cmd_args[0], strerror(errno));
+		ft_printerror("%s: %s\n", cmd_args[0], "command not found");
 	}
-	else if (cmd_args && !cmd_args[0] && cmd->redir[1] != -42)
+	else if (cmd_args && !cmd_args[0] && cmd->redir[1] != FILE_NOT_USED)
 	{
 		handle_redironly_cmd(cmd);
 	}
@@ -117,68 +114,62 @@ void	cmd_run_com(t_sh *sh, t_cmd *cmd)
 	clean_string_array(env_tab);
 }
 
-int	cmd_proc_main_job(t_sh *sh, pid_t pid, t_cmd **cmd, int fd[2])
+int	child_proc_job(t_sh *sh, t_cmd *cmd, int p[2], int fd_in)
 {
-	/*MARCHE MAIS A CHECKER FD NON FERMEE*/
-	if (pid)
-	{
-		ft_printerror("I AM THE PARENT\n");
-/* 		if (close(fd[1]) == -1)
-			return (exec_error("close: ", strerror(errno))); */
-		(*cmd)->redir[0] = fd[0];
-		*cmd = (*cmd)->next;
-		return (0);
-	}
-
-ft_printerror("I AM A CHILD\n");
-
-	if ((*cmd)->redir[0] <= STDERR_FILENO && (*cmd)->index == 0)
-		(*cmd)->redir[0] = STDIN_FILENO;
-	else 
-	{
-		if ((*cmd)->redir[0] <= STDERR_FILENO && (*cmd)->index != 0)
-			(*cmd)->redir[0] = fd[0];
-		if (dup2((*cmd)->redir[0], STDIN_FILENO) == -1)
-			return (exec_error("dup2: ", strerror(errno)));
-	}
-
-
-	if ((*cmd)->redir[1] <= STDERR_FILENO && (*cmd)->index == sh->cmd_nb - 1)
-		(*cmd)->redir[1] = STDOUT_FILENO;
-	else
-	{
-		if ((*cmd)->redir[1] <= STDERR_FILENO && (*cmd)->index != sh->cmd_nb - 1)
-			(*cmd)->redir[1] = fd[1];		
-		if (dup2((*cmd)->redir[1], STDOUT_FILENO) == -1)
-			return (exec_error("dup2: ", strerror(errno)));
-	}
-
-	cmd_run_com(sh, *cmd);
-	exit(FAILURE);
+	close(p[0]);
+	if (cmd->redir[0] > STDIN_FILENO)
+		dup2_close_old(cmd->redir[0], STDIN_FILENO);
+	else if (fd_in != STDIN_FILENO)
+		dup2_close_old(fd_in, STDIN_FILENO);
+	if (cmd->redir[1] > STDOUT_FILENO)
+		dup2_close_old(cmd->redir[1], STDOUT_FILENO);
+	else if (cmd->index != sh->cmd_nb - 1)
+		dup2_close_old(p[1], STDOUT_FILENO);
+	cmd_run_com(sh, cmd);
+	exit(127);
 //	exit(exec_error("NLABLAk: ", strerror(errno)));
+}
+
+int	parent_proc_job(int p[2], int *fd_in)
+{
+/*  	if (p[1] > STDERR_FILENO && close(p[1]) == -1)
+		return (exec_error("close: ", strerror(errno)));  */
+	close(p[1]);
+	*fd_in = p[0];
+	return (0);
 }
 
 int	cmd_execute(t_sh *sh)
 {
-	int		fd[2];
+	int		p[2];
+	int		fd_in;
 	pid_t	pid;
 	t_cmd	*cmd;
 
 	cmd = sh->cmd_list;
-	fd[0] = 0;
-	fd[1] = 1;
+	fd_in = 0;
 	while (cmd)
 	{
-		if (cmd->next && pipe(fd) < 0)
+		if (cmd->next && pipe(p) < 0)
 			return (exec_error("pipe: ", strerror(errno)));
 		pid = fork();
 		if (pid < 0)
 			return (exec_error("fork: ", strerror(errno)));
-		if (cmd_proc_main_job(sh, pid, &cmd, fd))
-			return (FAILURE);
+		if (pid == 0)
+			child_proc_job(sh, cmd, p, fd_in);
+		else
+			parent_proc_job(p, &fd_in);
+		cmd = cmd->next;
 	}
-	while (waitpid(-1, NULL, 0) >= 0)
-		;
+	int status = 0;
+	size_t	i = 0;
+	while (i < sh->cmd_nb -1 )
+	{
+		pid = waitpid(-1, &status, WUNTRACED);
+		if (WIFEXITED(status) && status == 139)
+			ft_printerror("segfault\n");
+		i++;
+	}
 	return (SUCCESS);
 }
 

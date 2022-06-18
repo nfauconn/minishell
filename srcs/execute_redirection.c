@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 17:20:37 by mdankou           #+#    #+#             */
-/*   Updated: 2022/06/14 18:12:49 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/18 16:50:34 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ static void	run_heredoc(int *fd, char *delim)
 void	cmd_redirections(t_cmd *cmd, t_list *token)
 {
 	errno = 0;
-	cmd->redir[0] = -42;
-	cmd->redir[1] = -42;
+	cmd->redir[0] = FILE_NOT_USED;
+	cmd->redir[1] = FILE_NOT_USED;
 	while (token && !is_separator(token->type) && !errno)
 	{
 		if (is_in_redir_path(token->type))
@@ -72,11 +72,6 @@ void	cmd_redirections(t_cmd *cmd, t_list *token)
 		}
 		else if (token->type == HEREDOC)
 			run_heredoc(&cmd->redir[0], token->next->content);
-		else
-		{
-			cmd->redir[0] = 0;
-			cmd->redir[1] = 1;
-		}
 		if (errno)
 			ft_printerror("minish: %s: %s\n", (char *)token->content, strerror(errno));
 		token = token->next;

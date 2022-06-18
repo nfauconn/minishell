@@ -15,6 +15,7 @@ SRCS := ${addprefix ${SRC_DIR}/, \
 		builtins_unset.c \
 		end.c \
 		error.c \
+		file_utils.c \
 		init.c \
 		main.c \
 		execute_redirection.c \

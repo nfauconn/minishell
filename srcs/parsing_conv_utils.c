@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 11:37:25 by user42            #+#    #+#             */
-/*   Updated: 2022/06/14 18:32:27 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/18 16:59:29 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,9 @@ static char	**cmd_tab(t_list *token)
 
 	cmd_tab = NULL;
 	size = get_cmd_tab_sz(token);
+	#ifdef DEBUG
 	printf("cmb_tab_size = %zu\n", size);
+	#endif
 	cmd_tab = (char **)malloc(sizeof(char *) * (size + 1));
 	i = 0;
 	while (token && !is_separator(token->type))
