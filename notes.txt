@@ -8,6 +8,7 @@ $ echo ????oooOOOooo??/>|lol.txt
 $ cat lol.txt
 ????oooOOOooo??/
 
+for file in `find -name "linux_*.mp4"`; do mv "$file" "${file/linux_/}" ; done
 
 !!! expansion du $?
 
