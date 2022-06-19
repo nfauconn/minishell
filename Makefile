@@ -23,7 +23,6 @@ SRCS := ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		init \
 		main \
 		signals \
-		wait \
 		${addprefix ${BUILTINS}, \
 		cd \
 		echo \
@@ -32,6 +31,7 @@ SRCS := ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		pwd \
 		unset} \
 		${addprefix ${EXEC}, \
+		wait \
 		get_path \
 		heredoc \
 		pipeline \
