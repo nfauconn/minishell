@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 16:22:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/14 15:57:44 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/19 13:25:24 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,9 @@ typedef struct s_list
 }	t_list;
 
 /* ARRAYS */
-void		ft_tab_display(char **tab);
-void		ft_tab_free(char **tab);
-int			ft_tab_size(char **tab);
+void		ft_str_array_display(char **tab);
+void		ft_str_array_free(char **tab);
+int			ft_str_array_size(char **tab);
 
 /* CHARACTERS */
 int			ft_isalnum(int c);
@@ -83,7 +83,7 @@ char		*ft_ulltoa_base(unsigned long long n, int base, size_t maj);
 int			get_next_line(int fd, char **line);
 
 /* LISTS */
-t_list		*tab_to_lst(char **tab);
+t_list		*ft_str_array_to_lst(char **tab);
 void		ft_lstadd_back(t_list **alst, t_list *new);
 void		ft_lstadd_front(t_list **alst, t_list *new);
 void		ft_lstclear(t_list **lst, void (*del)(void*));

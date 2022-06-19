@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 17:25:43 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/18 18:41:38 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/19 13:25:17 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,5 @@ void	init_sh(t_sh *sh, char **env)
 	sh->cmd_nb = 0;
 	sh->cmd_list = NULL;
 	sh->env = NULL;
-	sh->env = tab_to_lst(env);
+	sh->env = ft_str_array_to_lst(env);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   conv_to_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 11:36:26 by user42            #+#    #+#             */
-/*   Updated: 2022/06/18 19:20:08 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/19 12:48:17 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	token_to_cmd_lst(t_sh *sh, t_list *token)
 	cmd = *head;
 	while (cmd)
 	{
-		ft_tab_display(cmd->cmd_tab);
+		ft_str_array_display(cmd->cmd_tab);
 		cmd = cmd->next;
 	} */
 }

@@ -1,36 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strfjoinchar.c                                     :+:      :+:    :+:   */
+/*   ft_str_array_to_lst.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/08 16:05:07 by nfauconn          #+#    #+#             */
-/*   Updated: 2021/09/08 19:07:54 by nfauconn         ###   ########.fr       */
+/*   Created: 2022/06/19 13:27:00 by user42            #+#    #+#             */
+/*   Updated: 2022/06/19 13:30:10 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*strfjoinchar(char *str, char c)
+t_list	*ft_str_array_to_lst(char **tab)
 {
-	char	*new_str;
 	int		i;
+	int		len;
+	t_list	*lst;
+	t_list	*new;
 
-	new_str = (char *)malloc(sizeof(char) * (ft_strlen(str) + 2));
-	if (!new_str)
-	{
-		free(str);
-		exit(EXIT_FAILURE);
-	}
+	len = 0;
+	while (tab[len])
+		len++;
+	lst = NULL;
 	i = 0;
-	while (str[i])
+	while (tab[i])
 	{
-		new_str[i] = str[i];
+		new = (t_list *)malloc(sizeof(t_list));
+	 	new->content = ft_strdup(tab[i]);
+		new->next = NULL;
+		ft_lstadd_back(&lst, new);
 		i++;
 	}
-	new_str[i] = c;
-	new_str[++i] = '\0';
-	free(str);
-	return (new_str);
+	return (lst);
 }

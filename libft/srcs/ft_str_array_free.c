@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins_env.c                                     :+:      :+:    :+:   */
+/*   ft_str_array_free.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/18 17:53:16 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/05/30 14:36:50 by mdankou          ###   ########.fr       */
+/*   Created: 2022/06/17 09:28:54 by user42            #+#    #+#             */
+/*   Updated: 2022/06/19 13:30:47 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-/*
-*	env with no options or arguments
-*/
-int	builtin_env(void *env)
+void	ft_str_array_free(char **tab)
 {
-	t_list	*l;
+	int	i;
 
-	l = (t_list *)env;
-	while (l)
-	{
-		printf("%s\n", (char *)l->content);
-		l = l->next;
-	}
-	return (0);
+	i = 0;
+	while (tab[i])
+		free(tab[i++]);
+	if (tab)
+		free(tab);
 }

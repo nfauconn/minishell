@@ -1,36 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tab_to_lst.c                               :+:      :+:    :+:   */
+/*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/09 17:44:34 by user42            #+#    #+#             */
-/*   Updated: 2022/06/09 17:45:23 by user42           ###   ########.fr       */
+/*   Created: 2022/05/18 17:52:52 by nfauconn          #+#    #+#             */
+/*   Updated: 2022/06/19 12:34:17 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-t_list	*tab_to_lst(char **tab)
+int	builtin_cd(char **args)
 {
-	int		i;
-	int		len;
-	t_list	*lst;
-	t_list	*new;
+	DIR	*dir;
 
-	len = 0;
-	while (tab[len])
-		len++;
-	lst = NULL;
-	i = 0;
-	while (tab[i])
+	if (!args[0])
+		errno = EINVAL;
+	else if (args[1])
+		errno = E2BIG;
+	else
 	{
-		new = (t_list *)malloc(sizeof(t_list));
-	 	new->content = ft_strdup(tab[i]);
-		new->next = NULL;
-		ft_lstadd_back(&lst, new);
-		i++;
+		dir = opendir(args[0]);
+		if (!dir)
+			perror("pwd");
+		else
+			chdir(args[0]);
 	}
-	return (lst);
+	return (errno);
 }

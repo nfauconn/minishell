@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tab_free.c                                 :+:      :+:    :+:   */
+/*   ft_str_array_size.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/23 19:58:45 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/05/23 20:00:03 by nfauconn         ###   ########.fr       */
+/*   Created: 2022/06/17 09:28:40 by user42            #+#    #+#             */
+/*   Updated: 2022/06/19 13:31:00 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_tab_free(char **tab)
+int	ft_str_array_size(char **array)
 {
 	int	i;
 
 	i = 0;
-	while (tab[i])
-		free(tab[i++]);
-	free(tab);
+	if (!array)
+		return (-1);
+	while (array[i])
+		i++;
+	return (i);
 }

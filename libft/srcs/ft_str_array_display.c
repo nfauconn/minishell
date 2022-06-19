@@ -1,38 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_int_tab.c                                     :+:      :+:    :+:   */
+/*   ft_str_array_display.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/29 19:46:07 by nfauconn          #+#    #+#             */
-/*   Updated: 2021/09/08 10:08:22 by nfauconn         ###   ########.fr       */
+/*   Created: 2022/06/17 09:29:04 by user42            #+#    #+#             */
+/*   Updated: 2022/06/19 13:30:54 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	*sort_int_tab(int *tab, int size)
+void	ft_str_array_display(char **tab)
 {
-	int	temp;
 	int	i;
-	int	j;
 
 	i = 0;
-	while (i < size)
+	while (tab[i])
 	{
-		j = i + 1;
-		while (j < size)
-		{
-			if (tab[j] < tab[i])
-			{
-				temp = tab[i];
-				tab[i] = tab[j];
-				tab[j] = temp;
-			}
-			j++;
-		}
+		ft_printf("line[%d] = |%s|\n", i, tab[i]);
 		i++;
 	}
-	return (tab);
 }

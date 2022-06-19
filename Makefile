@@ -15,20 +15,23 @@ LIBS := ${addsuffix ${L_EXT}, ${addprefix ${LIBFT_DIR}, \
 		libft}}
 
 SRCS := ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
-		builtins_cd \
-		builtins_echo \
-		builtins_env \
-		builtins_export \
-		builtins_pwd \
-		builtins_unset \
+		${addprefix builtins/, \
+		cd \
+		echo \
+		env \
+		export \
+		pwd \
+		unset} \
 		end \
 		error \
-		file_utils \
 		init \
 		main \
-		execute_redirection \
-		execute_run \
-		execute_utils \
+		${addprefix exec/, \
+		heredoc \
+		pipeline \
+		redirection \
+		utils \
+		utils_for_fd} \
 		${addprefix parsing/, \
 		conv_to_cmd \
 		conv_utils \

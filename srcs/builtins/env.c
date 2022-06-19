@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tab_size.c                                    :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/14 12:26:44 by user42            #+#    #+#             */
-/*   Updated: 2021/10/14 12:26:45 by user42           ###   ########.fr       */
+/*   Created: 2022/05/18 17:53:16 by nfauconn          #+#    #+#             */
+/*   Updated: 2022/06/19 12:34:26 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-int	ft_tab_size(char **array)
+/*
+*	env with no options or arguments
+*/
+int	builtin_env(void *env)
 {
-	int	i;
+	t_list	*l;
 
-	i = 0;
-	if (!array)
-		return (-1);
-	while (array[i])
-		i++;
-	return (i);
+	l = (t_list *)env;
+	while (l)
+	{
+		printf("%s\n", (char *)l->content);
+		l = l->next;
+	}
+	return (0);
 }

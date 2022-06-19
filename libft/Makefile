@@ -42,8 +42,11 @@ SRCS = \
 		ft_putstr_fd.c \
 		ft_rev_int_tab.c \
 		ft_sort_int_tab.c \
-		ft_str_isdigit.c \
 		ft_split.c \
+		ft_str_array_display.c \
+		ft_str_array_free.c \
+		ft_str_array_size.c \
+		ft_str_array_to_lst.c \
 		ft_strchr.c \
 		ft_strcmp.c \
 		ft_strdel.c \
@@ -52,6 +55,7 @@ SRCS = \
 		ft_strfdup.c \
 		ft_strfjoin.c \
 		ft_strfjoinchar.c \
+		ft_str_isdigit.c \
 		ft_strjoin.c \
 		ft_strlcat.c \
 		ft_strlcpy.c \
@@ -62,10 +66,6 @@ SRCS = \
 		ft_strrchr.c \
 		ft_strtrim.c \
 		ft_substr.c \
-		ft_tab_display.c \
-		ft_tab_free.c \
-		ft_tab_size.c \
-		ft_tab_to_lst.c	\
 		ft_tolower.c \
 		ft_toupper.c \
 		ft_ulltoa_base.c \
