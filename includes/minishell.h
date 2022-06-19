@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 18:25:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/19 17:23:38 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/19 19:32:29 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,6 @@ void	end_input(t_input *input);
 void	end_sh(t_sh *sh);
 void	perror_and_free(t_input *input, char *s);
 void	error_display(char *s1, char *s2);
+int		wait_children(t_sh *sh);
 
 #endif

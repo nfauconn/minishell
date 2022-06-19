@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 15:32:33 by mdankou           #+#    #+#             */
-/*   Updated: 2022/06/19 19:03:00 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/19 19:07:34 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,15 +114,7 @@ int	cmd_execute(t_sh *sh)
 			parent_proc_job(p, &fd_in);
 		cmd = cmd->next;
 	}
-	int status = 0;
-	size_t	i = 1;
-	while (i <= sh->cmd_nb)
-	{
-		pid = waitpid(-1, &status, WUNTRACED);
-		if (WIFEXITED(status) && status == 139)
-			ft_printerror("segfault\n");
-		i++;
-	}
+	wait_children(sh);
 	signal_catching_mode(INTERACTIVE);
 	return (SUCCESS);
 }

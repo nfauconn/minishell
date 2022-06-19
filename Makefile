@@ -23,6 +23,7 @@ SRCS := ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		init \
 		main \
 		signals \
+		wait \
 		${addprefix ${BUILTINS}, \
 		cd \
 		echo \
