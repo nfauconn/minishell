@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 17:20:37 by mdankou           #+#    #+#             */
-/*   Updated: 2022/06/19 13:04:44 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/19 18:51:25 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,27 +15,34 @@
 void	cmd_redirections(t_cmd *cmd, t_list *token)
 {
 	errno = 0;
-	cmd->redir[0] = FILE_NOT_USED;
-	cmd->redir[1] = FILE_NOT_USED;
+	cmd->redir_in = FILE_NOT_USED;
+	cmd->redir_out = FILE_NOT_USED;
 	while (token && !is_separator(token->type) && !errno)
 	{
 		if (is_in_redir_path(token->type))
 		{
-			if (cmd->redir[0] > STDERR_FILENO)
-				close(cmd->redir[0]);
+			if (cmd->redir_in > STDERR_FILENO)
+				close(cmd->redir_in);
 			if (token->type == INFILE_PATH)
-				cmd->redir[0] = open((char *)token->content, O_RDONLY);
+			{
+				cmd->redir_in = open((char *)token->content, O_RDONLY);
+				if (cmd->redir_in < 0)
+				{
+					error_display((char *)token->content, strerror(errno));
+					return ;
+				}
+			}
 			else
-				run_heredoc(&cmd->redir[0], token->content);
+				run_heredoc(&cmd->redir_in, token->content);
 		}
 		else if (is_out_redir_path(token->type))
 		{
-			if (cmd->redir[1] > STDERR_FILENO)
-				close(cmd->redir[1]);
+			if (cmd->redir_out > STDERR_FILENO)
+				close(cmd->redir_out);
 			if (token->type == APPEND_OUTFILE_PATH)
-				cmd->redir[1] = open((char *)token->content, O_CREAT | O_APPEND | O_WRONLY, 0644);
+				cmd->redir_out = open((char *)token->content, O_CREAT | O_APPEND | O_WRONLY, 0644);
 			else if (token->type == TRUNC_OUTFILE_PATH)
-				cmd->redir[1] = open((char *)token->content, O_CREAT | O_TRUNC | O_WRONLY, 0644);
+				cmd->redir_out = open((char *)token->content, O_CREAT | O_TRUNC | O_WRONLY, 0644);
 		}
 		if (errno)
 			ft_printerror("minish: %s: %s\n", (char *)token->content, strerror(errno));

@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 17:55:15 by user42            #+#    #+#             */
-/*   Updated: 2022/06/08 15:07:17 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/19 17:17:06 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,6 @@ void	signal_catching_mode(int mode)
 	}
 	else if (mode == PGM_EXEC)
 	{
+		signal(SIGINT, SIG_DFL);
 	}
 }

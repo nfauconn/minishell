@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipeline.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 15:32:33 by mdankou           #+#    #+#             */
-/*   Updated: 2022/06/19 14:07:12 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/19 19:03:00 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ void handle_redironly_cmd(t_cmd *cmd)
 	char	buf[BUFFER_SIZE];
 
 	//ret = read(STDIN_FILENO, buf, BUFFER_SIZE);
-	ret = read(cmd->redir[0], buf, BUFFER_SIZE);
+	ret = read(cmd->redir_in, buf, BUFFER_SIZE);
 	if (ret < 0)
 		exit(exec_error("read: ", strerror(errno)));
 	while (ret > 0)
 	{
-		write(cmd->redir[1], buf, ret);
-		ret = read(cmd->redir[0], buf, BUFFER_SIZE);
+		write(cmd->redir_out, buf, ret);
+		ret = read(cmd->redir_in, buf, BUFFER_SIZE);
 		if (ret < 0)
 			exit(exec_error("read: ", strerror(errno)));
 		//ret = read(STDIN_FILENO, buf, BUFFER_SIZE);
@@ -47,7 +47,7 @@ void	cmd_run_com(t_sh *sh, t_cmd *cmd)
 	{
 		if (access(cmd_args[0], X_OK) != -1)
 			execve(cmd_args[0], cmd_args, env_tab);
-		while (path_tab[i] != NULL)
+		while (path_tab && path_tab[i])
 		{
 			path_exec = join_path(path_tab[i], cmd_args[0]);
 			if (!path_exec)
@@ -59,7 +59,7 @@ void	cmd_run_com(t_sh *sh, t_cmd *cmd)
 		}
 		ft_printerror("%s: %s\n", cmd_args[0], "command not found");
 	}
-	else if (cmd_args && !cmd_args[0] && cmd->redir[1] != FILE_NOT_USED)
+	else if (cmd_args && !cmd_args[0] && cmd->redir_out != FILE_NOT_USED)
 	{
 		handle_redironly_cmd(cmd);
 	}
@@ -70,25 +70,24 @@ void	cmd_run_com(t_sh *sh, t_cmd *cmd)
 int	child_proc_job(t_sh *sh, t_cmd *cmd, int p[2], int fd_in)
 {
 	close(p[0]);
-	if (cmd->redir[0] > STDIN_FILENO)
-		dup2_close_old(cmd->redir[0], STDIN_FILENO);
-	else if (fd_in != STDIN_FILENO)
+	if (cmd->redir_in > STDIN_FILENO)
+		dup2_close_old(cmd->redir_in, STDIN_FILENO);
+	else if (fd_in)
 		dup2_close_old(fd_in, STDIN_FILENO);
-	if (cmd->redir[1] > STDOUT_FILENO)
-		dup2_close_old(cmd->redir[1], STDOUT_FILENO);
+	if (cmd->redir_out > STDOUT_FILENO)
+		dup2_close_old(cmd->redir_out, STDOUT_FILENO);
 	else if (cmd->next)
-		dup2_close_old(p[1], STDOUT_FILENO);
+		dup2(p[1], STDOUT_FILENO);
+	close(p[1]);
 	cmd_run_com(sh, cmd);
 	exit(127);
-//	exit(exec_error("NLABLAk: ", strerror(errno)));
 }
 
-int	parent_proc_job(int p[2], int *fd_in)
+int	parent_proc_job(int p[2], int *fd)
 {
-/*  	if (p[1] > STDERR_FILENO && close(p[1]) == -1)
-		return (exec_error("close: ", strerror(errno)));  */
 	close(p[1]);
-	*fd_in = p[0];
+	close_if_exists(*fd);
+	*fd = p[0];
 	return (0);
 }
 
@@ -101,10 +100,10 @@ int	cmd_execute(t_sh *sh)
 
 	cmd = sh->cmd_list;
 	fd_in = 0;
+	signal_catching_mode(PGM_EXEC);
 	while (cmd)
 	{
-		ft_printerror("cmd->redir[0] = %d, cmd->redir[1] = %d\n", cmd->redir[0], cmd->redir[1]);
-		if (cmd->next && pipe(p) < 0)
+		if (pipe(p) < 0)
 			return (exec_error("pipe: ", strerror(errno)));
 		pid = fork();
 		if (pid < 0)
@@ -116,21 +115,14 @@ int	cmd_execute(t_sh *sh)
 		cmd = cmd->next;
 	}
 	int status = 0;
-	size_t	i = 0;
-	while (i < sh->cmd_nb)
+	size_t	i = 1;
+	while (i <= sh->cmd_nb)
 	{
 		pid = waitpid(-1, &status, WUNTRACED);
 		if (WIFEXITED(status) && status == 139)
 			ft_printerror("segfault\n");
 		i++;
 	}
+	signal_catching_mode(INTERACTIVE);
 	return (SUCCESS);
 }
-
-/*		if (cmd->next && pipe(fd) < 0)
-			return(exec_error("pipe: ", strerror(errno)));
-		pid = fork();
-		if (pid < 0)
-			
-		if (cmd_proc_main_job(sh, pid, &cmd, fd) == -1)
-			return (errno);*/

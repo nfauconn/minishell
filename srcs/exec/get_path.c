@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 14:06:55 by user42            #+#    #+#             */
-/*   Updated: 2022/06/19 14:13:55 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/19 19:00:23 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,13 @@ char	**get_env_tab(t_list *env)
 			break ;
 		env = env->next;
 	}
-	if (env)
+/* 	if (env)
 	{
 		while (--len >= 0)
 			free(tab[len]);
 		free(tab);
 		return (NULL);
-	}
+	} */
 	tab[len] = NULL;
 	return (tab);
 }

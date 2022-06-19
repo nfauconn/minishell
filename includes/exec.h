@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:22:26 by mdankou           #+#    #+#             */
-/*   Updated: 2022/06/19 14:13:46 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/19 18:51:44 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ typedef struct s_cmd
 {
 	char			**cmd_tab;
 	size_t			index;
-	int				redir[2];
+	int				redir_in;
+	int				redir_out;
 	int				in_redir_type;
 	int				out_redir_type;
 	struct s_cmd	*next;
