@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:22:26 by mdankou           #+#    #+#             */
-/*   Updated: 2022/06/19 13:16:01 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/19 14:13:46 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@ typedef struct s_cmd
 	struct s_cmd	*next;
 }	t_cmd;
 
+char	*join_path(char const *penv, char const *pexec);
+void	clean_string_array(char **array);
+char	**get_path_tab(t_list *env);
+char	**get_env_tab(t_list *env);
 void	cmd_redirections(t_cmd *cmd, t_list *token);
 void	run_heredoc(int *fd, char *delim);
 int		exec_error(char *s1, char *s2);

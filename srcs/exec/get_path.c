@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   get_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/08 14:38:14 by mdankou           #+#    #+#             */
-/*   Updated: 2022/06/19 12:35:06 by user42           ###   ########.fr       */
+/*   Created: 2022/06/19 14:06:55 by user42            #+#    #+#             */
+/*   Updated: 2022/06/19 14:13:55 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,30 +45,46 @@ char	*join_path(char const *penv, char const *pexec)
 	return (dst);
 }
 
-/*
-void grab_command(t_list *token)
+char	**get_env_tab(t_list *env)
 {
-	t_list *l;
-	t_list	*start;
+	size_t	len;
+	char	**tab;
 
-	while (token)
+	len = ft_lstsize(env);
+	tab = (char**)malloc(sizeof(char *) * (len + 1));
+	if (!tab)
+		return (NULL);
+	len = 0;
+	while (env)
 	{
-		if (token->type == IN_REDIR || token->type == OUT_REDIR)
-		{
-			start = token->next->next;
-			if (start)
-			while (start && !is_redir(*(char *)start->content)
-				&& !is_blank(*(char *)start->content) 
-				&& !is_separator(*(char *)start->content))
-			{
-				ft_lstadd_back(&l, ft_lstnew(ft_strdup(start->content)));
-				start = start->next;
-			}
-		}
-		else
-			start = token->next;
-		token = start;
+		tab[len++] = ft_strdup(env->content);
+		if (!tab[len])
+			break ;
+		env = env->next;
 	}
-	ft_lstiter(l, display_token_list);
+	if (env)
+	{
+		while (--len >= 0)
+			free(tab[len]);
+		free(tab);
+		return (NULL);
+	}
+	tab[len] = NULL;
+	return (tab);
 }
-*/
+
+char	**get_path_tab(t_list *env)
+{
+	char	**tab;
+	while (env && ft_strncmp(env->content, "PATH=", 5))
+		env = env->next;
+	if (!env)
+	{
+		tab = (char **)malloc(sizeof(char *));
+		if (!tab)
+			return (NULL);
+		tab[0] = NULL;
+		return (tab);
+	}
+	return (ft_split(env->content + 5, ':'));
+}

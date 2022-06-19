@@ -2,6 +2,9 @@ TARGET = minishell
 
 INC_DIR = ./includes
 SRC_DIR  = ./srcs
+BUILTINS = builtins/
+EXEC = exec/
+PARSING = parsing/
 BUILD_DIR  = ./objs
 
 LIBFT_DIR = ./libft
@@ -15,24 +18,25 @@ LIBS := ${addsuffix ${L_EXT}, ${addprefix ${LIBFT_DIR}, \
 		libft}}
 
 SRCS := ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
-		${addprefix builtins/, \
+		end \
+		error \
+		init \
+		main \
+		signals \
+		${addprefix ${BUILTINS}, \
 		cd \
 		echo \
 		env \
 		export \
 		pwd \
 		unset} \
-		end \
-		error \
-		init \
-		main \
-		${addprefix exec/, \
+		${addprefix ${EXEC}, \
+		get_path \
 		heredoc \
 		pipeline \
 		redirection \
-		utils \
 		utils_for_fd} \
-		${addprefix parsing/, \
+		${addprefix ${PARSING}, \
 		conv_to_cmd \
 		conv_utils \
 		expand \
@@ -41,8 +45,7 @@ SRCS := ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		parser \
 		tokenizer \
 		types \
-		utils} \
-		signals}}
+		utils}}}
 
 DEPS := ${subst ${SRC_DIR}, ${BUILD_DIR}, ${SRCS:%.c=%.d}}
 OBJS := ${subst ${SRC_DIR}, ${BUILD_DIR}, ${SRCS:%.c=%.o}}

@@ -6,58 +6,11 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 15:32:33 by mdankou           #+#    #+#             */
-/*   Updated: 2022/06/19 12:34:48 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/19 14:07:12 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	clean_string_array(char **array);
-char	*join_path(char const *penv, char const *pexec);
-
-char	**get_env_tab(t_list *env)
-{
-	size_t	len;
-	char	**tab;
-
-	len = ft_lstsize(env);
-	tab = (char**)malloc(sizeof(char *) * (len + 1));
-	if (!tab)
-		return (NULL);
-	len = 0;
-	while (env)
-	{
-		tab[len++] = ft_strdup(env->content);
-		if (!tab[len])
-			break ;
-		env = env->next;
-	}
-	if (env)
-	{
-		while (--len >= 0)
-			free(tab[len]);
-		free(tab);
-		return (NULL);
-	}
-	tab[len] = NULL;
-	return (tab);
-}
-
-char	**get_path_tab(t_list *env)
-{
-	char	**tab;
-	while (env && ft_strncmp(env->content, "PATH=", 5))
-		env = env->next;
-	if (!env)
-	{
-		tab = (char **)malloc(sizeof(char *));
-		if (!tab)
-			return (NULL);
-		tab[0] = NULL;
-		return (tab);
-	}
-	return (ft_split(env->content + 5, ':'));
-}
 
 void handle_redironly_cmd(t_cmd *cmd)
 {
