@@ -3,20 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 20:11:25 by user42            #+#    #+#             */
-/*   Updated: 2022/06/20 12:57:27 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/20 16:45:27 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DEFINES_H
 # define DEFINES_H
 
-# define STDIN 0
-# define STDOUT 1
-# define STDERR 2
-
+/* PARSING */
 # define BLANK 32
 # define QUOTE 39
 # define DB_QUOTE 34
@@ -31,9 +28,12 @@
 # define TRUNC_OUTFILE_PATH 134
 # define DELIMITER 135
 # define APPEND_OUTFILE_PATH 136
-# define FILE_NOT_USED -42
-# define FILE_OPEN_FAIL -1
+# define NO_REDIR -42
+# define REDIR_FAIL -1
+
+/* EXEC */
 # define NOT_FOUND 127
 # define NOT_EXECUTABLE 126
+# define WRONG_REDIR 1
 
 #endif

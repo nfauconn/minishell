@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 19:07:39 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/19 19:32:52 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/20 16:50:01 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,6 @@ int	wait_children(t_sh *sh)
 			ft_printerror("segfault\n");
 		i++;
 	}
+	sh->last_exit_code = status;
 	return (status);
 }

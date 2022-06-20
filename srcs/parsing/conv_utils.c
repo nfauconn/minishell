@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   conv_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 11:37:25 by user42            #+#    #+#             */
-/*   Updated: 2022/06/20 13:06:39 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/20 17:21:21 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,9 @@ t_cmd	*create_new_cmd(t_list *token)
 	else
 		new->name = NULL;
 	new->path = NULL;
+	new->env = NULL;
+	new->possible_path = NULL;
 	new->next = NULL;
-	new->exit_status = EXIT_SUCCESS;
 	cmd_redirections(new, token);
 	return (new);
 }

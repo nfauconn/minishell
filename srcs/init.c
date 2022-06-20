@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 17:25:43 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/19 17:23:52 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/20 16:46:55 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,5 @@ void	init_sh(t_sh *sh, char **env)
 	sh->cmd_list = NULL;
 	sh->env = NULL;
 	sh->env = ft_str_array_to_lst(env);
-	sh->error_status = 0;
+	sh->last_exit_code = 0;
 }

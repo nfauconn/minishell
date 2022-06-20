@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 18:49:09 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/18 16:56:10 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/20 17:34:51 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,13 @@ int	exec_error(char *s1, char *s2)
 void	error_display(char *s1, char *s2)
 {
 	ft_printerror("%s: %s\n", s1, s2);
+}
+
+void	error_exit(char *cmd_name, int8_t error_code)
+{
+	if (error_code == NOT_FOUND)
+		error_display(cmd_name, "command not found");
+	else if (error_code == NOT_EXECUTABLE)
+		error_display(cmd_name, "permission denied");
+	exit(error_code);
 }

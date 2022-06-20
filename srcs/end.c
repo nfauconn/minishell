@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   end.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 16:09:54 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/20 12:20:13 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/20 17:32:23 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,16 @@ void	end_sh(t_sh *sh)
 	{
 		if (sh->cmd_list->args)
 			ft_str_array_free(sh->cmd_list->args);
+		if (sh->cmd_list->env)
+			ft_str_array_free(sh->cmd_list->env);
+		if (sh->cmd_list->possible_path)
+			ft_str_array_free(sh->cmd_list->possible_path);
+		if (sh->cmd_list->path)
+			free(sh->cmd_list->path);
 		to_del = sh->cmd_list;
 		sh->cmd_list = sh->cmd_list->next;
 		free(to_del);
 	}
-/* 	if (sh->env)
-		ft_lstclear(&sh->env, free);	 */
 }
 
 void	end_input(t_input *input)

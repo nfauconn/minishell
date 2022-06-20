@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   pipeline.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 15:32:33 by mdankou           #+#    #+#             */
-/*   Updated: 2022/06/20 13:15:19 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/20 17:35:08 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int8_t	last_status = 0;
+int8_t	exit_code = 0;
 
 void redironly_cmd(t_cmd *cmd)
 {
@@ -35,42 +35,35 @@ void redironly_cmd(t_cmd *cmd)
 
 static void	exec_cmd(t_sh *sh, t_cmd *cmd)
 {
-	char	**paths;
-	char	**env_tab;
-
-	env_tab = get_env_tab(sh->env);
-	paths = get_path_tab(sh->env);
-	if (cmd->name && paths)
+	cmd->env = get_env_tab(sh->env);
+	cmd->possible_path = get_path_tab(sh->env);
+	if (cmd->name && cmd->possible_path)
 	{
 		if (access(cmd->name, X_OK) != -1)
-			execve(cmd->name, cmd->args, env_tab);
-		else if (find_path(cmd, paths))
+			execve(cmd->name, cmd->args, cmd->env);
+		else if (find_path(cmd, cmd->possible_path))
 		{
-			execve(cmd->path, cmd->args, env_tab);
-			last_status = NOT_EXECUTABLE;
-			error_display("permission denied", cmd->name);
+			execve(cmd->path, cmd->args, cmd->env);
+			exit_code = NOT_EXECUTABLE;
 		}
 		else
-		{
-			last_status = NOT_FOUND;
-			error_display(cmd->name, "command not found");
-		}
+			exit_code = NOT_FOUND;
 	}
-	else if (cmd->args && !cmd->name && cmd->redir_out != FILE_NOT_USED)
+	else if (cmd->args && !cmd->name && cmd->redir_out != NO_REDIR)
 		redironly_cmd(cmd);
-	ft_str_array_free(paths);
-	ft_str_array_free(env_tab);
-	exit(last_status);
+	error_exit(cmd->name, exit_code);
 }
 
 void	child_seq(t_sh *sh, t_cmd *cmd, int p[2], int fd_in)
 {
 	close(p[0]);
-	if (cmd->redir_in > STDIN_FILENO)
+	if (cmd->redir_in == REDIR_FAIL || cmd->redir_out == REDIR_FAIL)
+		exit(WRONG_REDIR);
+	if (cmd->redir_in > NO_REDIR)
 		dup2_close_old(cmd->redir_in, STDIN_FILENO);
 	else if (fd_in)
 		dup2_close_old(fd_in, STDIN_FILENO);
-	if (cmd->redir_out > STDOUT_FILENO)
+	if (cmd->redir_out > NO_REDIR)
 		dup2_close_old(cmd->redir_out, STDOUT_FILENO);
 	else if (cmd->next)
 		dup2(p[1], STDOUT_FILENO);
@@ -110,5 +103,5 @@ int	cmd_execute(t_sh *sh)
 	}
 	wait_children(sh);
 	signal_catching_mode(INTERACTIVE);
-	return (last_status);
+	return (sh->last_exit_code);
 }

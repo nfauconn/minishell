@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 19:57:56 by user42            #+#    #+#             */
-/*   Updated: 2022/06/18 19:20:08 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/20 17:13:54 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ int	is_separator(int c)
 	return (c == PIPE);
 }
 
-int	is_in_redir_path(int c)
+int	is_infile(int c)
 {
 	return (c == INFILE_PATH || c == DELIMITER);
 }
 
-int	is_out_redir_path(int c)
+int	is_outfile(int c)
 {
 	return (c == TRUNC_OUTFILE_PATH || c == APPEND_OUTFILE_PATH);
 }

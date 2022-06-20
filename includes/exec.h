@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:22:26 by mdankou           #+#    #+#             */
-/*   Updated: 2022/06/20 12:51:34 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/20 17:22:13 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,14 @@
 
 typedef struct s_cmd
 {
+	size_t			index;
 	char			*name;
 	char			**args;
+	char			**env;
+	char			**possible_path;
 	char			*path;
-	size_t			index;
 	int				redir_in;
-	int				redir_out;
-	int8_t			exit_status;		
+	int				redir_out;	
 	struct s_cmd	*next;
 }	t_cmd;
 

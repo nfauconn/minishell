@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 18:25:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/20 12:15:12 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/20 17:34:53 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@
 # include "libft.h"
 # include "signals.h"
 
-//#define DEBUG
-
 typedef struct s_input
 {
 	char	*line_read;
@@ -36,7 +34,7 @@ typedef struct s_sh
 	size_t		cmd_nb;
 	t_cmd		*cmd_list;
 	t_list		*env;
-	size_t		error_status;
+	size_t		last_exit_code;
 }	t_sh;
 
 /* INIT */
@@ -46,8 +44,8 @@ void	init_sh(t_sh *sh, char **env);
 
 /* PARSING_TOKENIZER */
 int		is_blank(int c);
-int		is_in_redir_path(int c);
-int		is_out_redir_path(int c);
+int		is_infile(int c);
+int		is_outfile(int c);
 int		is_redir(int c);
 int		is_redir_path(int c);
 int		is_separator(int c);
@@ -82,6 +80,7 @@ void	end_input(t_input *input);
 void	end_sh(t_sh *sh);
 void	perror_and_free(t_input *input, char *s);
 void	error_display(char *s1, char *s2);
+void	error_exit(char *cmd_name, int8_t error_code);
 int		wait_children(t_sh *sh);
 
 #endif
