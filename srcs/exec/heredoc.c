@@ -3,14 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 12:37:34 by user42            #+#    #+#             */
-/*   Updated: 2022/06/19 13:16:22 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/20 18:17:53 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "minishell.h"
+
+/*
+static void	sigTerm(int sig_num) A UTILISER POUR METTRE NL APRES SINGINT
+{
+	if (sig_num == SIGINT)
+	{
+		write(1, "\n", 1);
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		exit(139);
+	}
+}
+*/
 
 void	run_heredoc(int *fd, char *delim)
 {
@@ -20,7 +33,7 @@ void	run_heredoc(int *fd, char *delim)
 	pid = fork();
 	if (pid == 0)
 	{
-		signal(SIGINT, SIG_DFL);
+		signal_catching_mode(PGM_EXEC);
 		*fd = open("/tmp/.here_doc", O_CREAT | O_TRUNC | O_WRONLY, 0644);
 		if (*fd < 0)
 			return ;
@@ -31,8 +44,6 @@ void	run_heredoc(int *fd, char *delim)
 			write(*fd, "\n", 1);
 			free(line);
 			line = readline("heredoc> ");
-			if (!line)
-				break ;
 		}
 		free(line);
 		close(*fd);
@@ -43,6 +54,11 @@ void	run_heredoc(int *fd, char *delim)
 		}
 		exit(0);
 	}
-	else
-		wait(NULL);
+	signal(SIGINT, SIG_IGN);
+	wait(NULL);
+	signal_catching_mode(INTERACTIVE);
+	/*
+	write(1, "\n", 1);
+	rl_redisplay();
+	*/
 }
