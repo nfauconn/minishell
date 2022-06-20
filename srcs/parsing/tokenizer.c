@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 16:59:04 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/20 18:10:56 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/20 18:28:04 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int	tokenizer(t_input *input, char *line)
 			token = ft_substr(start, 0, end - start);
 			add_token_to_list(&input->token_list, token);
 		}
-		if (is_blank(*line) && !is_separator(*token) && !is_redir(*token))
+		if (is_blank(*line) && !is_redir(*token))
 		{
 			token = ft_strdup(" ");
 			add_token_to_list(&input->token_list, token);

@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:22:26 by mdankou           #+#    #+#             */
-/*   Updated: 2022/06/20 17:22:13 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/20 18:23:33 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ typedef struct s_cmd
 	char			*name;
 	char			**args;
 	char			**env;
-	char			**possible_path;
+	char			**possible_paths;
 	char			*path;
 	int				redir_in;
 	int				redir_out;	

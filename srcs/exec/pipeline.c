@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 15:32:33 by mdankou           #+#    #+#             */
-/*   Updated: 2022/06/20 18:00:34 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/20 18:23:33 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,12 @@ int8_t	exit_code = 0;
 static void	exec_cmd(t_sh *sh, t_cmd *cmd)
 {
 	cmd->env = get_env_tab(sh->env);
-	cmd->possible_path = get_path_tab(sh->env);
-	if (cmd->name && cmd->possible_path)
+	cmd->possible_paths = get_path_tab(sh->env);
+	if (cmd->name && cmd->possible_paths)
 	{
 		if (access(cmd->name, X_OK) != -1)
 			execve(cmd->name, cmd->args, cmd->env);
-		else if (find_path(cmd, cmd->possible_path))
+		else if (find_path(cmd, cmd->possible_paths))
 		{
 			execve(cmd->path, cmd->args, cmd->env);
 			exit_code = NOT_EXECUTABLE;

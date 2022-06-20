@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 11:37:25 by user42            #+#    #+#             */
-/*   Updated: 2022/06/20 18:13:07 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/20 18:23:33 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ t_cmd	*create_new_cmd(t_list *token)
 		new->name = new->args[0];
 	new->path = NULL;
 	new->env = NULL;
-	new->possible_path = NULL;
+	new->possible_paths = NULL;
 	new->next = NULL;
 	cmd_redirections(new, token);
 	return (new);
