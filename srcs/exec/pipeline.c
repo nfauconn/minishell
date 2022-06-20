@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 15:32:33 by mdankou           #+#    #+#             */
-/*   Updated: 2022/06/20 17:35:08 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/20 18:00:34 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,11 @@
 
 int8_t	exit_code = 0;
 
-void redironly_cmd(t_cmd *cmd)
+/* void redironly_cmd(t_cmd *cmd)
 {
 	ssize_t	ret;
 	char	buf[BUFFER_SIZE];
 
-	//ret = read(STDIN_FILENO, buf, BUFFER_SIZE);
 	ret = read(cmd->redir_in, buf, BUFFER_SIZE);
 	if (ret < 0)
 		exit(exec_error("read: ", strerror(errno)));
@@ -29,9 +28,9 @@ void redironly_cmd(t_cmd *cmd)
 		ret = read(cmd->redir_in, buf, BUFFER_SIZE);
 		if (ret < 0)
 			exit(exec_error("read: ", strerror(errno)));
-		//ret = read(STDIN_FILENO, buf, BUFFER_SIZE);
 	}
-}
+	exit(EXIT_SUCCESS);
+} */
 
 static void	exec_cmd(t_sh *sh, t_cmd *cmd)
 {
@@ -49,8 +48,8 @@ static void	exec_cmd(t_sh *sh, t_cmd *cmd)
 		else
 			exit_code = NOT_FOUND;
 	}
-	else if (cmd->args && !cmd->name && cmd->redir_out != NO_REDIR)
-		redironly_cmd(cmd);
+/* 	else if (cmd->args && !cmd->name && cmd->redir_out != NO_REDIR)
+		redironly_cmd(cmd); */
 	error_exit(cmd->name, exit_code);
 }
 

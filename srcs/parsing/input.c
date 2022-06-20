@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 18:10:00 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/19 17:18:00 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/20 18:13:07 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,12 @@ char	*get_input(void)
 		{
 			tmp++;
 			if (*tmp == '\0')
-				token->type = WORD;
+				token->type = CMD_ARG;
 			else
 				token->type = TO_EXPAND;
 		}
 		else if (token->type != PIPE && !is_quote(token->type))
-			token->type = WORD;
+			token->type = CMD_ARG;
 		token = token->next;
 	}
 }*/

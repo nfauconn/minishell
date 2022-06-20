@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 16:59:04 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/18 19:20:08 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/20 18:10:56 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static char	*find_end(t_input *input, char **s)
 
 	if (**s == '$' && (!is_blank(*((*s) + 1)) || is_quote(*((*s) + 1))))
 		(*s)++;
-	if (is_quote(**s))// && (*((*s) + 1)))
+	if (is_quote(**s))
 	{
 		tmp = (*s)++;
 		if (find_closing_quote(s, *tmp))
@@ -93,7 +93,7 @@ int	tokenizer(t_input *input, char *line)
 			add_token_to_list(&input->token_list, token);
 		}
 	}
+	ft_lstiter(input->token_list, display_token_list);
 	set_types_to_expand(input->token_list);
-
 	return (SUCCESS);
 }

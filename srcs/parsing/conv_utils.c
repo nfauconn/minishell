@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 11:37:25 by user42            #+#    #+#             */
-/*   Updated: 2022/06/20 17:21:21 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/20 18:13:07 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ size_t	get_cmd_tab_sz(t_list *token)
 	count = 0;
 	while (token && !is_separator(token->type))
 	{
-		if ((token->type == WORD || is_quote(token->type)) && !is_blank(token->type))
+		if ((token->type == CMD_ARG || is_quote(token->type)) && !is_blank(token->type))
 			count++;
 		token = token->next;
 	}
@@ -68,10 +68,10 @@ static char	**cmd_tab(t_list *token)
 	i = 0;
 	while (token && !is_separator(token->type))
 	{
-		if (token->type == WORD)
+		if (token->type == CMD_ARG)
 		{
 			cmd_tab[i] = ft_strdup((char *)token->content);
-			while (token->next && token->next->type == WORD)
+			while (token->next && token->next->type == CMD_ARG)
 			{
 				token = token->next;
 				tmp = cmd_tab[i];
@@ -92,10 +92,8 @@ t_cmd	*create_new_cmd(t_list *token)
 
 	new = (t_cmd *)malloc(sizeof(t_cmd));
 	new->args = cmd_tab(token);
-	if (new->args && new->args[0])
+	if (new->args)
 		new->name = new->args[0];
-	else
-		new->name = NULL;
 	new->path = NULL;
 	new->env = NULL;
 	new->possible_path = NULL;

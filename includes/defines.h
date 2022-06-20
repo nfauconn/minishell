@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 20:11:25 by user42            #+#    #+#             */
-/*   Updated: 2022/06/20 16:45:27 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/20 18:13:07 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # define OUT_REDIR 62
 # define HEREDOC 129
 # define APPEND_REDIR 130
-# define WORD 131
+# define CMD_ARG 131
 # define TO_EXPAND 132
 # define INFILE_PATH 133
 # define TRUNC_OUTFILE_PATH 134

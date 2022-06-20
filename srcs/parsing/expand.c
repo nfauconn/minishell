@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:13:37 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/18 18:57:30 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/20 18:13:07 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ void	token_expand(t_list *token, t_list *env)
 			token->content = ft_substr(tmp, 1, ft_strlen(tmp) - 2);
 			free(tmp);
 		}
-		else if (token->type == WORD)
+		else if (token->type == CMD_ARG)
 		{
 			tmp = token->content;
 			token->content = var_expand(tmp, env);

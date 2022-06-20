@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   parsing.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,14 +12,12 @@
 
 #include "minishell.h"
 
-int	parser(t_input *input, t_sh *sh)
+int	parsing(t_input *input, t_sh *sh)
 {
+	if (tokenizer(input, input->line_read) || lexer(input->token_list))
+		return (FAILURE);
 	token_expand(input->token_list, sh->env);
 	complete_types(input->token_list);
-	#ifdef DEBUG
-	ft_lstiter(input->token_list, display_token_list);
-	#endif
-
 	token_to_cmd_lst(sh, input->token_list);
 	return (SUCCESS);
 }

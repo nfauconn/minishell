@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 18:25:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/20 17:34:53 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/20 18:18:03 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int		lexer(t_list *tokens);
 int		lex_error(char *s);
 
 /* PARSING_PARSER */
-int		parser(t_input *input, t_sh *sh);
+int		parsing(t_input *input, t_sh *sh);
 void	token_expand(t_list *token_list, t_list *env);
 
 /*EXECUTE*/
