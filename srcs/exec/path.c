@@ -1,27 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_path.c                                         :+:      :+:    :+:   */
+/*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 14:06:55 by user42            #+#    #+#             */
-/*   Updated: 2022/06/19 19:00:23 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/20 13:06:55 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	clean_string_array(char **array)
+int	find_path(t_cmd *cmd, char **paths)
 {
-	size_t	i;
+	int	i;
 
-	if (!array)
-		return ;
 	i = 0;
-	while (array[i])
-		free(array[i++]);
-	free(array);
+	while (paths && paths[i])
+	{
+		cmd->path = join_path(paths[i], cmd->name);
+		if (!cmd->path)
+			break ;
+		if (access(cmd->path, X_OK) != -1)
+			return (1);
+		free(cmd->path);
+		i++;
+	}
+	return (0);
 }
 
 char	*join_path(char const *penv, char const *pexec)
@@ -34,8 +40,7 @@ char	*join_path(char const *penv, char const *pexec)
 	len1 = ft_strlen(penv);
 	len2 = ft_strlen(pexec);
 	sep = penv[len1 - 1] != '/';
-	dst = (char *)malloc(sizeof(char)
-			* (len1 + len2 + sep + 1));
+	dst = (char *)malloc(sizeof(char) * (len1 + len2 + sep + 1));
 	if (!dst)
 		return (NULL);
 	ft_strlcpy(dst, penv, len1 + 1);
@@ -62,13 +67,6 @@ char	**get_env_tab(t_list *env)
 			break ;
 		env = env->next;
 	}
-/* 	if (env)
-	{
-		while (--len >= 0)
-			free(tab[len]);
-		free(tab);
-		return (NULL);
-	} */
 	tab[len] = NULL;
 	return (tab);
 }

@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 11:36:26 by user42            #+#    #+#             */
-/*   Updated: 2022/06/19 12:48:17 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/20 12:38:15 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	token_to_cmd_lst(t_sh *sh, t_list *token)
 	t_cmd 	**head;
 
 	sh->cmd_nb = get_cmd_nb(token);
-//	printf("cmd_nb = %zu\n", sh->cmd_nb);
 	head = &sh->cmd_list;
 	i = 0;
 	while (token)
@@ -33,13 +32,4 @@ void	token_to_cmd_lst(t_sh *sh, t_list *token)
 			token = token->next;
 		i++;
 	}
-
-//just to display
-/* 	t_cmd	*cmd;
-	cmd = *head;
-	while (cmd)
-	{
-		ft_str_array_display(cmd->cmd_tab);
-		cmd = cmd->next;
-	} */
 }

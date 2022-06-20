@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 18:25:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/19 19:32:29 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/20 12:15:12 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int		cmd_execute(t_sh *sh);
 
 /* PARSING_CONV_TO_CMD */
 size_t	get_cmd_nb(t_list *token);
-size_t	get_cmd_tab_sz(t_list *token);
+size_t	get_cmd_args_sz(t_list *token);
 void	add_cmd_to_list(t_cmd **head, t_cmd *new);
 t_cmd	*create_new_cmd(t_list *token);
 void	token_to_cmd_lst(t_sh *sh, t_list *token);

@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 09:28:54 by user42            #+#    #+#             */
-/*   Updated: 2022/06/19 13:30:47 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/20 11:59:29 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_str_array_free(char **tab)
 	int	i;
 
 	i = 0;
-	while (tab[i])
+	while (tab && tab[i])
 		free(tab[i++]);
 	if (tab)
 		free(tab);

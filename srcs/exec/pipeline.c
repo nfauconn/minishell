@@ -3,16 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   pipeline.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 15:32:33 by mdankou           #+#    #+#             */
-/*   Updated: 2022/06/19 19:07:34 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/20 13:15:19 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void handle_redironly_cmd(t_cmd *cmd)
+int8_t	last_status = 0;
+
+void redironly_cmd(t_cmd *cmd)
 {
 	ssize_t	ret;
 	char	buf[BUFFER_SIZE];
@@ -31,43 +33,37 @@ void handle_redironly_cmd(t_cmd *cmd)
 	}
 }
 
-void	cmd_run_com(t_sh *sh, t_cmd *cmd)
+static void	exec_cmd(t_sh *sh, t_cmd *cmd)
 {
-	int		i;
-	char	**cmd_args;
-	char	**path_tab;
+	char	**paths;
 	char	**env_tab;
-	char	*path_exec;
 
-	i = 0;
 	env_tab = get_env_tab(sh->env);
-	path_tab = get_path_tab(sh->env);
-	cmd_args = cmd->cmd_tab;
-	if (cmd_args && cmd_args[0] && path_tab)
+	paths = get_path_tab(sh->env);
+	if (cmd->name && paths)
 	{
-		if (access(cmd_args[0], X_OK) != -1)
-			execve(cmd_args[0], cmd_args, env_tab);
-		while (path_tab && path_tab[i])
+		if (access(cmd->name, X_OK) != -1)
+			execve(cmd->name, cmd->args, env_tab);
+		else if (find_path(cmd, paths))
 		{
-			path_exec = join_path(path_tab[i], cmd_args[0]);
-			if (!path_exec)
-				break ;
-			if (access(path_exec, X_OK) != -1)
-				execve(path_exec, cmd_args, env_tab);
-			free(path_exec);
-			++i;
+			execve(cmd->path, cmd->args, env_tab);
+			last_status = NOT_EXECUTABLE;
+			error_display("permission denied", cmd->name);
 		}
-		ft_printerror("%s: %s\n", cmd_args[0], "command not found");
+		else
+		{
+			last_status = NOT_FOUND;
+			error_display(cmd->name, "command not found");
+		}
 	}
-	else if (cmd_args && !cmd_args[0] && cmd->redir_out != FILE_NOT_USED)
-	{
-		handle_redironly_cmd(cmd);
-	}
-	clean_string_array(path_tab);
-	clean_string_array(env_tab);
+	else if (cmd->args && !cmd->name && cmd->redir_out != FILE_NOT_USED)
+		redironly_cmd(cmd);
+	ft_str_array_free(paths);
+	ft_str_array_free(env_tab);
+	exit(last_status);
 }
 
-int	child_proc_job(t_sh *sh, t_cmd *cmd, int p[2], int fd_in)
+void	child_seq(t_sh *sh, t_cmd *cmd, int p[2], int fd_in)
 {
 	close(p[0]);
 	if (cmd->redir_in > STDIN_FILENO)
@@ -79,16 +75,14 @@ int	child_proc_job(t_sh *sh, t_cmd *cmd, int p[2], int fd_in)
 	else if (cmd->next)
 		dup2(p[1], STDOUT_FILENO);
 	close(p[1]);
-	cmd_run_com(sh, cmd);
-	exit(127);
+	exec_cmd(sh, cmd);
 }
 
-int	parent_proc_job(int p[2], int *fd)
+void	parent_seq(int p[2], int *fd)
 {
 	close(p[1]);
 	close_if_exists(*fd);
 	*fd = p[0];
-	return (0);
 }
 
 int	cmd_execute(t_sh *sh)
@@ -109,12 +103,12 @@ int	cmd_execute(t_sh *sh)
 		if (pid < 0)
 			return (exec_error("fork: ", strerror(errno)));
 		if (pid == 0)
-			child_proc_job(sh, cmd, p, fd_in);
+			child_seq(sh, cmd, p, fd_in);
 		else
-			parent_proc_job(p, &fd_in);
+			parent_seq(p, &fd_in);
 		cmd = cmd->next;
 	}
 	wait_children(sh);
 	signal_catching_mode(INTERACTIVE);
-	return (SUCCESS);
+	return (last_status);
 }

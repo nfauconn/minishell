@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 20:11:25 by user42            #+#    #+#             */
-/*   Updated: 2022/06/18 16:07:50 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/20 12:57:27 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,7 @@
 # define APPEND_OUTFILE_PATH 136
 # define FILE_NOT_USED -42
 # define FILE_OPEN_FAIL -1
+# define NOT_FOUND 127
+# define NOT_EXECUTABLE 126
 
 #endif

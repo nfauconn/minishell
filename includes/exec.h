@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:22:26 by mdankou           #+#    #+#             */
-/*   Updated: 2022/06/19 18:51:44 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/20 12:51:34 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,20 @@
 
 typedef struct s_cmd
 {
-	char			**cmd_tab;
+	char			*name;
+	char			**args;
+	char			*path;
 	size_t			index;
 	int				redir_in;
 	int				redir_out;
-	int				in_redir_type;
-	int				out_redir_type;
+	int8_t			exit_status;		
 	struct s_cmd	*next;
 }	t_cmd;
 
 char	*join_path(char const *penv, char const *pexec);
-void	clean_string_array(char **array);
 char	**get_path_tab(t_list *env);
 char	**get_env_tab(t_list *env);
+int		find_path(t_cmd *cmd, char **paths);
 void	cmd_redirections(t_cmd *cmd, t_list *token);
 void	run_heredoc(int *fd, char *delim);
 int		exec_error(char *s1, char *s2);

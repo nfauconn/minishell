@@ -18,35 +18,35 @@ LIBS := ${addsuffix ${L_EXT}, ${addprefix ${LIBFT_DIR}, \
 		libft}}
 
 SRCS := ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
+		main \
+		init \
 		end \
 		error \
-		init \
-		main \
 		signals \
+		${addprefix ${PARSING}, \
+		input \
+		tokenizer \
+		types \
+		lexer \
+		expand \
+		conv_to_cmd \
+		conv_utils \
+		parser \
+		utils} \
+		${addprefix ${EXEC}, \
+		path \
+		heredoc \
+		pipeline \
+		redirection \
+		utils_for_fd \
+		wait} \
 		${addprefix ${BUILTINS}, \
 		cd \
 		echo \
 		env \
 		export \
 		pwd \
-		unset} \
-		${addprefix ${EXEC}, \
-		wait \
-		get_path \
-		heredoc \
-		pipeline \
-		redirection \
-		utils_for_fd} \
-		${addprefix ${PARSING}, \
-		conv_to_cmd \
-		conv_utils \
-		expand \
-		input \
-		lexer \
-		parser \
-		tokenizer \
-		types \
-		utils}}}
+		unset}}}
 
 DEPS := ${subst ${SRC_DIR}, ${BUILD_DIR}, ${SRCS:%.c=%.d}}
 OBJS := ${subst ${SRC_DIR}, ${BUILD_DIR}, ${SRCS:%.c=%.o}}

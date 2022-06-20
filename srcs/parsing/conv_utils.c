@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   conv_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 11:37:25 by user42            #+#    #+#             */
-/*   Updated: 2022/06/18 19:20:08 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/20 13:06:39 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,6 @@ static char	**cmd_tab(t_list *token)
 
 	cmd_tab = NULL;
 	size = get_cmd_tab_sz(token);
-	#ifdef DEBUG
-	printf("cmb_tab_size = %zu\n", size);
-	#endif
 	cmd_tab = (char **)malloc(sizeof(char *) * (size + 1));
 	i = 0;
 	while (token && !is_separator(token->type))
@@ -80,11 +77,7 @@ static char	**cmd_tab(t_list *token)
 				tmp = cmd_tab[i];
 				cmd_tab[i] = ft_strjoin(tmp, (char *)token->content);
 				free(tmp);
-//				ft_free_mode(ft_strjoin, &cmd_tab[i], (char *)token->content);
 			}
-			#ifdef DEBUG
-			printf("cmd_tab[%zu] = %s\n", i, cmd_tab[i]);
-			#endif
 			i++;
 		}
 		token = token->next;
@@ -98,8 +91,14 @@ t_cmd	*create_new_cmd(t_list *token)
 	t_cmd	*new;
 
 	new = (t_cmd *)malloc(sizeof(t_cmd));
-	new->cmd_tab = cmd_tab(token);
+	new->args = cmd_tab(token);
+	if (new->args && new->args[0])
+		new->name = new->args[0];
+	else
+		new->name = NULL;
+	new->path = NULL;
 	new->next = NULL;
+	new->exit_status = EXIT_SUCCESS;
 	cmd_redirections(new, token);
 	return (new);
 }
