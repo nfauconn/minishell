@@ -1,16 +1,20 @@
-SIGNALS when prgram launched=============================seems to be reset->need to handle it 
+SIGNALS
+	when prgram launched, signals seem to be reset->need to handle it 
 
+PARSING
+	PIPE THEN NOTHING
+		$ echo lol |
+		>
+	REDIR_STUCK_TO_PIPE >|
+		is a redirecting operator used to overwrite file even if option noclobber is set
 
-$ echo lol |
->
+EXPAND
+	LAST_PIPELINE_STATUS $?
+		need to handle
 
-$ echo ????oooOOOooo??/>|lol.txt
-$ cat lol.txt
-????oooOOOooo??/
 
 for file in `find -name "linux_*.mp4"`; do mv "$file" "${file/linux_/}" ; done
 
-!!! expansion du $?
 
 
 VALGRIND

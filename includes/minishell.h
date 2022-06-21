@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 18:25:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/20 18:18:03 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/21 12:50:18 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_sh
 }	t_sh;
 
 /* INIT */
-int	init_input(t_input *input);
+int		init_input(t_input *input);
 char	*get_input(void);
 void	init_sh(t_sh *sh, char **env);
 
@@ -53,8 +53,8 @@ int		is_quote(int c);
 void	add_token_to_list(t_list **token_list, char *token);
 void	display_token_list(void *content);
 int		tokenizer(t_input *input, char *line);
-void	set_types_to_expand(t_list *token);
-void	complete_types(t_list *token);
+void	set_types_for_lex(t_list *token);
+void	set_types_complete(t_list *token);
 
 /* PARSING_LEX */
 int		lexer(t_list *tokens);
@@ -78,7 +78,7 @@ void	token_to_cmd_lst(t_sh *sh, t_list *token);
 void	end(t_input *input, t_sh *sh);
 void	end_input(t_input *input);
 void	end_sh(t_sh *sh);
-void	perror_and_free(t_input *input, char *s);
+char	*perror_and_free(t_input *input, char *s);
 void	error_display(char *s1, char *s2);
 void	error_exit(char *cmd_name, int8_t error_code);
 int		wait_children(t_sh *sh);

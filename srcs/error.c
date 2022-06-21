@@ -3,19 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 18:49:09 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/20 18:14:27 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/21 12:45:23 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	perror_and_free(t_input *input, char *s)
+char	*perror_and_free(t_input *input, char *s)
 {
 	ft_printerror("minish: %s\n", s);
 	end_input(input);
+	return (NULL);
 }
 
 int	lex_error(char *s)
@@ -40,7 +41,9 @@ void	error_display(char *s1, char *s2)
 
 void	error_exit(char *cmd_name, int8_t error_code)
 {
-	if (error_code == NOT_FOUND)
+	if (!ft_strlen(cmd_name))
+		error_display("\'\'", "command not found");
+	else if (error_code == NOT_FOUND)
 		error_display(cmd_name, "command not found");
 	else if (error_code == NOT_EXECUTABLE)
 		error_display(cmd_name, "permission denied");

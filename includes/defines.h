@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 20:11:25 by user42            #+#    #+#             */
-/*   Updated: 2022/06/20 18:13:07 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/21 11:28:23 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,6 @@
 # define NOT_FOUND 127
 # define NOT_EXECUTABLE 126
 # define WRONG_REDIR 1
+# define EMPTY_CMD 127
 
 #endif

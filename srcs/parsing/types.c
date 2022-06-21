@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   types.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 11:09:58 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/20 18:13:15 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/21 12:50:18 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	set_types_to_expand(t_list *token)
+void	set_types_for_lex(t_list *token)
 {
 	char	*tmp;
 
@@ -47,7 +47,7 @@ static t_list	*set_next_type(t_list *token, int type)
 		return (token);
 }
 
-void	complete_types(t_list *token)
+void	set_types_complete(t_list *token)
 {
 	while (token)
 	{

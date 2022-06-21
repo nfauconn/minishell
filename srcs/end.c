@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   end.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 16:09:54 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/20 18:23:33 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/21 11:32:24 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	end_sh(t_sh *sh)
 			ft_str_array_free(sh->cmd_list->args);
 		if (sh->cmd_list->env)
 			ft_str_array_free(sh->cmd_list->env);
-		if (sh->cmd_list->possible_paths)
-			ft_str_array_free(sh->cmd_list->possible_paths);
+		if (sh->cmd_list->env_paths)
+			ft_str_array_free(sh->cmd_list->env_paths);
 		if (sh->cmd_list->path)
 			free(sh->cmd_list->path);
 		to_del = sh->cmd_list;

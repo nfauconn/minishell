@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipeline.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 15:32:33 by mdankou           #+#    #+#             */
-/*   Updated: 2022/06/20 18:23:33 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/21 11:48:26 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,42 +14,19 @@
 
 int8_t	exit_code = 0;
 
-/* void redironly_cmd(t_cmd *cmd)
-{
-	ssize_t	ret;
-	char	buf[BUFFER_SIZE];
-
-	ret = read(cmd->redir_in, buf, BUFFER_SIZE);
-	if (ret < 0)
-		exit(exec_error("read: ", strerror(errno)));
-	while (ret > 0)
-	{
-		write(cmd->redir_out, buf, ret);
-		ret = read(cmd->redir_in, buf, BUFFER_SIZE);
-		if (ret < 0)
-			exit(exec_error("read: ", strerror(errno)));
-	}
-	exit(EXIT_SUCCESS);
-} */
-
 static void	exec_cmd(t_sh *sh, t_cmd *cmd)
 {
 	cmd->env = get_env_tab(sh->env);
-	cmd->possible_paths = get_path_tab(sh->env);
-	if (cmd->name && cmd->possible_paths)
-	{
-		if (access(cmd->name, X_OK) != -1)
-			execve(cmd->name, cmd->args, cmd->env);
-		else if (find_path(cmd, cmd->possible_paths))
-		{
-			execve(cmd->path, cmd->args, cmd->env);
-			exit_code = NOT_EXECUTABLE;
-		}
-		else
-			exit_code = NOT_FOUND;
+	if (cmd->name && access(cmd->name, X_OK) != -1)
+		execve(cmd->name, cmd->args, cmd->env);
+	cmd->env_paths = get_path_tab(sh->env);
+	if (!cmd->env_paths || !find_path(cmd, cmd->env_paths))
+		exit_code = NOT_FOUND;
+	else
+	{	
+		execve(cmd->path, cmd->args, cmd->env);
+		exit_code = NOT_EXECUTABLE;
 	}
-/* 	else if (cmd->args && !cmd->name && cmd->redir_out != NO_REDIR)
-		redironly_cmd(cmd); */
 	error_exit(cmd->name, exit_code);
 }
 

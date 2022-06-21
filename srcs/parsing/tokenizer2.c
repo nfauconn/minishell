@@ -1,54 +1,54 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenizer.c                                        :+:      :+:    :+:   */
+/*   tokenizer2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 16:59:04 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/21 13:29:30 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/21 13:17:17 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*end_of_sep_or_redir(t_input *input, char *s)
+static char	*find_closing_quote(char *s, char quote)
 {
-	char	*tmp;
-
-	tmp = *s;
-	while (*s == *tmp)
-		s++;
-	if (s - tmp == 3 && *tmp == '<')
-		return (perror_and_free(input, "does not handle here words"));
-	if (s - tmp == 2 && *tmp == '|')
-		return(perror_and_free(input, "does not handle double pipes"));
-	return (s);
-}
-
-static char	*find_closing_quote(t_input *input, char *s, char quote)
-{
-	s++;
 	while (*s)
-	{
 		if (*(s++) == quote)
 			return (s);
-	}
-	return (perror_and_free(input, "does not handle non closed quotes"));
+	return (NULL);
 }
 
 static char	*find_end(t_input *input, char *s)
 {
-	while (*s && !is_blank(*s))
-	{
-		if (*s == '$' && is_quote(*(s + 1)))
-			s++;
-		if (is_quote(*s))
-			return (find_closing_quote(input, s, *s));
-		if (is_separator(*s) || is_redir(*s))
-			return (end_of_sep_or_redir(input, s));
+	char	*tmp;
+
+	if (*s == '$' && (!is_blank(*(s + 1)) || is_quote(*(s + 1))))
 		s++;
+	if (is_quote(*s))
+	{
+		tmp = s++;
+		s = find_closing_quote(s, *tmp);
+		if (s)
+			return (s);
+		return (perror_and_free(input, "does not handle non closed quotes"));
 	}
+	if (is_separator(*s) || is_redir(*s))
+	{
+		tmp = s;
+		while (*s == *tmp)
+			s++;
+		if (s - tmp == 3 && *tmp == '<')
+			return (perror_and_free(input, "does not handle here words"));
+		if (s - tmp == 2 && *tmp == '|')
+			return(perror_and_free(input, "does not handle double pipes"));
+		return (s);
+	}
+	s++;
+	if (*s == '\0' || is_blank(*s) || is_quote(*s) || is_separator(*s) || is_redir(*s))
+		return (s);
+	find_end(input, s);
 	return (s);
 }
 
@@ -74,7 +74,6 @@ int	tokenizer(t_input *input, char *line)
 			line = find_end(input, start);
 			if (!input->line_read)
 				return (FAILURE);
-			printf("line = %s\n", line);
 			token = ft_substr(start, 0, line - start);
 			add_token_to_list(&input->token_list, token);
 		}
@@ -82,7 +81,6 @@ int	tokenizer(t_input *input, char *line)
 		{
 			token = ft_strdup(" ");
 			add_token_to_list(&input->token_list, token);
-			line++;
 		}
 	}
 	return (SUCCESS);
