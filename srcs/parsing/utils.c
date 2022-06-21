@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 19:57:56 by user42            #+#    #+#             */
-/*   Updated: 2022/06/20 17:13:54 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/21 16:53:10 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	is_blank(int c)
 	return (c == 32 || (c >= 9 && c <= 13));
 }
 
-int	is_separator(int c)
+int	is_sep(int c)
 {
 	return (c == PIPE);
 }
@@ -49,9 +49,18 @@ int	is_quote(int c)
 	return (c == QUOTE || c == DB_QUOTE);
 }
 
-void	display_token_list(void *content)
+int	is_word(int c)
 {
-	printf("token : (%s)\n", (char *)content);
+	return (!is_quote(c) && !is_redir(c) && !is_blank(c) && !is_sep(c));
+}
+
+void	display_token_list(t_list *lst)
+{
+	while (lst)
+	{
+		printf("tok = %20s | type = %d\n", (char *)lst->content, lst->type);
+		lst = lst->next;
+	}
 }
 
 void	add_token_to_list(t_list **token_list, char *token)

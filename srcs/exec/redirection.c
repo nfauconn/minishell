@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 17:20:37 by mdankou           #+#    #+#             */
-/*   Updated: 2022/06/20 17:15:42 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/21 15:03:04 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	cmd_redirections(t_cmd *cmd, t_list *token)
 	errno = 0;
 	cmd->redir_in = NO_REDIR;
 	cmd->redir_out = NO_REDIR;
-	while (token && !is_separator(token->type) && !errno)
+	while (token && !is_sep(token->type) && !errno)
 	{
 		file = (char*)token->content;
 		if (is_infile(token->type) && cmd->redir_in != WRONG_REDIR)

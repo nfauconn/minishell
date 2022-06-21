@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 11:36:22 by user42            #+#    #+#             */
-/*   Updated: 2022/06/18 18:58:06 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/21 15:03:04 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	check_nb_sign(t_list *token, size_t len)
 		else if (token->type == OUT_REDIR && len > 2)
 			return (lex_error(">>"));
 	}
-	else if (is_separator(*tok))
+	else if (is_sep(*tok))
 	{
 		if (token->type == PIPE && len > 1)
 			return (lex_error("|"));
@@ -43,14 +43,14 @@ int	lexer(t_list *token)
 	{
 		tok = (char *)token->content;
 		len = ft_strlen(tok);
-		if (is_redir(token->type) || is_separator(token->type))
+		if (is_redir(token->type) || is_sep(token->type))
 		{
 			if (check_nb_sign(token, len) == FAILURE)
 				return (FAILURE);
 			token = token->next;
 			if (token)
 			{
-				if (is_redir(token->type) || is_separator(token->type))
+				if (is_redir(token->type) || is_sep(token->type))
 				{
 					len = ft_strlen((char *)token->content);
 					if (check_nb_sign(token, len) == FAILURE)

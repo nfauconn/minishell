@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 18:25:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/21 12:50:18 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/21 16:51:09 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define MINISHELL_H
 
 # define _GNU_SOURCE
+
+# define DEBUG
 
 # include "builtins.h"
 # include "defines.h"
@@ -48,10 +50,11 @@ int		is_infile(int c);
 int		is_outfile(int c);
 int		is_redir(int c);
 int		is_redir_path(int c);
-int		is_separator(int c);
+int		is_sep(int c);
 int		is_quote(int c);
+int		is_word(int c);
 void	add_token_to_list(t_list **token_list, char *token);
-void	display_token_list(void *content);
+void	display_token_list(t_list *lst);
 int		tokenizer(t_input *input, char *line);
 void	set_types_for_lex(t_list *token);
 void	set_types_complete(t_list *token);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 11:09:58 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/21 12:50:18 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/21 16:43:49 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,9 @@ void	set_types_for_lex(t_list *token)
 			if (!ft_strcmp(tmp, ">>"))
 				token->type = APPEND_REDIR;
 		}
-		else if (!is_separator(token->type) && !is_quote(token->type) && !is_blank(token->type))
-			token->type = CMD_ARG;
+		else if (!is_sep(token->type) && !is_quote(token->type)
+			&& !is_blank(token->type))
+			token->type = WORD;
 		token = token->next;
 	}
 }
@@ -60,7 +61,7 @@ void	set_types_complete(t_list *token)
 		else if (token->type == APPEND_REDIR)
 			token = set_next_type(token, APPEND_OUTFILE_PATH);
 		else if (is_quote(token->type))
-			token->type = CMD_ARG;
+			token->type = WORD;
 		token = token->next;
 	}
 }

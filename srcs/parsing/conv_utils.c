@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   conv_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 11:37:25 by user42            #+#    #+#             */
-/*   Updated: 2022/06/21 11:32:24 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/21 15:30:06 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ size_t	get_cmd_tab_sz(t_list *token)
 	size_t	count;
 
 	count = 0;
-	while (token && !is_separator(token->type))
+	while (token && !is_sep(token->type))
 	{
-		if ((token->type == CMD_ARG || is_quote(token->type)) && !is_blank(token->type))
+		if ((token->type == WORD || is_quote(token->type)) && !is_blank(token->type))
 			count++;
 		token = token->next;
 	}
@@ -33,7 +33,7 @@ size_t	get_cmd_nb(t_list *token)
 	cmd_nb = 1;
 	while (token)
 	{
-		if (is_separator(token->type))
+		if (is_sep(token->type))
 			cmd_nb++;
 		token = token->next;
 	}
@@ -66,12 +66,12 @@ static char	**cmd_tab(t_list *token)
 	size = get_cmd_tab_sz(token);
 	cmd_tab = (char **)malloc(sizeof(char *) * (size + 1));
 	i = 0;
-	while (token && !is_separator(token->type))
+	while (token && !is_sep(token->type))
 	{
-		if (token->type == CMD_ARG)
+		if (token->type == WORD)
 		{
 			cmd_tab[i] = ft_strdup((char *)token->content);
-			while (token->next && token->next->type == CMD_ARG)
+			while (token->next && token->next->type == WORD)
 			{
 				token = token->next;
 				tmp = cmd_tab[i];

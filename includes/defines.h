@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 20:11:25 by user42            #+#    #+#             */
-/*   Updated: 2022/06/21 11:28:23 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/21 16:50:34 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,13 @@
 # define OUT_REDIR 62
 # define HEREDOC 129
 # define APPEND_REDIR 130
-# define CMD_ARG 131
-# define TO_EXPAND 132
+# define WORD 131
 # define INFILE_PATH 133
 # define TRUNC_OUTFILE_PATH 134
 # define DELIMITER 135
 # define APPEND_OUTFILE_PATH 136
+
+/* REDIRECTIONS */
 # define NO_REDIR -42
 # define REDIR_FAIL -1
 

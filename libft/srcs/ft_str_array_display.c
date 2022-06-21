@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_str_array_display.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 09:29:04 by user42            #+#    #+#             */
-/*   Updated: 2022/06/19 13:30:54 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/21 15:13:06 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_str_array_display(char **tab)
 	i = 0;
 	while (tab[i])
 	{
-		ft_printf("line[%d] = |%s|\n", i, tab[i]);
+		ft_printf("cmd[%d] = |%s|\n", i, tab[i]);
 		i++;
 	}
 }

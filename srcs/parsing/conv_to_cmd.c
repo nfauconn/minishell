@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   conv_to_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 11:36:26 by user42            #+#    #+#             */
-/*   Updated: 2022/06/20 12:38:15 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/21 15:03:04 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ void	token_to_cmd_lst(t_sh *sh, t_list *token)
 		new_cmd = create_new_cmd(token);
 		new_cmd->index = i;
 		add_cmd_to_list(head, new_cmd);
-		while (token && !is_separator(token->type))
+		while (token && !is_sep(token->type))
 			token = token->next;
-		if (token && is_separator(token->type))
+		if (token && is_sep(token->type))
 			token = token->next;
 		i++;
 	}

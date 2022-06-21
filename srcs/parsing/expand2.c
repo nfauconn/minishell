@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:13:37 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/21 17:04:21 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/21 16:31:10 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,27 +77,39 @@ static char	*var_expand(char *token, t_list *env)
 	res = NULL;
 	while (*token)
 	{
-		start = token;
-		while (*token && *token != '$')
-			token++;
-		res = ft_strnextend(res, start, token - start);
-		if (*token == '$' && is_identifier(*(token + 1)))
+		if (*token && is_identifier(*token))
 		{
-			token++;
 			start = token;
 			while (is_identifier(*token))
 				token++;
 			token_val = get_expand_value(start, 0, token - start, env);
 			res = ft_strnextend(res, token_val, ft_strlen(token_val));
-			free(token_val);
 		}
-		else if (*token == '$' && !is_identifier(*(token + 1)))
+		if (*token && !is_identifier(*token))
 		{
-			res = ft_strnextend(res, token, 1);
-			token++;
+			start = token;
+			while (*token)
+				token++;
+			res = ft_strnextend(res, token, ft_strlen(token_val) + (token - start));
 		}
+		free(token_val);
 	}
 	return (res);
+}
+
+static void	quote_expand(t_list *token, char *tok, t_list *env)
+{
+	char	*tmp;
+
+	if (token->type == DB_QUOTE)
+	{
+		tmp = token->content;
+		token->content = var_expand(tok, env);
+		free(tmp);
+	}
+	tmp = token->content;
+	token->content = ft_substr(tmp, 1, ft_strlen(tmp) - 2);
+	free(tmp);
 }
 
 void	token_expand(t_list *token, t_list *env)
@@ -109,6 +121,7 @@ void	token_expand(t_list *token, t_list *env)
 	tmp = NULL;
 	while (token)
 	{
+		start = 0;
 		tok = (char *)token->content;
 		if (token->type == HEREDOC)
 		{
@@ -117,26 +130,24 @@ void	token_expand(t_list *token, t_list *env)
 				token = token->next;
 			continue ;
 		}
-		start = 1;
-		if (*tok == '$' && ft_strlen(tok) > 1 && is_quote(*(++tok)))
-			start++;
-		if (*tok == QUOTE || *tok == DB_QUOTE)
-		{
-			if (*tok == DB_QUOTE)
-			{
-				tmp = token->content;
-				token->content = var_expand(tok, env);
-				free(tmp);
-			}
-			tmp = token->content;
-			token->content = ft_substr(tmp, 1, ft_strlen(tmp) - (2));
-			free(tmp);
-		}
-		else if (token->type == WORD)
+		if (token->type == '$' && ft_strlen(tok) > 1 && !is_quote(*(tok + 1)))
 		{
 			tmp = token->content;
 			token->content = var_expand(tmp, env);
 			free(tmp);
+			tok++;
+			if (is_quote(*tok))
+				
+		}
+		if (is_quote(token->type))
+			quote_expand(token, tok, env);
+		else if (token->type == '$' && ft_strlen((char *)token->content) > 1)
+		{
+			tok++;
+			tok = (char *)token->content;
+			if (is_quote(*tok))
+				quote_expand(token, tok, env);
+
 		}
  		token = token->next;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 18:10:00 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/21 12:48:33 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/21 15:30:06 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,12 @@ char	*get_input(void)
 		{
 			tmp++;
 			if (*tmp == '\0')
-				token->type = CMD_ARG;
+				token->type = WORD;
 			else
 				token->type = TO_EXPAND;
 		}
 		else if (token->type != PIPE && !is_quote(token->type))
-			token->type = CMD_ARG;
+			token->type = WORD;
 		token = token->next;
 	}
 }*/

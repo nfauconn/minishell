@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 16:59:04 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/21 13:17:17 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/21 15:03:04 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static char	*find_end(t_input *input, char *s)
 			return (s);
 		return (perror_and_free(input, "does not handle non closed quotes"));
 	}
-	if (is_separator(*s) || is_redir(*s))
+	if (is_sep(*s) || is_redir(*s))
 	{
 		tmp = s;
 		while (*s == *tmp)
@@ -46,7 +46,7 @@ static char	*find_end(t_input *input, char *s)
 		return (s);
 	}
 	s++;
-	if (*s == '\0' || is_blank(*s) || is_quote(*s) || is_separator(*s) || is_redir(*s))
+	if (*s == '\0' || is_blank(*s) || is_quote(*s) || is_sep(*s) || is_redir(*s))
 		return (s);
 	find_end(input, s);
 	return (s);
