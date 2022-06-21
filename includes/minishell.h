@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 18:25:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/21 16:51:09 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/21 18:21:12 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	display_token_list(t_list *lst);
 int		tokenizer(t_input *input, char *line);
 void	set_types_for_lex(t_list *token);
 void	set_types_complete(t_list *token);
+t_list *skip_token(t_list *token, int to_skip);
 
 /* PARSING_LEX */
 int		lexer(t_list *tokens);

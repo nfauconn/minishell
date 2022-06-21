@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 16:59:04 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/21 16:57:13 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/21 18:04:06 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static char	*end_of_sep_or_redir(t_input *input, char *s)
 	if (s - tmp == 3 && *tmp == '<')
 		return (perror_and_free(input, "does not handle here words"));
 	if (s - tmp == 2 && *tmp == '|')
-		return(perror_and_free(input, "does not handle double pipes"));
+		return (perror_and_free(input, "does not handle double pipes"));
 	return (s);
 }
 

@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 19:57:56 by user42            #+#    #+#             */
-/*   Updated: 2022/06/21 16:53:10 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/21 18:22:39 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,14 @@ int	is_quote(int c)
 int	is_word(int c)
 {
 	return (!is_quote(c) && !is_redir(c) && !is_blank(c) && !is_sep(c));
+}
+
+t_list *skip_token(t_list *token, int to_skip)
+{
+	token = token->next;
+	if (token && token->type == to_skip)
+		token = token->next;
+	return (token);
 }
 
 void	display_token_list(t_list *lst)

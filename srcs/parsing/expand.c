@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:13:37 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/21 17:04:21 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/21 18:03:22 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,11 +110,9 @@ void	token_expand(t_list *token, t_list *env)
 	while (token)
 	{
 		tok = (char *)token->content;
-		if (token->type == HEREDOC)
+		if (token->type == HEREDOC && token->next->next)
 		{
-			token = token->next;
-			if (token->next)
-				token = token->next;
+			token = token->next->next;
 			continue ;
 		}
 		start = 1;
