@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 18:25:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/22 16:22:37 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/22 19:20:21 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int		lex_error(char *s);
 
 /* PARSING_PARSER */
 int		parsing(t_input *input, t_sh *sh);
-void	token_expand(t_list *token_list, t_sh *sh);
+void	token_expand(t_list *token_list, t_list *env);
 
 /*EXECUTE*/
 int		cmd_execute(t_sh *sh);
