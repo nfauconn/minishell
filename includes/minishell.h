@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 18:25:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/21 18:21:12 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/22 16:22:37 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ typedef struct s_input
 
 typedef struct s_sh
 {
-	size_t		cmd_nb;
-	t_cmd		*cmd_list;
-	t_list		*env;
-	size_t		last_exit_code;
+	size_t			cmd_nb;
+	t_cmd			*cmd_list;
+	t_list			*env;
+	unsigned char	last_exit_code;
 }	t_sh;
 
 /* INIT */
@@ -52,6 +52,7 @@ int		is_redir(int c);
 int		is_redir_path(int c);
 int		is_sep(int c);
 int		is_quote(int c);
+int		is_dollar_quote(t_list *token);
 int		is_word(int c);
 void	add_token_to_list(t_list **token_list, char *token);
 void	display_token_list(t_list *lst);
@@ -66,7 +67,7 @@ int		lex_error(char *s);
 
 /* PARSING_PARSER */
 int		parsing(t_input *input, t_sh *sh);
-void	token_expand(t_list *token_list, t_list *env);
+void	token_expand(t_list *token_list, t_sh *sh);
 
 /*EXECUTE*/
 int		cmd_execute(t_sh *sh);

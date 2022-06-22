@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:13:37 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/22 13:49:28 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/06/22 16:57:33 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,14 @@ static int	is_identifier(int c)
 	return (0);
 }
 
-static t_list	*search_token(char *str, size_t start, size_t len, t_list *env)
+static int	is_first_identifier(int c)
+{
+	if (ft_isalpha(c) || c == '_' || c == '?')
+		return (1);
+	return (0);
+}
+
+static t_list	*search_token(char *str, size_t len, t_list *env)
 {
 	while (env)
 	{
@@ -31,16 +38,21 @@ static t_list	*search_token(char *str, size_t start, size_t len, t_list *env)
 	return (env);
 }
 
-static char	*get_expand_value(char *str, size_t start, size_t len, t_list *env)
+static char	*get_expand_value(char *str, size_t len, t_sh *sh)
 {
 	t_list	*l;
 	char	*res;
 
-	l = search_token(str, start, len, env);
-	if (l)
-		res = ft_strdup(ft_strchr((char *)l->content, '=') + 1);
+	if (*str == '?')
+		res = ft_itoa(sh->last_exit_code);
 	else
-		res = ft_strdup("\0");
+	{
+		l = search_token(str, len, sh->env);
+		if (l)
+			res = ft_strdup(ft_strchr((char *)l->content, '=') + 1);
+		else
+			res = ft_strdup("\0");
+	}
 	return (res);
 }
 
@@ -68,77 +80,67 @@ static char	*ft_strnextend(char *alloc_str, char *str, size_t len)
 	return (new);
 } 
 
-static char	*var_expand(char *token, t_list *env)
+static char	*expanded_content(char *s, t_sh *sh)
 {
 	char	*start;
-	char	*res;
+	char	*buf;
 	char	*token_val;
 
-	res = NULL;
-	while (*token)
+	buf = NULL;
+	while (*s)
 	{
-		start = token;
-		while (*token && *token != '$')
-			token++;
-		res = ft_strnextend(res, start, token - start);
-		if (*token == '$' && is_identifier(*(token + 1)))
-		{
-			token++;
-			start = token;
-			while (is_identifier(*token))
-				token++;
-			if (isalpha(*start) || *start == '_')
-				token_val = get_expand_value(start, 0, token - start, env);
-			else
-				token_val = ft_strdup(start + 1);
-			res = ft_strnextend(res, token_val, ft_strlen(token_val));
-			free(token_val);
+		start = s;
+		while (*s && *s != '$')
+			s++;
+		buf = ft_strnextend(buf, start, s - start);
+		if (*s == '$')
+		{ 
+			s++;
+			if (*s == '?')
+				token_val = get_expand_value()
 		}
-		else if (*token == '$' && !is_identifier(*(token + 1)))
-		{
-			res = ft_strnextend(res, token, 1);
-			token++;
-		}
+		token_val = get_expand_value(s, s - start, sh);
+
 	}
-	return (res);
 }
 
-void	token_expand(t_list *token, t_list *env)
+static void	expand_content(t_list *token, char *tok_str, t_sh *sh)
 {
-	int	start;
-	char	*tok;
+	char	*tmp;
+
+	tmp = token->content;
+	token->content = expanded_content(tok_str, sh);
+	free(tmp);
+}
+
+static void	expand_remove_quotes(t_list *token, char *tok_str, t_sh *sh)
+{
+	char	*tmp;
+
+	if (*tok_str == '$')
+		tok_str++;
+	if (*tok_str && *tok_str == DB_QUOTE)
+		expand_content(token, tok_str, sh);
+	tmp = token->content;
+	token->content = ft_substr(tmp, 1, ft_strlen(tmp) - (2));
+	free(tmp);
+}
+
+void	token_expand(t_list *token, t_sh *sh)
+{
+	char	*tok_str;
 	char	*tmp;
 
 	tmp = NULL;
 	while (token)
 	{
-		tok = (char *)token->content;
-		if (token->type == HEREDOC && token->next->next)
-		{
+		if (token->type == HEREDOC && token->next && token->next->next)
 			token = token->next->next;
-			continue ;
-		}
-		start = 1;
-		if (*tok == '$' && ft_strlen(tok) > 1 && is_quote(*(++tok)))
-			start++;
-		if (*tok == QUOTE || *tok == DB_QUOTE)
-		{
-			if (*tok == DB_QUOTE)
-			{
-				tmp = token->content;
-				token->content = var_expand(tok, env);
-				free(tmp);
-			}
-			tmp = token->content;
-			token->content = ft_substr(tmp, 1, ft_strlen(tmp) - (2));
-			free(tmp);
-		}
-		else if (token->type == WORD)
-		{
-			tmp = token->content;
-			token->content = var_expand(tmp, env);
-			free(tmp);
-		}
+		tok_str = (char *)token->content;
+		if (is_quote(token->type) || is_dollar_quote(token))
+			expand_remove_quotes(token, tok_str, sh);
+		else if (token->type == WORD && ft_strlen(tok_str) > 1)
+			expand_content(token, tok_str, sh);
  		token = token->next;
 	}
 }

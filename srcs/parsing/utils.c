@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 19:57:56 by user42            #+#    #+#             */
-/*   Updated: 2022/06/21 18:22:39 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/22 16:22:18 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,16 @@ int	is_redir_path(int c)
 int	is_quote(int c)
 {
 	return (c == QUOTE || c == DB_QUOTE);
+}
+
+int	is_dollar_quote(t_list *token)
+{
+	char	*tok;
+
+	tok = (char *)token->content;
+	if (*tok == '$' && ft_strlen(tok) > 1 && is_quote(*(tok + 1)))
+		return (1);
+	return (0);
 }
 
 int	is_word(int c)

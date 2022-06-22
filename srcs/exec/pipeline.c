@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   pipeline.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 15:32:33 by mdankou           #+#    #+#             */
-/*   Updated: 2022/06/22 12:49:30 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/06/22 15:27:03 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int8_t	exit_code = 0;
+unsigned char	g_exit_code = 0;
 
 static void	exec_cmd(t_sh *sh, t_cmd *cmd)
 {
@@ -23,13 +23,13 @@ static void	exec_cmd(t_sh *sh, t_cmd *cmd)
 		execve(cmd->name, cmd->args, cmd->env);
 	cmd->env_paths = get_path_tab(sh->env);
 	if (!cmd->env_paths || !find_path(cmd, cmd->env_paths))
-		exit_code = NOT_FOUND;
+		g_exit_code = NOT_FOUND;
 	else
 	{	
 		execve(cmd->path, cmd->args, cmd->env);
-		exit_code = NOT_EXECUTABLE;
+		g_exit_code = NOT_EXECUTABLE;
 	}
-	error_exit(cmd->name, exit_code);
+	error_exit(cmd->name, g_exit_code);
 }
 
 void	child_seq(t_sh *sh, t_cmd *cmd, int p[2], int fd_in)
