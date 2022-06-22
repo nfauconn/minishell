@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipeline.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 15:32:33 by mdankou           #+#    #+#             */
-/*   Updated: 2022/06/21 11:48:26 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/22 12:49:30 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int8_t	exit_code = 0;
 
 static void	exec_cmd(t_sh *sh, t_cmd *cmd)
 {
+	if (!cmd->name)
+		exit(0);
 	cmd->env = get_env_tab(sh->env);
 	if (cmd->name && access(cmd->name, X_OK) != -1)
 		execve(cmd->name, cmd->args, cmd->env);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:13:37 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/21 18:03:22 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/22 13:49:28 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static char	*get_expand_value(char *str, size_t start, size_t len, t_list *env)
 	if (l)
 		res = ft_strdup(ft_strchr((char *)l->content, '=') + 1);
 	else
-		res = ft_strdup("");
+		res = ft_strdup("\0");
 	return (res);
 }
 
@@ -49,7 +49,7 @@ static char	*ft_strnextend(char *alloc_str, char *str, size_t len)
 	size_t	old_len;
 	char	*new;
 
-	if (str == NULL || len == 0)
+	if (str == NULL)
 		return (alloc_str);
 	if (alloc_str != NULL)
 		old_len = ft_strlen(alloc_str);
@@ -87,7 +87,10 @@ static char	*var_expand(char *token, t_list *env)
 			start = token;
 			while (is_identifier(*token))
 				token++;
-			token_val = get_expand_value(start, 0, token - start, env);
+			if (isalpha(*start) || *start == '_')
+				token_val = get_expand_value(start, 0, token - start, env);
+			else
+				token_val = ft_strdup(start + 1);
 			res = ft_strnextend(res, token_val, ft_strlen(token_val));
 			free(token_val);
 		}
