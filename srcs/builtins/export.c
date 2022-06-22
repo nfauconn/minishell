@@ -3,42 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:53:50 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/19 12:34:31 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/22 16:33:30 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	builtin_export(t_list **env, char **var_assign)
+static void	do_export(t_list **env, char *assign)
 {
-	size_t	j;
 	t_list	*l;
 	char	*str;
 	int		var_len;
 
-	j = -1;
-	while (var_assign[++j])
+	if (!strchr(assign, '='))
+		return ;
+	l = (t_list *)(*env);
+	while (l)
 	{
-		if (!strchr(var_assign[j], '='))
-			continue;
-		l = (t_list *)(*env);
-		while (l)
+		str = (char *)l->content;
+		var_len = ft_strlen(assign);
+		if (!ft_strncmp(assign, str, var_len) && !str[var_len])
 		{
-			str = (char *)l->content;
-			var_len = ft_strlen(var_assign[j]);
-			if (!ft_strncmp(var_assign[j], str, var_len)
-				&& str[var_len] == '\0')
-			{
-				l->content = ft_strdup(var_assign[j]);
-				break ;
-			}
-			l = l->next;
+			l->content = ft_strdup(assign);
+			break ;
 		}
-		if (!l)
-			ft_lstadd_back(env, ft_lstnew(ft_strdup(var_assign[j])));
+		l = l->next;
 	}
-	return (0);
+	if (!l)
+		ft_lstadd_back(env, ft_lstnew(ft_strdup(assign)));
+}
+
+int	builtin_export(t_list **env, char **var_assigns)
+{
+	int		status;
+	size_t	j;
+
+	j = -1;
+	status = 0;
+	while (var_assigns[++j])
+	{
+		do_export(env, var_assigns[j]);
+	}
+	return (status);
 }
