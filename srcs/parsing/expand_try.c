@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:13:37 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/22 19:44:09 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/22 20:14:33 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,23 +91,21 @@ static char	*expanded_content(char **s, t_sh *sh)
 	return (token_val);
 }
 
-static void	expand_content(t_list *token, char *tok_str, t_sh *sh)
+static void	replace_and_free(void **prev_content, void *new_content)
 {
-	char	*tmp;
+	void	*tmp;
 
-	tmp = token->content;
-	token->content = expanded_content(tok_str, sh);
+	tmp = *prev_content;
+	*prev_content = new_content;
 	free(tmp);
 }
 
 static void	expand_remove_quotes(t_list *token, char *tok_str, t_sh *sh)
 {
+	char	*buf;
 	char	*start;
 	char	*token_val;
-	char	*tmp;
-	char	*buf;
 
-	buf = NULL;
 	if (*tok_str == '$')
 		tok_str++;
 	if (*tok_str && *tok_str == DB_QUOTE)
@@ -116,20 +114,21 @@ static void	expand_remove_quotes(t_list *token, char *tok_str, t_sh *sh)
 		while (*tok_str)
 		{
 			start = tok_str;
-			while (*tok_str != '$')
+			while (*tok_str && *tok_str != '$')
 				tok_str++;
 			buf = ft_realloc(buf, start, tok_str - start);
 			if (*tok_str == '$')
+			{
 				token_val = expanded_content(&tok_str, sh);
-			buf = ft_realloc(buf, token_val, ft_strlen(token_val));
-			free(token_val);
-			tok_str++;
+				buf = ft_realloc(buf, token_val, ft_strlen(token_val));
+				free(token_val);
+				tok_str++;
+			}
 		}
+		replace_and_free(&token->content, buf);
 	}
-	tmp = token->content;
-	token->content = ft_substr(buf, 1, ft_strlen(tmp) - (2));
-	free(buf);
-	free(tmp);
+	buf = token->content;
+	replace_and_free(&token->content, ft_substr(buf, 1, ft_strlen(buf) - (2)));
 }
 
 void	token_expand(t_list *token, t_sh *sh)
@@ -146,7 +145,7 @@ void	token_expand(t_list *token, t_sh *sh)
 		if (is_quote(token->type) || is_dollar_quote(token))
 			expand_remove_quotes(token, tok_str, sh);
 		else if (token->type == '$' && ft_strlen(tok_str) > 1)
-			expand_content(token, tok_str, sh);
+			replace_and_free(&token->content, expanded_content(tok_str, sh));
  		token = token->next;
 	}
 }
