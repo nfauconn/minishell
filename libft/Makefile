@@ -35,7 +35,10 @@ SRCS := ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		ft_strend_cmp \
 		ft_strncmp \
 		ft_strnstr \
-		ft_strrchr} \
+		ft_strrchr \
+		is_blank \
+		is_identifier \
+		is_quote} \
 		${addprefix ${CONV}/, \
 		ft_atoi \
 		ft_atoi_base \
@@ -83,6 +86,7 @@ SRCS := ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		ft_calloc \
 		ft_memalloc \
 		ft_memdel \
+		ft_realloc_and_add \
 		ft_replace_free_old \
 		ft_str_array_free \
 		ft_strdel \

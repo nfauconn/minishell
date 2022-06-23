@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strfjoinchar.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 12:10:16 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/05/13 12:10:18 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/23 16:02:25 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,7 @@ char	*ft_strfjoinchar(char *str, char c)
 
 	new_str = (char *)malloc(sizeof(char) * (ft_strlen(str) + 2));
 	if (!new_str)
-	{
-		free(str);
-		exit(EXIT_FAILURE);
-	}
+		return (str);
 	i = 0;
 	while (str[i])
 	{

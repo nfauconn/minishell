@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 16:22:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/23 15:50:05 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/23 16:32:39 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,9 @@ int			ft_strend_cmp(char *name, char *end);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
 char		*ft_strnstr(const char *haystack, const char *needle, size_t len);
 char		*ft_strrchr(const char *s, int c);
+int			is_blank(int c);
+int			is_identifier(int c);
+int			is_quote(int c);
 
 /* CONVERSION */
 int			ft_atoi(const char *s);

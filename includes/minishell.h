@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 18:25:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/23 14:05:13 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/23 17:40:31 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ int		lex_error(char *s);
 /* PARSING_PARSER */
 int		parsing(t_input *input, t_sh *sh);
 void	token_expand(t_list *token_list, t_sh *sh);
-//void	token_expand(t_list *token_list, t_list *env);
+char	*alloc_until_var(char *buf, char **tok_str, char *start);
+void	add_expanded_var(char **buf, char **tok_str, t_sh *sh);
 
 /*EXECUTE*/
 int		cmd_execute(t_sh *sh);

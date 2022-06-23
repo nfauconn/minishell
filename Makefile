@@ -29,6 +29,7 @@ SRCS := ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		types \
 		lexer \
 		expand \
+		expand_utils \
 		conv_to_cmd \
 		conv_utils \
 		parser \

@@ -6,24 +6,17 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:13:37 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/23 15:34:08 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/23 17:51:43 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	is_identifier(int c)
-{
-	if (ft_isalnum(c) || c == '_')
-		return (1);
-	return (0);
-}
-
-static t_list	*search_token(char *str, size_t len, t_list *env)
+static t_list	*search_token(char *str, size_t start, size_t len, t_list *env)
 {
 	while (env)
 	{
-		if (!ft_strncmp(str, (char *)env->content, len)
+		if (!ft_strncmp(str + start, (char *)env->content, len)
 			&& ((char *)env->content)[len] == '=')
 			break ;
 		env = env->next;
@@ -31,106 +24,112 @@ static t_list	*search_token(char *str, size_t len, t_list *env)
 	return (env);
 }
 
-static char	*get_expand_value(char *str, size_t len, t_list *env)
+static char	*get_expand_value(char *str, size_t start, size_t len, t_list *env)
 {
-	t_list	*var_line;
+	t_list	*l;
 	char	*res;
 
-	var_line = search_token(str, len, env);
-	if (var_line)
-		res = ft_strdup(ft_strchr((char *)var_line->content, '=') + 1);
+	l = search_token(str, start, len, env);
+	if (l)
+		res = ft_strdup(ft_strchr((char *)l->content, '=') + 1);
 	else
 		res = ft_strdup("\0");
 	return (res);
 }
 
-static char	*expanded_content(char **s, t_sh *sh)
+static char	*ft_strnextend(char *alloc_str, char *str, size_t len)
 {
-	char	*start;
-	char	*token_val;
+	size_t	old_len;
+	char	*new;
 
-	(*s)++;
-	start = *s;
-	if (*start == '?')
-		token_val = ft_itoa(sh->last_exit_code);
-	else if (is_identifier(*start) && !ft_isdigit(*start))
-	{
-		while (is_identifier(**s))
-			(*s)++;
-		token_val = get_expand_value(start, (*s) - start, sh->env);
-	}
+	if (str == NULL)
+		return (alloc_str);
+	if (alloc_str != NULL)
+		old_len = ft_strlen(alloc_str);
 	else
+		old_len = 0;
+	new = (char *)malloc(sizeof(char) * (len + old_len + 1));
+	if (!new)
 	{
-		(*s)++;
-		token_val = ft_strdup("");
+		free(alloc_str);
+		return (NULL);
 	}
-	return (token_val);
-}
+	if (old_len)
+		ft_strlcpy(new, alloc_str, old_len + 1);
+	ft_strlcpy(new + old_len, str, len + 1);
+	free(alloc_str);
+	return (new);
+} 
 
-static void	add_expanded_var(char **buf, char **tok_str, t_sh *sh)
+static char	*var_expand(char *token, t_list *env)
 {
-	char	*token_val;
-
-	if (**tok_str == '$')
-	{
-		token_val = expanded_content(tok_str, sh);
-		*buf = ft_replace_free_old(buf, ft_strjoin(*buf, *tok_str));
-		free(token_val);
-	}
-}
-
-static void	alloc_until_var(char **buf, char **tok_str, char *start)
-{
-	while (**tok_str && **tok_str != '$')
-		(*tok_str)++;
-	*buf = ft_realloc(*buf, start, (*tok_str) - start);
-}
-
-static void	expand_remove_quotes(t_list *token, char *tok_str, t_sh *sh)
-{
-	char	*buf;
 	char	*start;
+	char	*res;
 	char	*token_val;
 
-	if (*tok_str == '$')
-		tok_str++;
-	if (*tok_str && *tok_str == QUOTE)
+	res = NULL;
+	while (*token)
 	{
-		buf = ft_strdup(tok_str);
-	}
-	else if (*tok_str && *tok_str == DB_QUOTE)
-	{
-		token_val = NULL;
-		while (*tok_str)
+		start = token;
+		while (*token && *token != '$')
+			token++;
+		res = ft_strnextend(res, start, token - start);
+		if (*token == '$' && is_identifier(*(token + 1)))
 		{
-			start = tok_str;
-			alloc_until_var(&buf, &tok_str, start);
-			add_expanded_var(&buf, &tok_str, sh);
+			token++;
+			start = token;
+			while (is_identifier(*token))
+				token++;
+			if (isalpha(*start) || *start == '_')
+				token_val = get_expand_value(start, 0, token - start, env);
+			else
+				token_val = ft_strdup(start + 1);
+			res = ft_strnextend(res, token_val, ft_strlen(token_val));
+			free(token_val);
 		}
-		ft_replace_free_old(&token->content, buf);
+		else if (*token == '$' && !is_identifier(*(token + 1)))
+		{
+			res = ft_strnextend(res, token, 1);
+			token++;
+		}
 	}
-	ft_replace_free_old(&token->content, ft_substr(buf, 1, ft_strlen(buf) - (2)));
+	return (res);
 }
 
 void	token_expand(t_list *token, t_sh *sh)
 {
-	char	*tok_str;
+	char	*tok;
 	char	*tmp;
 
 	tmp = NULL;
 	while (token)
 	{
-		tok_str = (char *)token->content;
-		if (token->type == HEREDOC)
+		tok = (char *)token->content;
+		if (token->type == HEREDOC && token->next->next)
 		{
-			token = skip_token(token, BLANK);
-			token = skip_token(token, WORD);
+			token = token->next->next;
 			continue ;
 		}
-		if (is_quote(token->type) || is_dollar_quote(token))
-			expand_remove_quotes(token, tok_str, sh);
-		else if (token->type == '$' && ft_strlen(tok_str) > 1)
-			ft_replace_free_old(&token->content, expanded_content(&tok_str, sh));
+		if (*tok == '$' && ft_strlen(tok) > 1 && is_quote(*(tok + 1)))
+			tok++;
+		if (*tok == QUOTE || *tok == DB_QUOTE)
+		{
+			if (*tok == DB_QUOTE)
+			{
+				tmp = token->content;
+				token->content = var_expand(tok, sh->env);
+				free(tmp);
+			}
+			tmp = token->content;
+			token->content = ft_substr(tmp, 1, ft_strlen(tmp) - (2));
+			free(tmp);
+		}
+		else if (token->type == WORD)
+		{
+			tmp = token->content;
+			token->content = var_expand(tmp, sh->env);
+			free(tmp);
+		}
  		token = token->next;
 	}
 }

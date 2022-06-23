@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 11:09:58 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/21 16:43:49 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/23 17:21:06 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ void	set_types_complete(t_list *token)
 			token = set_next_type(token, TRUNC_OUTFILE_PATH);
 		else if (token->type == APPEND_REDIR)
 			token = set_next_type(token, APPEND_OUTFILE_PATH);
-		else if (is_quote(token->type))
-			token->type = WORD;
+/* 		else if (is_quote(token->type))
+			token->type = WORD; */
 		token = token->next;
 	}
 }

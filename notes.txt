@@ -15,6 +15,7 @@ EXPAND
 
 for file in `find -name "linux_*.mp4"`; do mv "$file" "${file/linux_/}" ; done
 
+minish> echo $USER$USER$"$USERcoucou'$USER"  '$USER'     $USER     "-$lol- hehe..."
 
 
 VALGRIND

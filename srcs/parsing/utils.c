@@ -6,16 +6,11 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 19:57:56 by user42            #+#    #+#             */
-/*   Updated: 2022/06/23 13:52:13 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/23 16:13:15 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	is_blank(int c)
-{
-	return (c == 32 || (c >= 9 && c <= 13));
-}
 
 int	is_sep(int c)
 {
@@ -42,11 +37,6 @@ int	is_redir_path(int c)
 {
 	return(c == INFILE_PATH || c == DELIMITER 
 		|| c == TRUNC_OUTFILE_PATH || c == APPEND_OUTFILE_PATH);
-}
-
-int	is_quote(int c)
-{
-	return (c == QUOTE || c == DB_QUOTE);
 }
 
 int	is_dollar_quote(t_list *token)
