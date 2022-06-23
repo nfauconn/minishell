@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 16:22:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/19 13:40:27 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/23 12:20:02 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ void		*ft_memcpy(void *dst, const void *src, size_t n);
 void		ft_memdel(void **ap);
 void		*ft_memmove(void *dst, const void *src, size_t len);
 void		*ft_memset(void *b, int c, size_t len);
+void		ft_replace_and_free(void **prev_content, void *new_content);
 
 /* PRINT */
 void		ft_putchar_fd(char c, int fd);

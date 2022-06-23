@@ -3,36 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   expand_try.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:13:37 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/22 20:14:33 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/23 12:17:08 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*ft_realloc(char *alloc_str, char *str, size_t len)
+static char	*ft_realloc(char *buffer, char *to_add, size_t len)
 {
 	size_t	old_len;
 	char	*new;
 
-	if (str == NULL)
-		return (alloc_str);
-	if (alloc_str != NULL)
-		old_len = ft_strlen(alloc_str);
+	if (to_add == NULL)
+		return (buffer);
+	if (buffer != NULL)
+		old_len = ft_strlen(buffer);
 	else
 		old_len = 0;
 	new = (char *)malloc(sizeof(char) * (len + old_len + 1));
 	if (!new)
 	{
-		free(alloc_str);
+		free(buffer);
 		return (NULL);
 	}
 	if (old_len)
-		ft_strlcpy(new, alloc_str, old_len + 1);
-	ft_strlcpy(new + old_len, str, len + 1);
-	free(alloc_str);
+		ft_strlcpy(new, buffer, old_len + 1);
+	ft_strlcpy(new + old_len, to_add, len + 1);
+	free(buffer);
 	return (new);
 } 
 
@@ -57,12 +57,12 @@ static t_list	*search_token(char *str, size_t len, t_list *env)
 
 static char	*get_expand_value(char *str, size_t len, t_list *env)
 {
-	t_list	*l;
+	t_list	*var_line;
 	char	*res;
 
-	l = search_token(str, len, env);
-	if (l)
-		res = ft_strdup(ft_strchr((char *)l->content, '=') + 1);
+	var_line = search_token(str, len, env);
+	if (var_line)
+		res = ft_strdup(ft_strchr((char *)var_line->content, '=') + 1);
 	else
 		res = ft_strdup("\0");
 	return (res);
@@ -89,15 +89,6 @@ static char	*expanded_content(char **s, t_sh *sh)
 		token_val = ft_strdup("");
 	}
 	return (token_val);
-}
-
-static void	replace_and_free(void **prev_content, void *new_content)
-{
-	void	*tmp;
-
-	tmp = *prev_content;
-	*prev_content = new_content;
-	free(tmp);
 }
 
 static void	expand_remove_quotes(t_list *token, char *tok_str, t_sh *sh)
@@ -139,8 +130,12 @@ void	token_expand(t_list *token, t_sh *sh)
 	tmp = NULL;
 	while (token)
 	{
-		if (token->type == HEREDOC && token->next && token->next->next)
-			token = token->next->next;
+		if (token->type == HEREDOC)
+		{
+			token = skip_token(token, BLANK);
+			token = skip_token(token, WORD);
+			continue ;
+		}
 		tok_str = (char *)token->content;
 		if (is_quote(token->type) || is_dollar_quote(token))
 			expand_remove_quotes(token, tok_str, sh);

@@ -1,110 +1,141 @@
 NAME = libft.a
-OS    = $(shell uname)
-CC	 = clang
+
+INC_DIR = ./includes
+
 SRC_DIR  = ./srcs
-OBJ_DIR  = ./objs
-CFLAGS = -Wall -Wextra -Werror -g
-INCLUDES = -I includes
+COMPARISON_SEARCH = comparison_search
+CONV = conversions
+DISPLAY = display
+FT_PRINTF = ft_printf
+LST = lst
+MEMORY = memory_add_free
+REPLACE = replace_copy_join_iter
+SIZE_LEN_MATHS = size_len_maths
 
-SRCS = \
-		ft_atoi.c \
-		ft_atoi_base.c \
-		ft_bzero.c \
-		ft_isalnum.c \
-		ft_isalpha.c \
-		ft_isascii.c \
-		ft_isdigit.c \
-		ft_isprint.c \
-		ft_itoa.c \
-		ft_lstadd_back.c \
-		ft_lstadd_front.c \
-		ft_lstclear.c \
-		ft_lstdelone.c \
-		ft_lstiter.c \
-		ft_lstlast.c \
-		ft_lstmap.c \
-		ft_lstnew.c \
-		ft_lstsize.c \
-		ft_memalloc.c \
-		ft_memccpy.c \
-		ft_memchr.c \
-		ft_memcmp.c \
-		ft_memcpy.c \
-		ft_memdel.c \
-		ft_memmove.c \
-		ft_memset.c \
-		ft_nbrlen_base.c \
-		ft_printerror.c \
-		ft_putchar_fd.c \
-		ft_putendl_fd.c \
-		ft_putnbr_fd.c \
-		ft_putstr_fd.c \
-		ft_rev_int_tab.c \
-		ft_sort_int_tab.c \
-		ft_split.c \
-		ft_str_array_display.c \
-		ft_str_array_free.c \
-		ft_str_array_size.c \
-		ft_str_array_to_lst.c \
-		ft_strchr.c \
-		ft_strcmp.c \
-		ft_strdel.c \
-		ft_strdup.c \
-		ft_strend_cmp.c \
-		ft_strfdup.c \
-		ft_strfjoin.c \
-		ft_strfjoinchar.c \
-		ft_str_isdigit.c \
-		ft_strjoin.c \
-		ft_strlcat.c \
-		ft_strlcpy.c \
-		ft_strlen.c \
-		ft_strmapi.c \
-		ft_strncmp.c \
-		ft_strnstr.c \
-		ft_strrchr.c \
-		ft_strtrim.c \
-		ft_substr.c \
-		ft_tolower.c \
-		ft_toupper.c \
-		ft_ulltoa_base.c \
-		get_next_line.c \
-		maths.c \
-		pf_conv_c.c \
-		pf_conv_s.c \
-		pf_conv_p.c \
-		pf_conv_d_i.c \
-		pf_conv_u.c \
-		pf_conv_x.c \
-		pf_conv_mx.c \
-		pf_conv_percent.c \
-		pf_convert.c \
-		pf_fill_nb.c \
-		pf_isflag.c \
-		pf_ft_printf.c \
-		pf_init.c \
-		pf_insert_into_buffer.c \
-		pf_main_loop.c \
-		pf_parse_printf.c 
+BUILD_DIR  = ./objs
 
-OBJS  = ${addprefix ${OBJ_DIR}/,${SRCS:%.c=%.o}}
+S_EXT = .c
 
-all: $(NAME)
+SRCS := ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
+		get_next_line \
+		${addprefix ${COMPARISON_SEARCH}/, \
+		ft_is_whitespace \
+		ft_isalnum \
+		ft_isalpha \
+		ft_isascii \
+		ft_isdigit \
+		ft_isprint \
+		ft_memchr \
+		ft_memcmp \
+		ft_str_isdigit \
+		ft_strchr \
+		ft_strcmp \
+		ft_strend_cmp \
+		ft_strncmp \
+		ft_strnstr \
+		ft_strrchr} \
+		${addprefix ${CONV}/, \
+		ft_atoi \
+		ft_atoi_base \
+		ft_itoa \
+		ft_split \
+		ft_str_array_to_lst \
+		ft_ulltoa_base} \
+		${addprefix ${DISPLAY}/, \
+		ft_printerror \
+		ft_putchar_fd \
+		ft_putendl_fd \
+		ft_putnbr_fd \
+		ft_putstr_fd \
+		ft_str_array_display \
+		${addprefix ${FT_PRINTF}/, \
+		pf_conv_c \
+		pf_conv_s \
+		pf_conv_p \
+		pf_conv_d_i \
+		pf_conv_u \
+		pf_conv_x \
+		pf_conv_mx \
+		pf_conv_percent \
+		pf_convert \
+		pf_fill_nb \
+		pf_isflag \
+		pf_ft_printf \
+		pf_init \
+		pf_insert_into_buffer \
+		pf_main_loop \
+		pf_parse_printf}} \
+		${addprefix ${LST}/, \
+		ft_lstadd_back \
+		ft_lstadd_front \
+		ft_lstclear \
+		ft_lstdelone \
+		ft_lstiter \
+		ft_lstlast \
+		ft_lstmap \
+		ft_lstnew \
+		ft_lstsize} \
+		${addprefix ${MEMORY}/, \
+		ft_calloc \
+		ft_memalloc \
+		ft_memdel \
+		ft_replace_free_old \
+		ft_str_array_free \
+		ft_strdel} \
+		${addprefix ${REPLACE}/, \
+		ft_bzero \
+		ft_memccpy \
+		ft_memcpy \
+		ft_memmove \
+		ft_memset \
+		ft_strdup \
+		ft_strfdup \
+		ft_strfjoin \
+		ft_strfjoinchar \
+		ft_strjoin \
+		ft_strlcat \
+		ft_strlcpy \
+		ft_strmapi \
+		ft_strtrim \
+		ft_substr \
+		ft_tolower \
+		ft_toupper} \
+		${addprefix ${SIZE_LEN_MATHS}/, \
+		ft_nbrlen_base \
+		ft_rev_int_tab \
+		ft_sort_int_tab \
+		ft_str_array_size \
+		ft_strlen \
+		operations}}}
 
-$(NAME): ${OBJS}
-	@ar rc $(NAME) $(OBJS)
+DEPS := ${subst ${SRC_DIR}, ${BUILD_DIR}, ${SRCS:%.c=%.d}}
+OBJS := ${subst ${SRC_DIR}, ${BUILD_DIR}, ${SRCS:%.c=%.o}}
+VPATH = ${SRC_DIR}:${INC_DIR}:${BUILD_DIR}
+
+CC = clang
+CFLAGS = -Wall -Wextra -Werror -g3
+INCLUDES = -I ${INC_DIR}
+COMP = ${CC} ${CFLAGS}
+RM	 = rm -rf
+
+all: ${NAME}
+
+${NAME}: ${OBJS} Makefile
+	@ar rc ${NAME} ${OBJS}
 	@echo "lib created"
 
-${OBJ_DIR}/%.o: ${SRC_DIR}/%.c
-	@mkdir -p ${OBJ_DIR}
+-include ${DEPS}
+
+${BUILD_DIR}/%.o: %.c
+	@mkdir -p ${dir $@}
 	@echo create: ${@:%=%}
-	@${CC} ${CFLAGS} ${INCLUDES} -o $@ -c $<
+	@${COMP} -MMD ${INCLUDES} -o $@ -c $<
 
 clean:
-	@rm -rf $(OBJS)
+	@${RM} ${OBJS}
 
 fclean: clean
-	@rm -f $(NAME)
+	@${RM} ${NAME}
 
 re: fclean all
 
