@@ -86,7 +86,7 @@ SRCS := ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		ft_calloc \
 		ft_memalloc \
 		ft_memdel \
-		ft_realloc_and_add \
+		insert_into_buffer \
 		ft_replace_free_old \
 		ft_str_array_free \
 		ft_strdel \

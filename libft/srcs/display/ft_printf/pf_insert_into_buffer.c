@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 23:16:33 by nfauconn          #+#    #+#             */
-/*   Updated: 2021/09/26 13:34:53 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/23 19:15:03 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	increase_buffer(t_pf *pf, size_t len)
 	}
 }
 
-void	insert_into_buffer(t_pf *pf, char *insert, size_t len)
+void	insert_into_pf_buffer(t_pf *pf, char *insert, size_t len)
 {
 	if (pf->buffer == NULL)
 		pf->buffer = ft_memalloc(BUFFSIZE);

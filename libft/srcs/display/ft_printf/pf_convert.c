@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 22:59:17 by nfauconn          #+#    #+#             */
-/*   Updated: 2021/09/26 13:35:05 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/23 19:15:34 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	convert(va_list *ap, t_pf *pf)
 	if (parse_conv(pf) != -1)
 	{
 		pf->fun_ptr[pf->index_conv](ap, &conv);
-		insert_into_buffer(pf, conv.str, conv.len);
+		insert_into_pf_buffer(pf, conv.str, conv.len);
 		free(conv.str);
 		conv.str = NULL;
 	}

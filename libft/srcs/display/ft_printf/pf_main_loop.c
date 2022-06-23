@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 17:25:21 by nfauconn          #+#    #+#             */
-/*   Updated: 2021/09/26 13:34:48 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/23 19:15:17 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main_loop(t_pf *pf, va_list *ap)
 	{
 		while (*pf->ptr && (*pf->ptr != '%'))
 			pf->ptr++;
-		insert_into_buffer(pf, pf->format, pf->ptr - pf->format);
+		insert_into_pf_buffer(pf, pf->format, pf->ptr - pf->format);
 		if (*pf->ptr && *pf->ptr == '%')
 		{
 			pf->ptr++;

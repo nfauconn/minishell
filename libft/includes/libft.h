@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 16:22:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/23 16:32:39 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/23 19:14:02 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ int			ft_lstsize(t_list *lst);
 void		*ft_calloc(size_t count, size_t size);
 void		*ft_memalloc(size_t size);
 void		ft_memdel(void **ap);
-char		*ft_realloc_and_add(char *buffer, char *to_add, size_t len);
+char		*insert_into_buffer(char *buffer, char *to_add, size_t len);
 void		ft_replace_free_old(void **prev_content, void *new_content);
 void		ft_str_array_free(char **tab);
 void		ft_strdel(char **as);

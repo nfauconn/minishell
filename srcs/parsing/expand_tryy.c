@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand.c                                           :+:      :+:    :+:   */
+/*   expand_tryy.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:13:37 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/23 17:50:34 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/23 19:59:37 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,30 +60,7 @@ static char	*expanded_content(char **s, t_sh *sh)
 	return (token_val);
 }
 
-void	add_expanded_var(char **buf, char **tok_str, t_sh *sh)
-{
-	char	*token_val;
-
-	if (**tok_str == '$')
-	{
-		token_val = expanded_content(tok_str, sh);
-		ft_replace_free_old((void **)buf, (void *)ft_strjoin(*buf, *tok_str));
-		free(token_val);
-	}
-}
-
-char	*alloc_until_var(char *buf, char **tok_str, char *start)
-{
-	char	*new;
-
-	new = NULL;
-	while (**tok_str && **tok_str != '$')
-		(*tok_str)++;
-	new = ft_realloc_and_add(buf, start, (*tok_str) - start);
-	return (new);
-}
-
-static char	*expand_string(char *tok_str, t_sh *sh)
+static void	expand_string(char *str, char *ptr, t_sh *sh)
 {
 	char	*buf;
 	char	*token_val;
@@ -91,40 +68,42 @@ static char	*expand_string(char *tok_str, t_sh *sh)
 
 	buf = NULL;
 	token_val = NULL;
-	while (*tok_str)
+	while (*ptr)
 	{
-		start = tok_str;
-		buf = alloc_until_var(buf, &tok_str, start);
-		add_expanded_var(&buf, &tok_str, sh);
+		start = ptr;
+		while (*ptr && *ptr != '$')
+			ptr++;
+		insert_into_buffer(buf, start, ptr - start);
+		token_val = expanded_content(ptr, sh);
+		insert_into_buffer(buf, token_val, ft_strlen(token_val));
+		free(token_val);
 	}
-	return (buf);
+	free(str);
+	str = buf;
 }
 
-static char	*expand_quotes(char *tok_str, t_sh *sh)
+static char	*expand_quotes(char *str, char *ptr, t_sh *sh)
 {
+	char	*start;
 	char	*buf;
 	char	*tmp;
 
 	buf = NULL;
-	if (*tok_str == '$')
-		tok_str++;
-	if (*tok_str && *tok_str == QUOTE)
-	{
-		buf = ft_substr(tok_str, 1, ft_strlen(tok_str) - 2);
-	}
-	else if (*tok_str && *tok_str == DB_QUOTE)
-	{
-		buf = expand_string(tok_str, sh);
-		tmp = buf;
-		buf = ft_substr(buf, 1, ft_strlen(buf) - 2);
-		free(tmp);
-	}
+	if (*ptr == '$')
+		ptr++;
+	if (*ptr && *ptr == DB_QUOTE)
+		expand_string(str, ptr, sh);
+	start = ptr + 1;
+	while (*ptr)
+		ptr++;
+	insert_into_buffer(buf, start, ptr - start - 1);
+	free(tmp);
 	return (buf);
 }
 
 void	token_expand(t_list *token, t_sh *sh)
 {
-	char	*tok_str;
+	char	*ptr;
 	char	*tmp;
 
 	tmp = NULL;
@@ -132,17 +111,17 @@ void	token_expand(t_list *token, t_sh *sh)
 	{
 		if (token->type == DELIMITER)
 			token = token->next;
-		tok_str = (char *)token->content;
-		if (is_quote(*tok_str) || is_dollar_quote(token))
+		ptr = (char *)token->content;
+		if (is_quote(*ptr) || is_dollar_quote(token))
 		{
 			tmp = token->content;
-			token->content = expand_quotes(tok_str, sh);
+			token->content = expand_quotes(ptr, sh);
 			free(tmp);
 		}
-		else if (ft_strchr(tok_str, '$') && ft_strlen(tok_str) > 1)
+		else if (ft_strchr(ptr, '$') && ft_strlen(ptr) > 1)
 		{
 			tmp = token->content;
-			token->content = expand_string(tok_str, sh);
+			token->content = expand_string(ptr, sh);
 			free(tmp);
 		}
 		token = token->next;

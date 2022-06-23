@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 17:28:00 by user42            #+#    #+#             */
-/*   Updated: 2022/06/23 17:40:09 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/23 19:14:02 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,25 +60,25 @@ static char	*expanded_content(char **s, t_sh *sh)
 	return (token_val);
 }
 
-void	add_expanded_var(char **buf, char **tok_str, t_sh *sh)
+void	add_expanded_var(char **buf, char **ptr, t_sh *sh)
 {
 	char	*token_val;
 
-	if (**tok_str == '$')
+	if (**ptr == '$')
 	{
-		token_val = expanded_content(tok_str, sh);
-		ft_replace_free_old((void **)buf, (void *)ft_strjoin(*buf, *tok_str));
+		token_val = expanded_content(ptr, sh);
+		ft_replace_free_old((void **)buf, (void *)ft_strjoin(*buf, *ptr));
 		free(token_val);
 	}
 }
 
-char	*alloc_until_var(char *buf, char **tok_str, char *start)
+char	*alloc_until_var(char *buf, char **ptr, char *start)
 {
 	char	*new;
 
 	new = NULL;
-	while (**tok_str && **tok_str != '$')
-		(*tok_str)++;
-	new = ft_realloc_and_add(buf, start, (*tok_str) - start);
+	while (**ptr && **ptr != '$')
+		(*ptr)++;
+	new = insert_into_buffer(buf, start, (*ptr) - start);
 	return (new);
 }

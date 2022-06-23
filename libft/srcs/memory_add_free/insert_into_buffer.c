@@ -1,18 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_realloc_and_add.c                               :+:      :+:    :+:   */
+/*   insert_into_buffer.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:16:21 by user42            #+#    #+#             */
-/*   Updated: 2022/06/23 17:39:36 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/23 19:43:52 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_realloc_and_add(char *buffer, char *to_add, size_t len)
+void	insert_into_buffer(char *buffer, char *to_add, size_t len)
+{
+	size_t	old_len;
+	char	*new;
+
+	if (!to_add)
+		return ;
+	if (!buffer)
+		old_len = 0;
+	else
+		old_len = ft_strlen(buffer);
+	new = (char *)malloc(sizeof (char) * (old_len + len + 1));
+	if (!new)
+		return ;
+	if (old_len)
+		ft_strlcpy(new, buffer, old_len + 1);
+	ft_strlcpy(new + old_len, to_add, len + 1);
+	free(buffer);
+	buffer = new;
+}
+
+/*
+char	*insert_into_buffer(char *buffer, char *to_add, size_t len)
 {
 	size_t	old_len;
 	char	*new;
@@ -35,3 +57,5 @@ char	*ft_realloc_and_add(char *buffer, char *to_add, size_t len)
 	free(buffer);
 	return (new);
 }
+
+*/
