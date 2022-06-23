@@ -8,6 +8,7 @@ COMPARISON_SEARCH = comparison_search
 CONV = conversions
 DISPLAY = display
 FT_PRINTF = ft_printf
+GNL = gnl
 LST = lst
 MEMORY = memory_add_free
 REPLACE = replace_copy_join_iter
@@ -18,7 +19,6 @@ BUILD_DIR  = ./objs
 S_EXT = .c
 
 SRCS := ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
-		get_next_line \
 		${addprefix ${COMPARISON_SEARCH}/, \
 		ft_is_whitespace \
 		ft_isalnum \
@@ -66,6 +66,8 @@ SRCS := ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		pf_insert_into_buffer \
 		pf_main_loop \
 		pf_parse_printf}} \
+		${addprefix ${GNL}/, \
+		get_next_line} \
 		${addprefix ${LST}/, \
 		ft_lstadd_back \
 		ft_lstadd_front \
@@ -103,11 +105,14 @@ SRCS := ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		ft_toupper} \
 		${addprefix ${SIZE_LEN_MATHS}/, \
 		ft_nbrlen_base \
+		ft_negative_power \
+		ft_operate_vector \
+		ft_power \
 		ft_rev_int_tab \
 		ft_sort_int_tab \
 		ft_str_array_size \
 		ft_strlen \
-		operations}}}
+		ft_square_root}}}
 
 DEPS := ${subst ${SRC_DIR}, ${BUILD_DIR}, ${SRCS:%.c=%.d}}
 OBJS := ${subst ${SRC_DIR}, ${BUILD_DIR}, ${SRCS:%.c=%.o}}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 12:28:47 by user42            #+#    #+#             */
-/*   Updated: 2022/05/21 20:22:33 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/23 15:45:42 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int			ft_printf(const char *str, ...);
 void		init_pf(t_pf *pf, const char *format);
 void		init_conv(t_conv *conv);
 void		insert_into_buffer(t_pf *pf, char *insert, size_t len);
+int			ft_isflagpf(int c);
 void		convert(va_list *ap, t_pf *pf);
 void		conv_c(va_list *ap, t_conv *conv);
 void		conv_s(va_list *ap, t_conv *conv);

@@ -6,35 +6,11 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:13:37 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/23 14:07:44 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/23 15:34:08 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static char	*ft_realloc(char *buffer, char *to_add, size_t len)
-{
-	size_t	old_len;
-	char	*new;
-
-	if (to_add == NULL)
-		return (buffer);
-	if (buffer != NULL)
-		old_len = ft_strlen(buffer);
-	else
-		old_len = 0;
-	new = (char *)malloc(sizeof(char) * (len + old_len + 1));
-	if (!new)
-	{
-		free(buffer);
-		return (NULL);
-	}
-	if (old_len)
-		ft_strlcpy(new, buffer, old_len + 1);
-	ft_strlcpy(new + old_len, to_add, len + 1);
-	free(buffer);
-	return (new);
-} 
 
 static int	is_identifier(int c)
 {
@@ -91,8 +67,24 @@ static char	*expanded_content(char **s, t_sh *sh)
 	return (token_val);
 }
 
-static void	search_doll_in_str()
-{}
+static void	add_expanded_var(char **buf, char **tok_str, t_sh *sh)
+{
+	char	*token_val;
+
+	if (**tok_str == '$')
+	{
+		token_val = expanded_content(tok_str, sh);
+		*buf = ft_replace_free_old(buf, ft_strjoin(*buf, *tok_str));
+		free(token_val);
+	}
+}
+
+static void	alloc_until_var(char **buf, char **tok_str, char *start)
+{
+	while (**tok_str && **tok_str != '$')
+		(*tok_str)++;
+	*buf = ft_realloc(*buf, start, (*tok_str) - start);
+}
 
 static void	expand_remove_quotes(t_list *token, char *tok_str, t_sh *sh)
 {
@@ -112,20 +104,12 @@ static void	expand_remove_quotes(t_list *token, char *tok_str, t_sh *sh)
 		while (*tok_str)
 		{
 			start = tok_str;
-			while (*tok_str && *tok_str != '$')
-				tok_str++;
-			buf = ft_realloc(buf, start, tok_str - start);
-			if (*tok_str == '$')
-			{
-				token_val = expanded_content(&tok_str, sh);
-				buf = ft_realloc(buf, token_val, ft_strlen(token_val));
-				free(token_val);
-				tok_str++;
-			}
+			alloc_until_var(&buf, &tok_str, start);
+			add_expanded_var(&buf, &tok_str, sh);
 		}
-		ft_replace_and_free(&token->content, buf);
+		ft_replace_free_old(&token->content, buf);
 	}
-	ft_replace_and_free(&token->content, ft_substr(buf, 1, ft_strlen(buf) - (2)));
+	ft_replace_free_old(&token->content, ft_substr(buf, 1, ft_strlen(buf) - (2)));
 }
 
 void	token_expand(t_list *token, t_sh *sh)
@@ -146,7 +130,7 @@ void	token_expand(t_list *token, t_sh *sh)
 		if (is_quote(token->type) || is_dollar_quote(token))
 			expand_remove_quotes(token, tok_str, sh);
 		else if (token->type == '$' && ft_strlen(tok_str) > 1)
-			ft_replace_and_free(&token->content, expanded_content(&tok_str, sh));
+			ft_replace_free_old(&token->content, expanded_content(&tok_str, sh));
  		token = token->next;
 	}
 }

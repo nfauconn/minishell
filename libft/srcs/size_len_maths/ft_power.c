@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_replace_free_old.c                              :+:      :+:    :+:   */
+/*   ft_power.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/23 12:17:42 by user42            #+#    #+#             */
-/*   Updated: 2022/06/23 15:35:26 by user42           ###   ########.fr       */
+/*   Created: 2022/06/23 15:40:51 by user42            #+#    #+#             */
+/*   Updated: 2022/06/23 15:41:18 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_replace_free_old(void **prev_content, void *new_content)
+t_ull	ft_power(int nb, int power)
 {
-	void	*tmp;
+	int		i;
+	t_ull	res;
 
-	if (prev_content)
-	{
-		tmp = *prev_content;
-		*prev_content = new_content;
-		free(tmp);
-	}
+	i = 1;
+	if (power < 0)
+		ft_putstr_fd("ft_power : for neg power, use ft_negative_power", 2);
+	res = nb;
+	while (i++ < power)
+		res = res * nb;
+	return (res);
 }
