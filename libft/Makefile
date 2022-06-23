@@ -11,7 +11,8 @@ FT_PRINTF = ft_printf
 GNL = gnl
 LST = lst
 MEMORY = memory_add_free
-REPLACE = replace_copy_join_iter
+REPLACE_WITH_ALLOC = replace_copy_join_iter/with_alloc
+REPLACE_NO_ALLOC = replace_copy_join_iter/no_alloc
 SIZE_LEN_MATHS = size_len_maths
 
 BUILD_DIR  = ./objs
@@ -84,23 +85,24 @@ SRCS := ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		ft_memdel \
 		ft_replace_free_old \
 		ft_str_array_free \
-		ft_strdel} \
-		${addprefix ${REPLACE}/, \
+		ft_strdel \
+		ft_strfdup \
+		ft_strfjoin \
+		ft_strfjoinchar} \
+		${addprefix ${REPLACE_WITH_ALLOC}/, \
+		ft_strdup \
+		ft_strjoin \
+		ft_strmapi \
+		ft_strtrim \
+		ft_substr} \
+		${addprefix ${REPLACE_NO_ALLOC}/, \
 		ft_bzero \
 		ft_memccpy \
 		ft_memcpy \
 		ft_memmove \
 		ft_memset \
-		ft_strdup \
-		ft_strfdup \
-		ft_strfjoin \
-		ft_strfjoinchar \
-		ft_strjoin \
 		ft_strlcat \
 		ft_strlcpy \
-		ft_strmapi \
-		ft_strtrim \
-		ft_substr \
 		ft_tolower \
 		ft_toupper} \
 		${addprefix ${SIZE_LEN_MATHS}/, \
