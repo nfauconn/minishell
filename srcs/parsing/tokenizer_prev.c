@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 16:59:04 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/22 18:44:29 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/22 14:05:04 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,13 @@ static char	*find_end(t_input *input, char *s)
 {
 	if (is_sep(*s) || is_redir(*s))
 		return (end_of_sep_or_redir(input, s));
-	if (*s == '$')
+	if (*s == '$' && is_quote(*(s + 1)))
 		s++;
 	if (is_quote(*s))
 		return (find_closing_quote(input, s, *s));
 	while (*s && is_word(*s))
 	{
-		if (*s == '$')
+		if (*s == '$' && is_quote(*(s + 1)))
 			return (s);
 		s++;
 	}

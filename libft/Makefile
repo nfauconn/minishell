@@ -3,6 +3,7 @@ NAME = libft.a
 INC_DIR = ./includes
 
 SRC_DIR  = ./srcs
+#SUBDIRECTORIES#
 COMPARISON_SEARCH = comparison_search
 CONV = conversions
 DISPLAY = display

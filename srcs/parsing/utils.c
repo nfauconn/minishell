@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 19:57:56 by user42            #+#    #+#             */
-/*   Updated: 2022/06/22 16:22:18 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/23 13:52:13 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ int	is_word(int c)
 
 t_list *skip_token(t_list *token, int to_skip)
 {
-	token = token->next;
+	if (token)
+		token = token->next;
 	if (token && token->type == to_skip)
 		token = token->next;
 	return (token);

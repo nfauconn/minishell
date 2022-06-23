@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 16:59:04 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/22 14:05:04 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/23 13:50:11 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,13 @@ static char	*find_end(t_input *input, char *s)
 {
 	if (is_sep(*s) || is_redir(*s))
 		return (end_of_sep_or_redir(input, s));
-	if (*s == '$' && is_quote(*(s + 1)))
+	if (*s == '$')
 		s++;
 	if (is_quote(*s))
 		return (find_closing_quote(input, s, *s));
 	while (*s && is_word(*s))
 	{
-		if (*s == '$' && is_quote(*(s + 1)))
+		if (*s == '$')
 			return (s);
 		s++;
 	}

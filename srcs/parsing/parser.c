@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 12:50:49 by user42            #+#    #+#             */
-/*   Updated: 2022/06/22 19:20:49 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/23 14:05:37 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ int	parsing(t_input *input, t_sh *sh)
 	
 	if (lexer(input->token_list) == FAILURE)
 		return (FAILURE);
-	token_expand(input->token_list, sh->env);
+	token_expand(input->token_list, sh);
+//	token_expand(input->token_list, sh->env);
 	set_types_complete(input->token_list);
 	token_to_cmd_lst(sh, input->token_list);
 
