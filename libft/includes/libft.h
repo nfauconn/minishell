@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 16:22:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/23 19:14:02 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/24 11:49:46 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,10 +114,13 @@ int			ft_lstsize(t_list *lst);
 void		*ft_calloc(size_t count, size_t size);
 void		*ft_memalloc(size_t size);
 void		ft_memdel(void **ap);
-char		*insert_into_buffer(char *buffer, char *to_add, size_t len);
 void		ft_replace_free_old(void **prev_content, void *new_content);
 void		ft_str_array_free(char **tab);
 void		ft_strdel(char **as);
+void		ft_strfdup(char **over, char *buff);
+void		ft_strfjoin(char **to_free, char *to_add);
+char		*ft_strfjoinchar(char *str, char c);
+void		ft_strljoin_free(char *s1, char const *s2, size_t len);
 
 /* REPLACE / COPY / JOIN / ITER */
 void		ft_bzero(void *s, size_t n);
@@ -126,10 +129,7 @@ void		*ft_memcpy(void *dst, const void *src, size_t n);
 void		*ft_memmove(void *dst, const void *src, size_t len);
 void		*ft_memset(void *b, int c, size_t len);
 char		*ft_strdup(const char *s1);
-void		ft_strfdup(char **over, char *buff);
-void		ft_strfjoin(char **to_free, char *to_add);
 char		*ft_strjoin(char const *s1, char const *s2);
-char		*ft_strfjoinchar(char *str, char c);
 size_t		ft_strlcat(char *dst, const char *src, size_t dstsize);
 size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize);
 char		*ft_strmapi(char const *s, char (*f)(unsigned int, char));

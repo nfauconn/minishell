@@ -5,7 +5,7 @@ INC_DIR = ./includes
 SRC_DIR  = ./srcs
 #SUBDIRECTORIES#
 COMPARISON_SEARCH = comparison_search
-CONV = conversions
+CONV = conversion
 DISPLAY = display
 FT_PRINTF = ft_printf
 GNL = gnl
@@ -86,13 +86,13 @@ SRCS := ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		ft_calloc \
 		ft_memalloc \
 		ft_memdel \
-		insert_into_buffer \
 		ft_replace_free_old \
 		ft_str_array_free \
 		ft_strdel \
 		ft_strfdup \
 		ft_strfjoin \
-		ft_strfjoinchar} \
+		ft_strfjoinchar \
+		ft_strljoin_free} \
 		${addprefix ${REPLACE_WITH_ALLOC}/, \
 		ft_strdup \
 		ft_strjoin \

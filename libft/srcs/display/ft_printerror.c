@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printerror.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 18:53:47 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/05/22 16:02:28 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/24 10:41:08 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	printerror_main_loop(t_pf *pf, va_list *ap)
 	{
 		while (*pf->ptr && (*pf->ptr != '%'))
 			pf->ptr++;
-		insert_into_buffer(pf, pf->format, pf->ptr - pf->format);
+		insert_into_pf_buffer(pf, pf->format, pf->ptr - pf->format);
 		if (*pf->ptr && *pf->ptr == '%')
 		{
 			pf->ptr++;

@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 17:28:00 by user42            #+#    #+#             */
-/*   Updated: 2022/06/23 19:14:02 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/24 10:40:10 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,6 @@ char	*alloc_until_var(char *buf, char **ptr, char *start)
 	new = NULL;
 	while (**ptr && **ptr != '$')
 		(*ptr)++;
-	new = insert_into_buffer(buf, start, (*ptr) - start);
+	new = expand_and_add(buf, start, (*ptr) - start);
 	return (new);
 }
