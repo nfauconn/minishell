@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 14:06:55 by user42            #+#    #+#             */
-/*   Updated: 2022/06/20 13:06:55 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/26 23:03:34 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char	**get_env_tab(t_list *env)
 	char	**tab;
 
 	len = ft_lstsize(env);
-	tab = (char**)malloc(sizeof(char *) * (len + 1));
+	tab = (char **)malloc(sizeof(char *) * (len + 1));
 	if (!tab)
 		return (NULL);
 	len = 0;
@@ -74,6 +74,7 @@ char	**get_env_tab(t_list *env)
 char	**get_path_tab(t_list *env)
 {
 	char	**tab;
+
 	while (env && ft_strncmp(env->content, "PATH=", 5))
 		env = env->next;
 	if (!env)

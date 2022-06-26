@@ -1,33 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wait.c                                             :+:      :+:    :+:   */
+/*   utils_comparison2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/19 19:07:39 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/26 23:02:41 by user42           ###   ########.fr       */
+/*   Created: 2022/06/26 22:56:44 by user42            #+#    #+#             */
+/*   Updated: 2022/06/26 23:00:30 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	wait_children(t_sh *sh)
+int	is_dollar_quote(t_list *token)
 {
-	pid_t	pid;
-	int		status;
-	size_t	i;
+	char	*tok;
 
-	i = 1;
-	while (i <= sh->cmd_nb)
-	{
-		pid = waitpid(-1, &status, WUNTRACED);
-		if (WIFEXITED(status) && status == 139)
-			ft_printerror("segfault\n");
-		i++;
-	}
-	return (status);
+	tok = (char *)token->content;
+	if (*tok == '$' && ft_strlen(tok) > 1 && is_quote(*(tok + 1)))
+		return (1);
+	return (0);
 }
 
-/* 		if (WIFEXITED(status) && status == NOT_FOUND)
-			sh->last_exit_code = status; */
+int	is_word(int c)
+{
+	return (!is_quote(c) && !is_redir(c) && !is_blank(c) && !is_sep(c));
+}

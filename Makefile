@@ -27,13 +27,16 @@ SRCS := ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		${addprefix ${PARSING}, \
 		input \
 		tokenizer \
+		token_utils \
 		types \
 		lexer \
 		expand \
+		expand_utils \
 		conv_to_cmd \
 		conv_utils \
 		parser \
-		utils} \
+		utils_comparison \
+		utils_comparison2} \
 		${addprefix ${EXEC}, \
 		path \
 		heredoc \

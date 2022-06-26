@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 17:20:37 by mdankou           #+#    #+#             */
-/*   Updated: 2022/06/26 22:38:39 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/26 23:03:46 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	cmd_redirections(t_cmd *cmd, t_list *token)
 	cmd->redir_out = NO_REDIR;
 	while (token && !is_sep(token->type))
 	{
-		file = (char*)token->content;
+		file = (char *)token->content;
 		if (is_infile(token->type) && cmd->redir_in != WRONG_REDIR)
 		{
 			set_redir_in(cmd, token, file);

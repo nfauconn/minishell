@@ -6,26 +6,11 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:13:37 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/26 22:26:42 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/26 22:41:33 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static char	*get_last_exit_code(t_sh *sh)
-{
-	char	*tmp;
-
-	if (!sh->last_exit_code_str)
-		sh->last_exit_code_str = ft_itoa(sh->last_exit_code);
-	else
-	{
-		tmp = sh->last_exit_code_str;
-		sh->last_exit_code_str = ft_itoa(sh->last_exit_code);
-		free(tmp);
-	}
-	return (sh->last_exit_code_str);
-}
 
 static char	*var_value(char *str, size_t len, t_list *env)
 {
@@ -90,7 +75,6 @@ static char	*expand_string(char *ptr, t_sh *sh)
 		new = ft_realloc(new, new_size);
 		ft_strlcat(new, start, new_size);
 	}
-	printf("new = %s\n", new);
 	return (new);
 }
 
@@ -130,7 +114,7 @@ void	token_expand(t_list *token, t_sh *sh)
 		if (token->type == DELIMITER)
 			token = token->next;
 		tok_str = token->content;
- 		if (is_quote(*tok_str) || is_dollar_quote(token))
+		if (is_quote(*tok_str) || is_dollar_quote(token))
 		{
 			token->content = expand_quotes(tok_str, sh);
 			free(tok_str);

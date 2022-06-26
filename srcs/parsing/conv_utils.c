@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   conv_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 11:37:25 by user42            #+#    #+#             */
-/*   Updated: 2022/06/21 15:30:06 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/26 22:54:32 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ size_t	get_cmd_tab_sz(t_list *token)
 	count = 0;
 	while (token && !is_sep(token->type))
 	{
-		if ((token->type == WORD || is_quote(token->type)) && !is_blank(token->type))
+		if ((token->type == WORD || is_quote(token->type))
+			&& !is_blank(token->type))
 			count++;
 		token = token->next;
 	}
@@ -57,14 +58,14 @@ void	add_cmd_to_list(t_cmd **head, t_cmd *new)
 
 static char	**cmd_tab(t_list *token)
 {
-	char *tmp;
 	char	**cmd_tab;
 	size_t	size;
 	size_t	i;
 
-	cmd_tab = NULL;
 	size = get_cmd_tab_sz(token);
 	cmd_tab = (char **)malloc(sizeof(char *) * (size + 1));
+	if (!cmd_tab)
+		return (NULL);
 	i = 0;
 	while (token && !is_sep(token->type))
 	{
@@ -74,9 +75,7 @@ static char	**cmd_tab(t_list *token)
 			while (token->next && token->next->type == WORD)
 			{
 				token = token->next;
-				tmp = cmd_tab[i];
-				cmd_tab[i] = ft_strjoin(tmp, (char *)token->content);
-				free(tmp);
+				ft_strfjoin(&cmd_tab[i], (char *)token->content);
 			}
 			i++;
 		}

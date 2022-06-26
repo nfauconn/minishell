@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   utils_comparison.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/16 19:57:56 by user42            #+#    #+#             */
-/*   Updated: 2022/06/23 16:13:15 by user42           ###   ########.fr       */
+/*   Created: 2022/06/26 22:55:34 by user42            #+#    #+#             */
+/*   Updated: 2022/06/26 23:01:02 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,47 +35,6 @@ int	is_redir(int c)
 
 int	is_redir_path(int c)
 {
-	return(c == INFILE_PATH || c == DELIMITER 
+	return (c == INFILE_PATH || c == DELIMITER
 		|| c == TRUNC_OUTFILE_PATH || c == APPEND_OUTFILE_PATH);
-}
-
-int	is_dollar_quote(t_list *token)
-{
-	char	*tok;
-
-	tok = (char *)token->content;
-	if (*tok == '$' && ft_strlen(tok) > 1 && is_quote(*(tok + 1)))
-		return (1);
-	return (0);
-}
-
-int	is_word(int c)
-{
-	return (!is_quote(c) && !is_redir(c) && !is_blank(c) && !is_sep(c));
-}
-
-t_list *skip_token(t_list *token, int to_skip)
-{
-	if (token)
-		token = token->next;
-	if (token && token->type == to_skip)
-		token = token->next;
-	return (token);
-}
-
-void	display_token_list(t_list *lst)
-{
-	while (lst)
-	{
-		printf("tok = %20s | type = %d\n", (char *)lst->content, lst->type);
-		lst = lst->next;
-	}
-}
-
-void	add_token_to_list(t_list **token_list, char *token)
-{
-	t_list	*new;
-
-	new = ft_lstnew(token);
-	ft_lstadd_back(token_list, new);
 }
