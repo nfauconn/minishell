@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:13:37 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/26 21:19:57 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/26 22:26:42 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ void	token_expand(t_list *token, t_sh *sh)
 	{
 		if (token->type == DELIMITER)
 			token = token->next;
-		tok_str = (char *)token->content;
+		tok_str = token->content;
  		if (is_quote(*tok_str) || is_dollar_quote(token))
 		{
 			token->content = expand_quotes(tok_str, sh);

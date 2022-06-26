@@ -8,5 +8,6 @@ minishell
 notes.txt
 o
 objs
+p
 srcs
 token_list,
