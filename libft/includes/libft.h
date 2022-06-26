@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 16:22:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/24 11:49:46 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/26 17:17:15 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,13 +114,12 @@ int			ft_lstsize(t_list *lst);
 void		*ft_calloc(size_t count, size_t size);
 void		*ft_memalloc(size_t size);
 void		ft_memdel(void **ap);
-void		ft_replace_free_old(void **prev_content, void *new_content);
+void		*ft_realloc(void *ptr, size_t newsize);
 void		ft_str_array_free(char **tab);
 void		ft_strdel(char **as);
 void		ft_strfdup(char **over, char *buff);
 void		ft_strfjoin(char **to_free, char *to_add);
 char		*ft_strfjoinchar(char *str, char c);
-void		ft_strljoin_free(char *s1, char const *s2, size_t len);
 
 /* REPLACE / COPY / JOIN / ITER */
 void		ft_bzero(void *s, size_t n);

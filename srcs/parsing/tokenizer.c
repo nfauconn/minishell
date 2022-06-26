@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenizer_try.c                                    :+:      :+:    :+:   */
+/*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 16:59:04 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/23 17:04:53 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/26 19:38:17 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,11 @@ static char	*find_end(t_input *input, char *s)
 	if (is_quote(*s))
 		return (find_closing_quote(input, s, *s));
 	while (*s && is_word(*s))
+	{
+		if (*s == '$')
+			return (s);
 		s++;
+	}
 	return (s);
 }
 

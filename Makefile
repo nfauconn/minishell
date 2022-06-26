@@ -9,6 +9,7 @@ BUILD_DIR  = ./objs
 
 LIBFT_DIR = ./libft
 LIBFT_INC_DIR = ./libft/includes
+LIBFT = ./libft/libft.a
 
 L_EXT = .a
 H_EXT = .h
@@ -64,7 +65,7 @@ all: libftcreat ${TARGET}
 libftcreat: 
 	@make -C ${LIBFT_DIR}
 
-${TARGET}: ${OBJS} Makefile
+${TARGET}: ${OBJS} ${LIBFT} Makefile
 	@${COMP} ${LD_FLAGS} ${OBJS} -o ${TARGET} -lft
 	@echo "${TARGET} created"
 

@@ -1,34 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*   ft_realloc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/07 15:27:40 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/24 15:57:38 by nfauconn         ###   ########.fr       */
+/*   Created: 2022/06/24 15:09:55 by nfauconn          #+#    #+#             */
+/*   Updated: 2022/06/26 19:41:50 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
+void	*ft_realloc(void *ptr, size_t newsize)
 {
-	size_t	i;
-	size_t	j;
-	size_t	dst_len;
+	char	*new_ptr;
+	size_t	oldsize;
 
-	if (!dst || !src)
-		return (0);
-	dst_len = ft_strlen(dst);
-	if (dstsize <= dst_len)
-		return (ft_strlen(src) + dstsize);
-	i = 0;
-	j = dst_len;
-	while (src[i] && j < dstsize - 1)
-	{
-		dst[j++] = src[i++];
-	}
-	dst[j] = '\0';
-	return (dst_len + ft_strlen(src));
+	new_ptr = NULL;
+	if (!ptr)
+		return (ft_memalloc(newsize));
+	oldsize = ft_strlen(ptr);
+	if (newsize <= oldsize)
+		return (ptr);
+	new_ptr = ft_memalloc(newsize);
+	if (!new_ptr)
+		return (ptr);
+	ft_memcpy(new_ptr, ptr, oldsize);
+	free(ptr);
+	return (new_ptr);
 }

@@ -86,13 +86,12 @@ SRCS := ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		ft_calloc \
 		ft_memalloc \
 		ft_memdel \
-		ft_replace_free_old \
+		ft_realloc \
 		ft_str_array_free \
 		ft_strdel \
 		ft_strfdup \
 		ft_strfjoin \
-		ft_strfjoinchar \
-		ft_strljoin_free} \
+		ft_strfjoinchar} \
 		${addprefix ${REPLACE_WITH_ALLOC}/, \
 		ft_strdup \
 		ft_strjoin \

@@ -3,133 +3,142 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:13:37 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/23 17:51:43 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/26 19:44:37 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static t_list	*search_token(char *str, size_t start, size_t len, t_list *env)
+static char	*get_last_exit_code(t_sh *sh)
+{
+	char	*tmp;
+
+	if (!sh->last_exit_code_str)
+		sh->last_exit_code_str = ft_itoa(sh->last_exit_code);
+	else
+	{
+		tmp = sh->last_exit_code_str;
+		sh->last_exit_code_str = ft_itoa(sh->last_exit_code);
+		free(tmp);
+	}
+	return (sh->last_exit_code_str);
+}
+
+static char	*var_value(char *str, size_t len, t_list *env)
 {
 	while (env)
 	{
-		if (!ft_strncmp(str + start, (char *)env->content, len)
+		if (!ft_strncmp(str, (char *)env->content, len)
 			&& ((char *)env->content)[len] == '=')
-			break ;
+			return (ft_strchr((char *)env->content, '=') + 1);
 		env = env->next;
 	}
-	return (env);
+	return (NULL);
 }
 
-static char	*get_expand_value(char *str, size_t start, size_t len, t_list *env)
-{
-	t_list	*l;
-	char	*res;
-
-	l = search_token(str, start, len, env);
-	if (l)
-		res = ft_strdup(ft_strchr((char *)l->content, '=') + 1);
-	else
-		res = ft_strdup("\0");
-	return (res);
-}
-
-static char	*ft_strnextend(char *alloc_str, char *str, size_t len)
-{
-	size_t	old_len;
-	char	*new;
-
-	if (str == NULL)
-		return (alloc_str);
-	if (alloc_str != NULL)
-		old_len = ft_strlen(alloc_str);
-	else
-		old_len = 0;
-	new = (char *)malloc(sizeof(char) * (len + old_len + 1));
-	if (!new)
-	{
-		free(alloc_str);
-		return (NULL);
-	}
-	if (old_len)
-		ft_strlcpy(new, alloc_str, old_len + 1);
-	ft_strlcpy(new + old_len, str, len + 1);
-	free(alloc_str);
-	return (new);
-} 
-
-static char	*var_expand(char *token, t_list *env)
+static char	*expanded_content(char **s, t_sh *sh)
 {
 	char	*start;
-	char	*res;
-	char	*token_val;
 
-	res = NULL;
-	while (*token)
+	(*s)++;
+	start = *s;
+	if (*start)
 	{
-		start = token;
-		while (*token && *token != '$')
-			token++;
-		res = ft_strnextend(res, start, token - start);
-		if (*token == '$' && is_identifier(*(token + 1)))
+		if (*start == '?')
 		{
-			token++;
-			start = token;
-			while (is_identifier(*token))
-				token++;
-			if (isalpha(*start) || *start == '_')
-				token_val = get_expand_value(start, 0, token - start, env);
-			else
-				token_val = ft_strdup(start + 1);
-			res = ft_strnextend(res, token_val, ft_strlen(token_val));
-			free(token_val);
+			(*s)++;
+			return (get_last_exit_code(sh));
 		}
-		else if (*token == '$' && !is_identifier(*(token + 1)))
+		else if (is_identifier(*start) && !ft_isdigit(*start))
 		{
-			res = ft_strnextend(res, token, 1);
-			token++;
+			while (is_identifier(**s))
+				(*s)++;
+			return (var_value(start, (*s) - start, sh->env));
 		}
+		else
+			(*s)++;
 	}
-	return (res);
+	return (NULL);
+}
+
+static char	*expand_string(char *ptr, t_sh *sh)
+{
+	char	*var_val;
+	char	*new;
+	size_t	new_size;
+	char	*start;
+
+	var_val = NULL;
+	new = NULL;
+	new_size = 0;
+	while (*ptr)
+	{
+		if (*ptr == '$')
+		{
+			var_val = expanded_content(&ptr, sh);
+			new_size = ft_strlen(new) + ft_strlen(var_val) + 1;
+			new = ft_realloc(new, new_size);
+			ft_strlcat(new, var_val, new_size);
+		}
+		start = ptr;
+		while (*ptr && *ptr != '$')
+			ptr++;
+		new_size += (ptr - start);
+		new = ft_realloc(new, new_size);
+		ft_strlcat(new, start, new_size);
+	}
+	return (new);
+}
+
+static char	*expand_quotes(char *ptr, t_sh *sh)
+{
+	t_bool	quote;
+	char	*start;
+	char	*new;
+	char	*tmp;
+
+	quote = 1;
+	new = NULL;
+	if (*ptr == '$')
+		ptr++;
+	start = ptr + quote;
+	if (ft_strlen(ptr) == quote + quote)
+		new = ft_strdup("");
+	else if (*ptr == QUOTE)
+		new = ft_substr(start, 0, ft_strlen(start) - quote);
+	else if (*ptr == DB_QUOTE)
+	{
+		tmp = expand_string(start, sh);
+		new = ft_substr(tmp, 0, ft_strlen(tmp) - quote);
+		free(tmp);
+	}
+	return (new);
 }
 
 void	token_expand(t_list *token, t_sh *sh)
 {
-	char	*tok;
+	char	*tok_str;
 	char	*tmp;
 
 	tmp = NULL;
 	while (token)
 	{
-		tok = (char *)token->content;
-		if (token->type == HEREDOC && token->next->next)
+		if (token->type == DELIMITER)
+			token = token->next;
+		tok_str = (char *)token->content;
+ 		if (is_quote(*tok_str) || is_dollar_quote(token))
 		{
-			token = token->next->next;
-			continue ;
+			token->content = expand_quotes(tok_str, sh);
+			free(tok_str);
 		}
-		if (*tok == '$' && ft_strlen(tok) > 1 && is_quote(*(tok + 1)))
-			tok++;
-		if (*tok == QUOTE || *tok == DB_QUOTE)
+		else if (ft_strchr(tok_str, '$') && ft_strlen(tok_str) > 1)
 		{
-			if (*tok == DB_QUOTE)
-			{
-				tmp = token->content;
-				token->content = var_expand(tok, sh->env);
-				free(tmp);
-			}
-			tmp = token->content;
-			token->content = ft_substr(tmp, 1, ft_strlen(tmp) - (2));
-			free(tmp);
+			token->content = expand_string(tok_str, sh);
+			free(tok_str);
 		}
-		else if (token->type == WORD)
-		{
-			tmp = token->content;
-			token->content = var_expand(tmp, sh->env);
-			free(tmp);
-		}
- 		token = token->next;
+		token = token->next;
 	}
 }
