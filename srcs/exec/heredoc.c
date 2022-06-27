@@ -3,16 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mdankou < mdankou@student.42.fr >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 12:37:34 by user42            #+#    #+#             */
-/*   Updated: 2022/06/27 15:34:32 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/27 22:46:07 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-//DOIT AJOUTER LE EXPAND 
+void	ft_replace_free_old(void **prev_content, void *new_content)
+{
+	void	*tmp;
+
+	if (prev_content)
+	{
+		tmp = *prev_content;
+		*prev_content = new_content;
+		free(tmp);
+	}
+}
 
 static void	read_heredoc_nbline(int *nb)
 {
@@ -34,7 +44,7 @@ static void	write_heredoc_nbline(int nb)
 	write(fd, &nb, sizeof(int));
 }
 
-static void	heredoc_job(int *fd, char *delim)
+static void	heredoc_job(int *fd, char *delim, t_sh *sh)
 {
 	int		nbltotal;
 	int		nbl;
@@ -50,6 +60,7 @@ static void	heredoc_job(int *fd, char *delim)
 	line = readline("> ");
 	while (++nbl && line && (line[0] == '\n' || ft_strcmp(line, delim)))
 	{
+		ft_replace_free_old((void **)&line, expand_string(line, sh));
 		ft_putendl_fd(line, *fd);
 		free(line);
 		line = readline("> ");
@@ -63,16 +74,15 @@ static void	heredoc_job(int *fd, char *delim)
 	exit(0);
 }
 
-void	run_heredoc(int *fd, char *delim, t_list *env)
+void	run_heredoc(int *fd, char *delim, t_sh *sh)
 {
 	pid_t		pid;
 	int			wstatus;
 
-	(void)env;
 	pid = fork();
 	if (pid == 0)
 	{
-		heredoc_job(fd, delim);
+		heredoc_job(fd, delim, sh);
 	}
 	signal(SIGINT, SIG_IGN);
 	wait(&wstatus);

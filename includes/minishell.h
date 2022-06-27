@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mdankou < mdankou@student.42.fr >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 18:25:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/27 15:44:57 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/27 22:10:50 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,6 @@ typedef struct s_input
 	char	*line_read;
 	t_list	*token_list;
 }	t_input;
-
-typedef struct s_sh
-{
-	size_t			cmd_nb;
-	t_cmd			*cmd_list;
-	t_list			*env;
-	unsigned char	last_status;
-	char			*last_status_str;
-}	t_sh;
 
 /* INIT */
 int		init_input(t_sh *sh, t_input *input);
@@ -70,6 +61,7 @@ int		lex_error(char *s);
 
 /* PARSING_PARSER */
 int		parsing(t_input *input, t_sh *sh);
+char	*expand_string(char *ptr, t_sh *sh);
 void	token_expand(t_list *token_list, t_sh *sh);
 void	add_until_var(char **buf, char **ptr, char *start);
 void	add_expanded_var(char **buf, char **ptr, t_sh *sh);

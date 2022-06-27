@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdankou < mdankou@student.42.fr >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:13:37 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/27 12:13:29 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/27 22:10:22 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static char	*expanded_content(char **s, t_sh *sh)
 	return (NULL);
 }
 
-static char	*expand_string(char *ptr, t_sh *sh)
+char	*expand_string(char *ptr, t_sh *sh)
 {
 	char	*var_val;
 	char	*new;
