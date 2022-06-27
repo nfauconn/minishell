@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:22:26 by mdankou           #+#    #+#             */
-/*   Updated: 2022/06/21 11:32:24 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/27 15:27:56 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ char	*join_path(char const *penv, char const *pexec);
 char	**get_path_tab(t_list *env);
 char	**get_env_tab(t_list *env);
 int		find_path(t_cmd *cmd, char **paths);
-void	cmd_redirections(t_cmd *cmd, t_list *token);
-void	run_heredoc(int *fd, char *delim);
+void	cmd_redirections(t_sh *sh, t_cmd *cmd, t_list *token);
+void	run_heredoc(t_sh *sh, int *fd, char *delim);
 int		exec_error(char *s1, char *s2);
 
 /* FILE UTILS */
