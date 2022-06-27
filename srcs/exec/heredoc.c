@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 12:37:34 by user42            #+#    #+#             */
-/*   Updated: 2022/06/27 15:28:23 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/27 15:34:32 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,12 @@ static void	heredoc_job(int *fd, char *delim)
 	exit(0);
 }
 
-void	run_heredoc(t_sh *sh, int *fd, char *delim)
+void	run_heredoc(int *fd, char *delim, t_list *env)
 {
 	pid_t		pid;
 	int			wstatus;
 
+	(void)env;
 	pid = fork();
 	if (pid == 0)
 	{

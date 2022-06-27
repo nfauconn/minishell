@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 17:55:15 by user42            #+#    #+#             */
-/*   Updated: 2022/06/27 15:28:11 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/27 15:33:34 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ static void	kill_child(int sig_num)
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
-		kill()
 	}
 }
 

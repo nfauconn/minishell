@@ -6,15 +6,14 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 17:20:37 by mdankou           #+#    #+#             */
-/*   Updated: 2022/06/27 15:28:37 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/27 15:32:33 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	set_redir_out(t_sh *sh, t_cmd *cmd, t_list *token, char *file)
+static void	set_redir_out(t_cmd *cmd, t_list *token, char *file)
 {
-	(void)sh;
 	if (cmd->redir_out != NO_REDIR)
 		close(cmd->redir_out);
 	else if (token->type == APPEND_OUTFILE_PATH)
@@ -23,17 +22,17 @@ static void	set_redir_out(t_sh *sh, t_cmd *cmd, t_list *token, char *file)
 		cmd->redir_out = open(file, O_CREAT | O_TRUNC | O_WRONLY, 0644);
 }
 
-static void	set_redir_in(t_sh *sh, t_cmd *cmd, t_list *token, char *file)
+static void	set_redir_in(t_cmd *cmd, t_list *token, char *file, t_list *env)
 {
 	if (cmd->redir_in != NO_REDIR)
 		close(cmd->redir_in);
 	else if (token->type == INFILE_PATH)
 		cmd->redir_in = open(file, O_RDONLY);
 	else if (token->type == DELIMITER)
-		run_heredoc(sh, &cmd->redir_in, token->content);
+		run_heredoc(&cmd->redir_in, token->content, env);
 }
 
-void	cmd_redirections(t_sh *sh, t_cmd *cmd, t_list *token)
+void	cmd_redirections(t_cmd *cmd, t_list *token, t_list *env)
 {
 	char	*file;
 
@@ -45,11 +44,11 @@ void	cmd_redirections(t_sh *sh, t_cmd *cmd, t_list *token)
 		file = (char *)token->content;
 		if (is_infile(token->type) && cmd->redir_in != WRONG_REDIR)
 		{
-			set_redir_in(sh, cmd, token, file);
+			set_redir_in(cmd, token, file, env);
 		}
 		else if (is_outfile(token->type) && cmd->redir_out != WRONG_REDIR)
 		{
-			set_redir_out(sh, cmd, token, file);
+			set_redir_out(cmd, token, file);
 		}
 		if (errno)
 			error_display(file, strerror(errno));
