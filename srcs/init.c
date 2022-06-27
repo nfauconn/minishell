@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 17:25:43 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/27 11:26:28 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/27 15:44:39 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	init_input(t_input *input)
+int	init_input(t_sh *sh, t_input *input)
 {
-	input->line_read = get_input();
+	input->line_read = get_input(sh);
 	if (!input->line_read)
 		return (FAILURE);
 	input->token_list = NULL;

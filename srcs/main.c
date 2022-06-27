@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 20:04:06 by user42            #+#    #+#             */
-/*   Updated: 2022/06/27 11:26:28 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/27 15:44:07 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,9 @@ int	main(int ac, char **av, char **env)
 	while (1)
 	{
 		signal_catching_mode(INTERACTIVE);
-		init_input(&input);
+		init_input(&sh, &input);
 		if (parsing(&input, &sh) == SUCCESS)
 			cmd_execute(&sh);
 		end(&input, &sh);
 	}
-	ft_lstclear(&sh.env, free);
-	ft_strdel(&sh.last_status_str);
 }

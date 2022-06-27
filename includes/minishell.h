@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 18:25:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/27 15:24:57 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/27 15:44:57 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ typedef struct s_sh
 }	t_sh;
 
 /* INIT */
-int		init_input(t_input *input);
-char	*get_input(void);
+int		init_input(t_sh *sh, t_input *input);
+char	*get_input(t_sh *sh);
 void	init_sh(t_sh *sh, char **env);
 
 /* PARSING_COMPARISON */

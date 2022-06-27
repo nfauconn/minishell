@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 18:10:00 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/26 23:00:18 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/27 15:44:49 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*get_input(void)
+char	*get_input(t_sh *sh)
 {
 	char	*line_read;
 
@@ -36,6 +36,8 @@ char	*get_input(void)
 	{
 		ft_putstr_fd("exit\n", 1);
 		free(line_read);
+		ft_lstclear(&sh->env, free);
+		ft_strdel(&sh->last_status_str);
 		exit(0);
 	}
 	return (line_read);
