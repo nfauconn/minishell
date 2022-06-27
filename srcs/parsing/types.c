@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 11:09:58 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/26 22:32:29 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/27 12:10:49 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,9 @@ void	set_types_for_lex(t_list *token)
 		tmp = (char *)token->content;
 		token->type = *tmp;
 		if (token->type == IN_REDIR && !ft_strcmp(tmp, "<<"))
-		{
-			token->type = HEREDOC;
 			token = set_next_type(token, DELIMITER);
-		}
-		else if (token->type == OUT_REDIR &&!ft_strcmp(tmp, ">>"))
-			token->type = APPEND_REDIR;
 		else if (!is_sep(token->type) && !is_quote(token->type)
-			&& !is_blank(token->type))
+			&& !is_blank(token->type) && !is_redir(token->type))
 			token->type = WORD;
 		token = token->next;
 	}
@@ -47,18 +42,21 @@ void	set_types_for_lex(t_list *token)
 
 void	complete_types(t_list *token)
 {
+	int	c;
+
 	while (token)
 	{
-		if (is_quote(token->type))
-			token->type = WORD;
-		if (token->type == IN_REDIR)
+		c = *(char *)token->content;
+		if (c == IN_REDIR)
 			token = set_next_type(token, INFILE_PATH);
-		else if (token->type == HEREDOC)
+		else if (c == HEREDOC)
 			token = set_next_type(token, DELIMITER);
-		else if (token->type == OUT_REDIR)
+		else if (c == OUT_REDIR)
 			token = set_next_type(token, TRUNC_OUTFILE_PATH);
-		else if (token->type == APPEND_REDIR)
+		else if (c == APPEND_REDIR)
 			token = set_next_type(token, APPEND_OUTFILE_PATH);
+		else if (is_quote(c))
+			token->type = WORD;
 		token = token->next;
 	}
 }

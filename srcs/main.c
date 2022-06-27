@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 20:04:06 by user42            #+#    #+#             */
-/*   Updated: 2022/06/26 19:07:13 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/27 11:26:28 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,5 @@ int	main(int ac, char **av, char **env)
 		end(&input, &sh);
 	}
 	ft_lstclear(&sh.env, free);
-	ft_strdel(&sh.last_exit_code_str);
+	ft_strdel(&sh.last_status_str);
 }

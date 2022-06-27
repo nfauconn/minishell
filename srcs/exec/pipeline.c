@@ -3,33 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   pipeline.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 15:32:33 by mdankou           #+#    #+#             */
-/*   Updated: 2022/06/22 15:27:03 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/27 12:14:26 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-unsigned char	g_exit_code = 0;
-
 static void	exec_cmd(t_sh *sh, t_cmd *cmd)
 {
-	if (!cmd->name)
-		exit(0);
 	cmd->env = get_env_tab(sh->env);
 	if (cmd->name && access(cmd->name, X_OK) != -1)
 		execve(cmd->name, cmd->args, cmd->env);
 	cmd->env_paths = get_path_tab(sh->env);
 	if (!cmd->env_paths || !find_path(cmd, cmd->env_paths))
-		g_exit_code = NOT_FOUND;
+		error_exit(cmd->name, NOT_FOUND);
 	else
 	{	
 		execve(cmd->path, cmd->args, cmd->env);
-		g_exit_code = NOT_EXECUTABLE;
+		error_exit(cmd->name, NOT_EXECUTABLE);
 	}
-	error_exit(cmd->name, g_exit_code);
 }
 
 void	child_seq(t_sh *sh, t_cmd *cmd, int p[2], int fd_in)
@@ -81,5 +76,5 @@ int	cmd_execute(t_sh *sh)
 	}
 	wait_children(sh);
 	signal_catching_mode(INTERACTIVE);
-	return (sh->last_exit_code);
+	return (sh->last_status);
 }

@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:13:37 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/26 22:41:33 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/27 12:13:29 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static char	*expanded_content(char **s, t_sh *sh)
 		if (*start == '?')
 		{
 			(*s)++;
-			return (get_last_exit_code(sh));
+			return (get_last_status(sh));
 		}
 		else if (is_identifier(*start) && !ft_isdigit(*start))
 		{
@@ -105,24 +105,25 @@ static char	*expand_quotes(char *ptr, t_sh *sh)
 
 void	token_expand(t_list *token, t_sh *sh)
 {
-	char	*tok_str;
 	char	*tmp;
 
-	tmp = NULL;
 	while (token)
 	{
 		if (token->type == DELIMITER)
+		{
 			token = token->next;
-		tok_str = token->content;
-		if (is_quote(*tok_str) || is_dollar_quote(token))
-		{
-			token->content = expand_quotes(tok_str, sh);
-			free(tok_str);
+			continue ;
 		}
-		else if (ft_strchr(tok_str, '$') && ft_strlen(tok_str) > 1)
+		tmp = token->content;
+		if (is_quote(*tmp) || is_dollar_quote(token))
 		{
-			token->content = expand_string(tok_str, sh);
-			free(tok_str);
+			token->content = expand_quotes(tmp, sh);
+			free(tmp);
+		}
+		else if (ft_strchr(tmp, '$') && ft_strlen(tmp) > 1)
+		{
+			token->content = expand_string(tmp, sh);
+			free(tmp);
 		}
 		token = token->next;
 	}

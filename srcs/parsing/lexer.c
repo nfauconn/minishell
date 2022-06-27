@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 11:36:22 by user42            #+#    #+#             */
-/*   Updated: 2022/06/21 18:49:49 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/27 12:05:25 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ static int	check_nb_sign(t_list *token)
 
 	tok = (char *)token->content;
 	len = ft_strlen(tok);
-	if (is_redir(*tok))
+	if (is_redir(token->type))
 	{
 		if (token->type == IN_REDIR && len > 2)
 			return (lex_error("<<"));
 		else if (token->type == OUT_REDIR && len > 2)
 			return (lex_error(">>"));
 	}
-	else if (is_sep(*tok))
+	else if (is_sep(token->type))
 	{
 		if (token->type == PIPE && len > 1)
 			return (lex_error("|"));

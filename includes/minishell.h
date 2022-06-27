@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 18:25:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/26 22:59:24 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/27 11:26:28 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ typedef struct s_sh
 	size_t			cmd_nb;
 	t_cmd			*cmd_list;
 	t_list			*env;
-	unsigned char	last_exit_code;
-	char			*last_exit_code_str;
+	unsigned char	last_status;
+	char			*last_status_str;
 }	t_sh;
 
 /* INIT */
@@ -73,7 +73,7 @@ int		parsing(t_input *input, t_sh *sh);
 void	token_expand(t_list *token_list, t_sh *sh);
 void	add_until_var(char **buf, char **ptr, char *start);
 void	add_expanded_var(char **buf, char **ptr, t_sh *sh);
-char	*get_last_exit_code(t_sh *sh);
+char	*get_last_status(t_sh *sh);
 
 /*EXECUTE*/
 int		cmd_execute(t_sh *sh);
