@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 14:06:55 by user42            #+#    #+#             */
-/*   Updated: 2022/06/26 23:03:34 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/27 14:11:45 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,7 @@ char	**get_path_tab(t_list *env)
 		env = env->next;
 	if (!env)
 	{
-		tab = (char **)malloc(sizeof(char *));
-		if (!tab)
-			return (NULL);
-		tab[0] = NULL;
+		tab = ft_split("/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin", ':');
 		return (tab);
 	}
 	return (ft_split(env->content + 5, ':'));
