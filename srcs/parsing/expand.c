@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:13:37 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/28 13:07:34 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/28 13:16:51 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ char	*expand_string(char *ptr, t_sh *sh)
 		start = ptr;
 		while (*ptr && *ptr != '$')
 			ptr++;
-		new_size += (ptr - start);
+		new_size += ptr - start;
 		new = ft_realloc(new, new_size);
 		ft_strlcat(new, start, new_size);
 	}
@@ -98,7 +98,7 @@ static char	*expand_quotes(char *ptr, t_sh *sh)
 	else if (*ptr == DB_QUOTE)
 	{
 		tmp = expand_string(start, sh);
-		new = ft_substr(tmp, 0, ft_strlen(tmp) - quote);
+		new = ft_substr(tmp, 0, ft_strlen(tmp));
 		free(tmp);
 	}
 	return (new);
@@ -116,7 +116,7 @@ void	token_expand(t_list *token, t_sh *sh)
 			continue ;
 		}
 		tmp = token->content;
-		if (is_quote(*tmp) || is_dollar_quote(token))
+		if (is_quote(*tmp) || (*tmp == '$' && is_quote(*(tmp + 1))))
 		{
 			token->content = expand_quotes(tmp, sh);
 			free(tmp);
