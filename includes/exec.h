@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdankou < mdankou@student.42.fr >          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:22:26 by mdankou           #+#    #+#             */
-/*   Updated: 2022/06/27 21:47:47 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/06/28 13:33:40 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct s_sh
 	size_t			cmd_nb;
 	t_cmd			*cmd_list;
 	t_list			*env;
-	unsigned char	last_status;
+	int				last_status;
 	char			*last_status_str;
 }	t_sh;
 

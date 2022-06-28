@@ -6,21 +6,11 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 22:56:44 by user42            #+#    #+#             */
-/*   Updated: 2022/06/26 23:00:30 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/28 13:17:54 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	is_dollar_quote(t_list *token)
-{
-	char	*tok;
-
-	tok = (char *)token->content;
-	if (*tok == '$' && ft_strlen(tok) > 1 && is_quote(*(tok + 1)))
-		return (1);
-	return (0);
-}
 
 int	is_word(int c)
 {

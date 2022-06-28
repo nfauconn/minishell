@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 17:55:15 by user42            #+#    #+#             */
-/*   Updated: 2022/06/27 15:33:34 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/06/28 13:30:24 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,12 @@
 ** rl_redisplay() displays the new prompt
 */
 
-static void	kill_child(int sig_num)
+static void	exit_yourself(int sig_num)
 {
 	if (sig_num == SIGINT)
 	{
-		write(1, "\n", 1);
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
+
+		exit(130);
 	}
 }
 
@@ -53,6 +51,10 @@ void	signal_catching_mode(int mode)
 	}
 	else if (mode == PGM_EXEC)
 	{
-		signal(SIGINT, kill_child);
+		signal(SIGINT, SIG_IGN);
+	}
+	else if (mode == CHILD)
+	{
+		signal(SIGINT, exit_yourself);
 	}
 }

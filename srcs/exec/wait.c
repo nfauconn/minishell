@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 19:07:39 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/27 11:42:46 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/28 13:37:53 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,11 @@
 void	set_last_status(t_sh *sh, int status)
 {
 	sh->last_status = status;
+}
+
+static void	set_last_signal_status(t_sh *sh, int status)
+{
+	sh->last_status = 128 + status;
 }
 
 int	wait_children(t_sh *sh)
@@ -28,14 +33,14 @@ int	wait_children(t_sh *sh)
 	{
 		pid = waitpid(-1, &status, 0);
 		if (WIFEXITED(status))
-			set_last_status(sh, WEXITSTATUS(status));
+			set_last_exit_status(sh, WEXITSTATUS(status));
 		if (WIFSIGNALED(status))
 		{
 			if (WTERMSIG(status) == SIGSEGV)
 				ft_printerror("Segmentation fault (core dumped)\n");
 			else if (WTERMSIG(status) == SIGBUS)
 				ft_printerror("Bus error (core dumped)\n");
-			set_last_status(sh, status);
+			set_last_signal_status(sh, status);
 		}
 		i++;
 	}

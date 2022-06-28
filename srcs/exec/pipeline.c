@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipeline.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdankou < mdankou@student.42.fr >          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 15:32:33 by mdankou           #+#    #+#             */
-/*   Updated: 2022/06/27 21:56:11 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/06/28 13:24:42 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,12 @@ static void	exec_cmd(t_sh *sh, t_cmd *cmd)
 		execve(cmd->path, cmd->args, cmd->env);
 		error_exit(cmd->name, NOT_EXECUTABLE);
 	}
+	error_exit(cmd->name, 1);
 }
 
 void	child_seq(t_sh *sh, t_cmd *cmd, int p[2], int fd_in)
 {
-	signal_catching_mode(PGM_EXEC);
-/*	while (1)
-		;
-*/
+	signal_catching_mode(CHILD);
 	close(p[0]);
 	if (cmd->redir_in == REDIR_FAIL || cmd->redir_out == REDIR_FAIL)
 		exit(WRONG_REDIR);
