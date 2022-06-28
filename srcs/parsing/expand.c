@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdankou < mdankou@student.42.fr >          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:13:37 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/27 22:10:22 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/06/28 13:07:34 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ char	*expand_string(char *ptr, t_sh *sh)
 		if (*ptr == '$')
 		{
 			var_val = expanded_content(&ptr, sh);
+			printf("var_val = %s\n", var_val);
 			new_size = ft_strlen(new) + ft_strlen(var_val) + 1;
 			new = ft_realloc(new, new_size);
 			ft_strlcat(new, var_val, new_size);
@@ -71,7 +72,7 @@ char	*expand_string(char *ptr, t_sh *sh)
 		start = ptr;
 		while (*ptr && *ptr != '$')
 			ptr++;
-		new_size += (ptr - start) + 1;
+		new_size += (ptr - start);
 		new = ft_realloc(new, new_size);
 		ft_strlcat(new, start, new_size);
 	}
@@ -119,6 +120,7 @@ void	token_expand(t_list *token, t_sh *sh)
 		{
 			token->content = expand_quotes(tmp, sh);
 			free(tmp);
+			token->type = WORD;
 		}
 		else if (ft_strchr(tmp, '$') && ft_strlen(tmp) > 1)
 		{

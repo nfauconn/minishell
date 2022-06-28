@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 12:50:49 by user42            #+#    #+#             */
-/*   Updated: 2022/06/27 12:18:03 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/28 12:55:40 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 int	parsing(t_input *input, t_sh *sh)
 {
-	if (tokenizer(input, input->line_read) == FAILURE)
+	if (tokenizer(input, input->line_read))
 		return (FAILURE);
 	set_types_for_lex(input->token_list);
-	if (lexer(input->token_list) == FAILURE)
+	if (lexer(input->token_list))
 		return (FAILURE);
 	complete_types(input->token_list);
 	
