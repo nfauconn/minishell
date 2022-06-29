@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 15:32:33 by mdankou           #+#    #+#             */
-/*   Updated: 2022/06/29 17:02:58 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/29 17:07:20 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,10 @@ void	child_seq(t_sh *sh, t_cmd *cmd, int p[2], int fd_in)
 	signal_catching_mode(CHILD);
 	close(p[0]);
 	if (cmd->redir_in == REDIR_FAIL || cmd->redir_out == REDIR_FAIL)
+	{
+		close(p[1]);
 		exit(WRONG_REDIR);
+	}
 	if (cmd->redir_in > NO_REDIR)
 		dup2_close_old(cmd->redir_in, STDIN_FILENO);
 	else if (fd_in)
