@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdankou < mdankou@student.42.fr >          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 18:25:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/27 22:10:50 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/06/29 20:25:31 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct s_input
 /* INIT */
 int		init_input(t_sh *sh, t_input *input);
 char	*get_input(t_sh *sh);
-void	init_sh(t_sh *sh, char **env);
+void	init_sh(t_sh *sh, char **env_sh);
 
 /* PARSING_COMPARISON */
 int		is_infile(int c);
@@ -44,6 +44,7 @@ int		is_redir_path(int c);
 int		is_sep(int c);
 int		is_dollar_quote(t_list *token);
 int		is_word(int c);
+int		is_builtin(char *cmd_name);
 
 /* PARSING_TOKEN */
 void	add_token_to_list(t_list **token_list, char *token);

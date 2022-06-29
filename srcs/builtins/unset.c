@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:53:50 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/19 12:34:42 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/29 20:11:52 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	del_elm_mid(t_list	*l, char *var_name)
 	}
 }
 
-int	builtin_unset(t_list **env, char **var_name)
+int	mini_unset(t_sh *sh, t_cmd *cmd)
 {
 	size_t	j;
 	t_list	*l;
@@ -45,8 +45,10 @@ int	builtin_unset(t_list **env, char **var_name)
 	char	*str;
 	int		var_len;
 
-	j = -1;
-	while (var_name[++j])
+	t_list	**env = &sh->env;
+	char	**var_name = cmd->args;
+	j = 0;
+	while (var_name && var_name[++j])
 	{
 		if (!*env)
 			return (0);

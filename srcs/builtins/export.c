@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:53:50 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/22 16:33:30 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/06/29 20:26:24 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,17 @@ static void	do_export(t_list **env, char *assign)
 		ft_lstadd_back(env, ft_lstnew(ft_strdup(assign)));
 }
 
-int	builtin_export(t_list **env, char **var_assigns)
+int	mini_export(t_sh *sh, t_cmd *cmd)
 {
 	int		status;
 	size_t	j;
 
-	j = -1;
+	char	**var_assigns = cmd->args;
+	j = 0;
 	status = 0;
-	while (var_assigns[++j])
+	while (var_assigns && var_assigns[++j])
 	{
-		do_export(env, var_assigns[j]);
+		do_export(&sh->env, var_assigns[j]);
 	}
 	return (status);
 }

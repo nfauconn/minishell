@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:22:26 by mdankou           #+#    #+#             */
-/*   Updated: 2022/06/28 13:33:40 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/29 20:23:39 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,16 @@
 # define EXECUTE_H
 
 # include "minishell.h"
+
+enum
+{
+	cd = 0,
+	echo,
+	env,
+	export,
+	pwd,
+	unset,
+};
 
 typedef struct s_cmd
 {
@@ -35,7 +45,17 @@ typedef struct s_sh
 	t_list			*env;
 	int				last_status;
 	char			*last_status_str;
+	int				(*exec_built[6])(struct s_sh *, t_cmd *);
 }	t_sh;
+
+void	(*exec_built[6])(t_sh *sh, t_cmd *cmd);
+int		mini_cd(t_sh *sh, t_cmd *cmd);
+int		mini_echo(t_sh *sh, t_cmd *cmd);
+int		mini_env(t_sh *sh, t_cmd *cmd);
+int		mini_export(t_sh *sh, t_cmd *cmd);
+int		mini_pwd(t_sh *sh, t_cmd *cmd);
+int		mini_unset(t_sh *sh, t_cmd *cmd);
+
 
 char	*join_path(char const *penv, char const *pexec);
 char	**get_path_tab(t_list *env);

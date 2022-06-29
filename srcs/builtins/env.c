@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:53:16 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/19 12:34:26 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/29 20:04:29 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,12 @@
 /*
 *	env with no options or arguments
 */
-int	builtin_env(void *env)
+int	mini_env(t_sh *sh, t_cmd *cmd)
 {
 	t_list	*l;
 
-	l = (t_list *)env;
+	(void)cmd;
+	l = sh->env;
 	while (l)
 	{
 		printf("%s\n", (char *)l->content);

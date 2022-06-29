@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 15:32:33 by mdankou           #+#    #+#             */
-/*   Updated: 2022/06/29 17:07:20 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/29 20:41:07 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,20 @@ int	cmd_execute(t_sh *sh)
 	int		fd_in;
 	pid_t	pid;
 	t_cmd	*cmd;
+	int		i;
 
 	cmd = sh->cmd_list;
 	fd_in = 0;
 	signal_catching_mode(PGM_EXEC);
 	while (cmd)
 	{
+		i = is_builtin(cmd->name);
+		if (i >= 0)
+		{
+			exec_built[i](sh, cmd);
+			cmd = cmd->next;
+			continue ;
+		}
 		if (pipe(p) < 0)
 			return (exec_error("pipe: ", strerror(errno)));
 		pid = fork();
