@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:22:26 by mdankou           #+#    #+#             */
-/*   Updated: 2022/06/29 20:23:39 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/29 21:45:22 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ typedef struct s_sh
 	int				(*exec_built[6])(struct s_sh *, t_cmd *);
 }	t_sh;
 
-void	(*exec_built[6])(t_sh *sh, t_cmd *cmd);
+int		(*exec_built[6])(t_sh *sh, t_cmd *cmd);
 int		mini_cd(t_sh *sh, t_cmd *cmd);
 int		mini_echo(t_sh *sh, t_cmd *cmd);
 int		mini_env(t_sh *sh, t_cmd *cmd);

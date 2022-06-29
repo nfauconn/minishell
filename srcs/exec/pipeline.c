@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 15:32:33 by mdankou           #+#    #+#             */
-/*   Updated: 2022/06/29 20:41:07 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/29 21:46:30 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	cmd_execute(t_sh *sh)
 		i = is_builtin(cmd->name);
 		if (i >= 0)
 		{
-			exec_built[i](sh, cmd);
+			sh->exec_built[i](sh, cmd);
 			cmd = cmd->next;
 			continue ;
 		}

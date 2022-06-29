@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:48:38 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/29 20:42:01 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/29 21:47:15 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ int	mini_echo(t_sh *sh, t_cmd *cmd)
 	int		nl_flag;
 	size_t	j;
 
-	printf("coucou from echo \n");
 	(void)sh;
 	char **args = cmd->args;
+	args++;
 	j = 0;
 	nl_flag = echo_handle_nlflag(args, &j);
 	while (args[j])
