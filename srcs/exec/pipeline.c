@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 15:32:33 by mdankou           #+#    #+#             */
-/*   Updated: 2022/06/28 13:24:42 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/29 17:02:58 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 static void	exec_cmd(t_sh *sh, t_cmd *cmd)
 {
+	if (!cmd->name)
+		exit(0);
 	cmd->env = get_env_tab(sh->env);
 	if (cmd->name && access(cmd->name, X_OK) != -1)
 		execve(cmd->name, cmd->args, cmd->env);
