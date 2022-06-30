@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 15:32:33 by mdankou           #+#    #+#             */
-/*   Updated: 2022/06/30 09:42:36 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/30 10:53:45 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,17 @@ static void	exec_cmd(t_sh *sh, t_cmd *cmd)
 {
 	if (!cmd->name)
 		exit(0);
+/* HERE
+**	if I use sh->exec_built[cmd->built_i](sh, cmd)
+**	==> it segfaults with totally no explanation or location given by sanitize
+**
+**	so I tried to manually launch, for now, just echo, in "builtin_child.c"
+**	it does not segfault anymore BUT doesnt seem to communicate well 
+**	==> if I do like "echo lol | grep lol", it does nothing, and the last status is 0 as if it had succeeded
+*/
 	if (cmd->built_i)
-		exit(sh->exec_built[cmd->built_i](sh, cmd));
+		exit(builtin_child(sh, cmd));
+/**/
 	cmd->env = get_env_tab(sh->env);
 	if (cmd->name && access(cmd->name, X_OK) != -1)
 		execve(cmd->name, cmd->args, cmd->env);

@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 18:25:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/30 09:41:09 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/30 10:03:03 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ char	*get_last_status(t_sh *sh);
 
 /* EXECUTE */
 int		launch(t_sh *sh);
+int		builtin_child(t_sh *sh, t_cmd *cmd);
 int		single_builtin_exec(t_sh *sh, t_cmd *cmd);
 int		subshells_seq(t_sh *sh, t_cmd*cmd);
 

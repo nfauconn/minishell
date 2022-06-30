@@ -39,6 +39,7 @@ SRCS := ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		utils_comparison \
 		utils_comparison2} \
 		${addprefix ${EXEC}, \
+		builtin_child \
 		path \
 		heredoc \
 		redirection \
