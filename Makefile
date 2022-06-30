@@ -21,6 +21,7 @@ LIBS := ${addsuffix ${L_EXT}, ${addprefix ${LIBFT_DIR}, \
 SRCS := ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		main \
 		init \
+		launch \
 		end \
 		error \
 		signals \
@@ -40,8 +41,9 @@ SRCS := ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		${addprefix ${EXEC}, \
 		path \
 		heredoc \
-		pipeline \
 		redirection \
+		single_builtin_exec \
+		subshells_seq \
 		utils_for_fd \
 		wait} \
 		${addprefix ${BUILTINS}, \

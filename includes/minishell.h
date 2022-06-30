@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 18:25:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/29 20:25:31 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/30 09:41:09 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,10 @@ void	add_until_var(char **buf, char **ptr, char *start);
 void	add_expanded_var(char **buf, char **ptr, t_sh *sh);
 char	*get_last_status(t_sh *sh);
 
-/*EXECUTE*/
-int		cmd_execute(t_sh *sh);
+/* EXECUTE */
+int		launch(t_sh *sh);
+int		single_builtin_exec(t_sh *sh, t_cmd *cmd);
+int		subshells_seq(t_sh *sh, t_cmd*cmd);
 
 /* PARSING_CONV_TO_CMD */
 size_t	get_cmd_nb(t_list *token);

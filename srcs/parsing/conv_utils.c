@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   conv_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdankou < mdankou@student.42.fr >          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 11:37:25 by user42            #+#    #+#             */
-/*   Updated: 2022/06/27 21:50:38 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/06/30 08:57:37 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ t_cmd	*create_new_cmd(t_sh *sh, t_list *token)
 	new->args = cmd_tab(token);
 	if (new->args)
 		new->name = new->args[0];
+	new->built_i = is_builtin(new->name);
 	new->path = NULL;
 	new->env = NULL;
 	new->env_paths = NULL;

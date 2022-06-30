@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:22:26 by mdankou           #+#    #+#             */
-/*   Updated: 2022/06/29 21:45:22 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/30 09:27:03 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct s_cmd
 {
 	size_t			index;
 	char			*name;
+	int				built_i;
 	char			**args;
 	char			**env;
 	char			**env_paths;
@@ -55,7 +56,6 @@ int		mini_env(t_sh *sh, t_cmd *cmd);
 int		mini_export(t_sh *sh, t_cmd *cmd);
 int		mini_pwd(t_sh *sh, t_cmd *cmd);
 int		mini_unset(t_sh *sh, t_cmd *cmd);
-
 
 char	*join_path(char const *penv, char const *pexec);
 char	**get_path_tab(t_list *env);

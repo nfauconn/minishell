@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipeline.c                                         :+:      :+:    :+:   */
+/*   subshells_seq.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 15:32:33 by mdankou           #+#    #+#             */
-/*   Updated: 2022/06/29 21:46:30 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/30 09:42:36 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ static void	exec_cmd(t_sh *sh, t_cmd *cmd)
 {
 	if (!cmd->name)
 		exit(0);
+	if (cmd->built_i)
+		exit(sh->exec_built[cmd->built_i](sh, cmd));
 	cmd->env = get_env_tab(sh->env);
 	if (cmd->name && access(cmd->name, X_OK) != -1)
 		execve(cmd->name, cmd->args, cmd->env);
@@ -30,7 +32,7 @@ static void	exec_cmd(t_sh *sh, t_cmd *cmd)
 	error_exit(cmd->name, 1);
 }
 
-void	child_seq(t_sh *sh, t_cmd *cmd, int p[2], int fd_in)
+void	child_exec(t_sh *sh, t_cmd *cmd, int p[2], int fd_in)
 {
 	signal_catching_mode(CHILD);
 	close(p[0]);
@@ -51,42 +53,32 @@ void	child_seq(t_sh *sh, t_cmd *cmd, int p[2], int fd_in)
 	exec_cmd(sh, cmd);
 }
 
-void	parent_seq(int p[2], int *fd)
+void	parent_linkin(int p[2], int *fd)
 {
 	close(p[1]);
 	close_if_exists(*fd);
 	*fd = p[0];
 }
 
-int	cmd_execute(t_sh *sh)
+int	subshells_seq(t_sh *sh, t_cmd *cmd)
 {
 	int		p[2];
 	int		fd_in;
 	pid_t	pid;
-	t_cmd	*cmd;
-	int		i;
 
-	cmd = sh->cmd_list;
 	fd_in = 0;
 	signal_catching_mode(PGM_EXEC);
 	while (cmd)
 	{
-		i = is_builtin(cmd->name);
-		if (i >= 0)
-		{
-			sh->exec_built[i](sh, cmd);
-			cmd = cmd->next;
-			continue ;
-		}
 		if (pipe(p) < 0)
 			return (exec_error("pipe: ", strerror(errno)));
 		pid = fork();
 		if (pid < 0)
 			return (exec_error("fork: ", strerror(errno)));
 		if (pid == 0)
-			child_seq(sh, cmd, p, fd_in);
+			child_exec(sh, cmd, p, fd_in);
 		else
-			parent_seq(p, &fd_in);
+			parent_linkin(p, &fd_in);
 		cmd = cmd->next;
 	}
 	wait_children(sh);

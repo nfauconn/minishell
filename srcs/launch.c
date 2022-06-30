@@ -1,31 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   launch.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/16 20:04:06 by user42            #+#    #+#             */
-/*   Updated: 2022/06/30 09:46:58 by user42           ###   ########.fr       */
+/*   Created: 2022/06/30 09:05:21 by user42            #+#    #+#             */
+/*   Updated: 2022/06/30 09:47:47 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"minishell.h"
+#include "minishell.h"
 
-int	main(int ac, char **av, char **env)
+int	launch(t_sh *sh)
 {
-	t_input	input;
-	t_sh	sh;
-
-	(void)ac;
-	(void)av;
-	init_sh(&sh, env);
-	while (1)
-	{
-		signal_catching_mode(INTERACTIVE);
-		init_input(&sh, &input);
-		if (parsing(&input, &sh) == SUCCESS)
-			launch(&sh);
-		end(&input, &sh);
-	}
+	if (sh->cmd_nb == 1 && sh->cmd_list->built_i > -1)
+		single_builtin_exec(sh, sh->cmd_list);
+	else
+		subshells_seq(sh, sh->cmd_list);
+	return (sh->last_status);
 }
