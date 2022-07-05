@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdankou < mdankou@student.42.fr >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:52:52 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/29 20:06:17 by user42           ###   ########.fr       */
+/*   Updated: 2022/07/05 01:23:33 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	mini_cd(t_sh *sh, t_cmd *cmd)
 	{
 		dir = opendir(args[1]);
 		if (!dir)
-			perror("pwd");
+			error_display("cd", strerror(errno));
 		else
 			chdir(args[1]);
 	}

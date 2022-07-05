@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdankou < mdankou@student.42.fr >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:53:50 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/29 20:26:24 by user42           ###   ########.fr       */
+/*   Updated: 2022/07/05 00:59:32 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,16 @@ static void	do_export(t_list **env, char *assign)
 {
 	t_list	*l;
 	char	*str;
-	int		var_len;
+	u_int	var_len;
 
-	if (!strchr(assign, '='))
+	var_len = strchr(assign, '=') - assign;
+	if (var_len <= 0)
 		return ;
 	l = (t_list *)(*env);
 	while (l)
 	{
 		str = (char *)l->content;
-		var_len = ft_strlen(assign);
-		if (!ft_strncmp(assign, str, var_len) && !str[var_len])
+		if (!ft_strncmp(assign, str, var_len) && str[var_len] == '=')
 		{
 			l->content = ft_strdup(assign);
 			break ;
@@ -38,10 +38,11 @@ static void	do_export(t_list **env, char *assign)
 
 int	mini_export(t_sh *sh, t_cmd *cmd)
 {
+	char	**var_assigns;
 	int		status;
 	size_t	j;
 
-	char	**var_assigns = cmd->args;
+	var_assigns = cmd->args;
 	j = 0;
 	status = 0;
 	while (var_assigns && var_assigns[++j])
