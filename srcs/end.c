@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 16:09:54 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/05 15:44:38 by user42           ###   ########.fr       */
+/*   Updated: 2022/07/05 16:19:15 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,10 @@ void	end(t_input *input, t_sh *sh)
 		end_input(input);
 	if (sh)
 		end_sh(sh);
+}
+
+void	exit_free(t_sh *sh)
+{
+	end_sh(sh);
+	exit(0);
 }

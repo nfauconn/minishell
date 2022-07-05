@@ -12,6 +12,9 @@ EXPAND
 	LAST_PIPELINE_STATUS $?
 		need to handle
 
+➜  minish_current git:(master) echo lol | cd ..
+(pwd now: ~)
+➜  ~ 
 
 for file in `find -name "linux_*.mp4"`; do mv "$file" "${file/linux_/}" ; done
 
