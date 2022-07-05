@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 15:32:33 by mdankou           #+#    #+#             */
-/*   Updated: 2022/06/30 10:53:45 by user42           ###   ########.fr       */
+/*   Updated: 2022/07/05 15:51:03 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,11 @@ static void	exec_cmd(t_sh *sh, t_cmd *cmd)
 **	it does not segfault anymore BUT doesnt seem to communicate well 
 **	==> if I do like "echo lol | grep lol", it does nothing, and the last status is 0 as if it had succeeded
 */
-	if (cmd->built_i)
+	if (cmd->built_i > -1)
+	{
+		ft_printerror("cmd->built_i = %d\n", cmd->built_i);
 		exit(builtin_child(sh, cmd));
+	}
 /**/
 	cmd->env = get_env_tab(sh->env);
 	if (cmd->name && access(cmd->name, X_OK) != -1)
@@ -34,7 +37,8 @@ static void	exec_cmd(t_sh *sh, t_cmd *cmd)
 	if (!cmd->env_paths || !find_path(cmd, cmd->env_paths))
 		error_exit(cmd->name, NOT_FOUND);
 	else
-	{	
+	{
+		ft_printerror("cmd->path = %s\n, cmd->args[0] = %s\n, cmd->env[0] = %s\n", cmd->path, cmd->args[0], cmd->env[0]);
 		execve(cmd->path, cmd->args, cmd->env);
 		error_exit(cmd->name, NOT_EXECUTABLE);
 	}

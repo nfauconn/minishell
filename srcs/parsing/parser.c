@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 12:50:49 by user42            #+#    #+#             */
-/*   Updated: 2022/06/28 12:55:40 by user42           ###   ########.fr       */
+/*   Updated: 2022/07/05 15:39:12 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	parsing(t_input *input, t_sh *sh)
 	while(tmp)
 	{
 		ft_str_array_display(tmp->args);
+		printf("redir_in = %d | redir_out = %d\n", tmp->redir_in, tmp->redir_out);
 		tmp = tmp->next;
 	}
 	#endif	
