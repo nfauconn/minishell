@@ -6,13 +6,13 @@
 /*   By: mdankou < mdankou@student.42.fr >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:53:50 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/05 00:59:32 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/07/05 18:02:01 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	do_export(t_list **env, char *assign)
+void	do_export(t_list **env, char *assign)
 {
 	t_list	*l;
 	char	*str;
