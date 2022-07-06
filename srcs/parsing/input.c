@@ -21,6 +21,7 @@ char	*get_input(t_sh *sh)
 	{
 		if (ft_strncmp(line_read, "exit", 4) == 0)
 		{
+			ft_printerror("exit\n");
 			free(line_read);
 			exit(0);
 		}
