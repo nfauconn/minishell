@@ -43,8 +43,8 @@ SRCS := ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		path \
 		heredoc \
 		redirection \
-		single_builtin_exec \
-		subshells_seq \
+		single_builtin_seq \
+		pipeline_seq \
 		utils_for_fd \
 		wait} \
 		${addprefix ${BUILTINS}, \

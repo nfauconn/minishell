@@ -24,6 +24,8 @@
 
 static void	exit_yourself(int sig_num)
 {
+	if (sig_num == SIGQUIT)
+		ft_printerror("Quit (core dumped)\n");
 	exit(sig_num + 128);
 }
 
@@ -52,5 +54,6 @@ void	signal_catching_mode(int mode)
 	else if (mode == CHILD)
 	{
 		signal(SIGINT, exit_yourself);
+		signal(SIGQUIT, exit_yourself);
 	}
 }

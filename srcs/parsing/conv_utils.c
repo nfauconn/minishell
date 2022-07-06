@@ -98,6 +98,6 @@ t_cmd	*create_new_cmd(t_sh *sh, t_list *token)
 	new->env = NULL;
 	new->env_paths = NULL;
 	new->next = NULL;
-	cmd_redirections(new, token, sh);
+	redir_open(new, token, sh);
 	return (new);
 }

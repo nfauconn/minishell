@@ -14,11 +14,16 @@
 
 int	launch(t_sh *sh)
 {
-	if (!sh->cmd_list)
+	if (!sh->cmd_list || sh->cmd_nb == 0)
 		return (sh->last_status);
-	if (sh->cmd_nb == 1 && sh->cmd_list->built_i > -1)
-		single_builtin_exec(sh, sh->cmd_list);
+	if (sh->cmd_nb == 1)
+	{
+		if (sh->cmd_list->built_i > -1)
+			single_builtin_seq(sh, sh->cmd_list);
+		else
+			single_cmd_seq(sh, sh->cmd_list);
+	}
 	else
-		subshells_seq(sh, sh->cmd_list);
+		pipeline_seq(sh, sh->cmd_list);
 	return (sh->last_status);
 }

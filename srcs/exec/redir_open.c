@@ -32,7 +32,7 @@ static void	set_redir_in(t_cmd *cmd, t_list *token, char *file, t_sh *sh)
 		run_heredoc(&cmd->redir_in, token->content, sh);
 }
 
-void	cmd_redirections(t_cmd *cmd, t_list *token, t_sh *sh)
+void	redir_open(t_cmd *cmd, t_list *token, t_sh *sh)
 {
 	char	*file;
 

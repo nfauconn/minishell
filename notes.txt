@@ -1,3 +1,11 @@
+BUILTINS
+	export without arg ==> sorted env
+
+SIGNALS
+	ctrl + \ in child : quit (core dumped) POURQUOI CA AFFICHE PAS
+		ET need to update last status --> global variable ?
+
+
 SIGNALS
 	when prgram launched, signals seem to be reset->need to handle it 
 

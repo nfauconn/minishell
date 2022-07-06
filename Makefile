@@ -39,12 +39,14 @@ SRCS := ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		utils_comparison \
 		utils_comparison2} \
 		${addprefix ${EXEC}, \
+		exec \
 		handle_builtin \
-		path \
 		heredoc \
-		redirection \
-		single_builtin_exec \
-		subshells_seq \
+		path \
+		pipeline_seq \
+		redir_apply \
+		redir_open \
+		single_seq \
 		utils_for_fd \
 		wait} \
 		${addprefix ${BUILTINS}, \

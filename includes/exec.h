@@ -49,6 +49,7 @@ typedef struct s_sh
 	int				(*exec_built[6])(struct s_sh *, t_cmd *);
 }	t_sh;
 
+/* BUILTINS */
 int		(*exec_built[6])(t_sh *sh, t_cmd *cmd);
 int		mini_cd(t_sh *sh, t_cmd *cmd);
 int		mini_echo(t_sh *sh, t_cmd *cmd);
@@ -57,11 +58,19 @@ int		mini_export(t_sh *sh, t_cmd *cmd);
 int		mini_pwd(t_sh *sh, t_cmd *cmd);
 int		mini_unset(t_sh *sh, t_cmd *cmd);
 
+/* COMMANDS */
+int		single_cmd_seq(t_sh *sh, t_cmd *cmd);
+int		pipeline_seq(t_sh *sh, t_cmd *cmd);
+void	exec_cmd(t_sh *sh, t_cmd *cmd);
+
+/* REDIRECTIONS */
+void	redir_apply(t_cmd *cmd, int p[2], int fd_in);
+void	redir_open(t_cmd *cmd, t_list *token, t_sh *sh);
+
 char	*join_path(char const *penv, char const *pexec);
 char	**get_path_tab(t_list *env);
 char	**get_env_tab(t_list *env);
 int		find_path(t_cmd *cmd, char **paths);
-void	cmd_redirections(t_cmd *cmd, t_list *token, t_sh *sh);
 void	run_heredoc(int *fd, char *delim, t_sh *sh);
 int		exec_error(char *s1, char *s2);
 

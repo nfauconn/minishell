@@ -71,8 +71,8 @@ char	*get_last_status(t_sh *sh);
 /* EXECUTE */
 int		launch(t_sh *sh);
 int		handle_builtin(t_sh *sh, t_cmd *cmd);
-int		single_builtin_exec(t_sh *sh, t_cmd *cmd);
-int		subshells_seq(t_sh *sh, t_cmd*cmd);
+int		single_builtin_seq(t_sh *sh, t_cmd *cmd);
+int		pipeline_seq(t_sh *sh, t_cmd*cmd);
 
 /* PARSING_CONV_TO_CMD */
 size_t	get_cmd_nb(t_list *token);
