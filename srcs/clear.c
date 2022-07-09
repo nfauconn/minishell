@@ -51,8 +51,9 @@ void	clear(t_input *input, t_sh *sh)
 		clear_sh(sh);
 }
 
-void	exit_clear(t_sh *sh)
+void	exit_clear(t_sh *sh, unsigned int exit_code)
 {
+	ft_lstclear(&sh->env, free);
 	clear_sh(sh);
-	exit(0);
+	exit(exit_code);
 }

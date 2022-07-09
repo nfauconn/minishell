@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 17:25:43 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/29 20:24:34 by user42           ###   ########.fr       */
+/*   Updated: 2022/07/09 18:12:51 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	init_sh(t_sh *sh, char **env_sh)
 	sh->exec_built[cd] = &mini_cd;
 	sh->exec_built[echo] = &mini_echo;
 	sh->exec_built[env] = &mini_env;
+	sh->exec_built[exit2] = &mini_exit;
 	sh->exec_built[export] = &mini_export;
 	sh->exec_built[pwd] = &mini_pwd;
 	sh->exec_built[unset] = &mini_unset;

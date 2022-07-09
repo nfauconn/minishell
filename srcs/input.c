@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 18:10:00 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/27 15:44:49 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/09 17:48:17 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,7 @@ char	*get_input(t_sh *sh)
 
 	line_read = readline("minish> ");
 	if (line_read && *line_read)
-	{
-		if (ft_strncmp(line_read, "exit", 4) == 0)
-		{
-			ft_printerror("exit\n");
-			free(line_read);
-			exit(0);
-		}
 		add_history(line_read);
-	}
 	else if (line_read && *line_read == '\0')
 	{
 		rl_on_new_line();

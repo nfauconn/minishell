@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 12:07:25 by user42            #+#    #+#             */
-/*   Updated: 2022/07/08 13:26:18 by user42           ###   ########.fr       */
+/*   Updated: 2022/07/09 18:12:23 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ enum
 	cd = 0,
 	echo,
 	env,
+	exit2,
 	export,
 	pwd,
 	unset,
@@ -52,7 +53,7 @@ typedef struct s_sh
 	t_list			*env;
 	int				last_status;
 	char			*last_status_str;
-	int				(*exec_built[6])(struct s_sh *, t_cmd *);
+	int				(*exec_built[7])(struct s_sh *, t_cmd *);
 }	t_sh;
 
 #endif

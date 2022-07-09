@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 17:55:15 by user42            #+#    #+#             */
-/*   Updated: 2022/07/08 13:11:34 by user42           ###   ########.fr       */
+/*   Updated: 2022/07/09 17:37:28 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	signal_catching_mode(int mode)
 	}
 	else if (mode == SH_PROCESS)
 	{
-		signal(SIGINT, SIG_IGN);
+		signal(SIGINT, SIG_DFL);
 	}
 	else if (mode == CHILD_PROCESS)
 	{

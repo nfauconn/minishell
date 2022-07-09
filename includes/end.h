@@ -1,30 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   end.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/22 18:25:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/09 18:16:45 by nfauconn         ###   ########.fr       */
+/*   Created: 2022/07/09 18:16:07 by nfauconn          #+#    #+#             */
+/*   Updated: 2022/07/09 18:21:58 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef END_H
+# define END_H
 
-# include "extern_libs.h"
-# include "structs.h"
-# include "parsing.h"
-# include "exec.h"
-# include "builtins.h"
-# include "signals.h"
-# include "end.h"
-# include "error.h"
+#include "extern_libs.h"
+#include "structs.h"
 
-/* INIT */
-int		init_input(t_sh *sh, t_input *input);
-char	*get_input(t_sh *sh);
-void	init_sh(t_sh *sh, char **env_sh);
+void	clear(t_input *input, t_sh *sh);
+void	clear_input(t_input *input);
+void	clear_sh(t_sh *sh);
+void	exit_clear(t_sh *sh, unsigned int exit_code);
 
 #endif

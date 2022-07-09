@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 15:52:13 by mdankou           #+#    #+#             */
-/*   Updated: 2022/07/09 16:37:17 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/09 17:46:20 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "structs.h"
 # include "error.h"
 
+int		mini_exit(t_sh *sh, t_cmd *cmd);
 int		mini_cd(t_sh *sh, t_cmd *cmd);
 int		mini_echo(t_sh *sh, t_cmd *cmd);
 int		mini_env(t_sh *sh, t_cmd *cmd);

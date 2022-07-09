@@ -52,6 +52,7 @@ SRCS := ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		cd \
 		echo \
 		env \
+		exit \
 		export \
 		pwd \
 		unset}}}}
