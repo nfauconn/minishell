@@ -1,17 +1,9 @@
-inish> < i cat
-minish: i: No such file or directory
-cmd n.0 = cat -- red_i = -1 | red_o = -42
-dup2_close_old : -1 becomes 0 (close -1)
+nfauconn@e1r5p17:~/minish_9_7$ export TEST=" ouais ttttttt"
+nfauconn@e1r5p17:~/minish_9_7$ echo lol > $TEST
+bash: $TEST: ambiguous redirect
 
-
-
-
-
-
-^C
-minish> 
-
-
+minish> cat Makefile > LL | < LL cat ======> LL: no such file or directory
+> parser nom des redir in AVANT de les open car bash 
 
 
 BUILTINS
