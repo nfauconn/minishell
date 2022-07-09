@@ -5,6 +5,8 @@ bash: $TEST: ambiguous redirect
 minish> cat Makefile > LL | < LL cat ======> LL: no such file or directory
 > parser nom des redir in AVANT de les open car bash 
 
+The "keyboard" doesnt send any signals, the line discipline does. Find out what a line discipline is, then read man 1 stty
+
 
 BUILTINS
 	export without arg ==> sorted env

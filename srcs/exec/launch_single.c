@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 13:07:55 by user42            #+#    #+#             */
-/*   Updated: 2022/07/09 18:19:42 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/09 19:14:34 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ static int	launch_single_builtin(t_sh *sh, t_cmd *cmd)
 		dup2_close_old(cmd->redir_out, STDOUT_FILENO); */
 
 // ==> CHECKER LES REDIR DANS ECHO MAIS SI ON DUP APRES ON EST FOUTU VU QU ON A PAS FORK
+	signal_catching_mode(SH_PROCESS);
 	sh->last_status = sh->exec_built[cmd->built_i](sh, cmd);
+	signal_catching_mode(INTERACTIVE);
 	return (sh->last_status);
 }
 
@@ -38,7 +40,6 @@ static int	launch_single_cmd(t_sh *sh, t_cmd *cmd)
 {
 	pid_t	pid;
 
-	signal_catching_mode(SH_PROCESS);
 	pid = fork();
 	if (pid < 0)
 		return (exec_error("fork: ", strerror(errno)));

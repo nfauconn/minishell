@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 13:07:05 by user42            #+#    #+#             */
-/*   Updated: 2022/07/09 16:24:49 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/09 19:15:45 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ int	launch_pipeline(t_sh *sh, t_cmd *cmd)
 	pid_t	pid;
 
 	fd_in = 0;
-	signal_catching_mode(SH_PROCESS);
 	while (cmd)
 	{
 		if (pipe(p) < 0)
