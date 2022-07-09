@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:48:38 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/30 10:42:21 by user42           ###   ########.fr       */
+/*   Updated: 2022/07/09 16:11:55 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "exec.h"
 
 int	echo_handle_nlflag(char **args, size_t *j)
 {
@@ -48,12 +48,16 @@ int	mini_echo(t_sh *sh, t_cmd *cmd)
 	nl_flag = echo_handle_nlflag(args, &j);
 	while (args[j])
 	{
-		printf("%s", args[j]);
+		if (cmd->redir_out == REDIR_FAIL)
+			return (WRONG_REDIR);
+		if (cmd->redir_out == NO_REDIR)
+			cmd->redir_out = STDIN_FILENO;
+		ft_putstr_fd(args[j], cmd->redir_out);
 		if (args[j + 1])
-			printf(" ");
+			ft_putstr_fd(" ", cmd->redir_out);
 		++j;
 	}
 	if (nl_flag)
-		printf("\n");
+		ft_putstr_fd("\n", cmd->redir_out);
 	return (0);
 }

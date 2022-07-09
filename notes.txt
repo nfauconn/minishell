@@ -1,13 +1,31 @@
+inish> < i cat
+minish: i: No such file or directory
+cmd n.0 = cat -- red_i = -1 | red_o = -42
+dup2_close_old : -1 becomes 0 (close -1)
+
+
+
+
+
+
+^C
+minish> 
+
+
+
+
 BUILTINS
 	export without arg ==> sorted env
 
 SIGNALS
-	ctrl + \ in child : quit (core dumped) POURQUOI CA AFFICHE PAS
+	- ctrl + \ in child : quit (core dumped) POURQUOI CA AFFICHE PAS
 		ET need to update last status --> global variable ?
 
+	- free sh->env when user exit minishell
 
-SIGNALS
-	when prgram launched, signals seem to be reset->need to handle it 
+CHILD
+	- free memory if failed
+	- close everything
 
 PARSING
 	PIPE THEN NOTHING
@@ -15,14 +33,6 @@ PARSING
 		>
 	REDIR_STUCK_TO_PIPE >|
 		is a redirecting operator used to overwrite file even if option noclobber is set
-
-EXPAND
-	LAST_PIPELINE_STATUS $?
-		need to handle
-
-➜  minish_current git:(master) echo lol | cd ..
-(pwd now: ~)
-➜  ~ 
 
 for file in `find -name "linux_*.mp4"`; do mv "$file" "${file/linux_/}" ; done
 
@@ -32,30 +42,18 @@ minish> echo $USER$USER$"$USERcoucou'$USER"  '$USER'     $USER     "-$lol- hehe.
 VALGRIND
 	valgrind --suppressions=ignoreleak --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes --verbose ./minishell
 
-
 SIMPLE COMMAND RETURN
 	The return status (see Exit Status) of a simple command is its exit status, or 128+n if the command was terminated by signal n. 
 
 EXPAND
-	If value is not given, the variable is assigned the null string. 
-	All values undergo tilde expansion, parameter and variable expansion, command substitution, arithmetic expansion, and quote removal (detailed below). 
-	If the variable has its integer attribute set, then value is evaluated as an arithmetic expression even if the $((…)) expansion is not used (see Arithmetic Expansion). 
-	Word splitting is not performed, with the exception of "$@" as explained below. Filename expansion is not performed. 
-	Assignment statements may also appear as arguments to the alias, declare, typeset, export, readonly, and local builtin commands (declaration commands). 
-	When in POSIX mode (see Bash POSIX Mode), these builtins may appear in a command after one or more instances of the command builtin and retain these assignment statement properties.
-
 	In the context where an assignment statement is assigning a value to a shell variable or array index (see Arrays), the ‘+=’ operator can be used to append to or add to the variable’s previous value. 
 	This includes arguments to builtin commands such as declare that accept assignment statements (declaration commands). 
 	When ‘+=’ is applied to a variable for which the integer attribute has been set, value is evaluated as an arithmetic expression and added to the variable’s current value, which is also evaluated. 
 	When ‘+=’ is applied to an array variable using compound assignment (see Arrays), the variable’s value is not unset (as it is when using ‘=’), and new values are appended to the array beginning at one greater than the array’s maximum index (for indexed arrays), or added as additional key-value pairs in an associative array. 
 	When applied to a string-valued variable, value is expanded and appended to the variable’s value. 
 
-
-
 https://codes-sources.commentcamarche.net/forum/affich-10047436-developper-un-shell-de-base
 
-
 HEREDOC
-	end of parsing -> parcourir pour voir si type d'un token = heredoc --> dans ce cas, prompt et reparsing (expand en tt cas)
 	!!!!!!!! if delimiter has quotes -> delimiter is set without it
 									 -> strings will be expanded considering the quoting rule

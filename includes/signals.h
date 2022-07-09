@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 20:01:13 by user42            #+#    #+#             */
-/*   Updated: 2022/06/28 13:20:09 by user42           ###   ########.fr       */
+/*   Updated: 2022/07/08 13:17:42 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 # define SIGNALS_H
 
 # define INTERACTIVE 0
-# define PGM_EXEC 1
-# define CHILD 2
+# define SH_PROCESS 1
+# define CHILD_PROCESS 2
+
+# include "extern_libs.h"
 
 void	signal_catching_mode(int mode);
 

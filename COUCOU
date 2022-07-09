@@ -21,12 +21,11 @@ LIBS := ${addsuffix ${L_EXT}, ${addprefix ${LIBFT_DIR}, \
 SRCS := ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		main \
 		init \
-		launch \
-		end \
+		input \
+		clear \
 		error \
 		signals \
 		${addprefix ${PARSING}, \
-		input \
 		tokenizer \
 		token_utils \
 		types \
@@ -39,21 +38,23 @@ SRCS := ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		utils_comparison \
 		utils_comparison2} \
 		${addprefix ${EXEC}, \
-		handle_builtin \
-		path \
-		heredoc \
-		redirection \
-		single_builtin_seq \
-		pipeline_seq \
-		utils_for_fd \
-		wait} \
+		cmd_execve \
+		cmd_path \
+		launch \
+		launch_pipeline \
+		launch_single \
+		redir_apply \
+		redir_heredoc \
+		redir_open \
+		redir_utils \
+		wait \
 		${addprefix ${BUILTINS}, \
 		cd \
 		echo \
 		env \
 		export \
 		pwd \
-		unset}}}
+		unset}}}}
 
 DEPS := ${subst ${SRC_DIR}, ${BUILD_DIR}, ${SRCS:%.c=%.d}}
 OBJS := ${subst ${SRC_DIR}, ${BUILD_DIR}, ${SRCS:%.c=%.o}}
@@ -98,7 +99,7 @@ re: fclean all
 TIME = `date +"%d/%m/%Y %Hh%M %Z"`
 USER := ${shell env | grep USER | tail --bytes=+6}
 
-git: fclean
+git:
 	git add .
 	git commit -m "by ${USER} at ${TIME}"
 	git push

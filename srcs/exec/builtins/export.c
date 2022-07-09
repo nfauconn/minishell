@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdankou < mdankou@student.42.fr >          +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:53:50 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/05 18:02:01 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/07/09 16:36:07 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "exec.h"
 
 void	do_export(t_list **env, char *assign)
 {
@@ -28,6 +28,7 @@ void	do_export(t_list **env, char *assign)
 		if (!ft_strncmp(assign, str, var_len) && str[var_len] == '=')
 		{
 			l->content = ft_strdup(assign);
+			free(str);
 			break ;
 		}
 		l = l->next;

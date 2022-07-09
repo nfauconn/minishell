@@ -1,35 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_comparison2.c                                :+:      :+:    :+:   */
+/*   cmd_execve.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/26 22:56:44 by user42            #+#    #+#             */
-/*   Updated: 2022/07/08 13:22:49 by user42           ###   ########.fr       */
+/*   Created: 2022/07/08 12:56:04 by user42            #+#    #+#             */
+/*   Updated: 2022/07/08 14:43:53 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-int	is_word(int c)
+void	cmd_execve(t_sh *sh, t_cmd *cmd)
 {
-	return (!is_quote(c) && !is_redir(c) && !is_blank(c) && !is_sep(c));
-}
-
-int	is_builtin(char *cmd_name)
-{
-	int			i;
-	static char	*builtins[7] = {"cd", "echo", "env", "export", "pwd", "unset", 0};
-
-	if (!cmd_name || !*cmd_name)
-		return (-1);
-	i = 0;
-	while (builtins[i])
+	cmd->env = get_env_tab(sh->env);
+	if (access(cmd->name, X_OK) != -1)
+		execve(cmd->name, cmd->args, cmd->env);
+	cmd->env_paths = get_path_tab(sh->env);
+	if (!cmd->env_paths || !find_path(cmd, cmd->env_paths))
+		error_exit(cmd->name, NOT_FOUND);
+	else
 	{
-		if (!ft_strcmp(cmd_name, builtins[i]))
-			return (i);
-		i++;
+		execve(cmd->path, cmd->args, cmd->env);
+		error_exit(cmd->name, NOT_EXECUTABLE);
 	}
-	return (-1);
+	error_exit(cmd->name, 1);
 }

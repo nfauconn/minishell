@@ -3,17 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdankou < mdankou@student.42.fr >          +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:52:52 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/05 22:23:23 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/07/09 16:31:53 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-
-char	*var_value(char *str, size_t len, t_list *env);
-void	do_export(t_list **env, char *assign);
+#include "parsing.h"
+#include "exec.h"
 
 int	mini_cd(t_sh *sh, t_cmd *cmd)
 {

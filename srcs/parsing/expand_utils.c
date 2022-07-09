@@ -6,11 +6,11 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 22:41:54 by user42            #+#    #+#             */
-/*   Updated: 2022/06/27 11:26:28 by user42           ###   ########.fr       */
+/*   Updated: 2022/07/08 13:21:04 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parsing.h"
 
 char	*get_last_status(t_sh *sh)
 {

@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 17:55:15 by user42            #+#    #+#             */
-/*   Updated: 2022/06/28 19:33:01 by user42           ###   ########.fr       */
+/*   Updated: 2022/07/08 13:11:34 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,11 @@ void	signal_catching_mode(int mode)
 		signal(SIGINT, new_line);
 		signal(SIGQUIT, SIG_IGN);
 	}
-	else if (mode == PGM_EXEC)
+	else if (mode == SH_PROCESS)
 	{
 		signal(SIGINT, SIG_IGN);
 	}
-	else if (mode == CHILD)
+	else if (mode == CHILD_PROCESS)
 	{
 		signal(SIGINT, exit_yourself);
 		signal(SIGQUIT, exit_yourself);

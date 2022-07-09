@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_builtin.c                                   :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/30 10:01:12 by user42            #+#    #+#             */
-/*   Updated: 2022/07/05 16:45:57 by user42           ###   ########.fr       */
+/*   Created: 2022/05/18 17:53:16 by nfauconn          #+#    #+#             */
+/*   Updated: 2022/07/08 13:20:10 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "exec.h"
 
-int	handle_builtin(t_sh *sh, t_cmd *cmd)
+/*
+*	env with no options or arguments
+*/
+int	mini_env(t_sh *sh, t_cmd *cmd)
 {
-	int	ret;
+	t_list	*l;
 
-	if ((cmd->built_i == cd || cmd->built_i == export || cmd->built_i == unset)
-		&& cmd->next)
-		exit(0);//and close ?
-	ret = sh->exec_built[cmd->built_i](sh, cmd);
-	close(1);//?
-	exit(ret);
+	(void)cmd;
+	l = sh->env;
+	while (l)
+	{
+		printf("%s\n", (char *)l->content);
+		l = l->next;
+	}
+	return (0);
 }

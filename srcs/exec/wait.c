@@ -6,11 +6,11 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 19:07:39 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/28 19:33:26 by user42           ###   ########.fr       */
+/*   Updated: 2022/07/08 14:36:28 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "exec.h"
 
 void	set_last_status(t_sh *sh, int status)
 {
@@ -45,6 +45,3 @@ int	wait_children(t_sh *sh)
 	}
 	return (status);
 }
-
-/* 		if (WIFEXITED(status) && status == NOT_FOUND)
-			sh->last_status = status; */

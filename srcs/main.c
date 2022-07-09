@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 20:04:06 by user42            #+#    #+#             */
-/*   Updated: 2022/06/30 09:46:58 by user42           ###   ########.fr       */
+/*   Updated: 2022/07/08 11:53:14 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ int	main(int ac, char **av, char **env)
 	{
 		signal_catching_mode(INTERACTIVE);
 		init_input(&sh, &input);
-		if (parsing(&input, &sh) == SUCCESS)
+		if (parsing(&sh, &input) == SUCCESS)
 			launch(&sh);
-		end(&input, &sh);
+		clear(&input, &sh);
 	}
 }

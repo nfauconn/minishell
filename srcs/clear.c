@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   end.c                                              :+:      :+:    :+:   */
+/*   clear.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,13 +12,14 @@
 
 #include "minishell.h"
 
-void	end_sh(t_sh *sh)
+void	clear_sh(t_sh *sh)
 {
 	t_cmd	*to_del;
 
-	(void)sh;
 	while (sh->cmd_list)
 	{
+		close_if_no_std(sh->cmd_list->redir_in);
+		close_if_no_std(sh->cmd_list->redir_out);
 		if (sh->cmd_list->args)
 			ft_str_array_free(sh->cmd_list->args);
 		if (sh->cmd_list->env)
@@ -33,7 +34,7 @@ void	end_sh(t_sh *sh)
 	}
 }
 
-void	end_input(t_input *input)
+void	clear_input(t_input *input)
 {
 	if (input->line_read)
 		ft_strdel(&input->line_read);
@@ -42,16 +43,16 @@ void	end_input(t_input *input)
 	input = NULL;
 }
 
-void	end(t_input *input, t_sh *sh)
+void	clear(t_input *input, t_sh *sh)
 {
 	if (input)
-		end_input(input);
+		clear_input(input);
 	if (sh)
-		end_sh(sh);
+		clear_sh(sh);
 }
 
-void	exit_free(t_sh *sh)
+void	exit_clear(t_sh *sh)
 {
-	end_sh(sh);
+	clear_sh(sh);
 	exit(0);
 }

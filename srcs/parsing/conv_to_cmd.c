@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   conv_to_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 11:36:26 by user42            #+#    #+#             */
-/*   Updated: 2022/06/27 15:24:42 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/08 13:20:49 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parsing.h"
 
 void	token_to_cmd_lst(t_sh *sh, t_list *token)
 {

@@ -6,13 +6,13 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 12:50:49 by user42            #+#    #+#             */
-/*   Updated: 2022/07/05 15:39:12 by user42           ###   ########.fr       */
+/*   Updated: 2022/07/08 14:46:07 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parsing.h"
 
-int	parsing(t_input *input, t_sh *sh)
+int	parsing(t_sh *sh, t_input *input)
 {
 	if (tokenizer(input, input->line_read))
 		return (FAILURE);
@@ -20,24 +20,17 @@ int	parsing(t_input *input, t_sh *sh)
 	if (lexer(input->token_list))
 		return (FAILURE);
 	complete_types(input->token_list);
-	
-	#ifdef DEBUG
-	display_token_list(input->token_list);
-	#endif
-	
 	token_expand(input->token_list, sh);
 	token_to_cmd_lst(sh, input->token_list);
-
 	#ifdef DEBUG
 	t_cmd	*tmp = sh->cmd_list;
 	while(tmp)
 	{
-		ft_str_array_display(tmp->args);
-		printf("redir_in = %d | redir_out = %d\n", tmp->redir_in, tmp->redir_out);
+//		ft_str_array_display(tmp->args);
+		printf("cmd n.%zu = %s -- red_i = %d | red_o = %d\n", tmp->index, tmp->name, tmp->redir_in, tmp->redir_out);
 		tmp = tmp->next;
 	}
-	#endif	
-
+	#endif
 	return (SUCCESS);
 }
 
@@ -46,12 +39,4 @@ int	parsing(t_input *input, t_sh *sh)
 	display_token_list(input->token_list);
 	#endif
 
-	#ifdef DEBUG
-	t_cmd	*tmp = sh->cmd_list;
-	while(tmp)
-	{
-		ft_str_array_display(tmp->args);
-		tmp = tmp->next;
-	}
-	#endif	
 */

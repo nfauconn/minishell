@@ -3,23 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 15:52:13 by mdankou           #+#    #+#             */
-/*   Updated: 2022/05/30 14:27:34 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/07/09 16:37:17 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUILTINS_H
 # define BUILTINS_H
 
-#include "libft.h"
+# include "extern_libs.h"
+# include "structs.h"
+# include "error.h"
 
-int	builtin_pwd(char **args);
-int	builtin_cd(char **args);
-int	builtin_echo(char **args);
-int	builtin_env(void *env);
-int	builtin_unset(t_list **env, char **var_name);
-int	builtin_export(t_list **env, char **var_assign);
+int		mini_cd(t_sh *sh, t_cmd *cmd);
+int		mini_echo(t_sh *sh, t_cmd *cmd);
+int		mini_env(t_sh *sh, t_cmd *cmd);
+int		mini_export(t_sh *sh, t_cmd *cmd);
+void	do_export(t_list **env, char *assign);
+int		mini_pwd(t_sh *sh, t_cmd *cmd);
+int		mini_unset(t_sh *sh, t_cmd *cmd);
 
 #endif

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   path.c                                             :+:      :+:    :+:   */
+/*   cmd_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 14:06:55 by user42            #+#    #+#             */
-/*   Updated: 2022/06/27 14:11:45 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/08 12:56:17 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "exec.h"
 
 int	find_path(t_cmd *cmd, char **paths)
 {
@@ -79,6 +79,7 @@ char	**get_path_tab(t_list *env)
 		env = env->next;
 	if (!env)
 	{
+		// DO WE HAVE THE RIGHT TO DO THAT LOL, as bash find a path anyways
 		tab = ft_split("/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin", ':');
 		return (tab);
 	}

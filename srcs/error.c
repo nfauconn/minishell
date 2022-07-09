@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 18:49:09 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/21 12:45:23 by user42           ###   ########.fr       */
+/*   Updated: 2022/07/08 11:53:10 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*perror_and_free(t_input *input, char *s)
 {
 	ft_printerror("minish: %s\n", s);
-	end_input(input);
+	clear_input(input);
 	return (NULL);
 }
 

@@ -3,16 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   extern_libs.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 20:00:30 by user42            #+#    #+#             */
-/*   Updated: 2022/05/18 17:50:22 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/08 13:19:05 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXTERN_LIBS_H
 # define EXTERN_LIBS_H
 
+# define _GNU_SOURCE
+# define DEBUG
+
+# include "libft.h"
+# include "ft_printf.h"
 # include <dirent.h>
 # include <errno.h>
 # include <fcntl.h>
