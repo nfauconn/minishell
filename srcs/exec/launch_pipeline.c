@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 13:07:05 by user42            #+#    #+#             */
-/*   Updated: 2022/07/09 19:28:38 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/09 19:40:23 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,18 @@ static int	builtin_pipe_exec(t_sh *sh, t_cmd *cmd)
 	exit(ret);
 }
 
+static void	exit_yo(int sig_num)
+{
+	//if (sig_num == SIGQUIT)
+	ft_printerror("Quit (core dumped)\n");
+	exit(sig_num + 128);
+}
+
 static void	child_seq(t_sh *sh, t_cmd *cmd, int p[2], int fd_in)
 {
-	signal_catching_mode(CHILD_PROCESS);
+//	signal_catching_mode(CHILD_PROCESS);
+		signal(SIGINT, exit_yo);
+		signal(SIGQUIT, exit_yo);
 	close(p[0]);
 	if (!cmd->name)
 	{
