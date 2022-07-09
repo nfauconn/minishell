@@ -1,6 +1,0 @@
-TARGET = minishell
-all: libftcreat ${TARGET}
-${TARGET}: ${OBJS} ${LIBFT} Makefile
-	@${COMP} ${LD_FLAGS} ${OBJS} -o ${TARGET} -lft
-	@echo "${TARGET} created"
-	@${RM} ${TARGET}

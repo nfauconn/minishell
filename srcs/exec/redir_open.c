@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_open.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 17:20:37 by mdankou           #+#    #+#             */
-/*   Updated: 2022/07/08 13:17:30 by user42           ###   ########.fr       */
+/*   Updated: 2022/07/09 18:42:00 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	redir_open(t_cmd *cmd, t_list *token, t_sh *sh)
 			set_redir_out(cmd, token, file);
 		}
 		if (errno)
-			error_display(file, strerror(errno));
+			error_display(file, strerror(errno), 0);
 		token = token->next;
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 18:49:09 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/08 11:53:10 by user42           ###   ########.fr       */
+/*   Updated: 2022/07/09 18:41:13 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,18 @@ int	exec_error(char *s1, char *s2)
 	return (FAILURE);
 }
 
-void	error_display(char *s1, char *s2)
+void	error_display(char *s1, char *s2, char *s3)
 {
-	ft_printerror("minish: %s: %s\n", s1, s2);
+	ft_printerror("minish: %s: %s\n", s1, s2, s3);
 }
 
 void	error_exit(char *cmd_name, int8_t error_code)
 {
 	if (!ft_strlen(cmd_name))
-		error_display("\'\'", "command not found");
+		error_display("\'\'", "command not found", 0);
 	else if (error_code == NOT_FOUND)
-		error_display(cmd_name, "command not found");
+		error_display(cmd_name, "command not found", 0);
 	else if (error_code == NOT_EXECUTABLE)
-		error_display(cmd_name, "permission denied");
+		error_display(cmd_name, "permission denied", 0);
 	exit(error_code);
 }

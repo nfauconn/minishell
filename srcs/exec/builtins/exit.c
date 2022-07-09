@@ -6,14 +6,13 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 17:46:29 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/09 18:38:17 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/09 18:41:34 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "exec.h"
 
-int		mini_exit(t_sh *sh, t_cmd *cmd)
+int	mini_exit(t_sh *sh, t_cmd *cmd)
 {
 	int	i;
 	int	exit_code;
@@ -30,7 +29,7 @@ int		mini_exit(t_sh *sh, t_cmd *cmd)
 	}
 	if (i > 2)
 	{
-		error_display("exit", "too many arguments");
+		error_display("exit", "too many arguments", 0);
 		return (1);
 	}
 	ft_printerror("exit\n");
@@ -38,4 +37,3 @@ int		mini_exit(t_sh *sh, t_cmd *cmd)
 	exit_clear(sh, exit_code);
 	return (0);
 }
-

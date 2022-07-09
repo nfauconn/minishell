@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 17:02:19 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/08 14:50:24 by user42           ###   ########.fr       */
+/*   Updated: 2022/07/09 18:41:46 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	open_w_err_check(int fd, char *file_path, int flag)
 		fd = open(file_path, O_RDWR | O_CREAT | O_TRUNC, 0644);
 	if (fd < 0)
 	{
-		error_display(file_path, strerror(errno));
+		error_display(file_path, strerror(errno), 0);
 		fd = -2;
 	}
 	return (fd);

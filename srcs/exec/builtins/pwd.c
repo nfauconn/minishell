@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:51:19 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/08 13:20:27 by user42           ###   ########.fr       */
+/*   Updated: 2022/07/09 18:43:21 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	mini_pwd(t_sh *sh, t_cmd *cmd)
 	name = getcwd(NULL, 0);
 	if (!name)
 	{
-		error_display("pwd", strerror(errno));
+		error_display("pwd", strerror(errno), 0);
 		return (errno);
 	}
 	printf("%s\n", name);
