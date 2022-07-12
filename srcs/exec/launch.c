@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 09:05:21 by user42            #+#    #+#             */
-/*   Updated: 2022/07/12 19:39:51 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/12 19:51:49 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int	launch(t_sh *sh)
 {
 	if (!sh->cmd_list || sh->cmd_nb == 0)
 		return (sh->last_status);
-	signal_catching_mode(PARENT_PROCESS);
 	if (sh->cmd_nb == 1)
 		launch_single(sh, sh->cmd_list);
 	else

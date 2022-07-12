@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 13:07:05 by user42            #+#    #+#             */
-/*   Updated: 2022/07/12 19:40:58 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/12 19:53:07 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,6 @@ static int	builtin_pipe_exec(t_sh *sh, t_cmd *cmd)
 	clear_sh(sh);
 	exit(ret);
 }
-
-/* static void	exit_yo(int sig_num)
-{
-	//if (sig_num == SIGQUIT)
-	ft_printerror("Quit (core dumped)\n");
-	exit(sig_num + 128);
-} */
 
 static void	child_seq(t_sh *sh, t_cmd *cmd, int p[2], int fd_in)
 {
@@ -74,6 +67,7 @@ int	launch_pipeline(t_sh *sh, t_cmd *cmd)
 	pid_t	pid;
 
 	fd_in = 0;
+	signal_catching_mode(PARENT_PROCESS);
 	while (cmd)
 	{
 		if (pipe(p) < 0)
@@ -88,5 +82,6 @@ int	launch_pipeline(t_sh *sh, t_cmd *cmd)
 		cmd = cmd->next;
 	}
 	wait_children(sh);
+	signal_catching_mode(INTERACTIVE);
 	return (sh->last_status);
 }

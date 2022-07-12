@@ -6,11 +6,11 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 20:04:06 by user42            #+#    #+#             */
-/*   Updated: 2022/07/12 18:58:10 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/12 19:49:22 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"minishell.h"
+#include "minishell.h"
 
 int	main(int ac, char **av, char **env)
 {

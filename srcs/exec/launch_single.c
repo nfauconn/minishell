@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 13:07:55 by user42            #+#    #+#             */
-/*   Updated: 2022/07/12 19:46:05 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/12 19:51:37 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static int	launch_single_cmd(t_sh *sh, t_cmd *cmd)
 {
 	pid_t	pid;
 
+	signal_catching_mode(PARENT_PROCESS);
 	pid = fork();
 	if (pid < 0)
 		return (exec_error("fork: ", strerror(errno)));
