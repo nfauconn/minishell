@@ -3,26 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   redir_heredoc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 12:37:34 by user42            #+#    #+#             */
-/*   Updated: 2022/07/08 12:29:41 by user42           ###   ########.fr       */
+/*   Updated: 2022/07/12 21:15:29 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
-
-void	ft_replace_free_old(void **prev_content, void *new_content)
-{
-	void	*tmp;
-
-	if (prev_content)
-	{
-		tmp = *prev_content;
-		*prev_content = new_content;
-		free(tmp);
-	}
-}
 
 static void	read_heredoc_nbline(int *nb)
 {
@@ -50,7 +38,6 @@ static void	heredoc_job(int *fd, char *delim, t_sh *sh)
 	int		nbl;
 	char	*line;
 
-	signal(SIGINT, SIG_DFL);
 	nbl = 0;
 	nbltotal = 1;
 	read_heredoc_nbline(&nbltotal);
@@ -79,12 +66,15 @@ void	run_heredoc(int *fd, char *delim, t_sh *sh)
 	pid_t		pid;
 	int			wstatus;
 
+	signal_catching_mode(PARENT_PROCESS);
 	pid = fork();
+	if (pid < 0)
+		error_display("fork", strerror(errno));
 	if (pid == 0)
 	{
+		signal_catching_mode(CHILD_PROCESS);
 		heredoc_job(fd, delim, sh);
 	}
-	signal(SIGINT, SIG_IGN);
 	wait(&wstatus);
 	signal_catching_mode(INTERACTIVE);
 	if (wstatus != 0)
@@ -94,7 +84,5 @@ void	run_heredoc(int *fd, char *delim, t_sh *sh)
 	}
 	*fd = open("/tmp/.here_doc", O_RDONLY);
 	if (*fd < 0)
-	{
-		ft_printerror("minish: here_doc: %s\n", strerror(errno));
-	}
+		error_display("here_doc", strerror(errno), 0);
 }

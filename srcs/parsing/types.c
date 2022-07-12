@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 11:09:58 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/08 13:22:01 by user42           ###   ########.fr       */
+/*   Updated: 2022/07/12 21:05:53 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,14 @@ void	set_types_for_lex(t_list *token)
 	{
 		tmp = (char *)token->content;
 		token->type = *tmp;
- 		if (token->type == IN_REDIR && !ft_strcmp(tmp, "<<"))
+ 		if (token->type == '<' && !ft_strcmp(tmp, "<<"))
 		{
 			token->type = HEREDOC;
 			token = set_next_type(token, DELIMITER);
 		}
-		else if (token->type == OUT_REDIR && !ft_strcmp(tmp, ">>"))
+		else if (token->type == '>' && !ft_strcmp(tmp, ">>"))
 		{
-			token->type = APPEND_REDIR;
+			token->type = APPEND;
 		}
 		if (!is_sep(token->type) && !is_quote(token->type)
 			&& !is_blank(token->type) && !is_redir(token->type))
@@ -51,14 +51,14 @@ void	complete_types(t_list *token)
 {
 	while (token)
 	{
-		if (token->type == IN_REDIR)
-			token = set_next_type(token, INFILE_PATH);
+		if (token->type == '<')
+			token = set_next_type(token, INFILE);
 		else if (token->type == HEREDOC)
 			token = set_next_type(token, DELIMITER);
-		else if (token->type == OUT_REDIR)
-			token = set_next_type(token, TRUNC_OUTFILE_PATH);
-		else if (token->type == APPEND_REDIR)
-			token = set_next_type(token, APPEND_OUTFILE_PATH);
+		else if (token->type == '>')
+			token = set_next_type(token, TRUNC);
+		else if (token->type == APPEND)
+			token = set_next_type(token, APPEND_FILE);
 		token = token->next;
 	}
 }

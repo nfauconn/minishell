@@ -33,7 +33,8 @@ SRCS := ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		expand \
 		expand_utils \
 		conv_to_cmd \
-		conv_utils \
+		conv_utils_creat \
+		conv_utils_redir \
 		parser \
 		utils_comparison \
 		utils_comparison2} \

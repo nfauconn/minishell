@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   conv_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 11:37:25 by user42            #+#    #+#             */
-/*   Updated: 2022/07/08 13:20:57 by user42           ###   ########.fr       */
+/*   Updated: 2022/07/12 21:22:30 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,10 @@ t_cmd	*create_new_cmd(t_sh *sh, t_list *token)
 	new->path = NULL;
 	new->env = NULL;
 	new->env_paths = NULL;
+	new->infile = NULL;
+	new->outfile = NULL;
+	new->redir_error = NULL;
+	conv_redir(sh, token, new);
 	new->next = NULL;
-	redir_open(new, token, sh);
 	return (new);
 }

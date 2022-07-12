@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 12:07:25 by user42            #+#    #+#             */
-/*   Updated: 2022/07/09 18:12:23 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/12 21:02:34 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,12 @@ typedef struct s_cmd
 	char			**env_paths;
 	char			*path;
 	int				redir_in;
-	int				redir_out;	
+	int				redir_out;
+	int				redir_in_type;
+	int				redir_out_type;
+	char			*infile;
+	char			*outfile;
+	char			*redir_error;
 	struct s_cmd	*next;
 }	t_cmd;
 

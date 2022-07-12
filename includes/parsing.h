@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 12:11:35 by user42            #+#    #+#             */
-/*   Updated: 2022/07/09 16:36:47 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/12 21:22:28 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,13 @@
 # define QUOTE 39
 # define DB_QUOTE 34
 # define PIPE 124
-# define IN_REDIR 60
-# define OUT_REDIR 62
 # define HEREDOC 129
-# define APPEND_REDIR 130
+# define APPEND 130
 # define WORD 131
-# define INFILE_PATH 133
-# define TRUNC_OUTFILE_PATH 134
+# define INFILE 133
+# define TRUNC 134
 # define DELIMITER 135
-# define APPEND_OUTFILE_PATH 136
+# define APPEND_FILE 136
 
 # include "extern_libs.h"
 # include "structs.h"
@@ -70,6 +68,7 @@ size_t	get_cmd_nb(t_list *token);
 size_t	get_cmd_args_sz(t_list *token);
 void	token_to_cmd_lst(t_sh *sh, t_list *token);
 t_cmd	*create_new_cmd(t_sh *sh, t_list *token);
+void	conv_redir(t_sh *sh, t_list *token, t_cmd *cmd);
 void	add_cmd_to_list(t_cmd **head, t_cmd *new);
 
 #endif

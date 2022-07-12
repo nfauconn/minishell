@@ -41,12 +41,7 @@ void	redir_open(t_cmd *cmd, t_list *token, t_sh *sh)
 	errno = 0;
 	cmd->redir_in = NO_REDIR;
 	cmd->redir_out = NO_REDIR;
-	if (cmd->redir_error)
-	{
-		error_display(cmd->redir_error, 0, 0);
-		break ;
-	}
-	/* while (token && !is_sep(token->type) && !errno)
+	while (token && !is_sep(token->type) && !errno)
 	{
 		file = (char *)token->content;
 		if (is_infile(token->type) && cmd->redir_in != WRONG_REDIR)
@@ -57,8 +52,8 @@ void	redir_open(t_cmd *cmd, t_list *token, t_sh *sh)
 		{
 			set_redir_out(cmd, token, file);
 		}
-		if (ERROR) // CMD->REDIR_ERROR
+		if (errno)
 			error_display(file, strerror(errno), 0);
 		token = token->next;
-	} */
+	}
 }

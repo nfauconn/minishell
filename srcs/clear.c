@@ -12,6 +12,24 @@
 
 #include "minishell.h"
 
+static void	clear_cmd_settings(t_cmd *cmd)
+{
+	if (cmd->args)
+		ft_str_array_free(cmd->args);
+	if (cmd->env)
+		ft_str_array_free(cmd->env);
+	if (cmd->env_paths)
+		ft_str_array_free(cmd->env_paths);
+	if (cmd->path)
+		ft_strdel(&cmd->path);
+	if (cmd->infile)
+		ft_strdel(&cmd->infile);
+	if (cmd->outfile)
+		ft_strdel(&cmd->outfile);
+	if (cmd->redir_error)
+		ft_strdel(&cmd->redir_error);
+}
+
 void	clear_sh(t_sh *sh)
 {
 	t_cmd	*to_del;
@@ -20,14 +38,7 @@ void	clear_sh(t_sh *sh)
 	{
 		close_if_no_std(sh->cmd_list->redir_in);
 		close_if_no_std(sh->cmd_list->redir_out);
-		if (sh->cmd_list->args)
-			ft_str_array_free(sh->cmd_list->args);
-		if (sh->cmd_list->env)
-			ft_str_array_free(sh->cmd_list->env);
-		if (sh->cmd_list->env_paths)
-			ft_str_array_free(sh->cmd_list->env_paths);
-		if (sh->cmd_list->path)
-			free(sh->cmd_list->path);
+		clear_cmd_settings(sh->cmd_list);
 		to_del = sh->cmd_list;
 		sh->cmd_list = sh->cmd_list->next;
 		free(to_del);

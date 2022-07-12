@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 11:36:22 by user42            #+#    #+#             */
-/*   Updated: 2022/07/08 13:21:24 by user42           ###   ########.fr       */
+/*   Updated: 2022/07/12 21:04:22 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ static int	check_nb_sign(t_list *token)
 	len = ft_strlen(tok);
 	if (is_redir(token->type))
 	{
-		if (token->type == IN_REDIR && len > 2)
+		if (token->type == '<' && len > 2)
 			return (lex_error("<<"));
-		else if (token->type == OUT_REDIR && len > 2)
+		else if (token->type == '>' && len > 2)
 			return (lex_error(">>"));
 	}
 	else if (is_sep(token->type))
