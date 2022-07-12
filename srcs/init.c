@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 17:25:43 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/09 18:12:51 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/12 22:13:34 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	init_sh(t_sh *sh, char **env_sh)
 {
 	sh->cmd_nb = 0;
 	sh->cmd_list = NULL;
+	sh->heredoc_nb = 0;
 	sh->env = NULL;
 	sh->env = ft_str_array_to_lst(env_sh);
 	sh->last_status = 0;

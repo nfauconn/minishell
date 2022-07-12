@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:22:26 by mdankou           #+#    #+#             */
-/*   Updated: 2022/07/12 20:05:33 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/12 22:47:19 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	redir_parse(t_cmd *cmd, t_list *token, t_sh *sh);
 void	dup2_close_old(int old_fd, int new_fd);
 void	close_if_no_std(int fd);
 int		open_w_err_check(int fd, char *file_path, int flag);
-void	run_heredoc(int *fd, char *delim, t_sh *sh);
+char	*run_heredoc(t_sh *sh, char *delim);
 
 /* PATH */
 char	*join_path(char const *penv, char const *pexec);

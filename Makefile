@@ -46,7 +46,6 @@ SRCS := ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		launch_single \
 		redir_apply \
 		redir_heredoc \
-		redir_open \
 		redir_utils \
 		wait \
 		${addprefix ${BUILTINS}, \

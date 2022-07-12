@@ -7,6 +7,9 @@ minish> cat Makefile > LL | < LL cat ======> LL: no such file or directory
 
 The "keyboard" doesnt send any signals, the line discipline does. Find out what a line discipline is, then read man 1 stty
 
+REDIR
+	- handle max opened fd ?
+	- HEREDOC what path ??? should return a char * so we can set for the cmd (e.g. if there are mutliple heredocs)
 
 BUILTINS
 	export without arg ==> sorted env
@@ -20,9 +23,6 @@ SIGNALS
 CHILD
 	- free memory if failed
 	- close everything
-
-HEREDOC
-	- what path ??? should return a char * so we can set for the cmd (e.g. if there are mutliple heredocs)
 
 PARSING
 	PIPE THEN NOTHING

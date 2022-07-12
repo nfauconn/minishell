@@ -6,16 +6,38 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 12:29:45 by user42            #+#    #+#             */
-/*   Updated: 2022/07/12 20:25:13 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/12 22:52:30 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "exec.h"
 
+static void	open_redir(t_cmd *cmd)
+{
+	errno = 0;
+	cmd->redir_in = NO_REDIR;
+	cmd->redir_out = NO_REDIR;
+	if (cmd->redir_error)
+	{
+		error_display(cmd->redir_error, 0, 0);
+		return ;
+	}
+	if (cmd->infile)
+		cmd->redir_in = open(cmd->infile, O_RDONLY);
+	if (cmd->outfile)
+	{
+		if (cmd->redir_out_type == APPEND_FILE)
+			cmd->redir_out = open(cmd->outfile, O_CREAT | O_APPEND | O_WRONLY, 0644);
+		else
+			cmd->redir_out = open(cmd->outfile, O_CREAT | O_TRUNC | O_WRONLY, 0644);
+	}
+}
+
 void	redir_apply(t_cmd *cmd, int p[2], int fd_in)
 {
-	if (cmd->redir_in == REDIR_FAIL || cmd->redir_out == REDIR_FAIL)
+	open_redir(cmd);
+	if (cmd->redir_error)
 	{
 		close(p[1]);
 		exit(WRONG_REDIR);

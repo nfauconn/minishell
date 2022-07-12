@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 12:07:25 by user42            #+#    #+#             */
-/*   Updated: 2022/07/12 21:02:34 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/12 22:10:33 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct s_sh
 {
 	size_t			cmd_nb;
 	t_cmd			*cmd_list;
+	int				heredoc_nb;
 	t_list			*env;
 	int				last_status;
 	char			*last_status_str;

@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 20:28:23 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/12 21:30:19 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/12 22:47:30 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,34 +15,35 @@
 static void	set_redir_out(t_sh *sh, t_list *token, t_cmd *cmd, char *file)
 {
 	(void)sh;
+	if (cmd->outfile)
+		ft_strdel(&cmd->outfile);
 	if (access(file, R_OK) == -1)
 		return ;
-	if (cmd->redir_out != NO_REDIR)
-		ft_strdel(&cmd->outfile);
 	cmd->redir_in_type = token->type;
-	cmd->outfile = ft_stdrup(file);
+	cmd->outfile = ft_strdup(file);
 }
 
 static void	set_redir_in(t_sh *sh, t_list *token, t_cmd *cmd, char *file)
 {
-	if (cmd->redir_in != NO_REDIR)
+	if (cmd->infile)
 		ft_strdel(&cmd->infile);
 	if (token->type == INFILE)
 	{
 		cmd->redir_in_type = INFILE;
-		cmd->infile = ft_stdrup(file);
+		cmd->infile = ft_strdup(file);
 	}
 	else if (token->type == DELIMITER)
 	{
 		cmd->redir_in_type = HEREDOC;
-		run_heredoc(&cmd->redir_in, token->content, sh);
-		// cmd->infile = <heredoc_filepath returned by the func>
+		sh->heredoc_nb++;
+		cmd->infile = run_heredoc(sh, (char *)token->content);
 	}
 }
 
 void	conv_redir(t_sh *sh, t_list *token, t_cmd *cmd)
 {
 	char	*file;
+	char	*tmp;
 
 	errno = 0;
 	while (token && !is_sep(token->type) && !errno)
@@ -58,7 +59,10 @@ void	conv_redir(t_sh *sh, t_list *token, t_cmd *cmd)
 		}
 		if (errno)
 		{
-			cmd->redir_error = ft_stdrup(sterror(errno));
+			cmd->redir_error = ft_strjoin(file, ": ");
+			tmp = cmd->redir_error;
+			cmd->redir_error = ft_strjoin(tmp, strerror(errno));
+			free(tmp);
 			return ;
 		}
 		token = token->next;
