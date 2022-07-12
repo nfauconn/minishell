@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 17:46:29 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/09 18:41:34 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/12 19:09:21 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	mini_exit(t_sh *sh, t_cmd *cmd)
 		exit_clear(sh, 0);
 	if (cmd->args[1] && !ft_str_isdigit(cmd->args[1]))
 	{
-		ft_printerror("minish: exit: %s: numeric argument required\n", cmd->args[1]);
+		error_display("exit", cmd->args[1], "numeric argument required");
 		return (2);
 	}
 	if (i > 2)
