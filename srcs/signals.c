@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 17:55:15 by user42            #+#    #+#             */
-/*   Updated: 2022/07/12 19:10:56 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/12 19:43:10 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,21 +43,18 @@ static void	new_line(int sig_num)
 
 void	signal_catching_mode(int mode)
 {
-//	ft_printerror("mode = %d\n", mode);
 	if (mode == INTERACTIVE)
 	{
-		ft_printerror("mode interactive_process\n");
 		signal(SIGINT, new_line);
 		signal(SIGQUIT, SIG_IGN);
 	}
-	else if (mode == SH_PROCESS)
+	else if (mode == PARENT_PROCESS)
 	{
-//		ft_printerror("mode sh_process\n");
-		signal(SIGINT, SIG_DFL);
+		signal(SIGINT, SIG_IGN);
+		signal(SIGQUIT, SIG_IGN);
 	}
 	else if (mode == CHILD_PROCESS)
 	{
-		ft_printerror("mode child_process\n");
 		signal(SIGINT, exit_yourself);
 		signal(SIGQUIT, exit_yourself);
 	}

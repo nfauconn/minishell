@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 13:07:05 by user42            #+#    #+#             */
-/*   Updated: 2022/07/12 18:57:59 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/12 19:40:58 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ static void	child_seq(t_sh *sh, t_cmd *cmd, int p[2], int fd_in)
 		builtin_pipe_exec(sh, cmd);
 	else
 		cmd_execve(sh, cmd);
+	signal_catching_mode(PARENT_PROCESS);
 }
 
 static void	parent_seq(t_cmd *cmd, int p[2], int *fd)
@@ -87,6 +88,5 @@ int	launch_pipeline(t_sh *sh, t_cmd *cmd)
 		cmd = cmd->next;
 	}
 	wait_children(sh);
-	signal_catching_mode(INTERACTIVE);
 	return (sh->last_status);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 09:05:21 by user42            #+#    #+#             */
-/*   Updated: 2022/07/08 13:28:55 by user42           ###   ########.fr       */
+/*   Updated: 2022/07/12 19:39:51 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,11 @@ int	launch(t_sh *sh)
 {
 	if (!sh->cmd_list || sh->cmd_nb == 0)
 		return (sh->last_status);
+	signal_catching_mode(PARENT_PROCESS);
 	if (sh->cmd_nb == 1)
 		launch_single(sh, sh->cmd_list);
 	else
 		launch_pipeline(sh, sh->cmd_list);
+	signal_catching_mode(INTERACTIVE);
 	return (sh->last_status);
 }
