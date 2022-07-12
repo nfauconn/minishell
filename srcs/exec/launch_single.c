@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 13:07:55 by user42            #+#    #+#             */
-/*   Updated: 2022/07/12 19:44:31 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/12 19:46:05 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,6 @@
 
 static int	launch_single_builtin(t_sh *sh, t_cmd *cmd)
 {
-/* 	if (cmd->redir_in > NO_REDIR)
-		dup2_close_old(cmd->redir_in, STDIN_FILENO);
-	if (cmd->redir_out > NO_REDIR)
-		dup2_close_old(cmd->redir_out, STDOUT_FILENO); */
-
-// ==> CHECKER LES REDIR DANS ECHO MAIS SI ON DUP APRES ON EST FOUTU VU QU ON A PAS FORK
 	sh->last_status = sh->exec_built[cmd->built_i](sh, cmd);
 	return (sh->last_status);
 }
