@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 17:55:15 by user42            #+#    #+#             */
-/*   Updated: 2022/07/09 19:38:25 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/12 19:00:24 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 static void	exit_yourself(int sig_num)
 {
 	if (sig_num == SIGQUIT)
-		ft_printerror("Quit (core dumped)\n");
+		
 	exit(sig_num + 128);
 }
 
@@ -33,6 +33,7 @@ static void	new_line(int sig_num)
 {
 	if (sig_num == SIGINT)
 	{
+		ft_printerror("new_line() being executed :\n");
 		write(1, "\n", 1);
 		rl_on_new_line();
 		rl_replace_line("", 0);

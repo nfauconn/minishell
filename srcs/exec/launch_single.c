@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 13:07:55 by user42            #+#    #+#             */
-/*   Updated: 2022/07/09 19:40:10 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/12 18:57:36 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,6 @@ static void	redir_single(t_sh *sh, t_cmd *cmd)
 		dup2_close_old(cmd->redir_out, STDOUT_FILENO);
 }
 
-
-static void	exit_yo(int sig_num)
-{
-	//if (sig_num == SIGQUIT)
-	ft_printerror("Quit (core dumped)\n");
-	exit(sig_num + 128);
-}
-
 static int	launch_single_cmd(t_sh *sh, t_cmd *cmd)
 {
 	pid_t	pid;
@@ -53,9 +45,7 @@ static int	launch_single_cmd(t_sh *sh, t_cmd *cmd)
 		return (exec_error("fork: ", strerror(errno)));
 	if (pid == 0)
 	{
-		//signal_catching_mode(CHILD_PROCESS);
-		signal(SIGINT, exit_yo);
-		signal(SIGQUIT, exit_yo);
+		signal_catching_mode(CHILD_PROCESS);
 		redir_single(sh, cmd);
 		cmd_execve(sh, cmd);
 	}
