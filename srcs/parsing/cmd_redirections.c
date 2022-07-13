@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   conv_utils_redir.c                                 :+:      :+:    :+:   */
+/*   cmd_redirections.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 20:28:23 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/12 22:47:30 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/13 14:54:02 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ static void	set_redir_out(t_sh *sh, t_list *token, t_cmd *cmd, char *file)
 	(void)sh;
 	if (cmd->outfile)
 		ft_strdel(&cmd->outfile);
-	if (access(file, R_OK) == -1)
-		return ;
 	cmd->redir_in_type = token->type;
 	cmd->outfile = ft_strdup(file);
 }
@@ -53,7 +51,7 @@ void	conv_redir(t_sh *sh, t_list *token, t_cmd *cmd)
 		{
 			set_redir_in(sh, token, cmd, file);
 		}
-		else if (is_outfile(token->type) && access(file, W_OK) != -1)
+		else if (is_outfile(token->type))
 		{
 			set_redir_out(sh, token, cmd, file);
 		}

@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:48:38 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/13 13:22:14 by user42           ###   ########.fr       */
+/*   Updated: 2022/07/13 15:00:54 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,11 @@ int	mini_echo(t_sh *sh, t_cmd *cmd)
 	args++;
 	j = 0;
 	nl_flag = echo_handle_nlflag(args, &j);
-	if (cmd->redir_error)
-		return (WRONG_REDIR);
-	if (cmd->redir_out == NO_REDIR)
+	if (sh->cmd_nb > 1)
+	{
+		cmd->redir_in = STDIN_FILENO;
 		cmd->redir_out = STDOUT_FILENO;
+	}
 	while (args[j])
 	{
 		ft_putstr_fd(args[j], cmd->redir_out);

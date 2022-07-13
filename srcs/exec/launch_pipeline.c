@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch_pipeline.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 13:07:05 by user42            #+#    #+#             */
-/*   Updated: 2022/07/12 22:51:50 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/13 14:43:53 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	child_seq(t_sh *sh, t_cmd *cmd, int p[2], int fd_in)
 		close(p[1]);
 		exit(0);
 	}
-	redir_apply(cmd, p, fd_in);
+	redir_apply(sh, cmd, p, fd_in);
 	if (cmd->built_i > -1)
 		builtin_pipe_exec(sh, cmd);
 	else

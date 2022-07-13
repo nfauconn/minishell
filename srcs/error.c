@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 18:49:09 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/09 18:41:13 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/13 13:51:43 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,10 @@ int	exec_error(char *s1, char *s2)
 
 void	error_display(char *s1, char *s2, char *s3)
 {
-	ft_printerror("minish: %s: %s\n", s1, s2, s3);
+	if (s1 && !s2 && !s3)
+		ft_printerror("minish: %s\n", s1);
+	else
+		ft_printerror("minish: %s: %s%s\n", s1, s2, s3);
 }
 
 void	error_exit(char *cmd_name, int8_t error_code)
