@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_heredoc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 12:37:34 by user42            #+#    #+#             */
-/*   Updated: 2022/07/12 22:52:59 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/13 15:10:51 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ char	*run_heredoc(t_sh *sh, char *delim)
 		write(1, "\n", 1);
 		rl_on_new_line();
 	}
+	ft_printerror("path heredoc = %s\n", path);
 	return (path);
 /* 	*fd = open("/tmp/.here_doc", O_RDONLY);
 	if (*fd < 0)

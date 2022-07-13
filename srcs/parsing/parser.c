@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 12:50:49 by user42            #+#    #+#             */
-/*   Updated: 2022/07/08 14:46:07 by user42           ###   ########.fr       */
+/*   Updated: 2022/07/13 15:16:39 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@ int	parsing(t_sh *sh, t_input *input)
 	if (lexer(input->token_list))
 		return (FAILURE);
 	complete_types(input->token_list);
+	#ifdef DEBUG
+	display_token_list(input->token_list);
+	#endif
 	token_expand(input->token_list, sh);
 	token_to_cmd_lst(sh, input->token_list);
 	#ifdef DEBUG
@@ -35,8 +38,6 @@ int	parsing(t_sh *sh, t_input *input)
 }
 
 /*
-	#ifdef DEBUG
-	display_token_list(input->token_list);
-	#endif
+
 
 */

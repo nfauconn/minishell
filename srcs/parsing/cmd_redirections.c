@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 20:28:23 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/13 14:54:02 by user42           ###   ########.fr       */
+/*   Updated: 2022/07/13 15:30:25 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,10 @@ void	conv_redir(t_sh *sh, t_list *token, t_cmd *cmd)
 	while (token && !is_sep(token->type) && !errno)
 	{
 		file = (char *)token->content;
-		if (is_infile(token->type) && access(file, R_OK) != -1)
+		if (is_infile(token->type))
 		{
 			set_redir_in(sh, token, cmd, file);
+			access(cmd->infile, R_OK);
 		}
 		else if (is_outfile(token->type))
 		{

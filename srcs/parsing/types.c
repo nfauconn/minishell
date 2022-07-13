@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 11:09:58 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/12 21:05:53 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/13 15:19:06 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ void	set_types_for_lex(t_list *token)
 			token->type = APPEND;
 		}
 		if (!is_sep(token->type) && !is_quote(token->type)
-			&& !is_blank(token->type) && !is_redir(token->type))
+			&& !is_blank(token->type) && !is_redir(token->type)
+			&& token->type != DELIMITER)
 			token->type = WORD;
 		token = token->next;
 	}
@@ -51,11 +52,9 @@ void	complete_types(t_list *token)
 {
 	while (token)
 	{
-		if (token->type == '<')
+		if (token->type == '<' && token->type != HEREDOC)
 			token = set_next_type(token, INFILE);
-		else if (token->type == HEREDOC)
-			token = set_next_type(token, DELIMITER);
-		else if (token->type == '>')
+		else if (token->type == '>' && token->type != APPEND)
 			token = set_next_type(token, TRUNC);
 		else if (token->type == APPEND)
 			token = set_next_type(token, APPEND_FILE);
