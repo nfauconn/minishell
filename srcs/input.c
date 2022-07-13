@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 18:10:00 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/09 17:48:17 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/13 15:34:47 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*get_input(t_sh *sh)
 		free(line_read);
 		ft_lstclear(&sh->env, free);
 		ft_strdel(&sh->last_status_str);
-		exit(0);
+		exit(1);
 	}
 	return (line_read);
 }
