@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:52:52 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/09 16:31:53 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/13 23:07:39 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ int	mini_cd(t_sh *sh, t_cmd *cmd)
 		}
 	}
 	if (errno == 2)
-		ft_printerror("minish: cd: %s: %s\n", args[1], strerror(errno));
+		error_display("cd", args[1] , strerror(errno));
 	else if (errno)
-		ft_printerror("minish: cd: %s\n", strerror(errno));
+		ft_printerror("cd", strerror(errno), 0);
 	return (errno);
 }

@@ -1,24 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redir_apply.c                                      :+:      :+:    :+:   */
+/*   pipeline_red.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/08 12:29:45 by user42            #+#    #+#             */
-/*   Updated: 2022/07/13 15:36:03 by user42           ###   ########.fr       */
+/*   Created: 2022/07/13 20:29:41 by nfauconn          #+#    #+#             */
+/*   Updated: 2022/07/13 22:06:51 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
-#include "exec.h"
+#include "redir.h"
 
-/* static void	close_pipe_exit(char *s, int p[2])
-{
-	
-} */
-
-static void	open_redir(t_sh *sh, t_cmd *cmd, int p[2])
+static void	open_pipeline_redir(t_sh *sh, t_cmd *cmd, int p[2])
 {
 	errno = 0;
 	cmd->redir_in = NO_REDIR;
@@ -54,9 +48,8 @@ static void	open_redir(t_sh *sh, t_cmd *cmd, int p[2])
 	}
 }
 
-void	redir_apply(t_sh *sh, t_cmd *cmd, int p[2], int fd_in)
+static void	dup_io(t_cmd *cmd, int p[2], int fd_in)
 {
-	open_redir(sh, cmd, p);
 	if (cmd->redir_in > NO_REDIR)
 		dup2_close_old(cmd->redir_in, STDIN_FILENO);
 	else if (fd_in)
@@ -66,4 +59,10 @@ void	redir_apply(t_sh *sh, t_cmd *cmd, int p[2], int fd_in)
 	else if (cmd->next)
 		dup2(p[1], STDOUT_FILENO);
 	close(p[1]);
+}
+
+void	pipeline_redir(t_sh *sh, t_cmd *cmd, int p[2], int fd_in)
+{
+	open_pipeline_redir(sh, cmd, p);
+	dup_io(cmd, p, fd_in);
 }

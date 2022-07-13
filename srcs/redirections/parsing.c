@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_redirections.c                                 :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 20:28:23 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/13 15:30:25 by user42           ###   ########.fr       */
+/*   Updated: 2022/07/13 23:31:18 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "redir.h"
 
 static void	set_redir_out(t_sh *sh, t_list *token, t_cmd *cmd, char *file)
 {
@@ -23,6 +23,8 @@ static void	set_redir_out(t_sh *sh, t_list *token, t_cmd *cmd, char *file)
 
 static void	set_redir_in(t_sh *sh, t_list *token, t_cmd *cmd, char *file)
 {
+	char	*heredoc_no;
+
 	if (cmd->infile)
 		ft_strdel(&cmd->infile);
 	if (token->type == INFILE)
@@ -34,11 +36,15 @@ static void	set_redir_in(t_sh *sh, t_list *token, t_cmd *cmd, char *file)
 	{
 		cmd->redir_in_type = HEREDOC;
 		sh->heredoc_nb++;
-		cmd->infile = run_heredoc(sh, (char *)token->content);
+		heredoc_no = ft_itoa(sh->heredoc_nb);
+		cmd->infile = ft_strjoin("/tmp/.here_doc", heredoc_no);
+		ft_strdel(&heredoc_no);
+					ft_printerror("cmd->infile = %s\n", cmd->infile);
+		run_heredoc(sh, cmd->infile, (char *)token->content);
 	}
 }
 
-void	conv_redir(t_sh *sh, t_list *token, t_cmd *cmd)
+void	fill_cmd_redir(t_sh *sh, t_list *token, t_cmd *cmd)
 {
 	char	*file;
 	char	*tmp;
@@ -47,10 +53,11 @@ void	conv_redir(t_sh *sh, t_list *token, t_cmd *cmd)
 	while (token && !is_sep(token->type) && !errno)
 	{
 		file = (char *)token->content;
-		if (is_infile(token->type))
+		if (is_infile_or_heredoc(token->type))
 		{
 			set_redir_in(sh, token, cmd, file);
-			access(cmd->infile, R_OK);
+			if (token->type == INFILE)
+				access(cmd->infile, R_OK);
 		}
 		else if (is_outfile(token->type))
 		{

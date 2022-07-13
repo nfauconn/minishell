@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:13:37 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/08 13:21:16 by user42           ###   ########.fr       */
+/*   Updated: 2022/07/13 23:10:49 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ char	*expand_string(char *ptr, t_sh *sh)
 		if (*ptr == '$')
 		{
 			var_val = expanded_content(&ptr, sh);
-			printf("var_val = %s\n", var_val);
 			new_size = ft_strlen(new) + ft_strlen(var_val) + 1;
 			new = ft_realloc(new, new_size);
 			ft_strlcat(new, var_val, new_size);
@@ -110,22 +109,20 @@ void	token_expand(t_list *token, t_sh *sh)
 
 	while (token)
 	{
-		if (token->type == DELIMITER)
+		if (token->type != DELIMITER)
 		{
-			token = token->next;
-			continue ;
-		}
-		tmp = token->content;
-		if (is_quote(*tmp) || (*tmp == '$' && is_quote(*(tmp + 1))))
-		{
-			token->content = expand_quotes(tmp, sh);
-			free(tmp);
-			token->type = WORD;
-		}
-		else if (ft_strchr(tmp, '$') && ft_strlen(tmp) > 1)
-		{
-			token->content = expand_string(tmp, sh);
-			free(tmp);
+			tmp = token->content;
+			if (is_quote(*tmp) || (*tmp == '$' && is_quote(*(tmp + 1))))
+			{
+				token->content = expand_quotes(tmp, sh);
+				free(tmp);
+				token->type = WORD;
+			}
+			else if (ft_strchr(tmp, '$') && ft_strlen(tmp) > 1)
+			{
+				token->content = expand_string(tmp, sh);
+				free(tmp);
+			}
 		}
 		token = token->next;
 	}

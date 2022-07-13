@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_comparison.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 22:55:34 by user42            #+#    #+#             */
-/*   Updated: 2022/07/13 15:21:41 by user42           ###   ########.fr       */
+/*   Updated: 2022/07/13 23:26:58 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	is_sep(int c)
 	return (c == PIPE);
 }
 
-int	is_infile(int c)
+int	is_infile_or_heredoc(int c)
 {
 	return (c == INFILE || c == DELIMITER);
 }

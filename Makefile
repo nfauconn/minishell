@@ -4,6 +4,7 @@ INC_DIR = ./includes
 SRC_DIR  = ./srcs
 BUILTINS = builtins/
 EXEC = exec/
+REDIR = redirections/
 PARSING = parsing/
 BUILD_DIR  = ./objs
 
@@ -34,19 +35,21 @@ SRCS := ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		expand_utils \
 		conv_to_cmd \
 		cmd_creat \
-		cmd_redirections \
 		parser \
 		utils_comparison \
 		utils_comparison2} \
+		${addprefix ${REDIR}, \
+		heredoc \
+		parsing \
+		pipeline_red \
+		single_red \
+		utils} \
 		${addprefix ${EXEC}, \
 		cmd_execve \
 		cmd_path \
 		launch \
 		launch_pipeline \
 		launch_single \
-		redir_apply \
-		redir_heredoc \
-		redir_utils \
 		wait \
 		${addprefix ${BUILTINS}, \
 		cd \

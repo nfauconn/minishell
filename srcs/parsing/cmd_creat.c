@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   conv_utils.c                                       :+:      :+:    :+:   */
+/*   cmd_creat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 11:37:25 by user42            #+#    #+#             */
-/*   Updated: 2022/07/12 21:22:30 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/13 20:54:49 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+#include "redir.h"
 
 size_t	get_cmd_tab_sz(t_list *token)
 {
@@ -100,7 +101,7 @@ t_cmd	*create_new_cmd(t_sh *sh, t_list *token)
 	new->infile = NULL;
 	new->outfile = NULL;
 	new->redir_error = NULL;
-	conv_redir(sh, token, new);
+	fill_cmd_redir(sh, token, new);
 	new->next = NULL;
 	return (new);
 }

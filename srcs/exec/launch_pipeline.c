@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   launch_pipeline.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 13:07:05 by user42            #+#    #+#             */
-/*   Updated: 2022/07/13 14:43:53 by user42           ###   ########.fr       */
+/*   Updated: 2022/07/13 22:15:51 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
+#include "redir.h"
 
 static int	builtin_pipe_exec(t_sh *sh, t_cmd *cmd)
 {
@@ -36,7 +37,7 @@ static void	child_seq(t_sh *sh, t_cmd *cmd, int p[2], int fd_in)
 		close(p[1]);
 		exit(0);
 	}
-	redir_apply(sh, cmd, p, fd_in);
+	pipeline_redir(sh, cmd, p, fd_in);
 	if (cmd->built_i > -1)
 		builtin_pipe_exec(sh, cmd);
 	else

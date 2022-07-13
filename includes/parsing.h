@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 12:11:35 by user42            #+#    #+#             */
-/*   Updated: 2022/07/12 22:25:47 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/13 23:26:58 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	display_token_list(t_list *lst);
 t_list *skip_token(t_list *token, int to_skip);
 
 /* COMPARISON */
-int		is_infile(int c);
+int		is_infile_or_heredoc(int c);
 int		is_outfile(int c);
 int		is_redir(int c);
 int		is_redir_path(int c);
@@ -68,7 +68,6 @@ size_t	get_cmd_nb(t_list *token);
 size_t	get_cmd_args_sz(t_list *token);
 void	token_to_cmd_lst(t_sh *sh, t_list *token);
 t_cmd	*create_new_cmd(t_sh *sh, t_list *token);
-void	conv_redir(t_sh *sh, t_list *token, t_cmd *cmd);
 void	add_cmd_to_list(t_cmd **head, t_cmd *new);
 
 #endif
