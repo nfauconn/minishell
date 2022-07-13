@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:48:38 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/09 16:11:55 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/13 13:22:14 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ int	mini_echo(t_sh *sh, t_cmd *cmd)
 	args++;
 	j = 0;
 	nl_flag = echo_handle_nlflag(args, &j);
+	if (cmd->redir_error)
+		return (WRONG_REDIR);
+	if (cmd->redir_out == NO_REDIR)
+		cmd->redir_out = STDOUT_FILENO;
 	while (args[j])
 	{
-		if (cmd->redir_out == REDIR_FAIL)
-			return (WRONG_REDIR);
-		if (cmd->redir_out == NO_REDIR)
-			cmd->redir_out = STDIN_FILENO;
 		ft_putstr_fd(args[j], cmd->redir_out);
 		if (args[j + 1])
 			ft_putstr_fd(" ", cmd->redir_out);
