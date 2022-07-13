@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:53:50 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/09 16:36:07 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/13 13:14:26 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	do_export(t_list **env, char *assign)
 	char	*str;
 	u_int	var_len;
 
-	var_len = strchr(assign, '=') - assign;
+	var_len = ft_strchr(assign, '=') - assign;
 	if (var_len <= 0)
 		return ;
 	l = (t_list *)(*env);
