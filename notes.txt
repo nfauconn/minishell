@@ -1,15 +1,13 @@
 strace -ff  (-e <fonctions qu on veut voir>)
 
 minish> << P
-cmd->infile = /tmp/.here_doc1
 > ss
 > s
 > s
 > P
 minish: '': command not found
+
 minish> < i
-errno = 2, strerror(errno) = No such file or directory
-errno = 2, strerror(errno) = No such file or directory
 minish: i: No such file or directory
 minish> 
 

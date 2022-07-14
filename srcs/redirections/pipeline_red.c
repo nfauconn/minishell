@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipeline_red.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 20:29:41 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/13 22:06:51 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/14 07:58:03 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,8 @@ static void	open_pipeline_redir(t_sh *sh, t_cmd *cmd, int p[2])
 	}
 }
 
-static void	dup_io(t_cmd *cmd, int p[2], int fd_in)
+static void	dup_output(t_cmd*cmd, int p[2])
 {
-	if (cmd->redir_in > NO_REDIR)
-		dup2_close_old(cmd->redir_in, STDIN_FILENO);
-	else if (fd_in)
-		dup2_close_old(fd_in, STDIN_FILENO);
 	if (cmd->redir_out > NO_REDIR)
 		dup2_close_old(cmd->redir_out, STDOUT_FILENO);
 	else if (cmd->next)
@@ -61,8 +57,17 @@ static void	dup_io(t_cmd *cmd, int p[2], int fd_in)
 	close(p[1]);
 }
 
+static void	dup_input(t_cmd *cmd, int fd_in)
+{
+	if (cmd->redir_in > NO_REDIR)
+		dup2_close_old(cmd->redir_in, STDIN_FILENO);
+	else if (fd_in)
+		dup2_close_old(fd_in, STDIN_FILENO);
+}
+
 void	pipeline_redir(t_sh *sh, t_cmd *cmd, int p[2], int fd_in)
 {
 	open_pipeline_redir(sh, cmd, p);
-	dup_io(cmd, p, fd_in);
+	dup_input(cmd, fd_in);
+	dup_output(cmd, p);
 }
