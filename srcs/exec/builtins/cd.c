@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mdankou < mdankou@student.42.fr >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:52:52 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/13 23:07:39 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/16 16:11:24 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@ int	mini_cd(t_sh *sh, t_cmd *cmd)
 {
 	char	*cwd;
 	char	*tmp;
+	char	**args;
 
-	char **args = cmd->args;
+	args = cmd->args;
 	if (!args[1])
 		errno = EINVAL;
 	else if (args[2])
@@ -41,7 +42,7 @@ int	mini_cd(t_sh *sh, t_cmd *cmd)
 		}
 	}
 	if (errno == 2)
-		error_display("cd", args[1] , strerror(errno));
+		error_display("cd", args[1], strerror(errno));
 	else if (errno)
 		ft_printerror("cd", strerror(errno), 0);
 	return (errno);

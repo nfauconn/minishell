@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdankou < mdankou@student.42.fr >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:53:50 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/08 13:20:34 by user42           ###   ########.fr       */
+/*   Updated: 2022/07/16 15:58:30 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,25 +40,24 @@ void	del_elm_mid(t_list	*l, char *var_name)
 int	mini_unset(t_sh *sh, t_cmd *cmd)
 {
 	size_t	j;
+	int		var_len;
 	t_list	*l;
 	t_list	*elm;
-	char	*str;
-	int		var_len;
+	char	**var_name;
 
-	t_list	**env = &sh->env;
-	char	**var_name = cmd->args;
+	var_name = cmd->args;
 	j = 0;
 	while (var_name && var_name[++j])
 	{
-		if (!*env)
+		l = sh->env;
+		if (!l)
 			return (0);
-		l = (t_list *)(*env);
-		str = (char *)l->content;
 		var_len = ft_strlen(var_name[j]);
-		if (!ft_strncmp(var_name[j], str, var_len) && str[var_len] == '=')
+		if (!ft_strncmp(var_name[j], l->content, var_len)
+			&& ((char *)l->content)[var_len] == '=')
 		{
-			elm = (*env);
-			(*env) = (*env)->next;
+			elm = sh->env;
+			sh->env = sh->env->next;
 			ft_lstdelone(elm, free);
 		}
 		else

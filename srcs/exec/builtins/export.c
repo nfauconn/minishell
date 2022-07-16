@@ -6,7 +6,7 @@
 /*   By: mdankou < mdankou@student.42.fr >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:53:50 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/13 18:25:19 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/07/16 12:26:18 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,9 @@ void	do_export(t_list **env, char *assign)
 {
 	t_list	*l;
 	char	*str;
-	u_int	var_len;
+	int		var_len;
 
-	var_len = strchr(assign, '=') - assign;
+	var_len = ft_strchr(assign, '=') - assign;
 	if (var_len <= 0)
 		return ;
 	l = (t_list *)(*env);
@@ -122,7 +122,7 @@ int	mini_export(t_sh *sh, t_cmd *cmd)
 			do_export(&sh->env, var_assigns[j]);
 		else
 		{
-			ft_printerror("minish: export: `%s':" \
+			ft_printerror("minish: export: `%s': " \
 				"not a valid identifier\n", var_assigns[j]);
 			status = 1;
 		}
