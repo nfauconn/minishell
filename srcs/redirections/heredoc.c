@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdankou < mdankou@student.42.fr >          +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 12:37:34 by user42            #+#    #+#             */
-/*   Updated: 2022/07/19 18:26:58 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/07/20 16:57:05 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,26 @@ static void	write_heredoc_nbline(int nb)
 	close(fd);
 }
 
+static void	heredoc_warning(int nbltotal, char *delim)
+{
+	read_heredoc_nbline(&nbltotal);	
+	ft_printerror("minish: warning: here-document"\
+	" at line %d delimited by end-of-file (wanted `%s')\n", nbltotal, delim);
+}
+
+static t_bool	quoted_delim(char **delim)
+{
+	t_bool	quoted;
+	char	*tmp;
+
+	// cas possibles : $'DELIM' 'DELIM' $"DELIM fefe" 
+	// pattern : $ --> fait pas partie du delim
+	quoted = (*delim[0] == QUOTE || *delim[0] == DB_QUOTE);
+	tmp = *delim;
+	*delim = ft_substr(*delim + quoted, 0, ft_strlen(delim) - 2 * quoted);
+	free(tmp);
+}
+
 static void	heredoc_job(t_sh *sh, char *heredoc_path, char *delim)
 {
 	int		fd;
@@ -45,12 +65,11 @@ static void	heredoc_job(t_sh *sh, char *heredoc_path, char *delim)
 	t_bool	quoted;
 
 	nbl = 0;
-	read_heredoc_nbline(&nbltotal);
+
 	fd = open(heredoc_path, O_CREAT | O_TRUNC | O_WRONLY, 0644);
 	if (fd < 0)
 		exit(errno);
-	quoted = (delim[0] == QUOTE || delim[0] == DB_QUOTE);
-	delim = ft_substr(delim + quoted, 0, ft_strlen(delim) - 2 * quoted);
+	quoted = quoted_delim(&delim);
 	line = readline("> ");
 	while (++nbl && line && (line[0] == '\n' || ft_strcmp(line, delim)))
 	{
@@ -60,8 +79,7 @@ static void	heredoc_job(t_sh *sh, char *heredoc_path, char *delim)
 		ft_replace_free_old((void **)&line, readline("> "));
 	}
 	if (!line)
-		ft_printerror("minish: warning: here-document"\
-		" at line %d delimited by end-of-file (wanted `%s')\n", nbltotal, delim);
+		heredoc_warning(nbltotal, delim);
 	write_heredoc_nbline(nbltotal += nbl);
 	free(line);
 	free(delim);
