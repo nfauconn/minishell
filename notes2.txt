@@ -1,0 +1,13 @@
+cat << DEL''IM
+> LOL
+> DEL''IM
+> DELIM
+LOL
+DEL''IM
+
+heredoc quand quotes dedans --> comportement mysterieux
+
+
+
+	new->heredoc_nb = 0;
+	new->heredoc_lines = 0;

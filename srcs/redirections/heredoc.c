@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 12:37:34 by user42            #+#    #+#             */
-/*   Updated: 2022/07/20 17:11:45 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/20 17:14:08 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,9 @@ static t_bool	quoted_delim(char **delim)
 
 	/* cas possibles :	 'DELIM' --> pas d expand
 						"DELIM" --> expand juste les $
-						DELIM = $"DELIM"/$'DELIM' = "$DELIM"/'$DELIM' = $DELIM
+						DELIM --> expand
+						$"DELIM"/$'DELIM' = "$DELIM"/'$DELIM' --> pas d'expand ? 
+															 --> MODIF LE DELIM 
 	*/
 	quoted = (*delim[0] == QUOTE || *delim[0] == DB_QUOTE);
 	tmp = *delim;

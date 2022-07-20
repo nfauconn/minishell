@@ -66,5 +66,6 @@ void	exit_clear(t_sh *sh, unsigned int exit_code)
 {
 	ft_lstclear(&sh->env, free);
 	clear_sh(sh);
+	unlink(HEREDOC_NBL_PATH);
 	exit(exit_code);
 }

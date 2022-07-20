@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 12:07:25 by user42            #+#    #+#             */
-/*   Updated: 2022/07/12 22:10:33 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/20 17:40:34 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_cmd
 	int				redir_out;
 	int				redir_in_type;
 	int				redir_out_type;
+	int				heredoc_nb;
 	char			*infile;
 	char			*outfile;
 	char			*redir_error;
