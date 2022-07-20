@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mdankou < mdankou@student.42.fr >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:13:37 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/13 23:10:49 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/19 17:08:05 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ char	*expand_string(char *ptr, t_sh *sh)
 		start = ptr;
 		while (*ptr && *ptr != '$')
 			ptr++;
-		new_size += ptr - start;
+		new_size += ptr - start + 1;
 		new = ft_realloc(new, new_size);
 		ft_strlcat(new, start, new_size);
 	}

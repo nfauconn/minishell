@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mdankou < mdankou@student.42.fr >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 20:35:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/13 23:00:17 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/19 17:37:51 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include "parsing.h"
 # include "exec.h"
 # include "signals.h"
+
+#define HEREDOC_NBL_PATH "/tmp/.here_doc_nblines"
 
 /* PARSING__PART */
 void	fill_cmd_redir(t_sh *sh, t_list *token, t_cmd *cmd);

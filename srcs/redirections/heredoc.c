@@ -3,33 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mdankou < mdankou@student.42.fr >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 12:37:34 by user42            #+#    #+#             */
-/*   Updated: 2022/07/13 20:55:41 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/19 18:26:58 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include "redir.h"
 
-static void	read_heredoc_nbline(char *heredoc_path, int *nb)
+static void	read_heredoc_nbline(int *nb)
 {
 	int	fd;
 
-	fd = open(heredoc_path, O_RDONLY);
+	*nb = 1;
+	fd = open(HEREDOC_NBL_PATH, O_RDONLY);
 	if (fd < 0)
 		return ;
 	read(fd, nb, sizeof(int));
+	close(fd);
 }
 
-static void	write_heredoc_nbline(char *heredoc_path, int nb)
+static void	write_heredoc_nbline(int nb)
 {
 	int	fd;
 
-	fd = open(heredoc_path, O_CREAT | O_TRUNC | O_WRONLY, 0644);
+	fd = open(HEREDOC_NBL_PATH, O_CREAT | O_TRUNC | O_WRONLY, 0644);
 	if (fd < 0)
 		return ;
 	write(fd, &nb, sizeof(int));
+	close(fd);
 }
 
 static void	heredoc_job(t_sh *sh, char *heredoc_path, char *delim)
@@ -38,26 +42,29 @@ static void	heredoc_job(t_sh *sh, char *heredoc_path, char *delim)
 	int		nbltotal;
 	int		nbl;
 	char	*line;
+	t_bool	quoted;
 
 	nbl = 0;
-	nbltotal = 1;
-	read_heredoc_nbline(heredoc_path, &nbltotal);
+	read_heredoc_nbline(&nbltotal);
 	fd = open(heredoc_path, O_CREAT | O_TRUNC | O_WRONLY, 0644);
 	if (fd < 0)
-		exit(-1);
+		exit(errno);
+	quoted = (delim[0] == QUOTE || delim[0] == DB_QUOTE);
+	delim = ft_substr(delim + quoted, 0, ft_strlen(delim) - 2 * quoted);
 	line = readline("> ");
 	while (++nbl && line && (line[0] == '\n' || ft_strcmp(line, delim)))
 	{
-		ft_replace_free_old((void **)&line, expand_string(line, sh));
+		if (!quoted)
+			ft_replace_free_old((void **)&line, expand_string(line, sh));
 		ft_putendl_fd(line, fd);
-		free(line);
-		line = readline("> ");
+		ft_replace_free_old((void **)&line, readline("> "));
 	}
 	if (!line)
 		ft_printerror("minish: warning: here-document"\
 		" at line %d delimited by end-of-file (wanted `%s')\n", nbltotal, delim);
-	write_heredoc_nbline(heredoc_path, nbltotal += nbl);
+	write_heredoc_nbline(nbltotal += nbl);
 	free(line);
+	free(delim);
 	close(fd);
 	exit(0);
 }
