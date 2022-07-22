@@ -3,16 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:48:38 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/13 15:00:54 by user42           ###   ########.fr       */
+/*   Updated: 2022/07/21 19:45:05 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-int	echo_handle_nlflag(char **args, size_t *j)
+static void	handle_redirection(t_sh *sh, t_cmd *cmd)
+{
+	if (sh->cmd_nb > 1)
+	{
+		cmd->redir_in = STDIN_FILENO;
+		cmd->redir_out = STDOUT_FILENO;
+	}
+}
+
+static int	echo_handle_nlflag(char **args, size_t *j)
 {
 	int		nl_flag;
 	size_t	i;
@@ -38,19 +47,15 @@ int	echo_handle_nlflag(char **args, size_t *j)
 
 int	mini_echo(t_sh *sh, t_cmd *cmd)
 {
+	char	**args;
 	int		nl_flag;
 	size_t	j;
 
-	(void)sh;
-	char **args = cmd->args;
+	args = cmd->args;
 	args++;
 	j = 0;
 	nl_flag = echo_handle_nlflag(args, &j);
-	if (sh->cmd_nb > 1)
-	{
-		cmd->redir_in = STDIN_FILENO;
-		cmd->redir_out = STDOUT_FILENO;
-	}
+	handle_redirection(sh, cmd);
 	while (args[j])
 	{
 		ft_putstr_fd(args[j], cmd->redir_out);

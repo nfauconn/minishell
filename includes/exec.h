@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:22:26 by mdankou           #+#    #+#             */
-/*   Updated: 2022/07/13 20:24:00 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/23 00:16:20 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@
 # define NOT_EXECUTABLE 126
 # define WRONG_REDIR 1
 # define EMPTY_CMD 127
+# define NO_SUCH_FILE 127
+
+//droits d'acces 126
 
 # include "extern_libs.h"
 # include "structs.h"
@@ -48,6 +51,8 @@ void	launch_single(t_sh *sh, t_cmd *cmd);
 void	cmd_execve(t_sh *sh, t_cmd *cmd);
 
 /* END */
-int		wait_children(t_sh *sh);
+void	wait_children(t_sh *sh);
+void	wait_child(t_sh *sh);
+void	wait_heredoc(t_sh *sh);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 12:11:35 by user42            #+#    #+#             */
-/*   Updated: 2022/07/13 23:26:58 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/23 00:16:33 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,12 @@
 # define QUOTE 39
 # define DB_QUOTE 34
 # define PIPE 124
-# define HEREDOC 129
-# define APPEND 130
 # define WORD 131
-# define INFILE 133
-# define TRUNC 134
-# define DELIMITER 135
-# define APPEND_FILE 136
+# define INFILE_NAME 133
+# define OUTFILE_NAME 134
+# define HEREDOC_DELIM 135
+# define QUOTED_HEREDOC_DELIM 137
+# define APPEND_OUTFILE_NAME 136
 
 # include "extern_libs.h"
 # include "structs.h"
@@ -34,25 +33,25 @@
 int		tokenizer(t_input *input, char *line);
 void	add_token_to_list(t_list **token_list, char *token);
 void	display_token_list(t_list *lst);
-t_list *skip_token(t_list *token, int to_skip);
+t_list	*skip_token(t_list *token, int to_skip);
 
 /* COMPARISON */
-int		is_infile_or_heredoc(int c);
-int		is_outfile(int c);
-int		is_redir(int c);
-int		is_redir_path(int c);
+int		is_outfilename(int c);
+int		is_rediroperator(int c);
+int		is_filename(int c);
 int		is_sep(int c);
 int		is_dollar_quote(t_list *token);
-int		is_word(int c);
+int		is_metacharacter(int c);
 int		is_builtin(char *cmd_name);
-
-/* TYPES */
-void	set_types_for_lex(t_list *token);
-void	complete_types(t_list *token);
+int		is_relative_path(char *filename);
 
 /* LEX */
 int		lexer(t_list *tokens);
 int		lex_error(char *s);
+
+/* TYPES */
+void	set_token_types(t_list *token);
+t_list	*set_next_words_type(t_list *token, int type);
 
 /* EXPAND */
 char	*expand_string(char *ptr, t_sh *sh);
@@ -61,6 +60,8 @@ char	*var_value(char *str, size_t len, t_list *env);
 void	add_until_var(char **buf, char **ptr, char *start);
 void	add_expanded_var(char **buf, char **ptr, t_sh *sh);
 char	*get_last_status(t_sh *sh);
+t_list	*set_delim_type(t_list *token);
+char	*var_value(char *str, size_t len, t_list *env);
 
 /* PARSER */
 int		parsing(t_sh *sh, t_input *input);

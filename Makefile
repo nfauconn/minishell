@@ -39,8 +39,11 @@ SRCS := ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		utils_comparison \
 		utils_comparison2} \
 		${addprefix ${REDIR}, \
-		heredoc \
-		parsing \
+		check_access \
+		heredoc_run \
+		heredoc_set \
+		open \
+		cmd_redir_path \
 		pipeline_red \
 		single_red \
 		utils} \

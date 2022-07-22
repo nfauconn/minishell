@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 22:55:34 by user42            #+#    #+#             */
-/*   Updated: 2022/07/13 23:26:58 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/23 00:55:01 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,25 @@ int	is_sep(int c)
 	return (c == PIPE);
 }
 
-int	is_infile_or_heredoc(int c)
+int	is_outfilename(int c)
 {
-	return (c == INFILE || c == DELIMITER);
+	return (c == OUTFILE_NAME || c == APPEND_OUTFILE_NAME);
 }
 
-int	is_outfile(int c)
+int	is_rediroperator(int c)
 {
-	return (c == TRUNC || c == APPEND_FILE);
+	return (c == '<' || c == '>');
 }
 
-int	is_redir(int c)
+int	is_filename(int c)
 {
-	return (c == '<' || c == '>' || c == HEREDOC
-		|| c == APPEND);
+	return (c == INFILE_NAME || c == HEREDOC_DELIM
+		|| c == OUTFILE_NAME || c == APPEND_OUTFILE_NAME);
 }
 
-int	is_redir_path(int c)
+int	is_relative_path(char *filename)
 {
-	return (c == INFILE || c == DELIMITER
-		|| c == TRUNC || c == APPEND_FILE);
+	if (ft_strchr(filename, '/'))
+		return (0);
+	return (1);
 }

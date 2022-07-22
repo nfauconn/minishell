@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   heredoc.c                                          :+:      :+:    :+:   */
+/*   heredoc_run.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 12:37:34 by user42            #+#    #+#             */
-/*   Updated: 2022/07/20 18:18:52 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/07/23 01:03:56 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,45 +37,23 @@ static void	write_heredoc_nbline(int nb)
 
 static void	heredoc_warning(int nbltotal, char *delim)
 {
-	read_heredoc_nbline(&nbltotal);	
+	read_heredoc_nbline(&nbltotal);
 	ft_printerror("minish: warning: here-document"\
 	" at line %d delimited by end-of-file (wanted `%s')\n", nbltotal, delim);
 }
 
-static t_bool	quoted_delim(char **delim)
-{
-	t_bool	quoted;
-	char	*tmp;
-	char	*start;
-
-	/* cas possibles :	 'DELIM' --> pas d expand
-						"DELIM" --> expand juste les $
-						DELIM --> expand
-						$"DELIM"/$'DELIM' = "$DELIM"/'$DELIM' --> pas d'expand ? 
-															 --> MODIF LE DELIM 
-	*/
-	start = *delim + (*delim[0] == '$');
-	quoted = (*delim[0] == QUOTE || *delim[0] == DB_QUOTE);
-	tmp = *delim;
-	*delim = ft_substr(start + quoted, 0, ft_strlen(start) - 2 * quoted);
-	free(tmp);
-	return (quoted);
-}
-
-static void	heredoc_job(t_sh *sh, char *heredoc_path, char *delim)
+static void	heredoc_job(t_sh *sh, char *hdoc_path, char *delim, t_bool quoted)
 {
 	int		fd;
 	int		nbltotal;
 	int		nbl;
 	char	*line;
-	t_bool	quoted;
 
 	nbl = 0;
 	nbltotal = 1;
-	fd = open(heredoc_path, O_CREAT | O_TRUNC | O_WRONLY, 0644);
+	fd = open(hdoc_path, O_CREAT | O_TRUNC | O_WRONLY, 0644);
 	if (fd < 0)
 		exit(errno);
-	quoted = quoted_delim(&delim);
 	line = readline("> ");
 	while (++nbl && line && (line[0] == '\n' || ft_strcmp(line, delim)))
 	{
@@ -88,15 +66,13 @@ static void	heredoc_job(t_sh *sh, char *heredoc_path, char *delim)
 		heredoc_warning(nbltotal, delim);
 	write_heredoc_nbline(nbltotal += nbl);
 	free(line);
-	free(delim);
 	close(fd);
 	exit(0);
 }
 
-void	run_heredoc(t_sh *sh, char *heredoc_path, char *delim)
+void	run_heredoc(t_sh *sh, char *hdoc_path, char *delim, t_bool quoted)
 {
 	pid_t		pid;
-	int			wstatus;
 
 	signal_catching_mode(PARENT_PROCESS);
 	pid = fork();
@@ -104,14 +80,10 @@ void	run_heredoc(t_sh *sh, char *heredoc_path, char *delim)
 		error_display("fork", strerror(errno), 0);
 	if (pid == 0)
 	{
-		signal_catching_mode(CHILD_PROCESS);
-		heredoc_job(sh, heredoc_path, delim);
+		signal(SIGQUIT, SIG_IGN);
+		signal(SIGINT, SIG_DFL);
+		heredoc_job(sh, hdoc_path, delim, quoted);
 	}
-	wait(&wstatus);
+	wait_heredoc(sh);
 	signal_catching_mode(INTERACTIVE);
-	if (wstatus != 0)
-	{
-		write(1, "\n", 1);
-		rl_on_new_line();
-	}
 }

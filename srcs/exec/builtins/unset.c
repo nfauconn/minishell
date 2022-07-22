@@ -6,7 +6,7 @@
 /*   By: mdankou < mdankou@student.42.fr >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:53:50 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/16 15:58:30 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/07/22 16:24:19 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,31 +37,58 @@ void	del_elm_mid(t_list	*l, char *var_name)
 	}
 }
 
+static int	is_valid_identifier(char *str)
+{
+	size_t	i;
+
+	if (!ft_isalpha(str[0]) && str[0] != '_')
+		return (0);
+	i = 1;
+	while (str[i])
+	{
+		if (!ft_isalnum(str[i]) && str[i] != '_')
+			return (0);
+		++i;
+	}
+	return (1);
+}
+
+static void	do_unset(t_sh *sh, char *id)
+{
+	int		var_len;
+	t_list	*elm;
+
+	var_len = ft_strlen(id);
+	if (!ft_strncmp(id, sh->env->content, var_len)
+		&& ((char *)sh->env->content)[var_len] == '=')
+	{
+		elm = sh->env;
+		sh->env = sh->env->next;
+		ft_lstdelone(elm, free);
+	}
+	else
+		del_elm_mid(sh->env, id);
+}
+
 int	mini_unset(t_sh *sh, t_cmd *cmd)
 {
 	size_t	j;
-	int		var_len;
-	t_list	*l;
-	t_list	*elm;
+	int		status;
 	char	**var_name;
 
 	var_name = cmd->args;
 	j = 0;
+	status = 0;
 	while (var_name && var_name[++j])
 	{
-		l = sh->env;
-		if (!l)
-			return (0);
-		var_len = ft_strlen(var_name[j]);
-		if (!ft_strncmp(var_name[j], l->content, var_len)
-			&& ((char *)l->content)[var_len] == '=')
+		if (!is_valid_identifier(var_name[j]))
 		{
-			elm = sh->env;
-			sh->env = sh->env->next;
-			ft_lstdelone(elm, free);
+			ft_printerror("export: `%s': not a valid identifier\n",
+				var_name[j]);
+			status = 1;
 		}
-		else
-			del_elm_mid(l, var_name[j]);
+		else if (sh->env)
+			do_unset(sh, var_name[j]);
 	}
-	return (0);
+	return (status);
 }

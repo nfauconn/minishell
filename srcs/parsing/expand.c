@@ -3,26 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdankou < mdankou@student.42.fr >          +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:13:37 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/19 17:08:05 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/07/22 20:47:00 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
-
-char	*var_value(char *str, size_t len, t_list *env)
-{
-	while (env)
-	{
-		if (!ft_strncmp(str, (char *)env->content, len)
-			&& ((char *)env->content)[len] == '=')
-			return (ft_strchr((char *)env->content, '=') + 1);
-		env = env->next;
-	}
-	return (NULL);
-}
 
 static char	*expanded_content(char **s, t_sh *sh)
 {
@@ -71,7 +59,7 @@ char	*expand_string(char *ptr, t_sh *sh)
 		start = ptr;
 		while (*ptr && *ptr != '$')
 			ptr++;
-		new_size += ptr - start + 1;
+		new_size += ptr - start;
 		new = ft_realloc(new, new_size);
 		ft_strlcat(new, start, new_size);
 	}
@@ -109,20 +97,21 @@ void	token_expand(t_list *token, t_sh *sh)
 
 	while (token)
 	{
-		if (token->type != DELIMITER)
+		tmp = token->content;
+		if (!ft_strcmp(tmp, "<<"))
 		{
+			token = set_delim_type(token);
 			tmp = token->content;
-			if (is_quote(*tmp) || (*tmp == '$' && is_quote(*(tmp + 1))))
-			{
-				token->content = expand_quotes(tmp, sh);
-				free(tmp);
-				token->type = WORD;
-			}
-			else if (ft_strchr(tmp, '$') && ft_strlen(tmp) > 1)
-			{
-				token->content = expand_string(tmp, sh);
-				free(tmp);
-			}
+		}
+		if (is_quote(*tmp) || (*tmp == '$' && is_quote(*(tmp + 1))))
+		{
+			token->content = expand_quotes(tmp, sh);
+			free(tmp);
+		}
+		else if (ft_strchr(tmp, '$') && ft_strlen(tmp) > 1)
+		{
+			token->content = expand_string(tmp, sh);
+			free(tmp);
 		}
 		token = token->next;
 	}

@@ -3,27 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   types.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 11:09:58 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/13 15:19:06 by user42           ###   ########.fr       */
+/*   Updated: 2022/07/23 00:17:00 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-static t_list	*set_next_type(t_list *token, int type)
+t_list	*set_next_words_type(t_list *token, int type)
 {
-	if (token->next)
+	token = token->next;
+	while (token && !is_metacharacter(token->type))
 	{
-		token->next->type = type;
-		return (token->next);
+		token->type = type;
+		token = token->next;
 	}
-	else
-		return (token);
+	return (token);
 }
 
-void	set_types_for_lex(t_list *token)
+static t_list	*set_type(t_list *token, char *tmp)
+{
+	if (token->type == '<' && !ft_strcmp(tmp, "<"))
+		token = set_next_words_type(token, INFILE_NAME);
+	else if (token->type == '<' && !ft_strcmp(tmp, "<<")
+		&& token->next->type != QUOTED_HEREDOC_DELIM)
+		token = set_next_words_type(token, HEREDOC_DELIM);
+	else if (token->type == '<' && !ft_strcmp(tmp, "<<")
+		&& token->next->type == QUOTED_HEREDOC_DELIM)
+		token = set_next_words_type(token, QUOTED_HEREDOC_DELIM);
+	else if (token->type == '>' && !ft_strcmp(tmp, ">"))
+		token = set_next_words_type(token, OUTFILE_NAME);
+	else if (token->type == '>' && !ft_strcmp(tmp, ">>"))
+		token = set_next_words_type(token, APPEND_OUTFILE_NAME);
+	else if (!is_metacharacter(token->type))
+	{
+		token->type = WORD;
+		token = set_next_words_type(token, WORD);
+	}
+	return (token);
+}
+
+void	set_token_types(t_list *token)
 {
 	char	*tmp;
 
@@ -31,33 +53,8 @@ void	set_types_for_lex(t_list *token)
 	{
 		tmp = (char *)token->content;
 		token->type = *tmp;
- 		if (token->type == '<' && !ft_strcmp(tmp, "<<"))
-		{
-			token->type = HEREDOC;
-			token = set_next_type(token, DELIMITER);
-		}
-		else if (token->type == '>' && !ft_strcmp(tmp, ">>"))
-		{
-			token->type = APPEND;
-		}
-		if (!is_sep(token->type) && !is_quote(token->type)
-			&& !is_blank(token->type) && !is_redir(token->type)
-			&& token->type != DELIMITER)
-			token->type = WORD;
-		token = token->next;
-	}
-}
-
-void	complete_types(t_list *token)
-{
-	while (token)
-	{
-		if (token->type == '<' && token->type != HEREDOC)
-			token = set_next_type(token, INFILE);
-		else if (token->type == '>' && token->type != APPEND)
-			token = set_next_type(token, TRUNC);
-		else if (token->type == APPEND)
-			token = set_next_type(token, APPEND_FILE);
-		token = token->next;
+		token = set_type(token, tmp);
+		if (token)
+			token = token->next;
 	}
 }

@@ -144,7 +144,7 @@ ${BUILD_DIR}/%.o: %.c
 	@${COMP} -MMD ${INCLUDES} -o $@ -c $<
 
 clean:
-	@${RM} ${OBJS}
+	@${RM} ${BUILD_DIR}
 
 fclean: clean
 	@${RM} ${NAME}

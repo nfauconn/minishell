@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 14:06:55 by user42            #+#    #+#             */
-/*   Updated: 2022/07/08 12:56:17 by user42           ###   ########.fr       */
+/*   Updated: 2022/07/21 19:51:03 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ char	**get_env_tab(t_list *env)
 	return (tab);
 }
 
+//Line 84: DO WE HAVE THE RIGHT TO DO THAT LOL, as bash find a path anyways
 char	**get_path_tab(t_list *env)
 {
 	char	**tab;
@@ -79,8 +80,8 @@ char	**get_path_tab(t_list *env)
 		env = env->next;
 	if (!env)
 	{
-		// DO WE HAVE THE RIGHT TO DO THAT LOL, as bash find a path anyways
-		tab = ft_split("/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin", ':');
+		tab = ft_split(
+				"/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin", ':');
 		return (tab);
 	}
 	return (ft_split(env->content + 5, ':'));

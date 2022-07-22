@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 11:37:25 by user42            #+#    #+#             */
-/*   Updated: 2022/07/20 17:39:51 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/21 22:42:52 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,17 +91,11 @@ t_cmd	*create_new_cmd(t_sh *sh, t_list *token)
 	t_cmd	*new;
 
 	new = (t_cmd *)malloc(sizeof(t_cmd));
+	ft_bzero(new, sizeof(t_cmd));
 	new->args = cmd_tab(token);
 	if (new->args)
 		new->name = new->args[0];
 	new->built_i = is_builtin(new->name);
-	new->path = NULL;
-	new->env = NULL;
-	new->env_paths = NULL;
-	new->infile = NULL;
-	new->outfile = NULL;
-	new->redir_error = NULL;
 	fill_cmd_redir(sh, token, new);
-	new->next = NULL;
 	return (new);
 }

@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   check_access.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/16 20:04:06 by user42            #+#    #+#             */
-/*   Updated: 2022/07/22 22:09:32 by nfauconn         ###   ########.fr       */
+/*   Created: 2022/07/23 00:57:11 by nfauconn          #+#    #+#             */
+/*   Updated: 2022/07/23 00:58:32 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "redir.h"
 
-int	main(int ac, char **av, char **env)
+static void	fill_access_error(char **to_fill, char *path, int access_errno)
 {
-	t_input	input;
-	t_sh	sh;
+	char	*tmp;
 
-	(void)ac;
-	(void)av;
-	init_sh(&sh, env);
-	while (1)
+	*to_fill = ft_strjoin(path, ": ");
+	tmp = *to_fill;
+	*to_fill = ft_strjoin(tmp, strerror(access_errno));
+	free(tmp);
+}
+
+int	check_access(char *filename, int flag, char **access_error)
+{
+	if (access(filename, flag) < 0)
 	{
-		signal_catching_mode(INTERACTIVE);
-		init_input(&sh, &input);
-		if (parsing(&sh, &input) == SUCCESS)
-			launch(&sh);
-		clear(&input, &sh);
+		fill_access_error(access_error, filename, errno);
+		return (-1);
 	}
+	return (0);
 }

@@ -1,25 +1,24 @@
 strace -ff  (-e <fonctions qu on veut voir>)
 
-minish> << P
-> ss
-> s
-> s
-> P
-minish: '': command not found
+nfauconn@e1r5p21:~/minish42$ echo lol > /dev/stdout | sleep 4 | < Makiki cat
+bash: Makiki: Permission denied
 
-minish> < i
-minish: i: No such file or directory
-minish> 
+VS
 
-
-The "keyboard" doesnt send any signals, the line discipline does. Find out what a line discipline is, then read man 1 stty
+minish> echo lol > /dev/stdout | sleep 4 | < Makiki cat
+lol
+minish: Makiki: Permission denied
 
 REDIR
 	- handle max opened fd ?
-	- expand contenu
+	- pipeline_red : bash stills open the redir_out if access error on infile, et vice versa
+		==> ne pas oublier d ailleurs que si erreur d'infile ET d'outfile, bash ne print qu une seule erreur, la PREMIERE de la ligne de commande (pas celle d'infile)
+	- pipeline_open : continuer modifs
 
+HEREDOC
+	- DELIM contient aussi les strings entre quotes collees sans espace (MAIS NE SONT PAS EXPANDED + comportement mysterieux concernant l expand de l interieur du heredoc)
+	- heredoc quits with SIGINT but doesnt set sh->last_status
 BUILTINS
-	- export without arg ==> sorted env
 
 	-	nfauconn@e1r5p17:~/minish_9_7$ export TEST=" ouais ttttttt"
 		nfauconn@e1r5p17:~/minish_9_7$ echo lol > $TEST
@@ -32,7 +31,7 @@ SIGNALS
 	- free sh->env when user exit minishell
 
 CHILD
-	- free memory if failed
+	- free memory if failed?
 	- close everything
 
 PARSING

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clear.c                                              :+:      :+:    :+:   */
+/*   clear.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/05 16:09:54 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/05 16:19:15 by user42           ###   ########.fr       */
+/*   Created: 2022/07/21 22:12:39 by nfauconn          #+#    #+#             */
+/*   Updated: 2022/07/22 22:33:07 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ static void	clear_cmd_settings(t_cmd *cmd)
 		ft_str_array_free(cmd->env_paths);
 	if (cmd->path)
 		ft_strdel(&cmd->path);
-	if (cmd->infile)
-		ft_strdel(&cmd->infile);
-	if (cmd->outfile)
-		ft_strdel(&cmd->outfile);
-	if (cmd->redir_error)
-		ft_strdel(&cmd->redir_error);
+	if (cmd->infile_name)
+		ft_strdel(&cmd->infile_name);
+	if (cmd->outfile_name)
+		ft_strdel(&cmd->outfile_name);
+	if (cmd->access_error)
+		ft_strdel(&cmd->access_error);
 }
 
 void	clear_sh(t_sh *sh)
@@ -37,6 +37,8 @@ void	clear_sh(t_sh *sh)
 	while (sh->cmd_list)
 	{
 		close_if_no_std(sh->cmd_list->redir_in);
+		if (sh->cmd_list->heredoc_infile)
+			unlink(sh->cmd_list->infile_name);
 		close_if_no_std(sh->cmd_list->redir_out);
 		clear_cmd_settings(sh->cmd_list);
 		to_del = sh->cmd_list;
@@ -66,6 +68,5 @@ void	exit_clear(t_sh *sh, unsigned int exit_code)
 {
 	ft_lstclear(&sh->env, free);
 	clear_sh(sh);
-	unlink(HEREDOC_NBL_PATH);
 	exit(exit_code);
 }

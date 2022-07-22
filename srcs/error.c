@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 18:49:09 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/13 13:51:43 by user42           ###   ########.fr       */
+/*   Updated: 2022/07/23 01:02:23 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,22 @@ void	error_display(char *s1, char *s2, char *s3)
 
 void	error_exit(char *cmd_name, int8_t error_code)
 {
-	if (!ft_strlen(cmd_name))
+	struct stat	mode;
+
+	if (!*cmd_name)
 		error_display("\'\'", "command not found", 0);
 	else if (error_code == NOT_FOUND)
-		error_display(cmd_name, "command not found", 0);
+	{
+		if (!is_relative_path(cmd_name))
+		{
+			if (stat(cmd_name, &mode) == 0 && S_ISDIR(mode.st_mode))
+				error_display(cmd_name, "Is a directory", 0);
+			else
+				error_display(cmd_name, "No such file or directory", 0);
+		}
+		else
+			error_display(cmd_name, "command not found", 0);
+	}
 	else if (error_code == NOT_EXECUTABLE)
 		error_display(cmd_name, "permission denied", 0);
 	exit(error_code);

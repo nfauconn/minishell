@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 12:50:49 by user42            #+#    #+#             */
-/*   Updated: 2022/07/13 15:16:39 by user42           ###   ########.fr       */
+/*   Updated: 2022/07/22 23:08:49 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,28 +16,31 @@ int	parsing(t_sh *sh, t_input *input)
 {
 	if (tokenizer(input, input->line_read))
 		return (FAILURE);
-	set_types_for_lex(input->token_list);
 	if (lexer(input->token_list))
 		return (FAILURE);
-	complete_types(input->token_list);
-	#ifdef DEBUG
-	display_token_list(input->token_list);
-	#endif
 	token_expand(input->token_list, sh);
+	set_token_types(input->token_list);
 	token_to_cmd_lst(sh, input->token_list);
-	#ifdef DEBUG
-	t_cmd	*tmp = sh->cmd_list;
-	while(tmp)
-	{
-//		ft_str_array_display(tmp->args);
-		printf("cmd n.%zu = %s -- red_i = %d | red_o = %d\n", tmp->index, tmp->name, tmp->redir_in, tmp->redir_out);
-		tmp = tmp->next;
-	}
-	#endif
 	return (SUCCESS);
 }
 
 /*
+											#ifdef DEBUG
+											ft_printerror("TOKEN_LIST :\n");
+											display_token_list(input->token_list);
+											ft_printerror("___________\n\n");
+											#endif
+
+											#ifdef DEBUG
+											ft_printf("\n");
+											t_cmd	*tmp = sh->cmd_list;
+											while(tmp)
+											{
+												ft_str_array_display(tmp->args);
+												ft_printf("\n", 1);
+												tmp = tmp->next;
+											}
+											#endif
 
 
 */

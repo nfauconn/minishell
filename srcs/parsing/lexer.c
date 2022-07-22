@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 11:36:22 by user42            #+#    #+#             */
-/*   Updated: 2022/07/12 21:04:22 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/21 17:08:17 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,12 @@ static int	check_nb_sign(t_list *token)
 
 	tok = (char *)token->content;
 	len = ft_strlen(tok);
-	if (is_redir(token->type))
-	{
-		if (token->type == '<' && len > 2)
-			return (lex_error("<<"));
-		else if (token->type == '>' && len > 2)
-			return (lex_error(">>"));
-	}
-	else if (is_sep(token->type))
-	{
-		if (token->type == PIPE && len > 1)
-			return (lex_error("|"));
-	}
+	if (token->type == '<' && len > 2)
+		return (lex_error("<<"));
+	if (token->type == '>' && len > 2)
+		return (lex_error(">>"));
+	if (token->type == PIPE && len > 1)
+		return (lex_error("|"));
 	return (SUCCESS);
 }
 
@@ -43,12 +37,12 @@ static int	next_token_error(t_list *token)
 
 static int	tok_lexer(t_list *token)
 {
-	if (is_redir(token->type))
+	if (is_rediroperator(token->type))
 	{
 		if (check_nb_sign(token) == FAILURE)
 			return (FAILURE);
 		token = skip_token(token, BLANK);
-		if (token && (is_redir(token->type) || is_sep(token->type)))
+		if (token && (is_rediroperator(token->type) || is_sep(token->type)))
 			return (next_token_error(token));
 		else if (!token)
 			return (lex_error("newline"));
@@ -68,10 +62,12 @@ static int	tok_lexer(t_list *token)
 
 int	lexer(t_list *token)
 {
-	if (token && token->type == PIPE)
+	token->type = *(char *)token->content;
+	if (token->type == PIPE)
 		return (lex_error("|"));
 	while (token)
 	{
+		token->type = *(char *)token->content;
 		if (tok_lexer(token) == SUCCESS)
 			token = token->next;
 		else

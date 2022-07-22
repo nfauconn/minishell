@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 13:07:05 by user42            #+#    #+#             */
-/*   Updated: 2022/07/13 22:15:51 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/21 20:44:37 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,11 @@ static int	builtin_pipe_exec(t_sh *sh, t_cmd *cmd)
 		ret = 0;
 	else
 		ret = sh->exec_built[cmd->built_i](sh, cmd);
-/* 	close(STDIN_FILENO);
-	close(STDOUT_FILENO); */
 	clear_sh(sh);
 	exit(ret);
 }
 
-static void	child_seq(t_sh *sh, t_cmd *cmd, int p[2], int fd_in)
+static void	child_job(t_sh *sh, t_cmd *cmd, int p[2], int fd_in)
 {
 	signal_catching_mode(CHILD_PROCESS);
 	close(p[0]);
@@ -45,7 +43,7 @@ static void	child_seq(t_sh *sh, t_cmd *cmd, int p[2], int fd_in)
 	signal_catching_mode(PARENT_PROCESS);
 }
 
-static void	parent_seq(t_cmd *cmd, int p[2], int *fd)
+static void	parent_job(t_cmd *cmd, int p[2], int *fd)
 {
 	if (!cmd->next)
 	{
@@ -77,9 +75,9 @@ int	launch_pipeline(t_sh *sh, t_cmd *cmd)
 		if (pid < 0)
 			return (exec_error("fork: ", strerror(errno)));
 		if (pid == 0)
-			child_seq(sh, cmd, p, fd_in);
+			child_job(sh, cmd, p, fd_in);
 		else
-			parent_seq(cmd, p, &fd_in);
+			parent_job(cmd, p, &fd_in);
 		cmd = cmd->next;
 	}
 	wait_children(sh);

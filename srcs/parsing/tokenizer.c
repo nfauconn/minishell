@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 16:59:04 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/08 13:21:52 by user42           ###   ########.fr       */
+/*   Updated: 2022/07/21 17:08:17 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,13 @@ static char	*find_closing_quote(t_input *input, char *s, char quote)
 
 static char	*find_end(t_input *input, char *s)
 {
-	if (is_sep(*s) || is_redir(*s))
+	if (is_sep(*s) || is_rediroperator(*s))
 		return (end_of_sep_or_redir(input, s));
 	if (*s == '$')
 		s++;
 	if (is_quote(*s))
 		return (find_closing_quote(input, s, *s));
-	while (*s && is_word(*s))
+	while (*s && !is_quote(*s) && !is_metacharacter(*s))
 	{
 		if (*s == '$')
 			return (s);
@@ -77,7 +77,7 @@ int	tokenizer(t_input *input, char *line)
 			token = ft_substr(start, 0, line - start);
 			add_token_to_list(&input->token_list, token);
 		}
-		if (line && is_blank(*line) && !is_redir(*token))
+		if (line && is_blank(*line) && !is_rediroperator(*token))
 		{
 			token = ft_strdup(" ");
 			add_token_to_list(&input->token_list, token);

@@ -6,7 +6,7 @@
 /*   By: mdankou < mdankou@student.42.fr >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:53:50 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/16 12:26:18 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/07/22 16:14:31 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	do_export(t_list **env, char *assign)
 		ft_lstadd_back(env, ft_lstnew(ft_strdup(assign)));
 }
 
-int	is_valid_identifier(char *str)
+static int	is_valid_identifier(char *str)
 {
 	size_t	i;
 
