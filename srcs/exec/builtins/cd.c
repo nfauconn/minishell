@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mdankou < mdankou@student.42.fr >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:52:52 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/22 23:08:13 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/23 00:18:26 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,12 @@ static void	update_env(t_list **env)
 		do_export(env, tmp);
 		free(tmp);
 	}
+	else
+	{
+		ft_printerror("cd: error retrieving current directory: getcwd: "
+			"cannot access parent directories: No such file or directory\n");
+		errno = 0;
+	}
 	free(cwd);
 }
 
@@ -42,22 +48,17 @@ int	mini_cd(t_sh *sh, t_cmd *cmd)
 	if (!args[1])
 		errno = EINVAL;
 	else if (args[2])
-		errno = E2BIG;
+		errno = 1;
 	else
 	{
 		if (!chdir(args[1]))
-			update_env(&sh->env);
-		else
 		{
-			ft_printerror("minish: cd: %s: \
-				No such file or directory\n", args[1]);
-			return (1);
+			update_env(&sh->env);
 		}
 	}
-	if (errno)
-	{
+	if (errno == 1)
+		ft_printerror("minish: cd: too many arguments\n");
+	else if (errno)
 		ft_printerror("minish: cd: %s: %s\n", args[1], strerror(errno));
-		return (1);
-	}
-	return (0);
+	return (errno != 0);
 }

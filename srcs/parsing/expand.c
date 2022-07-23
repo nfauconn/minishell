@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:13:37 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/22 20:47:00 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/23 19:22:08 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ char	*expand_string(char *ptr, t_sh *sh)
 		start = ptr;
 		while (*ptr && *ptr != '$')
 			ptr++;
-		new_size += ptr - start;
+		new_size += ptr - start + 1;
 		new = ft_realloc(new, new_size);
 		ft_strlcat(new, start, new_size);
 	}
@@ -85,7 +85,7 @@ static char	*expand_quotes(char *ptr, t_sh *sh)
 	else if (*ptr == DB_QUOTE)
 	{
 		tmp = expand_string(start, sh);
-		new = ft_substr(tmp, 0, ft_strlen(tmp));
+		new = ft_substr(tmp, 0, ft_strlen(tmp) - quote);
 		free(tmp);
 	}
 	return (new);

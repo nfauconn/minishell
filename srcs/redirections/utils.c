@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 17:02:19 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/13 20:48:02 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/23 18:19:49 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	dup2_close_old(int old_fd, int new_fd)
 {
 	dup2(old_fd, new_fd);
-	if (old_fd != new_fd)
+	if (old_fd != new_fd && old_fd > STDERR_FILENO)
 		close(old_fd);
 }
 

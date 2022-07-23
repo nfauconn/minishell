@@ -2,7 +2,6 @@ make --dry-run --always-make --keep-going --print-directory
 make: Entering directory '/mnt/nfs/homes/nfauconn/minishGithub'
  
 make -C ./libft
- 
 mkdir -p objs/
 echo create: objs/main.o
 clang -Wall -Wextra -Werror -g3 -fsanitize=address -MMD -I ./includes -I ./libft/includes -c ./srcs/main.c -o objs/main.o
@@ -55,11 +54,20 @@ mkdir -p objs/parsing/
 echo create: objs/parsing/utils_comparison2.o
 clang -Wall -Wextra -Werror -g3 -fsanitize=address -MMD -I ./includes -I ./libft/includes -c ./srcs/parsing/utils_comparison2.c -o objs/parsing/utils_comparison2.o
 mkdir -p objs/redirections/
-echo create: objs/redirections/heredoc.o
-clang -Wall -Wextra -Werror -g3 -fsanitize=address -MMD -I ./includes -I ./libft/includes -c ./srcs/redirections/heredoc.c -o objs/redirections/heredoc.o
+echo create: objs/redirections/check_access.o
+clang -Wall -Wextra -Werror -g3 -fsanitize=address -MMD -I ./includes -I ./libft/includes -c ./srcs/redirections/check_access.c -o objs/redirections/check_access.o
 mkdir -p objs/redirections/
-echo create: objs/redirections/parsing.o
-clang -Wall -Wextra -Werror -g3 -fsanitize=address -MMD -I ./includes -I ./libft/includes -c ./srcs/redirections/parsing.c -o objs/redirections/parsing.o
+echo create: objs/redirections/heredoc_run.o
+clang -Wall -Wextra -Werror -g3 -fsanitize=address -MMD -I ./includes -I ./libft/includes -c ./srcs/redirections/heredoc_run.c -o objs/redirections/heredoc_run.o
+mkdir -p objs/redirections/
+echo create: objs/redirections/heredoc_set.o
+clang -Wall -Wextra -Werror -g3 -fsanitize=address -MMD -I ./includes -I ./libft/includes -c ./srcs/redirections/heredoc_set.c -o objs/redirections/heredoc_set.o
+mkdir -p objs/redirections/
+echo create: objs/redirections/open.o
+clang -Wall -Wextra -Werror -g3 -fsanitize=address -MMD -I ./includes -I ./libft/includes -c ./srcs/redirections/open.c -o objs/redirections/open.o
+mkdir -p objs/redirections/
+echo create: objs/redirections/cmd_redir_path.o
+clang -Wall -Wextra -Werror -g3 -fsanitize=address -MMD -I ./includes -I ./libft/includes -c ./srcs/redirections/cmd_redir_path.c -o objs/redirections/cmd_redir_path.o
 mkdir -p objs/redirections/
 echo create: objs/redirections/pipeline_red.o
 clang -Wall -Wextra -Werror -g3 -fsanitize=address -MMD -I ./includes -I ./libft/includes -c ./srcs/redirections/pipeline_red.c -o objs/redirections/pipeline_red.o
@@ -102,13 +110,14 @@ clang -Wall -Wextra -Werror -g3 -fsanitize=address -MMD -I ./includes -I ./libft
 mkdir -p objs/exec/builtins/
 echo create: objs/exec/builtins/export.o
 clang -Wall -Wextra -Werror -g3 -fsanitize=address -MMD -I ./includes -I ./libft/includes -c ./srcs/exec/builtins/export.c -o objs/exec/builtins/export.o
+ 
 mkdir -p objs/exec/builtins/
 echo create: objs/exec/builtins/pwd.o
 clang -Wall -Wextra -Werror -g3 -fsanitize=address -MMD -I ./includes -I ./libft/includes -c ./srcs/exec/builtins/pwd.c -o objs/exec/builtins/pwd.o
 mkdir -p objs/exec/builtins/
 echo create: objs/exec/builtins/unset.o
 clang -Wall -Wextra -Werror -g3 -fsanitize=address -MMD -I ./includes -I ./libft/includes -c ./srcs/exec/builtins/unset.c -o objs/exec/builtins/unset.o
-clang -Wall -Wextra -Werror -g3 -fsanitize=address -L ./libft -ltinfo -lreadline   ./objs/main.o  ./objs/init.o  ./objs/input.o  ./objs/clear.o  ./objs/error.o  ./objs/signals.o  ./objs/parsing/tokenizer.o  ./objs/parsing/token_utils.o  ./objs/parsing/types.o  ./objs/parsing/lexer.o  ./objs/parsing/expand.o  ./objs/parsing/expand_utils.o  ./objs/parsing/conv_to_cmd.o  ./objs/parsing/cmd_creat.o  ./objs/parsing/parser.o  ./objs/parsing/utils_comparison.o  ./objs/parsing/utils_comparison2.o  ./objs/redirections/heredoc.o  ./objs/redirections/parsing.o  ./objs/redirections/pipeline_red.o  ./objs/redirections/single_red.o  ./objs/redirections/utils.o  ./objs/exec/cmd_execve.o  ./objs/exec/cmd_path.o  ./objs/exec/launch.o  ./objs/exec/launch_pipeline.o  ./objs/exec/launch_single.o  ./objs/exec/wait.o  ./objs/exec/builtins/cd.o  ./objs/exec/builtins/echo.o  ./objs/exec/builtins/env.o  ./objs/exec/builtins/exit.o  ./objs/exec/builtins/export.o  ./objs/exec/builtins/pwd.o  ./objs/exec/builtins/unset.o -o minishell -lft
+clang -Wall -Wextra -Werror -g3 -fsanitize=address -L ./libft -ltinfo -lreadline   ./objs/main.o  ./objs/init.o  ./objs/input.o  ./objs/clear.o  ./objs/error.o  ./objs/signals.o  ./objs/parsing/tokenizer.o  ./objs/parsing/token_utils.o  ./objs/parsing/types.o  ./objs/parsing/lexer.o  ./objs/parsing/expand.o  ./objs/parsing/expand_utils.o  ./objs/parsing/conv_to_cmd.o  ./objs/parsing/cmd_creat.o  ./objs/parsing/parser.o  ./objs/parsing/utils_comparison.o  ./objs/parsing/utils_comparison2.o  ./objs/redirections/check_access.o  ./objs/redirections/heredoc_run.o  ./objs/redirections/heredoc_set.o  ./objs/redirections/open.o  ./objs/redirections/cmd_redir_path.o  ./objs/redirections/pipeline_red.o  ./objs/redirections/single_red.o  ./objs/redirections/utils.o  ./objs/exec/cmd_execve.o  ./objs/exec/cmd_path.o  ./objs/exec/launch.o  ./objs/exec/launch_pipeline.o  ./objs/exec/launch_single.o  ./objs/exec/wait.o  ./objs/exec/builtins/cd.o  ./objs/exec/builtins/echo.o  ./objs/exec/builtins/env.o  ./objs/exec/builtins/exit.o  ./objs/exec/builtins/export.o  ./objs/exec/builtins/pwd.o  ./objs/exec/builtins/unset.o -o minishell -lft
 echo "minishell created"
 make: Leaving directory '/mnt/nfs/homes/nfauconn/minishGithub'
  
