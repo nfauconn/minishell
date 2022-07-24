@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdankou < mdankou@student.42.fr >          +#+  +:+       +#+        */
+/*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:53:50 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/22 16:14:31 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/07/24 14:31:20 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,17 @@ static void	print_env_tab(t_list *env)
 	j = 0;
 	while (tab[j])
 	{
-		printf("declare -x ");
-		i = 0;
-		while (tab[j][i] != '=')
-			printf("%c", tab[j][i++]);
-		printf("=\"%s\"\n", ft_strchr(tab[j], '=') + 1);
+		if (ft_strncmp(tab[j], "_=", 2))
+		{
+			ft_printf("declare -x ");
+			i = 0;
+			while (tab[j][i] && tab[j][i] != '=')
+				ft_printf("%c", tab[j][i++]);
+			if (tab[j][i] == '=')
+				ft_printf("=\"%s\"\n", &tab[j][i + 1]);
+			else
+				ft_printf("\n");
+		}
 		++j;
 	}
 	ft_str_array_free(tab);
@@ -69,14 +75,15 @@ void	do_export(t_list **env, char *assign)
 	char	*str;
 	int		var_len;
 
-	var_len = ft_strchr(assign, '=') - assign;
-	if (var_len <= 0)
-		return ;
+	var_len = 0;
+	while (assign[var_len] && assign[var_len] != '=')
+		++var_len;
 	l = (t_list *)(*env);
 	while (l)
 	{
 		str = (char *)l->content;
-		if (!ft_strncmp(assign, str, var_len) && str[var_len] == '=')
+		if (!ft_strncmp(assign, str, var_len) && (str[var_len] == '='
+				|| str[var_len] == '\0'))
 		{
 			l->content = ft_strdup(assign);
 			free(str);

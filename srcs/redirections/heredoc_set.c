@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_set.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 22:24:41 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/23 01:04:15 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/24 16:10:03 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ static char	*get_heredoc_delim(t_list **token, t_cmd *cmd)
 {
 	char	*delim;
 
+	if ((*token)->type == QUOTED_HEREDOC_DELIM)
+		cmd->delim_quote = 1;
 	delim = ft_strdup((char *)(*token)->content);
 	while ((*token)->next && ((*token)->next->type == HEREDOC_DELIM
 			|| (*token)->next->type == QUOTED_HEREDOC_DELIM))
