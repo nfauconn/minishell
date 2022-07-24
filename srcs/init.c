@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 17:25:43 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/24 01:26:07 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/24 18:03:14 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,19 +42,20 @@ static t_list	*init_env(char **env_tab)
 	t_list	*env;
 	t_list	*head;
 
+	head = NULL;
 	if (env_tab && *env_tab)
 	{
-		ft_str_array_display(env_tab);
+		//ft_str_array_display(env_tab);
 		head = ft_str_array_to_lst(env_tab);
 		init_shell_level(head);
 	}
 	else
 	{
-		head = ft_lstnew(getcwd(NULL, 0));
-		ft_lstadd_back(&head, head);
-		env = head;
+		env = ft_lstnew(getcwd(NULL, 0));
+		ft_lstadd_back(&head, env);
+		head = env;
 		env = env->next;
-		env = ft_lstnew("SHLVL=1");
+		env = ft_lstnew("SHLVL=0");
 		ft_lstadd_back(&head, env);
 		env = env->next;
 		env = ft_lstnew("_=/usr/bin/env");

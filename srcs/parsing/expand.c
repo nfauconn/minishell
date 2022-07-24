@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:13:37 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/23 19:22:08 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/24 19:27:33 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,8 @@ void	token_expand(t_list *token, t_sh *sh)
 		}
 		if (is_quote(*tmp) || (*tmp == '$' && is_quote(*(tmp + 1))))
 		{
+			if (*tmp == '$' && is_quote(*(tmp + 1)))
+				token->type = *(tmp + 1);
 			token->content = expand_quotes(tmp, sh);
 			free(tmp);
 		}

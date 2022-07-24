@@ -1,6 +1,5 @@
 make --dry-run --always-make --keep-going --print-directory
 make: Entering directory '/mnt/nfs/homes/nfauconn/minishGithub'
- 
 make -C ./libft
 mkdir -p objs/
 echo create: objs/main.o
@@ -110,7 +109,6 @@ clang -Wall -Wextra -Werror -g3 -fsanitize=address -MMD -I ./includes -I ./libft
 mkdir -p objs/exec/builtins/
 echo create: objs/exec/builtins/export.o
 clang -Wall -Wextra -Werror -g3 -fsanitize=address -MMD -I ./includes -I ./libft/includes -c ./srcs/exec/builtins/export.c -o objs/exec/builtins/export.o
- 
 mkdir -p objs/exec/builtins/
 echo create: objs/exec/builtins/pwd.o
 clang -Wall -Wextra -Werror -g3 -fsanitize=address -MMD -I ./includes -I ./libft/includes -c ./srcs/exec/builtins/pwd.c -o objs/exec/builtins/pwd.o

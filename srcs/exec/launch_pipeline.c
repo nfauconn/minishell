@@ -6,18 +6,26 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 13:07:05 by user42            #+#    #+#             */
-/*   Updated: 2022/07/21 20:44:37 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/24 17:50:20 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 #include "redir.h"
 
+static int	no_args(t_cmd *cmd)
+{
+	if (cmd->name && !cmd->args[1])
+		return (1);
+	return (0);
+}
+
 static int	builtin_pipe_exec(t_sh *sh, t_cmd *cmd)
 {
 	int	ret;
 
-	if ((cmd->built_i == cd || cmd->built_i == export || cmd->built_i == unset)
+	if ((cmd->built_i == cd || (cmd->built_i == export && !no_args(cmd))
+		|| cmd->built_i == unset)
 		&& cmd->next)
 		ret = 0;
 	else

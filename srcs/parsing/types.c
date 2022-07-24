@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 11:09:58 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/23 00:17:00 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/24 19:23:48 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ void	set_token_types(t_list *token)
 	while (token)
 	{
 		tmp = (char *)token->content;
-		token->type = *tmp;
+		if (!is_quote(token->type))
+			token->type = *tmp;
 		token = set_type(token, tmp);
 		if (token)
 			token = token->next;

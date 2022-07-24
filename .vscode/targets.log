@@ -1,18 +1,16 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # GNU Make 4.2.1
+ 
 # Built for x86_64-pc-linux-gnu
 # Copyright (C) 1988-2016 Free Software Foundation, Inc.
 # License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
- 
 
-# Make data base, printed on Sun Jul 24 00:42:31 2022
+# Make data base, printed on Sun Jul 24 17:29:50 2022
 
 # Variables
 
-# environment
-VSCODE_GIT_ASKPASS_MAIN = /usr/share/code/resources/app/extensions/git/dist/askpass-main.js
 # automatic
 <D = $(patsubst %/,%,$(dir $<))
 # automatic
@@ -52,11 +50,11 @@ RM = rm -rf
 # environment
 VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
 # environment
-_ = /usr/bin/code
+_ = /usr/share/code/code
 # makefile (from 'Makefile', line 71)
 CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
 # environment
-JOURNAL_STREAM = 9:524243
+JOURNAL_STREAM = 9:449250
 # environment
 XDG_CONFIG_DIRS = /etc/xdg/xdg-ubuntu:/etc/xdg
 # makefile (from 'objs/exec/builtins/unset.d', line 1)
@@ -84,25 +82,25 @@ VSCODE_VERBOSE_LOGGING = true
 # makefile (from 'Makefile', line 67)
 OBJS :=   ./objs/main.o  ./objs/init.o  ./objs/input.o  ./objs/clear.o  ./objs/error.o  ./objs/signals.o  ./objs/parsing/tokenizer.o  ./objs/parsing/token_utils.o  ./objs/parsing/types.o  ./objs/parsing/lexer.o  ./objs/parsing/expand.o  ./objs/parsing/expand_utils.o  ./objs/parsing/conv_to_cmd.o  ./objs/parsing/cmd_creat.o  ./objs/parsing/parser.o  ./objs/parsing/utils_comparison.o  ./objs/parsing/utils_comparison2.o  ./objs/redirections/check_access.o  ./objs/redirections/heredoc_run.o  ./objs/redirections/heredoc_set.o  ./objs/redirections/open.o  ./objs/redirections/cmd_redir_path.o  ./objs/redirections/pipeline_red.o  ./objs/redirections/single_red.o  ./objs/redirections/utils.o  ./objs/exec/cmd_execve.o  ./objs/exec/cmd_path.o  ./objs/exec/launch.o  ./objs/exec/launch_pipeline.o  ./objs/exec/launch_single.o  ./objs/exec/wait.o  ./objs/exec/builtins/cd.o  ./objs/exec/builtins/echo.o  ./objs/exec/builtins/env.o  ./objs/exec/builtins/exit.o  ./objs/exec/builtins/export.o  ./objs/exec/builtins/pwd.o  ./objs/exec/builtins/unset.o
 # environment
-MANAGERPID = 108017
+MANAGERPID = 110263
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/37478/vscode-ipc-05d5c448-6ee4-4398-ab28-bb9601837c3d.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/37478/vscode-ipc-d63bb8b7-b59e-432a-9f51-8cf7a5ffdfb5.sock
 # environment
-VSCODE_CWD = /mnt/nfs/homes/nfauconn/minishGithub
+VSCODE_CWD = /mnt/nfs/homes/nfauconn
 # environment
-XDG_SESSION_PATH = /org/freedesktop/DisplayManager/Session1
+XDG_SESSION_PATH = /org/freedesktop/DisplayManager/Session2
 # environment
-KRB5CCNAME = FILE:/tmp/krb5cc_37478_PBGyRO
+KRB5CCNAME = FILE:/tmp/krb5cc_37478_S9VAD3
 # default
 MAKE_HOST := x86_64-pc-linux-gnu
 # environment
-PATH = /mnt/nfs/homes/nfauconn/bin:/mnt/nfs/homes/nfauconn/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+PATH = /mnt/nfs/homes/nfauconn/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
 # environment
 GPG_AGENT_INFO = /run/user/37478/gnupg/S.gpg-agent:0:1
 # environment
 LSCOLORS = Gxfxcxdxbxegedabagacad
 # environment
-SESSION_MANAGER = local/e1r7p6.clusters.42paris.fr:@/tmp/.ICE-unix/108451,unix/e1r7p6.clusters.42paris.fr:/tmp/.ICE-unix/108451
+SESSION_MANAGER = local/e1r6p17.clusters.42paris.fr:@/tmp/.ICE-unix/110782,unix/e1r6p17.clusters.42paris.fr:/tmp/.ICE-unix/110782
 # environment
 XDG_RUNTIME_DIR = /run/user/37478
 # makefile (from 'Makefile', line 68)
@@ -114,17 +112,15 @@ VSCODE_LOG_STACK = false
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-INVOCATION_ID = 4cd9d74ee0ed43809b3ac229908f7257
+INVOCATION_ID = 0d0360dca596466e9ba98346fffeb372
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # makefile (from 'Makefile', line 11)
 LIBFT_DIR = ./libft
 # environment
-ELECTRON_NO_ATTACH_CONSOLE = 1
-# environment
 XDG_GREETER_DATA_DIR = /var/lib/lightdm-data/nfauconn
 # environment
-LS_COLORS = rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:
+LS_COLORS = 
 # makefile (from 'Makefile', line 8)
 PARSING = parsing/
 # environment
@@ -132,7 +128,7 @@ XDG_SESSION_DESKTOP = ubuntu
 # environment
 SSH_AUTH_SOCK = /run/user/37478/keyring/ssh
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 158229
+GIO_LAUNCHED_DESKTOP_FILE_PID = 111768
 # automatic
 %F = $(notdir $%)
 # environment
@@ -148,9 +144,9 @@ PWD = /mnt/nfs/homes/nfauconn/minishGithub
 # makefile (from 'Makefile', line 5)
 BUILTINS = builtins/
 # environment
-SSH_AGENT_PID = 108410
+SSH_AGENT_PID = 110746
 # environment
-ORIGINAL_XDG_CURRENT_DESKTOP = Unity
+ORIGINAL_XDG_CURRENT_DESKTOP = ubuntu:GNOME
 # makefile (from 'Makefile', line 3)
 INC_DIR = ./includes
 # makefile (from 'Makefile', line 12)
@@ -161,8 +157,6 @@ GTK_MODULES = gail:atk-bridge
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
 HOME = /mnt/nfs/homes/nfauconn
-# environment
-VSCODE_CLI = 1
 # environment
 VSCODE_CODE_CACHE_PATH = /mnt/nfs/homes/nfauconn/.config/Code/CachedData/30d9c6cd9483b2cc586687151bcbcd635f373630
 # environment
@@ -181,10 +175,6 @@ GNOME_DESKTOP_SESSION_ID = this-is-deprecated
 S_EXT = .c
 # environment
 MAKELEVEL := 0
-# environment
-VSCODE_GIT_IPC_HANDLE = /run/user/37478/vscode-git-34871d4940.sock
-# environment
-COLORTERM = truecolor
 # default
 MAKE = $(MAKE_COMMAND)
 # default
@@ -194,11 +184,12 @@ QT_IM_MODULE = ibus
 # makefile (from 'Makefile', line 22)
 SRCS := ./srcs/main.c ./srcs/init.c ./srcs/input.c ./srcs/clear.c ./srcs/error.c ./srcs/signals.c ./srcs/parsing/tokenizer.c ./srcs/parsing/token_utils.c ./srcs/parsing/types.c ./srcs/parsing/lexer.c ./srcs/parsing/expand.c ./srcs/parsing/expand_utils.c ./srcs/parsing/conv_to_cmd.c ./srcs/parsing/cmd_creat.c ./srcs/parsing/parser.c ./srcs/parsing/utils_comparison.c ./srcs/parsing/utils_comparison2.c ./srcs/redirections/check_access.c ./srcs/redirections/heredoc_run.c ./srcs/redirections/heredoc_set.c ./srcs/redirections/open.c ./srcs/redirections/cmd_redir_path.c ./srcs/redirections/pipeline_red.c ./srcs/redirections/single_red.c ./srcs/redirections/utils.c ./srcs/exec/cmd_execve.c ./srcs/exec/cmd_path.c ./srcs/exec/launch.c ./srcs/exec/launch_pipeline.c ./srcs/exec/launch_single.c ./srcs/exec/wait.c ./srcs/exec/builtins/cd.c ./srcs/exec/builtins/echo.c ./srcs/exec/builtins/env.c ./srcs/exec/builtins/exit.c ./srcs/exec/builtins/export.c ./srcs/exec/builtins/pwd.c ./srcs/exec/builtins/unset.c
 # environment
-SHLVL = 2
+SHLVL = 1
 # makefile (from 'Makefile', line 13)
 LIBFT = ./libft/libft.a
 # makefile (from 'Makefile', line 70)
 CC = clang
+ 
 # environment
 IM_CONFIG_PHASE = 1
 # makefile (from 'Makefile', line 9)
@@ -225,10 +216,6 @@ MAKE_COMMAND := make
 L_EXT = .a
 # environment
 OLDPWD = /mnt/nfs/homes/nfauconn
-# environment
-VSCODE_GIT_ASKPASS_EXTRA_ARGS = --ms-enable-electron-run-as-node
-# environment
-TERM_PROGRAM = vscode
 # default
 .VARIABLES := 
 # automatic
@@ -237,16 +224,12 @@ TERM_PROGRAM = vscode
 XDG_SEAT_PATH = /org/freedesktop/DisplayManager/Seat0
 # environment
 VSCODE_IPC_HOOK = /run/user/37478/vscode-9becb554-1.68.1-main.sock
-# environment
-VSCODE_GIT_ASKPASS_NODE = /usr/share/code/code
 # makefile
 MAKEFLAGS = pqrR
 # environment
 MFLAGS = -pqrR
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
-# environment
-TERM_PROGRAM_VERSION = 1.68.1
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # environment
@@ -254,15 +237,11 @@ GDK_BACKEND = x11
 # automatic
 +F = $(notdir $+)
 # environment
-NO_AT_BRIDGE = 1
-# environment
 QT_ACCESSIBILITY = 1
 # environment
 DEFAULTS_PATH = /usr/share/gconf/ubuntu.default.path
 # 'override' directive
 .SHELLSTATUS := 0
-# environment
-GIT_ASKPASS = /usr/share/code/resources/app/extensions/git/dist/askpass.sh
 # default
 MAKEFILES := 
 # makefile (from 'Makefile', line 4)
@@ -286,7 +265,6 @@ SUFFIXES :=
 # environment
 CHROME_DESKTOP = code-url-handler.desktop
 # default
- 
 .INCLUDE_DIRS = /usr/include /usr/local/include /usr/include
 # environment
 GJS_DEBUG_OUTPUT = stderr
@@ -295,13 +273,11 @@ GJS_DEBUG_OUTPUT = stderr
 # environment
 LANG = C
 # environment
-TERM = xterm-256color
-# environment
 DOCKER_HOST = unix:///run/user/37478/docker.sock
 # environment
-VSCODE_PID = 158229
+VSCODE_PID = 111768
 # variable set hash-table stats:
-# Load=144/1024=14%, Rehash=0, Collisions=21/276=8%
+# Load=132/1024=13%, Rehash=0, Collisions=16/264=6%
 
 # Pattern-specific Variable Values
 
@@ -309,10 +285,10 @@ VSCODE_PID = 158229
 
 # Directories
 
-# . (device 59, inode 274369258): 15 files, no impossibilities.
-# ./includes (device 59, inode 274383328): 12 files, no impossibilities.
-# ./srcs (device 59, inode 274383360): 11 files, no impossibilities.
-# ./objs (device 59, inode 274383355): 17 files, no impossibilities.
+# . (device 55, inode 274369258): 15 files, no impossibilities.
+# ./includes (device 55, inode 274383328): 12 files, no impossibilities.
+# ./srcs (device 55, inode 274383360): 11 files, no impossibilities.
+# ./objs (device 55, inode 274383355): 17 files, no impossibilities.
 
 # 55 files, no impossibilities in 4 directories.
 
@@ -363,6 +339,7 @@ objs/parsing/conv_to_cmd.d:
 # Not a target:
 objs/redirections/open.d:
 #  Implicit rule search has been done.
+ 
 #  Last modified 2022-07-24 00:42:19.958877265
 #  File has been updated.
 #  Successfully updated.
@@ -518,7 +495,7 @@ srcs/redirections/utils.c:
 # Not a target:
 objs/init.d:
 #  Implicit rule search has been done.
-#  Last modified 2022-07-24 00:42:18.239869033
+#  Last modified 2022-07-24 01:26:10.163438739
 #  File has been updated.
 #  Successfully updated.
 
@@ -567,7 +544,6 @@ objs/parsing/utils_comparison.d:
 #  Implicit rule search has been done.
 #  Last modified 2022-07-24 00:42:19.528875205
 #  File has been updated.
- 
 #  Successfully updated.
 
 # Not a target:
@@ -605,6 +581,7 @@ srcs/error.c:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
+ 
 
 # Not a target:
 includes/redir.h:
@@ -680,7 +657,7 @@ srcs/redirections/heredoc_set.c:
 # Not a target:
 objs/parsing/parser.d:
 #  Implicit rule search has been done.
-#  Last modified 2022-07-24 00:42:19.438874774
+#  Last modified 2022-07-24 00:44:09.744403144
 #  File has been updated.
 #  Successfully updated.
 
@@ -834,7 +811,6 @@ objs/exec/launch_single.d:
 objs/parsing/utils_comparison.o: srcs/parsing/utils_comparison.c includes/parsing.h includes/extern_libs.h libft/includes/libft.h libft/includes/ft_printf.h includes/structs.h includes/builtins.h includes/error.h includes/minishell.h includes/exec.h includes/end.h includes/signals.h
 #  Implicit rule search has not been done.
 #  Modification time never checked.
- 
 #  File has not been updated.
 
 # Not a target:
@@ -872,6 +848,7 @@ objs/exec/launch_pipeline.o: srcs/exec/launch_pipeline.c includes/exec.h include
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
+ 
 
 # Not a target:
 srcs/signals.c:
@@ -1112,7 +1089,6 @@ srcs/redirections/cmd_redir_path.c:
 objs/redirections/heredoc_set.d:
 #  Implicit rule search has been done.
 #  Last modified 2022-07-24 00:42:19.869876838
- 
 #  File has been updated.
 #  Successfully updated.
 
@@ -1143,6 +1119,7 @@ objs/redirections/heredoc_run.d:
 #  Successfully updated.
 
 objs/parsing/lexer.o: srcs/parsing/lexer.c includes/parsing.h includes/extern_libs.h libft/includes/libft.h libft/includes/ft_printf.h includes/structs.h includes/builtins.h includes/error.h includes/minishell.h includes/exec.h includes/end.h includes/signals.h
+ 
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -1182,7 +1159,7 @@ objs/exec/builtins/export.o: srcs/exec/builtins/export.c includes/exec.h include
 # Not a target:
 objs/exec/builtins/env.d:
 #  Implicit rule search has been done.
-#  Last modified 2022-07-24 00:42:21.142882936
+#  Last modified 2022-07-24 00:48:19.577598236
 #  File has been updated.
 #  Successfully updated.
 
@@ -1213,6 +1190,6 @@ objs/parsing/utils_comparison2.o: srcs/parsing/utils_comparison2.c includes/exec
 # strcache performance: lookups = 758 / hit rate = 74%
 # hash-table stats:
 # Load=190/8192=2%, Rehash=0, Collisions=10/758=1%
-# Finished Make data base on Sun Jul 24 00:42:31 2022
+# Finished Make data base on Sun Jul 24 17:29:50 2022
 
  
