@@ -77,9 +77,9 @@ LD_FLAGS = -L ${LIBFT_DIR} -ltinfo -lreadline
 COMP = ${CC} ${CFLAGS}
 RM	 = rm -rf
 
-all: libftcreat ${TARGET}
+all: ${LIBFT} ${TARGET}
 
-libftcreat: 
+${LIBFT}:
 	@make -C ${LIBFT_DIR}
 
 ${TARGET}: ${OBJS} ${LIBFT} Makefile

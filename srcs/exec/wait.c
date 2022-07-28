@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 19:07:39 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/28 20:20:51 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/28 23:52:51 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ void	wait_child(void)
 			ft_printerror("Bus error (core dumped)\n");
 		else if (signal == SIGINT)
 			ft_printerror("\n");
+		else if (signal == SIGQUIT)
+			ft_printerror("Quit (core dumped)\n");
 		g_last_status = signal + 128;
 	}
 }
@@ -65,3 +67,7 @@ void	wait_children(t_sh *sh)
 		i++;
 	}
 }
+
+//c est le parent qui affiche le retour a la ligne ou le quit
+//quit core dump s affiche seulement si
+// c est le dernier enfant attendu qui recoit un SIGQUIT

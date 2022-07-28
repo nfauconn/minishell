@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 17:25:43 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/28 22:19:43 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/28 23:49:36 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,29 +28,36 @@ static void	init_shell_level(t_list *env)
 	free(lvl_str);
 }
 
+static void	create_minimal_env(t_list **head)
+{
+	char	*content;
+	char	*tmp;
+
+	tmp = getcwd(NULL, 0);
+	content = ft_strjoin("PWD=", tmp);
+	free(tmp);
+	ft_lstadd_back(head, ft_lstnew((void *)content));
+	content = ft_strdup("SHLVL=1");
+	ft_lstadd_back(head, ft_lstnew((void *)content));
+	content = ft_strdup("_=/usr/bin/env");
+	ft_lstadd_back(head, ft_lstnew((void *)content));
+	content = ft_strdup("OLDPWD");
+	ft_lstadd_back(head, ft_lstnew((void *)content));
+}
+
 static t_list	*init_env(char **env_tab)
 {
-	t_list	*tmp;
-	t_list	*head;
+	t_list	*env;
 
-	head = NULL;
+	env = NULL;
 	if (env_tab && *env_tab)
 	{
-		//ft_str_array_display(env_tab);
-		head = ft_str_array_to_lst(env_tab);
-		init_shell_level(head);
+		env = ft_str_array_to_lst(env_tab);
+		init_shell_level(env);
 	}
 	else
-	{
-		tmp = ft_lstnew(getcwd(NULL, 0)); // PWD = !!!!!!!!! + ne s'affiche dans l'env !!!!!!1
-		ft_printerror("tmp->content =%s", (char *)tmp->content);
-		ft_lstadd_back(&head, tmp);
-		tmp = ft_lstnew("SHLVL=0");
-		ft_lstadd_back(&head, tmp);
-		tmp = ft_lstnew("_=/usr/bin/env");
-		ft_lstadd_back(&head, tmp);
-	}
-	return (head);
+		create_minimal_env(&env);
+	return (env);
 }
 
 static void	init_builtins_ptr(t_sh *sh)
