@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.h                                            :+:      :+:    :+:   */
+/*   ft_str_array_free.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/08 12:58:31 by user42            #+#    #+#             */
-/*   Updated: 2022/07/27 21:37:16 by nfauconn         ###   ########.fr       */
+/*   Created: 2022/06/17 09:28:54 by user42            #+#    #+#             */
+/*   Updated: 2022/07/27 22:47:55 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERROR_H
-# define ERROR_H
+#include "libft.h"
 
-# include "extern_libs.h"
-# include "minishell.h"
-# include "structs.h"
+void	ft_strarray_clear(char **tab)
+{
+	int	i;
 
-char	*perror_and_free(t_input *input, char *s);
-void	error_display(char *s1, char *s2, char *s3);
-void	error_exit(char *cmd_name, int8_t error_code);
-int		exec_perror(char *s1, char *s2);
-
-#endif
+	i = 0;
+	while (tab && tab[i])
+		free(tab[i++]);
+	if (tab)
+		free(tab);
+}

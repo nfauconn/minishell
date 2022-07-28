@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.h                                            :+:      :+:    :+:   */
+/*   reset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/08 12:58:31 by user42            #+#    #+#             */
-/*   Updated: 2022/07/27 21:37:16 by nfauconn         ###   ########.fr       */
+/*   Created: 2022/07/27 22:38:56 by nfauconn          #+#    #+#             */
+/*   Updated: 2022/07/27 22:54:34 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERROR_H
-# define ERROR_H
+#include "minishell.h"
 
-# include "extern_libs.h"
-# include "minishell.h"
-# include "structs.h"
-
-char	*perror_and_free(t_input *input, char *s);
-void	error_display(char *s1, char *s2, char *s3);
-void	error_exit(char *cmd_name, int8_t error_code);
-int		exec_perror(char *s1, char *s2);
-
-#endif
+void	reset_input(t_sh *sh, t_input *input)
+{
+	if (input)
+		clear_input(input);
+	if (sh->cmd_list)
+		clear_cmd_list(sh->cmd_list);
+	sh->cmd_nb = 0;
+	sh->heredoc_nb = 0;
+}

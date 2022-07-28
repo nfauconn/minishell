@@ -6,20 +6,11 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 17:25:43 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/24 18:03:14 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/28 22:19:43 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	init_input(t_sh *sh, t_input *input)
-{
-	input->line_read = get_input(sh);
-	if (!input->line_read)
-		return (FAILURE);
-	input->token_list = NULL;
-	return (0);
-}
 
 static void	init_shell_level(t_list *env)
 {
@@ -39,7 +30,7 @@ static void	init_shell_level(t_list *env)
 
 static t_list	*init_env(char **env_tab)
 {
-	t_list	*env;
+	t_list	*tmp;
 	t_list	*head;
 
 	head = NULL;
@@ -51,18 +42,26 @@ static t_list	*init_env(char **env_tab)
 	}
 	else
 	{
-		env = ft_lstnew(getcwd(NULL, 0));
-		ft_lstadd_back(&head, env);
-		head = env;
-		env = env->next;
-		env = ft_lstnew("SHLVL=0");
-		ft_lstadd_back(&head, env);
-		env = env->next;
-		env = ft_lstnew("_=/usr/bin/env");
-		ft_lstadd_back(&head, env);
-		env->next = NULL;
+		tmp = ft_lstnew(getcwd(NULL, 0)); // PWD = !!!!!!!!! + ne s'affiche dans l'env !!!!!!1
+		ft_printerror("tmp->content =%s", (char *)tmp->content);
+		ft_lstadd_back(&head, tmp);
+		tmp = ft_lstnew("SHLVL=0");
+		ft_lstadd_back(&head, tmp);
+		tmp = ft_lstnew("_=/usr/bin/env");
+		ft_lstadd_back(&head, tmp);
 	}
 	return (head);
+}
+
+static void	init_builtins_ptr(t_sh *sh)
+{
+	sh->exec_built[cd] = &mini_cd;
+	sh->exec_built[echo] = &mini_echo;
+	sh->exec_built[env] = &mini_env;
+	sh->exec_built[exit2] = &mini_exit;
+	sh->exec_built[export] = &mini_export;
+	sh->exec_built[pwd] = &mini_pwd;
+	sh->exec_built[unset] = &mini_unset;	
 }
 
 void	init_sh(t_sh *sh, char **env_sh)
@@ -70,15 +69,8 @@ void	init_sh(t_sh *sh, char **env_sh)
 	sh->cmd_nb = 0;
 	sh->cmd_list = NULL;
 	sh->heredoc_nb = 0;
+	sh->line_nb = 0;
 	sh->env = NULL;
 	sh->env = init_env(env_sh);
-	sh->last_status = 0;
-	sh->last_status_str = NULL;
-	sh->exec_built[cd] = &mini_cd;
-	sh->exec_built[echo] = &mini_echo;
-	sh->exec_built[env] = &mini_env;
-	sh->exec_built[exit2] = &mini_exit;
-	sh->exec_built[export] = &mini_export;
-	sh->exec_built[pwd] = &mini_pwd;
-	sh->exec_built[unset] = &mini_unset;
+	init_builtins_ptr(sh);
 }

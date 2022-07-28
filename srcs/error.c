@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 18:49:09 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/23 01:02:23 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/28 22:06:27 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ int	lex_error(char *s)
 	return (FAILURE);
 }
 
-int	exec_error(char *s1, char *s2)
+int	exec_perror(char *s1, char *s2)
 {
 	if (s1 && s2)
 		ft_printerror("minish: %s%s\n", s1, s2);
 	else
-		ft_printerror("please enter 2 valid strings in ft_printerror\n");
+		ft_printerror("please enter 2 valid strings in exec_error\n");
 	return (FAILURE);
 }
 
@@ -50,7 +50,7 @@ void	error_exit(char *cmd_name, int8_t error_code)
 		error_display("\'\'", "command not found", 0);
 	else if (error_code == NOT_FOUND)
 	{
-		if (!is_relative_path(cmd_name))
+		if (is_absolute_path(cmd_name))
 		{
 			if (stat(cmd_name, &mode) == 0 && S_ISDIR(mode.st_mode))
 				error_display(cmd_name, "Is a directory", 0);

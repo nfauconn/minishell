@@ -3,29 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   expand_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 22:41:54 by user42            #+#    #+#             */
-/*   Updated: 2022/07/24 15:50:25 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/07/28 20:21:33 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
-
-char	*get_last_status(t_sh *sh)
-{
-	char	*tmp;
-
-	if (!sh->last_status_str)
-		sh->last_status_str = ft_itoa(sh->last_status);
-	else
-	{
-		tmp = sh->last_status_str;
-		sh->last_status_str = ft_itoa(sh->last_status);
-		free(tmp);
-	}
-	return (sh->last_status_str);
-}
 
 t_list	*set_delim_type(t_list *token)
 {

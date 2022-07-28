@@ -6,11 +6,13 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:13:37 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/24 19:27:33 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/28 20:22:42 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+
+extern unsigned char	g_last_status;
 
 static char	*expanded_content(char **s, t_sh *sh)
 {
@@ -23,7 +25,7 @@ static char	*expanded_content(char **s, t_sh *sh)
 		if (*start == '?')
 		{
 			(*s)++;
-			return (get_last_status(sh));
+			return (ft_itoa(g_last_status));
 		}
 		else if (is_identifier(*start) && !ft_isdigit(*start))
 		{
@@ -55,6 +57,8 @@ char	*expand_string(char *ptr, t_sh *sh)
 			new_size = ft_strlen(new) + ft_strlen(var_val) + 1;
 			new = ft_realloc(new, new_size);
 			ft_strlcat(new, var_val, new_size);
+			if (var_val)
+				ft_strdel(&var_val);
 		}
 		start = ptr;
 		while (*ptr && *ptr != '$')
@@ -63,6 +67,7 @@ char	*expand_string(char *ptr, t_sh *sh)
 		new = ft_realloc(new, new_size);
 		ft_strlcat(new, start, new_size);
 	}
+//	ft_strdel(&var_val);
 	return (new);
 }
 

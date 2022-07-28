@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 18:19:59 by user42            #+#    #+#             */
-/*   Updated: 2022/07/21 22:21:41 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/27 21:53:20 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	open_redir_out(t_cmd *cmd)
 	else
 		cmd->redir_out = open(cmd->outfile_name, \
 			O_CREAT | O_TRUNC | O_WRONLY, 0644);
-	if (cmd->redir_out == WRONG_REDIR)
+	if (cmd->redir_out < 0)
 	{
 		error_display(cmd->outfile_name, strerror(errno), 0);
 		return (1);
@@ -31,7 +31,7 @@ static int	open_redir_out(t_cmd *cmd)
 static int	open_redir_in(t_cmd *cmd)
 {
 	cmd->redir_in = open(cmd->infile_name, O_RDONLY);
-	if (cmd->redir_in == WRONG_REDIR)
+	if (cmd->redir_in < 0)
 	{
 		error_display(cmd->infile_name, strerror(errno), 0);
 		return (1);
@@ -45,10 +45,7 @@ int	open_redir(t_cmd *cmd)
 	cmd->redir_in = NO_REDIR;
 	cmd->redir_out = NO_REDIR;
 	if (cmd->access_error)
-	{
-		error_display(cmd->access_error, 0, 0);
 		return (1);
-	}
 	if (cmd->infile_name && open_redir_in(cmd) == FAILURE)
 		return (1);
 	if (cmd->outfile_name && open_redir_out(cmd) == FAILURE)

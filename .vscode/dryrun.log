@@ -1,9 +1,12 @@
 make --dry-run --always-make --keep-going --print-directory
 make: Entering directory '/mnt/nfs/homes/nfauconn/minishGithub'
+ 
 make -C ./libft
+ 
 mkdir -p objs/
 echo create: objs/main.o
 clang -Wall -Wextra -Werror -g3 -fsanitize=address -MMD -I ./includes -I ./libft/includes -c ./srcs/main.c -o objs/main.o
+ 
 mkdir -p objs/
 echo create: objs/init.o
 clang -Wall -Wextra -Werror -g3 -fsanitize=address -MMD -I ./includes -I ./libft/includes -c ./srcs/init.c -o objs/init.o
@@ -11,14 +14,18 @@ mkdir -p objs/
 echo create: objs/input.o
 clang -Wall -Wextra -Werror -g3 -fsanitize=address -MMD -I ./includes -I ./libft/includes -c ./srcs/input.c -o objs/input.o
 mkdir -p objs/
-echo create: objs/clear.o
-clang -Wall -Wextra -Werror -g3 -fsanitize=address -MMD -I ./includes -I ./libft/includes -c ./srcs/clear.c -o objs/clear.o
+echo create: objs/prompt.o
+clang -Wall -Wextra -Werror -g3 -fsanitize=address -MMD -I ./includes -I ./libft/includes -c ./srcs/prompt.c -o objs/prompt.o
+mkdir -p objs/
+echo create: objs/reset.o
+clang -Wall -Wextra -Werror -g3 -fsanitize=address -MMD -I ./includes -I ./libft/includes -c ./srcs/reset.c -o objs/reset.o
 mkdir -p objs/
 echo create: objs/error.o
 clang -Wall -Wextra -Werror -g3 -fsanitize=address -MMD -I ./includes -I ./libft/includes -c ./srcs/error.c -o objs/error.o
 mkdir -p objs/
 echo create: objs/signals.o
 clang -Wall -Wextra -Werror -g3 -fsanitize=address -MMD -I ./includes -I ./libft/includes -c ./srcs/signals.c -o objs/signals.o
+ 
 mkdir -p objs/parsing/
 echo create: objs/parsing/tokenizer.o
 clang -Wall -Wextra -Werror -g3 -fsanitize=address -MMD -I ./includes -I ./libft/includes -c ./srcs/parsing/tokenizer.c -o objs/parsing/tokenizer.o
@@ -65,8 +72,8 @@ mkdir -p objs/redirections/
 echo create: objs/redirections/open.o
 clang -Wall -Wextra -Werror -g3 -fsanitize=address -MMD -I ./includes -I ./libft/includes -c ./srcs/redirections/open.c -o objs/redirections/open.o
 mkdir -p objs/redirections/
-echo create: objs/redirections/cmd_redir_path.o
-clang -Wall -Wextra -Werror -g3 -fsanitize=address -MMD -I ./includes -I ./libft/includes -c ./srcs/redirections/cmd_redir_path.c -o objs/redirections/cmd_redir_path.o
+echo create: objs/redirections/set_redir.o
+clang -Wall -Wextra -Werror -g3 -fsanitize=address -MMD -I ./includes -I ./libft/includes -c ./srcs/redirections/set_redir.c -o objs/redirections/set_redir.o
 mkdir -p objs/redirections/
 echo create: objs/redirections/pipeline_red.o
 clang -Wall -Wextra -Werror -g3 -fsanitize=address -MMD -I ./includes -I ./libft/includes -c ./srcs/redirections/pipeline_red.c -o objs/redirections/pipeline_red.o
@@ -85,6 +92,10 @@ clang -Wall -Wextra -Werror -g3 -fsanitize=address -MMD -I ./includes -I ./libft
 mkdir -p objs/exec/
 echo create: objs/exec/launch.o
 clang -Wall -Wextra -Werror -g3 -fsanitize=address -MMD -I ./includes -I ./libft/includes -c ./srcs/exec/launch.c -o objs/exec/launch.o
+ 
+mkdir -p objs/exec/
+echo create: objs/exec/launch_builtin.o
+clang -Wall -Wextra -Werror -g3 -fsanitize=address -MMD -I ./includes -I ./libft/includes -c ./srcs/exec/launch_builtin.c -o objs/exec/launch_builtin.o
 mkdir -p objs/exec/
 echo create: objs/exec/launch_pipeline.o
 clang -Wall -Wextra -Werror -g3 -fsanitize=address -MMD -I ./includes -I ./libft/includes -c ./srcs/exec/launch_pipeline.c -o objs/exec/launch_pipeline.o
@@ -115,7 +126,7 @@ clang -Wall -Wextra -Werror -g3 -fsanitize=address -MMD -I ./includes -I ./libft
 mkdir -p objs/exec/builtins/
 echo create: objs/exec/builtins/unset.o
 clang -Wall -Wextra -Werror -g3 -fsanitize=address -MMD -I ./includes -I ./libft/includes -c ./srcs/exec/builtins/unset.c -o objs/exec/builtins/unset.o
-clang -Wall -Wextra -Werror -g3 -fsanitize=address -L ./libft -ltinfo -lreadline   ./objs/main.o  ./objs/init.o  ./objs/input.o  ./objs/clear.o  ./objs/error.o  ./objs/signals.o  ./objs/parsing/tokenizer.o  ./objs/parsing/token_utils.o  ./objs/parsing/types.o  ./objs/parsing/lexer.o  ./objs/parsing/expand.o  ./objs/parsing/expand_utils.o  ./objs/parsing/conv_to_cmd.o  ./objs/parsing/cmd_creat.o  ./objs/parsing/parser.o  ./objs/parsing/utils_comparison.o  ./objs/parsing/utils_comparison2.o  ./objs/redirections/check_access.o  ./objs/redirections/heredoc_run.o  ./objs/redirections/heredoc_set.o  ./objs/redirections/open.o  ./objs/redirections/cmd_redir_path.o  ./objs/redirections/pipeline_red.o  ./objs/redirections/single_red.o  ./objs/redirections/utils.o  ./objs/exec/cmd_execve.o  ./objs/exec/cmd_path.o  ./objs/exec/launch.o  ./objs/exec/launch_pipeline.o  ./objs/exec/launch_single.o  ./objs/exec/wait.o  ./objs/exec/builtins/cd.o  ./objs/exec/builtins/echo.o  ./objs/exec/builtins/env.o  ./objs/exec/builtins/exit.o  ./objs/exec/builtins/export.o  ./objs/exec/builtins/pwd.o  ./objs/exec/builtins/unset.o -o minishell -lft
+clang -Wall -Wextra -Werror -g3 -fsanitize=address -L ./libft -ltinfo -lreadline   ./objs/main.o  ./objs/init.o  ./objs/input.o  ./objs/prompt.o  ./objs/reset.o  ./objs/error.o  ./objs/signals.o  ./objs/parsing/tokenizer.o  ./objs/parsing/token_utils.o  ./objs/parsing/types.o  ./objs/parsing/lexer.o  ./objs/parsing/expand.o  ./objs/parsing/expand_utils.o  ./objs/parsing/conv_to_cmd.o  ./objs/parsing/cmd_creat.o  ./objs/parsing/parser.o  ./objs/parsing/utils_comparison.o  ./objs/parsing/utils_comparison2.o  ./objs/redirections/check_access.o  ./objs/redirections/heredoc_run.o  ./objs/redirections/heredoc_set.o  ./objs/redirections/open.o  ./objs/redirections/set_redir.o  ./objs/redirections/pipeline_red.o  ./objs/redirections/single_red.o  ./objs/redirections/utils.o  ./objs/exec/cmd_execve.o  ./objs/exec/cmd_path.o  ./objs/exec/launch.o  ./objs/exec/launch_builtin.o  ./objs/exec/launch_pipeline.o  ./objs/exec/launch_single.o  ./objs/exec/wait.o  ./objs/exec/builtins/cd.o  ./objs/exec/builtins/echo.o  ./objs/exec/builtins/env.o  ./objs/exec/builtins/exit.o  ./objs/exec/builtins/export.o  ./objs/exec/builtins/pwd.o  ./objs/exec/builtins/unset.o -o minishell -lft
 echo "minishell created"
 make: Leaving directory '/mnt/nfs/homes/nfauconn/minishGithub'
  

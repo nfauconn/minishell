@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 12:11:35 by user42            #+#    #+#             */
-/*   Updated: 2022/07/23 00:16:33 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/28 22:05:57 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void	display_token_list(t_list *lst);
 t_list	*skip_token(t_list *token, int to_skip);
 
 /* COMPARISON */
+int		is_infilename(int c);
+int		is_heredoc_delim(int c);
 int		is_outfilename(int c);
 int		is_rediroperator(int c);
 int		is_filename(int c);
@@ -43,7 +45,7 @@ int		is_sep(int c);
 int		is_dollar_quote(t_list *token);
 int		is_metacharacter(int c);
 int		is_builtin(char *cmd_name);
-int		is_relative_path(char *filename);
+int		is_absolute_path(char *filename);
 
 /* LEX */
 int		lexer(t_list *tokens);
@@ -59,7 +61,6 @@ void	token_expand(t_list *token_list, t_sh *sh);
 char	*var_value(char *str, size_t len, t_list *env);
 void	add_until_var(char **buf, char **ptr, char *start);
 void	add_expanded_var(char **buf, char **ptr, t_sh *sh);
-char	*get_last_status(t_sh *sh);
 t_list	*set_delim_type(t_list *token);
 char	*var_value(char *str, size_t len, t_list *env);
 

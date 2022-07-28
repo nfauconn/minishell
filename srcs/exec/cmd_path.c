@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 14:06:55 by user42            #+#    #+#             */
-/*   Updated: 2022/07/21 19:51:03 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/07/28 21:58:25 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,7 @@ char	**get_path_tab(t_list *env)
 		env = env->next;
 	if (!env)
 	{
-		tab = ft_split(
-				"/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin", ':');
+		tab = ft_split("/usr/bin", ':');
 		return (tab);
 	}
 	return (ft_split(env->content + 5, ':'));

@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.h                                            :+:      :+:    :+:   */
+/*   exitclear.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/08 12:58:31 by user42            #+#    #+#             */
-/*   Updated: 2022/07/27 21:37:16 by nfauconn         ###   ########.fr       */
+/*   Created: 2022/07/28 08:14:07 by user42            #+#    #+#             */
+/*   Updated: 2022/07/28 20:25:44 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERROR_H
-# define ERROR_H
+#include "clearexit.h"
 
-# include "extern_libs.h"
-# include "minishell.h"
-# include "structs.h"
+/* void	exit_subprocess(t_sh *sh, unsigned char exit_code)
+{
+//	(void)sh;
+	clear_cmd_list(sh->cmd_list);
+	reset_sh(sh);
+	exit(exit_code);
+} */
 
-char	*perror_and_free(t_input *input, char *s);
-void	error_display(char *s1, char *s2, char *s3);
-void	error_exit(char *cmd_name, int8_t error_code);
-int		exec_perror(char *s1, char *s2);
+void	exit_clear_process(t_sh *sh, unsigned char exit_code)
+{
+	(void)sh;
 
-#endif
+	ft_printerror("exit\n");
+	reset_sh(sh);
+	exit(exit_code);
+}

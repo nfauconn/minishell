@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 22:56:44 by user42            #+#    #+#             */
-/*   Updated: 2022/07/22 22:33:01 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/27 21:46:11 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,16 @@
 int	is_metacharacter(int c)
 {
 	return (is_blank(c) || is_rediroperator(c) || is_sep(c));
+}
+
+int	is_infilename(int c)
+{
+	return (c == INFILE_NAME);
+}
+
+int	is_heredoc_delim(int c)
+{
+	return (c == HEREDOC_DELIM || c == QUOTED_HEREDOC_DELIM);
 }
 
 int	is_builtin(char *cmd_name)

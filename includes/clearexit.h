@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.h                                            :+:      :+:    :+:   */
+/*   clearexit.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/08 12:58:31 by user42            #+#    #+#             */
-/*   Updated: 2022/07/27 21:37:16 by nfauconn         ###   ########.fr       */
+/*   Created: 2022/07/09 18:16:07 by nfauconn          #+#    #+#             */
+/*   Updated: 2022/07/28 13:22:09 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERROR_H
-# define ERROR_H
+#ifndef CLEAREXIT_H
+# define CLEAREXIT_H
 
 # include "extern_libs.h"
-# include "minishell.h"
 # include "structs.h"
 
-char	*perror_and_free(t_input *input, char *s);
-void	error_display(char *s1, char *s2, char *s3);
-void	error_exit(char *cmd_name, int8_t error_code);
-int		exec_perror(char *s1, char *s2);
+void	clear_input(t_input *input);
+void	reset_sh(t_sh *sh);
+void	clear_cmd_list(t_cmd *cmd);
+void	exit_subprocess(t_sh *sh, unsigned char exit_code);
+void	exit_clear_process(t_sh *sh, unsigned char exit_code);
 
 #endif

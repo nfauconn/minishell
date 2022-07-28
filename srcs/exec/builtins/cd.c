@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdankou < mdankou@student.42.fr >          +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:52:52 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/27 15:51:06 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/07/28 20:57:47 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,18 @@ static void	update_env(t_list **env)
 	free(cwd);
 }
 
+static int	cd_home(t_sh *sh, char *home)
+{
+	if (!home)
+	{
+		ft_printerror("minish: cd: HOME not set\n");
+		return (1);
+	}
+	if (!chdir(home))
+		update_env(&sh->env);
+	return (0);
+}
+
 int	mini_cd(t_sh *sh, t_cmd *cmd)
 {
 	char	**args;
@@ -48,21 +60,17 @@ int	mini_cd(t_sh *sh, t_cmd *cmd)
 	args = cmd->args;
 	home = var_value("HOME", 4, sh->env);
 	if (!args[1])
-	{
-		if (home && !chdir(home))
-			update_env(&sh->env);
-		else if (!home)
-			errno = EINVAL;
-	}
+		return (cd_home(sh, home));
 	else if (args[2])
-		errno = 1;
-	else if (!chdir(args[1]))
-		update_env(&sh->env);
-	if (!home)
-		ft_printerror("minish: cd: HOME not set\n");
-	else if (errno == 1)
+	{
 		ft_printerror("minish: cd: too many arguments\n");
-	else if (errno)
+		return (1);
+	}
+	if (chdir(args[1]) < 0)
+	{
 		ft_printerror("minish: cd: %s: %s\n", args[1], strerror(errno));
-	return (errno != 0);
+		return (1);
+	}
+	update_env(&sh->env);
+	return (0);
 }

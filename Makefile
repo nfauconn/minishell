@@ -21,10 +21,12 @@ LIBS := ${addsuffix ${L_EXT}, ${addprefix ${LIBFT_DIR}, \
 
 SRCS := ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		main \
-		init \
-		input \
 		clear \
 		error \
+		exitclear \
+		init \
+		input \
+		prompt \
 		signals \
 		${addprefix ${PARSING}, \
 		tokenizer \
@@ -43,7 +45,7 @@ SRCS := ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		heredoc_run \
 		heredoc_set \
 		open \
-		cmd_redir_path \
+		set_redir \
 		pipeline_red \
 		single_red \
 		utils} \
@@ -51,6 +53,7 @@ SRCS := ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		cmd_execve \
 		cmd_path \
 		launch \
+		launch_builtin \
 		launch_pipeline \
 		launch_single \
 		wait \

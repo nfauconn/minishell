@@ -6,14 +6,12 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 20:35:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/23 00:59:32 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/27 23:43:49 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef REDIR_H
 # define REDIR_H
-
-# define HEREDOC_NBL_PATH "/tmp/.here_doc_nblines"
 
 # include "extern_libs.h"
 # include "structs.h"
@@ -24,13 +22,13 @@
 
 /* PARSING__PART */
 void	fill_cmd_redir(t_sh *sh, t_list *token, t_cmd *cmd);
-int		check_access(char *filename, int flag, char **access_error);
+int		check_access(char *filename, int flag);
 void	heredoc_set(t_sh *sh, t_list **token, t_cmd *cmd);
 void	run_heredoc(t_sh *sh, char *heredoc_path, char *delim, t_bool quoted);
 
 /* EXEC_PART */
 void	pipeline_redir(t_sh *sh, t_cmd *cmd, int p[2], int fd_in);
-void	single_cmd_redir(t_sh *sh, t_cmd *cmd);
+int		single_cmd_redir(t_cmd *cmd);
 int		open_redir(t_cmd *cmd);
 
 /* UTILS */

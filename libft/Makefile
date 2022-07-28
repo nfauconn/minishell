@@ -88,7 +88,7 @@ SRCS := ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		ft_memdel \
 		ft_realloc \
 		ft_replace_free_old \
-		ft_str_array_free \
+		ft_strarray_clear \
 		ft_strdel \
 		ft_strfdup \
 		ft_strfjoin \

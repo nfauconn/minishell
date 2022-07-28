@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 12:50:49 by user42            #+#    #+#             */
-/*   Updated: 2022/07/24 19:22:16 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/28 21:47:29 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,18 @@ int	parsing(t_sh *sh, t_input *input)
 	token_expand(input->token_list, sh);
 
 	set_token_types(input->token_list);
-											#ifdef DEBUG
-											ft_printerror("TOKEN_LIST :\n");
-											display_token_list(input->token_list);
-											ft_printerror("___________\n\n");
-											#endif
+
 	token_to_cmd_lst(sh, input->token_list);
 	return (SUCCESS);
 }
 
 /*
 
+											#ifdef DEBUG
+											ft_printerror("TOKEN_LIST :\n");
+											display_token_list(input->token_list);
+											ft_printerror("___________\n\n");
+											#endif
 
 											#ifdef DEBUG
 											ft_printf("\n");

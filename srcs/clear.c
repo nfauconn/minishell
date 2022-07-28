@@ -5,44 +5,47 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/21 22:12:39 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/22 22:33:07 by nfauconn         ###   ########.fr       */
+/*   Created: 2022/07/28 21:14:36 by nfauconn          #+#    #+#             */
+/*   Updated: 2022/07/28 21:14:38 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	clear_cmd_settings(t_cmd *cmd)
+static void	free_cmd_params(t_cmd *cmd)
 {
 	if (cmd->args)
-		ft_str_array_free(cmd->args);
+		ft_strarray_clear(cmd->args);
 	if (cmd->env)
-		ft_str_array_free(cmd->env);
+		ft_strarray_clear(cmd->env);
 	if (cmd->env_paths)
-		ft_str_array_free(cmd->env_paths);
+		ft_strarray_clear(cmd->env_paths);
 	if (cmd->path)
 		ft_strdel(&cmd->path);
 	if (cmd->infile_name)
 		ft_strdel(&cmd->infile_name);
 	if (cmd->outfile_name)
 		ft_strdel(&cmd->outfile_name);
-	if (cmd->access_error)
-		ft_strdel(&cmd->access_error);
 }
 
-void	clear_sh(t_sh *sh)
+static void	close_cmd_redirs(t_cmd *cmd)
+{
+	close_if_no_std(cmd->redir_in);
+	if (cmd->heredoc_infile)
+		unlink(cmd->infile_name);
+	close_if_no_std(cmd->redir_out);	
+}
+
+void	clear_cmd_list(t_cmd *cmd)
 {
 	t_cmd	*to_del;
 
-	while (sh->cmd_list)
+	while (cmd)
 	{
-		close_if_no_std(sh->cmd_list->redir_in);
-		if (sh->cmd_list->heredoc_infile)
-			unlink(sh->cmd_list->infile_name);
-		close_if_no_std(sh->cmd_list->redir_out);
-		clear_cmd_settings(sh->cmd_list);
-		to_del = sh->cmd_list;
-		sh->cmd_list = sh->cmd_list->next;
+		close_cmd_redirs(cmd);
+		free_cmd_params(cmd);
+		to_del = cmd;
+		cmd = cmd->next;
 		free(to_del);
 	}
 }
@@ -56,17 +59,10 @@ void	clear_input(t_input *input)
 	input = NULL;
 }
 
-void	clear(t_input *input, t_sh *sh)
+void	reset_sh(t_sh *sh)
 {
-	if (input)
-		clear_input(input);
-	if (sh)
-		clear_sh(sh);
-}
-
-void	exit_clear(t_sh *sh, unsigned int exit_code)
-{
-	ft_lstclear(&sh->env, free);
-	clear_sh(sh);
-	exit(exit_code);
+	if (sh->env)
+		ft_lstclear(&sh->env, free);
+	reset_for_new_input(sh, NULL);
+	ft_bzero(sh, sizeof(sh));
 }

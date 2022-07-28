@@ -6,21 +6,14 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 17:55:15 by user42            #+#    #+#             */
-/*   Updated: 2022/07/14 07:48:36 by user42           ###   ########.fr       */
+/*   Updated: 2022/07/28 13:32:52 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "signals.h"
 #include "minishell.h"
 
-/*
-** SIGINT = CTRL-C
-** write '\n' moves to a new line (if not : prompt displayed on the 
-**															same line as ^C)
-** rl_on_new_line() regenerates the prompt on a newline
-** rl_replace_line() clears the previous text if ctrl-C pressed in a 
-**																non-empty line
-** rl_redisplay() displays the new prompt
-*/
+unsigned char	g_last_status;
 
 static void	exit_yourself(int sig_num)
 {
@@ -29,14 +22,19 @@ static void	exit_yourself(int sig_num)
 	exit(sig_num + 128);
 }
 
+static void	exit_heredoc(int sig_num)
+{
+	write(1, "\n", 1);
+	exit(sig_num + 128);
+}
+
 static void	new_line(int sig_num)
 {
 	if (sig_num == SIGINT)
 	{
 		write(1, "\n", 1);
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
+		redisplay_prompt();
+		g_last_status = sig_num + 128;
 	}
 }
 
@@ -56,5 +54,10 @@ void	signal_catching_mode(int mode)
 	{
 		signal(SIGINT, exit_yourself);
 		signal(SIGQUIT, exit_yourself);
+	}
+	else if (mode == HEREDOC)
+	{
+		signal(SIGINT, exit_heredoc);
+		signal(SIGQUIT, SIG_IGN);
 	}
 }
