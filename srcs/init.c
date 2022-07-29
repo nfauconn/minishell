@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 17:25:43 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/29 02:45:28 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/29 23:49:47 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	create_minimal_env(t_list **head)
 	ft_lstadd_back(head, ft_lstnew((void *)content));
 }
 
-static t_list	*init_env(char **env_tab)
+t_list	*init_env(char **env_tab)
 {
 	t_list	*env;
 
@@ -71,13 +71,13 @@ static void	init_builtins_ptr(t_sh *sh)
 	sh->exec_built[unset] = &mini_unset;	
 }
 
-void	init_sh(t_sh *sh, char **env_sh)
+void	init_sh(t_sh *sh)
 {
+	sh->level = 0;
+	sh->line_nb = 0;
 	sh->cmd_nb = 0;
 	sh->cmd_list = NULL;
 	sh->heredoc_nb = 0;
-	sh->line_nb = 0;
 	sh->env = NULL;
-	sh->env = init_env(env_sh);
 	init_builtins_ptr(sh);
 }

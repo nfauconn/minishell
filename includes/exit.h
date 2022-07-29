@@ -1,35 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   exit.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/18 17:51:19 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/30 00:34:46 by user42           ###   ########.fr       */
+/*   Created: 2022/07/30 00:24:54 by user42            #+#    #+#             */
+/*   Updated: 2022/07/30 01:07:12 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#ifndef EXIT_H
+# define EXIT_H
 
-/*
-*	pwd with no options (and no arguments)
-*	@return 0 Successful completion. >0 An error occurred.
-*/
+# include "extern_libs.h"
+# include "structs.h"
+# include "clear.h"
+# include "error.h"
 
-int	mini_pwd(t_sh *sh, t_cmd *cmd)
-{
-	char	*name;
+void	exit_clear_minish(t_sh *sh, unsigned char exit_code);
+void	exit_clear_child(t_sh *sh, unsigned char exit_code);
 
-	(void)sh;
-	(void)cmd;
-	name = getcwd(NULL, 0);
-	if (!name)
-	{
-		error_display("pwd", strerror(errno), 0);
-		return (errno);
-	}
-	printf("%s\n", name);
-	free(name);
-	return (0);
-}
+#endif

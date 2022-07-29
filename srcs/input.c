@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 18:10:00 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/29 04:22:38 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/30 00:13:06 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	*get_input(t_sh *sh)
 	if (!line_read)
 	{
 		free(line_read);
-		exit_clear_process(sh, 0);
+		exit_clear_minish(sh, 0);
 	}
 	if (line_read && *line_read == '\0')
 		redisplay_prompt();
@@ -53,15 +53,4 @@ int	init_input(t_sh *sh, t_input *input)
 	input->line_read = get_input(sh);
 	input->token_list = NULL;
 	return (0);
-}
-
-void	reset_for_new_input(t_sh *sh, t_input *input)
-{
-	if (input)
-		clear_input(input);
-	if (sh->cmd_list)
-		clear_cmd_list(sh->cmd_list);
-	sh->cmd_list = NULL;
-	sh->cmd_nb = 0;
-	sh->heredoc_nb = 0;
 }

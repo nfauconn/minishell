@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_creat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 11:37:25 by user42            #+#    #+#             */
-/*   Updated: 2022/07/21 22:42:52 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/30 00:37:56 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
-#include "redir.h"
 
 size_t	get_cmd_tab_sz(t_list *token)
 {
@@ -86,16 +85,11 @@ static char	**cmd_tab(t_list *token)
 	return (cmd_tab);
 }
 
-t_cmd	*create_new_cmd(t_sh *sh, t_list *token)
+void	fill_cmd_infos(t_sh *sh, t_list *token, t_cmd *cmd)
 {
-	t_cmd	*new;
-
-	new = (t_cmd *)malloc(sizeof(t_cmd));
-	ft_bzero(new, sizeof(t_cmd));
-	new->args = cmd_tab(token);
-	if (new->args)
-		new->name = new->args[0];
-	new->built_i = is_builtin(new->name);
-	fill_cmd_redir(sh, token, new);
-	return (new);
+	cmd->args = cmd_tab(token);
+	if (cmd->args)
+		cmd->name = cmd->args[0];
+	cmd->built_i = is_builtin(cmd->name);
+	fill_cmd_redir(sh, token, cmd);
 }

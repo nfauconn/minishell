@@ -37,7 +37,7 @@ void	launch_forked_builtin(t_sh *sh, t_cmd *cmd)
 		ret = 0;
 	else
 		ret = sh->exec_built[cmd->built_i](sh, cmd);
-	exit(ret);
+	exit_clear_child(sh, ret);
 }
 
 void	launch_single_builtin(t_sh *sh, t_cmd *cmd)

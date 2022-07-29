@@ -1,64 +1,37 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # GNU Make 4.1
- 
 # Built for x86_64-pc-linux-gnu
- 
 # Copyright (C) 1988-2014 Free Software Foundation, Inc.
- 
 # License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
- 
 # This is free software: you are free to change and redistribute it.
- 
 # There is NO WARRANTY, to the extent permitted by law.
- 
 
- 
-# Make data base, printed on Fri Jul 29 20:11:54 2022
- 
+# Make data base, printed on Sat Jul 30 01:08:15 2022
 
 # Variables
- 
 
- 
 # environment
- 
 VSCODE_GIT_ASKPASS_MAIN = /usr/share/code/resources/app/extensions/git/dist/askpass-main.js
- 
 # automatic
- 
 <D = $(patsubst %/,%,$(dir $<))
- 
 # automatic
- 
 ?F = $(notdir $?)
  
 # environment
- 
 PAPERSIZE = a4
- 
 # environment
- 
 DESKTOP_SESSION = xubuntu
- 
 # default
- 
 .SHELLFLAGS := -c
- 
-# makefile (from 'Makefile', line 76)
- 
+# makefile (from 'Makefile', line 79)
 LD_FLAGS = -L ${LIBFT_DIR} -ltinfo -lreadline
- 
 # environment
- 
 XDG_SESSION_TYPE = x11
- 
 # makefile (from 'Makefile', line 1)
- 
 TARGET = minishell
- 
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
-# makefile (from 'Makefile', line 75)
+# makefile (from 'Makefile', line 78)
 INCLUDES = -I ${INC_DIR} -I ${LIBFT_INC_DIR}
 # automatic
 @D = $(patsubst %/,%,$(dir $@))
@@ -72,7 +45,7 @@ MAKE_VERSION := 4.1
 CURDIR := /home/user42/minishGithub
 # makefile
 SHELL = /bin/sh
-# makefile (from 'Makefile', line 78)
+# makefile (from 'Makefile', line 81)
 RM = rm -rf
 # environment
 GDM_LANG = en
@@ -80,20 +53,19 @@ GDM_LANG = en
 VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
 # environment
 _ = /usr/bin/code
-# makefile (from 'Makefile', line 74)
- 
-CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
+# makefile (from 'Makefile', line 77)
+CFLAGS = -Wall -Wextra -Werror 
 # environment
 XDG_CONFIG_DIRS = /etc/xdg/xdg-xubuntu:/etc/xdg:/etc/xdg
 # environment
 GTK_OVERLAY_SCROLLING = 0
-# makefile (from 'Makefile', line 1)
-MAKEFILE_LIST :=  Makefile
+# makefile (from 'objs/exec/builtins/unset.d', line 1)
+MAKEFILE_LIST :=  Makefile objs/main.d objs/clear.d objs/error.d objs/exit.d objs/init.d objs/input.d objs/prompt.d objs/reset.d objs/signals.d objs/parsing/tokenizer.d objs/parsing/token_utils.d objs/parsing/types.d objs/parsing/lexer.d objs/parsing/expand.d objs/parsing/expand_utils.d objs/parsing/conv_to_cmd.d objs/parsing/cmd_creat.d objs/parsing/cmd_init.d objs/parsing/parser.d objs/parsing/utils_comparison.d objs/parsing/utils_comparison2.d objs/redirections/check_access.d objs/redirections/heredoc_run.d objs/redirections/heredoc_set.d objs/redirections/open.d objs/redirections/set_redir.d objs/redirections/pipeline_red.d objs/redirections/single_red.d objs/redirections/utils.d objs/exec/cmd_execve.d objs/exec/cmd_path.d objs/exec/launch.d objs/exec/launch_builtin.d objs/exec/launch_pipeline.d objs/exec/launch_single.d objs/exec/wait.d objs/exec/builtins/cd.d objs/exec/builtins/echo.d objs/exec/builtins/env.d objs/exec/builtins/exit.d objs/exec/builtins/export.d objs/exec/builtins/pwd.d objs/exec/builtins/unset.d
 # automatic
 @F = $(notdir $@)
 # makefile (from 'Makefile', line 7)
 REDIR = redirections/
-# makefile (from 'Makefile', line 77)
+# makefile (from 'Makefile', line 80)
 COMP = ${CC} ${CFLAGS}
 # 'override' directive
 GNUMAKEFLAGS := 
@@ -112,7 +84,6 @@ GLADE_PIXMAP_PATH = :
 # environment
 ELECTRON_NO_ATTACH_CONSOLE = 1
 # environment
- 
 LC_NAME = fr_FR.UTF-8
 # environment
 VSCODE_CWD = /home/user42/minishGithub
@@ -132,7 +103,7 @@ SESSION_MANAGER = local/salty-VirtualBox:@/tmp/.ICE-unix/1728,unix/salty-Virtual
 XDG_RUNTIME_DIR = /run/user/1001
 # environment
 GLADE_CATALOG_PATH = :
-# makefile (from 'Makefile', line 71)
+# makefile (from 'Makefile', line 74)
 VPATH = ${SRC_DIR}:${INC_DIR}:${BUILD_DIR}
 # environment
 XDG_MENU_PREFIX = xfce-
@@ -143,7 +114,6 @@ ELECTRON_RUN_AS_NODE = 1
 # makefile (from 'Makefile', line 11)
 LIBFT_DIR = ./libft
 # environment
- 
 GLADE_MODULE_PATH = :
 # environment
 XDG_GREETER_DATA_DIR = /var/lib/lightdm-data/user42
@@ -159,8 +129,9 @@ SSH_AUTH_SOCK = /run/user/1001/keyring/ssh
 %F = $(notdir $%)
 # environment
 DISPLAY = :0.0
-# makefile (from 'Makefile', line 70)
-OBJS :=   ./objs/main.o  ./objs/clear.o  ./objs/error.o  ./objs/exitclear.o  ./objs/init.o  ./objs/input.o  ./objs/prompt.o  ./objs/signals.o  ./objs/parsing/tokenizer.o  ./objs/parsing/token_utils.o  ./objs/parsing/types.o  ./objs/parsing/lexer.o  ./objs/parsing/expand.o  ./objs/parsing/expand_utils.o  ./objs/parsing/conv_to_cmd.o  ./objs/parsing/cmd_creat.o  ./objs/parsing/parser.o  ./objs/parsing/utils_comparison.o  ./objs/parsing/utils_comparison2.o  ./objs/redirections/check_access.o  ./objs/redirections/heredoc_run.o  ./objs/redirections/heredoc_set.o  ./objs/redirections/open.o  ./objs/redirections/set_redir.o  ./objs/redirections/pipeline_red.o  ./objs/redirections/single_red.o  ./objs/redirections/utils.o  ./objs/exec/cmd_execve.o  ./objs/exec/cmd_path.o  ./objs/exec/launch.o  ./objs/exec/launch_builtin.o  ./objs/exec/launch_pipeline.o  ./objs/exec/launch_single.o  ./objs/exec/wait.o  ./objs/exec/builtins/cd.o  ./objs/exec/builtins/echo.o  ./objs/exec/builtins/env.o  ./objs/exec/builtins/exit.o  ./objs/exec/builtins/export.o  ./objs/exec/builtins/pwd.o  ./objs/exec/builtins/unset.o
+# makefile (from 'Makefile', line 73)
+ 
+OBJS :=   ./objs/main.o  ./objs/clear.o  ./objs/close.o  ./objs/error.o  ./objs/exit.o  ./objs/init.o  ./objs/input.o  ./objs/prompt.o  ./objs/reset.o  ./objs/signals.o  ./objs/parsing/tokenizer.o  ./objs/parsing/token_utils.o  ./objs/parsing/types.o  ./objs/parsing/lexer.o  ./objs/parsing/expand.o  ./objs/parsing/expand_utils.o  ./objs/parsing/conv_to_cmd.o  ./objs/parsing/cmd_creat.o  ./objs/parsing/cmd_init.o  ./objs/parsing/parser.o  ./objs/parsing/utils_comparison.o  ./objs/parsing/utils_comparison2.o  ./objs/redirections/check_access.o  ./objs/redirections/heredoc_run.o  ./objs/redirections/heredoc_set.o  ./objs/redirections/open.o  ./objs/redirections/set_redir.o  ./objs/redirections/pipeline_red.o  ./objs/redirections/single_red.o  ./objs/redirections/utils.o  ./objs/exec/cmd_execve.o  ./objs/exec/cmd_path.o  ./objs/exec/launch.o  ./objs/exec/launch_builtin.o  ./objs/exec/launch_pipeline.o  ./objs/exec/launch_single.o  ./objs/exec/wait.o  ./objs/exec/builtins/cd.o  ./objs/exec/builtins/echo.o  ./objs/exec/builtins/env.o  ./objs/exec/builtins/exit.o  ./objs/exec/builtins/export.o  ./objs/exec/builtins/pwd.o  ./objs/exec/builtins/unset.o
 # environment
 PWD = /home/user42/minishGithub
 # environment
@@ -176,6 +147,7 @@ ORIGINAL_XDG_CURRENT_DESKTOP = XFCE
 # makefile (from 'Makefile', line 3)
 INC_DIR = ./includes
 # makefile (from 'Makefile', line 4)
+ 
 SRC_DIR = ./srcs
 # makefile (from 'Makefile', line 12)
 LIBFT_INC_DIR = ./libft/includes
@@ -210,19 +182,18 @@ LC_TIME = en_US.UTF-8
 # environment
 VSCODE_GIT_IPC_HANDLE = /run/user/1001/vscode-git-bdcae5b870.sock
 # environment
- 
 COLORTERM = truecolor
 # default
 MAKE = $(MAKE_COMMAND)
 # default
 MAKECMDGOALS := all
 # makefile (from 'Makefile', line 22)
-SRCS := ./srcs/main.c ./srcs/clear.c ./srcs/error.c ./srcs/exitclear.c ./srcs/init.c ./srcs/input.c ./srcs/prompt.c ./srcs/signals.c ./srcs/parsing/tokenizer.c ./srcs/parsing/token_utils.c ./srcs/parsing/types.c ./srcs/parsing/lexer.c ./srcs/parsing/expand.c ./srcs/parsing/expand_utils.c ./srcs/parsing/conv_to_cmd.c ./srcs/parsing/cmd_creat.c ./srcs/parsing/parser.c ./srcs/parsing/utils_comparison.c ./srcs/parsing/utils_comparison2.c ./srcs/redirections/check_access.c ./srcs/redirections/heredoc_run.c ./srcs/redirections/heredoc_set.c ./srcs/redirections/open.c ./srcs/redirections/set_redir.c ./srcs/redirections/pipeline_red.c ./srcs/redirections/single_red.c ./srcs/redirections/utils.c ./srcs/exec/cmd_execve.c ./srcs/exec/cmd_path.c ./srcs/exec/launch.c ./srcs/exec/launch_builtin.c ./srcs/exec/launch_pipeline.c ./srcs/exec/launch_single.c ./srcs/exec/wait.c ./srcs/exec/builtins/cd.c ./srcs/exec/builtins/echo.c ./srcs/exec/builtins/env.c ./srcs/exec/builtins/exit.c ./srcs/exec/builtins/export.c ./srcs/exec/builtins/pwd.c ./srcs/exec/builtins/unset.c
+SRCS := ./srcs/main.c ./srcs/clear.c ./srcs/close.c ./srcs/error.c ./srcs/exit.c ./srcs/init.c ./srcs/input.c ./srcs/prompt.c ./srcs/reset.c ./srcs/signals.c ./srcs/parsing/tokenizer.c ./srcs/parsing/token_utils.c ./srcs/parsing/types.c ./srcs/parsing/lexer.c ./srcs/parsing/expand.c ./srcs/parsing/expand_utils.c ./srcs/parsing/conv_to_cmd.c ./srcs/parsing/cmd_creat.c ./srcs/parsing/cmd_init.c ./srcs/parsing/parser.c ./srcs/parsing/utils_comparison.c ./srcs/parsing/utils_comparison2.c ./srcs/redirections/check_access.c ./srcs/redirections/heredoc_run.c ./srcs/redirections/heredoc_set.c ./srcs/redirections/open.c ./srcs/redirections/set_redir.c ./srcs/redirections/pipeline_red.c ./srcs/redirections/single_red.c ./srcs/redirections/utils.c ./srcs/exec/cmd_execve.c ./srcs/exec/cmd_path.c ./srcs/exec/launch.c ./srcs/exec/launch_builtin.c ./srcs/exec/launch_pipeline.c ./srcs/exec/launch_single.c ./srcs/exec/wait.c ./srcs/exec/builtins/cd.c ./srcs/exec/builtins/echo.c ./srcs/exec/builtins/env.c ./srcs/exec/builtins/exit.c ./srcs/exec/builtins/export.c ./srcs/exec/builtins/pwd.c ./srcs/exec/builtins/unset.c
 # environment
 SHLVL = 1
 # makefile (from 'Makefile', line 13)
 LIBFT = ./libft/libft.a
-# makefile (from 'Makefile', line 73)
+# makefile (from 'Makefile', line 76)
 CC = clang
 # makefile (from 'Makefile', line 9)
 BUILD_DIR = ./objs
@@ -264,6 +235,7 @@ LANGUAGE = en
 XDG_SEAT_PATH = /org/freedesktop/DisplayManager/Seat0
 # environment
 VSCODE_IPC_HOOK = /run/user/1001/vscode-6f96cc86-1.69.0-main.sock
+ 
 # environment
 VSCODE_GIT_ASKPASS_NODE = /usr/share/code/code
 # makefile
@@ -283,6 +255,7 @@ LC_PAPER = fr_FR.UTF-8
 # environment
 NO_AT_BRIDGE = 1
 # environment
+ 
 S_COLORS = auto
 # environment
 QT_ACCESSIBILITY = 1
@@ -306,8 +279,8 @@ LC_ALL = C
 LIBS := ./libftlibft.a
 # automatic
 ^F = $(notdir $^)
-# makefile (from 'Makefile', line 69)
-DEPS :=   ./objs/main.d  ./objs/clear.d  ./objs/error.d  ./objs/exitclear.d  ./objs/init.d  ./objs/input.d  ./objs/prompt.d  ./objs/signals.d  ./objs/parsing/tokenizer.d  ./objs/parsing/token_utils.d  ./objs/parsing/types.d  ./objs/parsing/lexer.d  ./objs/parsing/expand.d  ./objs/parsing/expand_utils.d  ./objs/parsing/conv_to_cmd.d  ./objs/parsing/cmd_creat.d  ./objs/parsing/parser.d  ./objs/parsing/utils_comparison.d  ./objs/parsing/utils_comparison2.d  ./objs/redirections/check_access.d  ./objs/redirections/heredoc_run.d  ./objs/redirections/heredoc_set.d  ./objs/redirections/open.d  ./objs/redirections/set_redir.d  ./objs/redirections/pipeline_red.d  ./objs/redirections/single_red.d  ./objs/redirections/utils.d  ./objs/exec/cmd_execve.d  ./objs/exec/cmd_path.d  ./objs/exec/launch.d  ./objs/exec/launch_builtin.d  ./objs/exec/launch_pipeline.d  ./objs/exec/launch_single.d  ./objs/exec/wait.d  ./objs/exec/builtins/cd.d  ./objs/exec/builtins/echo.d  ./objs/exec/builtins/env.d  ./objs/exec/builtins/exit.d  ./objs/exec/builtins/export.d  ./objs/exec/builtins/pwd.d  ./objs/exec/builtins/unset.d
+# makefile (from 'Makefile', line 72)
+DEPS :=   ./objs/main.d  ./objs/clear.d  ./objs/close.d  ./objs/error.d  ./objs/exit.d  ./objs/init.d  ./objs/input.d  ./objs/prompt.d  ./objs/reset.d  ./objs/signals.d  ./objs/parsing/tokenizer.d  ./objs/parsing/token_utils.d  ./objs/parsing/types.d  ./objs/parsing/lexer.d  ./objs/parsing/expand.d  ./objs/parsing/expand_utils.d  ./objs/parsing/conv_to_cmd.d  ./objs/parsing/cmd_creat.d  ./objs/parsing/cmd_init.d  ./objs/parsing/parser.d  ./objs/parsing/utils_comparison.d  ./objs/parsing/utils_comparison2.d  ./objs/redirections/check_access.d  ./objs/redirections/heredoc_run.d  ./objs/redirections/heredoc_set.d  ./objs/redirections/open.d  ./objs/redirections/set_redir.d  ./objs/redirections/pipeline_red.d  ./objs/redirections/single_red.d  ./objs/redirections/utils.d  ./objs/exec/cmd_execve.d  ./objs/exec/cmd_path.d  ./objs/exec/launch.d  ./objs/exec/launch_builtin.d  ./objs/exec/launch_pipeline.d  ./objs/exec/launch_single.d  ./objs/exec/wait.d  ./objs/exec/builtins/cd.d  ./objs/exec/builtins/echo.d  ./objs/exec/builtins/env.d  ./objs/exec/builtins/exit.d  ./objs/exec/builtins/export.d  ./objs/exec/builtins/pwd.d  ./objs/exec/builtins/unset.d
 # default
 SUFFIXES := 
 # environment
@@ -327,7 +300,7 @@ TERM = xterm-256color
 # environment
 VSCODE_PID = 2178
 # variable set hash-table stats:
-# Load=142/1024=14%, Rehash=0, Collisions=37/196=19%
+# Load=142/1024=14%, Rehash=0, Collisions=38/287=13%
 
 # Pattern-specific Variable Values
 
@@ -335,20 +308,18 @@ VSCODE_PID = 2178
 
 # Directories
 
-# ./objs/libft: could not be stat'd.
-# . (device 2049, inode 1480531): 22 files, no impossibilities.
-# ./includes (device 2049, inode 1480550): No files, no impossibilities so far.
-# ./srcs (device 2049, inode 1480565): No files, no impossibilities so far.
-# ./objs: could not be stat'd.
-# ./includes/libft: could not be stat'd.
-# ./srcs/libft: could not be stat'd.
+ 
+# . (device 2049, inode 1480531): 15 files, no impossibilities.
+# ./includes (device 2049, inode 1480550): 15 files, no impossibilities.
+# ./srcs (device 2049, inode 1480565): 15 files, no impossibilities.
+# ./objs (device 2049, inode 1480583): 23 files, no impossibilities.
 
-# 22 files, no impossibilities in 7 directories.
+# 68 files, no impossibilities in 4 directories.
 
 # Implicit Rules
 
 objs/%.o: %.c
-#  recipe to execute (from 'Makefile', line 92):
+#  recipe to execute (from 'Makefile', line 95):
 	@mkdir -p ${dir $@}
 	@echo create: ${@:%=%}
 	@${COMP} -MMD ${INCLUDES} -c $< -o $@
@@ -357,72 +328,134 @@ objs/%.o: %.c
 
 # Files
 
-# Not a target:
-objs/redirections/utils.o:
+objs/redirections/utils.o: srcs/redirections/utils.c includes/redir.h includes/extern_libs.h libft/includes/libft.h libft/includes/ft_printf.h includes/structs.h includes/parsing.h includes/error.h includes/exit.h includes/clear.h includes/close.h includes/exec.h includes/builtins.h includes/signals.h
 #  Implicit rule search has not been done.
+ 
 #  Modification time never checked.
 #  File has not been updated.
 
 # Not a target:
 objs/parsing/types.d:
 #  Implicit rule search has been done.
-#  File does not exist.
+#  Last modified 2022-07-30 01:07:15.434300625
 #  File has been updated.
-#  Failed to be updated.
+#  Successfully updated.
 
 # Not a target:
 objs/input.d:
 #  Implicit rule search has been done.
-#  File does not exist.
+#  Last modified 2022-07-30 01:07:14.774300605
 #  File has been updated.
-#  Failed to be updated.
+#  Successfully updated.
 
 # Not a target:
-objs/redirections/set_redir.d:
-#  Implicit rule search has been done.
-#  File does not exist.
-#  File has been updated.
-#  Failed to be updated.
-
-# Not a target:
-objs/parsing/conv_to_cmd.d:
-#  Implicit rule search has been done.
-#  File does not exist.
-#  File has been updated.
-#  Failed to be updated.
-
-# Not a target:
-objs/redirections/open.d:
-#  Implicit rule search has been done.
-#  File does not exist.
-#  File has been updated.
-#  Failed to be updated.
-
-# Not a target:
-objs/exec/cmd_execve.d:
-#  Implicit rule search has been done.
-#  File does not exist.
-#  File has been updated.
-#  Failed to be updated.
-
-# Not a target:
-objs/redirections/single_red.d:
-#  Implicit rule search has been done.
-#  File does not exist.
-#  File has been updated.
-#  Failed to be updated.
-
-# Not a target:
-objs/main.o:
+srcs/exec/builtins/pwd.c:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
 # Not a target:
-objs/exec/launch_builtin.o:
+objs/redirections/set_redir.d:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-30 01:07:16.97430067
+#  File has been updated.
+ 
+#  Successfully updated.
+
+# Not a target:
+objs/parsing/conv_to_cmd.d:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-30 01:07:15.93430064
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+objs/redirections/open.d:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-30 01:07:16.870300667
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+objs/exec/cmd_execve.d:
+#  Implicit rule search has been done.
+ 
+#  Last modified 2022-07-30 01:07:17.438300684
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+srcs/exec/launch_single.c:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/parsing/token_utils.c:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+objs/parsing/cmd_init.d:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-30 01:07:16.146300646
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+objs/redirections/single_red.d:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-30 01:07:17.226300678
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
  
+srcs/exec/wait.c:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+objs/reset.o: srcs/reset.c includes/reset.h includes/extern_libs.h libft/includes/libft.h libft/includes/ft_printf.h includes/structs.h includes/clear.h includes/close.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+objs/main.o: ./srcs/main.c srcs/main.c includes/minishell.h includes/extern_libs.h libft/includes/libft.h libft/includes/ft_printf.h includes/structs.h includes/parsing.h includes/redir.h includes/exec.h includes/builtins.h includes/error.h includes/exit.h includes/clear.h includes/close.h includes/signals.h includes/reset.h
+#  Implicit rule search has been done.
+ 
+#  Implicit/static pattern stem: 'main'
+#  Last modified 2022-07-30 01:07:14.354300593
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := objs/main.o
+# automatic
+# % := 
+# automatic
+# * := main
+# automatic
+# + := ./srcs/main.c srcs/main.c includes/minishell.h includes/extern_libs.h libft/includes/libft.h libft/includes/ft_printf.h includes/structs.h includes/parsing.h includes/redir.h includes/exec.h includes/builtins.h includes/error.h includes/exit.h includes/clear.h includes/close.h includes/signals.h includes/reset.h
+# automatic
+# | := 
+# automatic
+# < := ./srcs/main.c
+# automatic
+# ^ := ./srcs/main.c srcs/main.c includes/minishell.h includes/extern_libs.h libft/includes/libft.h libft/includes/ft_printf.h includes/structs.h includes/parsing.h includes/redir.h includes/exec.h includes/builtins.h includes/error.h includes/exit.h includes/clear.h includes/close.h includes/signals.h includes/reset.h
+# automatic
+# ? := includes/close.h
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/21=5%
+#  recipe to execute (from 'Makefile', line 95):
+	@mkdir -p ${dir $@}
+	@echo create: ${@:%=%}
+	@${COMP} -MMD ${INCLUDES} -c $< -o $@
+
+objs/exec/launch_builtin.o: srcs/exec/launch_builtin.c includes/exec.h includes/extern_libs.h libft/includes/libft.h libft/includes/ft_printf.h includes/structs.h includes/builtins.h includes/error.h includes/exit.h includes/clear.h includes/close.h includes/redir.h includes/parsing.h includes/signals.h
+ 
+#  Implicit rule search has not been done.
+#  Modification time never checked.
 #  File has not been updated.
 
 all: libft/libft.a minishell
@@ -433,10 +466,33 @@ all: libft/libft.a minishell
 #  File has been updated.
 #  Needs to be updated (-q is set).
 # variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/4=0%
+# Load=0/32=0%, Rehash=0, Collisions=0/9=0%
+
+objs/error.o: srcs/error.c includes/minishell.h includes/extern_libs.h libft/includes/libft.h libft/includes/ft_printf.h includes/structs.h includes/parsing.h includes/redir.h includes/exec.h includes/builtins.h includes/error.h includes/exit.h includes/clear.h includes/close.h includes/signals.h includes/reset.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+objs/redirections/heredoc_run.o: srcs/redirections/heredoc_run.c includes/redir.h includes/extern_libs.h libft/includes/libft.h libft/includes/ft_printf.h includes/structs.h includes/parsing.h includes/error.h includes/exit.h includes/clear.h includes/close.h includes/exec.h includes/builtins.h includes/signals.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
-objs/error.o:
+includes/structs.h:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-29 20:11:25.371585492
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+srcs/parsing/expand.c:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/exec/builtins/echo.c:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -444,9 +500,9 @@ objs/error.o:
 # Not a target:
 objs/signals.d:
 #  Implicit rule search has been done.
-#  File does not exist.
+#  Last modified 2022-07-30 01:07:15.098300615
 #  File has been updated.
-#  Failed to be updated.
+#  Successfully updated.
 
 .PHONY: all clean fclean re
 #  Implicit rule search has not been done.
@@ -456,25 +512,37 @@ objs/signals.d:
 # Not a target:
 objs/parsing/tokenizer.d:
 #  Implicit rule search has been done.
-#  File does not exist.
+#  Last modified 2022-07-30 01:07:15.194300618
 #  File has been updated.
-#  Failed to be updated.
+#  Successfully updated.
 
 # Not a target:
-objs/exec/builtins/exit.o:
+includes/signals.h:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-30 00:32:48.090239556
+#  File has been updated.
+#  Successfully updated.
+
+objs/exec/builtins/exit.o: srcs/exec/builtins/exit.c includes/exit.h includes/extern_libs.h libft/includes/libft.h libft/includes/ft_printf.h includes/structs.h includes/clear.h includes/close.h includes/error.h
 #  Implicit rule search has not been done.
 #  Modification time never checked.
+ 
 #  File has not been updated.
 
 # Not a target:
 objs/redirections/pipeline_red.d:
 #  Implicit rule search has been done.
-#  File does not exist.
+#  Last modified 2022-07-30 01:07:17.078300673
 #  File has been updated.
-#  Failed to be updated.
+#  Successfully updated.
 
 # Not a target:
-objs/redirections/heredoc_set.o:
+srcs/exec/builtins/export.c:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+objs/redirections/heredoc_set.o: srcs/redirections/heredoc_set.c includes/redir.h includes/extern_libs.h libft/includes/libft.h libft/includes/ft_printf.h includes/structs.h includes/parsing.h includes/error.h includes/exit.h includes/clear.h includes/close.h includes/exec.h includes/builtins.h includes/signals.h
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -482,12 +550,24 @@ objs/redirections/heredoc_set.o:
 # Not a target:
 objs/exec/launch.d:
 #  Implicit rule search has been done.
-#  File does not exist.
+#  Last modified 2022-07-30 01:07:17.64230069
 #  File has been updated.
-#  Failed to be updated.
+#  Successfully updated.
 
 # Not a target:
-objs/redirections/heredoc_run.o:
+srcs/parsing/utils_comparison2.c:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+objs/close.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/redirections/utils.c:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -495,42 +575,34 @@ objs/redirections/heredoc_run.o:
 # Not a target:
 objs/init.d:
 #  Implicit rule search has been done.
-#  File does not exist.
+#  Last modified 2022-07-30 01:07:14.674300602
 #  File has been updated.
-#  Failed to be updated.
+#  Successfully updated.
 
 # Not a target:
+ 
 objs/redirections/check_access.d:
 #  Implicit rule search has been done.
-#  File does not exist.
+#  Last modified 2022-07-30 01:07:16.554300658
+ 
 #  File has been updated.
-#  Failed to be updated.
+#  Successfully updated.
 
 # Not a target:
 objs/exec/cmd_path.d:
 #  Implicit rule search has been done.
-#  File does not exist.
+#  Last modified 2022-07-30 01:07:17.542300687
 #  File has been updated.
-#  Failed to be updated.
-
-git:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-#  recipe to execute (from 'Makefile', line 110):
-	@git add .
-	@echo "enter the truc after commit -m:"; read tmp; git commit -m "$${tmp}"
-	@git push
-	@echo pushed hihi
+#  Successfully updated.
 
 # Not a target:
-.SUFFIXES:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+libft/includes/ft_printf.h:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-29 20:11:25.371585492
+#  File has been updated.
+#  Successfully updated.
 
-# Not a target:
-objs/exec/builtins/env.o:
+objs/exec/builtins/env.o: srcs/exec/builtins/env.c includes/exec.h includes/extern_libs.h libft/includes/libft.h libft/includes/ft_printf.h includes/structs.h includes/builtins.h includes/error.h includes/exit.h includes/clear.h includes/close.h includes/redir.h includes/parsing.h includes/signals.h
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -538,64 +610,88 @@ objs/exec/builtins/env.o:
 # Not a target:
 objs/parsing/utils_comparison.d:
 #  Implicit rule search has been done.
-#  File does not exist.
-#  File has been updated.
-#  Failed to be updated.
-
-# Not a target:
-objs/parsing/expand_utils.d:
-#  Implicit rule search has been done.
-#  File does not exist.
-#  File has been updated.
-#  Failed to be updated.
-
-# Not a target:
-Makefile:
-#  Implicit rule search has been done.
-#  Last modified 2022-07-29 20:11:25.371585492
+ 
+#  Last modified 2022-07-30 01:07:16.346300652
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
-objs/exitclear.d:
+srcs/reset.c:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+Makefile:
 #  Implicit rule search has been done.
-#  File does not exist.
+#  Last modified 2022-07-30 01:08:11.910302293
 #  File has been updated.
-#  Failed to be updated.
+#  Successfully updated.
 
 # Not a target:
-objs/parsing/types.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
-objs/input.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
-objs/exec/launch_pipeline.d:
+srcs/main.c:
 #  Implicit rule search has been done.
-#  File does not exist.
+#  Last modified 2022-07-30 00:57:18.042282978
 #  File has been updated.
-#  Failed to be updated.
+#  Successfully updated.
 
 # Not a target:
-objs/redirections/set_redir.o:
+includes/reset.h:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-30 00:53:53.006276921
+ 
+#  File has been updated.
+ 
+#  Successfully updated.
+
+objs/parsing/types.o: srcs/parsing/types.c includes/parsing.h includes/extern_libs.h libft/includes/libft.h libft/includes/ft_printf.h includes/structs.h includes/redir.h includes/exec.h includes/builtins.h includes/error.h includes/exit.h includes/clear.h includes/close.h includes/signals.h
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
 # Not a target:
-objs/parsing/conv_to_cmd.o:
+srcs/exec/launch_builtin.c:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+objs/input.o: srcs/input.c includes/minishell.h includes/extern_libs.h libft/includes/libft.h libft/includes/ft_printf.h includes/structs.h includes/parsing.h includes/redir.h includes/exec.h includes/builtins.h includes/error.h includes/exit.h includes/clear.h includes/close.h includes/signals.h includes/reset.h
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
 # Not a target:
-objs/exec/cmd_execve.o:
+srcs/error.c:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+includes/redir.h:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-30 00:48:45.378267834
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+includes/error.h:
+ 
+#  Implicit rule search has been done.
+#  Last modified 2022-07-30 00:28:20.274231645
+#  File has been updated.
+#  Successfully updated.
+
+objs/redirections/set_redir.o: srcs/redirections/set_redir.c includes/redir.h includes/extern_libs.h libft/includes/libft.h libft/includes/ft_printf.h includes/structs.h includes/parsing.h includes/error.h includes/exit.h includes/clear.h includes/close.h includes/exec.h includes/builtins.h includes/signals.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+objs/parsing/conv_to_cmd.o: srcs/parsing/conv_to_cmd.c includes/parsing.h includes/extern_libs.h libft/includes/libft.h libft/includes/ft_printf.h includes/structs.h includes/redir.h includes/exec.h includes/builtins.h includes/error.h includes/exit.h includes/clear.h includes/close.h includes/signals.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+objs/exec/cmd_execve.o: srcs/exec/cmd_execve.c includes/exec.h includes/extern_libs.h libft/includes/libft.h libft/includes/ft_printf.h includes/structs.h includes/builtins.h includes/error.h includes/exit.h includes/clear.h includes/close.h includes/redir.h includes/parsing.h includes/signals.h
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -603,19 +699,57 @@ objs/exec/cmd_execve.o:
 # Not a target:
 objs/exec/builtins/unset.d:
 #  Implicit rule search has been done.
-#  File does not exist.
+#  Last modified 2022-07-30 01:07:18.858300726
 #  File has been updated.
-#  Failed to be updated.
+#  Successfully updated.
+
+# Not a target:
+libft/includes/libft.h:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-29 20:11:25.371585492
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
 objs/parsing/cmd_creat.d:
 #  Implicit rule search has been done.
-#  File does not exist.
+#  Last modified 2022-07-30 01:07:16.050300643
 #  File has been updated.
-#  Failed to be updated.
+#  Successfully updated.
 
 # Not a target:
-objs/redirections/single_red.o:
+includes/parsing.h:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-30 01:03:39.438294244
+#  File has been updated.
+#  Successfully updated.
+
+ 
+objs/parsing/cmd_init.o: srcs/parsing/cmd_init.c includes/parsing.h includes/extern_libs.h libft/includes/libft.h libft/includes/ft_printf.h includes/structs.h includes/redir.h includes/exec.h includes/builtins.h includes/error.h includes/exit.h includes/clear.h includes/close.h includes/signals.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+objs/redirections/single_red.o: srcs/redirections/single_red.c includes/redir.h includes/extern_libs.h libft/includes/libft.h libft/includes/ft_printf.h includes/structs.h includes/parsing.h includes/error.h includes/exit.h includes/clear.h includes/close.h includes/exec.h includes/builtins.h includes/signals.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+includes/extern_libs.h:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-30 00:30:02.158234654
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+srcs/parsing/conv_to_cmd.c:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/redirections/heredoc_set.c:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -623,114 +757,166 @@ objs/redirections/single_red.o:
 # Not a target:
 objs/parsing/parser.d:
 #  Implicit rule search has been done.
-#  File does not exist.
+#  Last modified 2022-07-30 01:07:16.246300649
 #  File has been updated.
-#  Failed to be updated.
+#  Successfully updated.
 
 # Not a target:
 objs/clear.d:
 #  Implicit rule search has been done.
-#  File does not exist.
+#  Last modified 2022-07-30 01:03:58.454294806
 #  File has been updated.
-#  Failed to be updated.
+#  Successfully updated.
+
+# Not a target:
+srcs/redirections/heredoc_run.c:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+includes/close.h:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-30 01:07:39.730301342
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+srcs/init.c:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 objs/prompt.d:
 #  Implicit rule search has been done.
-#  File does not exist.
+ 
+#  Last modified 2022-07-30 01:07:14.910300609
 #  File has been updated.
-#  Failed to be updated.
+#  Successfully updated.
+
+objs/signals.o: srcs/signals.c includes/signals.h includes/extern_libs.h libft/includes/libft.h libft/includes/ft_printf.h includes/minishell.h includes/structs.h includes/parsing.h includes/redir.h includes/exec.h includes/builtins.h includes/error.h includes/exit.h includes/clear.h includes/close.h includes/reset.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
-objs/signals.o:
+srcs/exec/builtins/exit.c:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
-minishell: objs/main.o objs/clear.o objs/error.o objs/exitclear.o objs/init.o objs/input.o objs/prompt.o objs/signals.o objs/parsing/tokenizer.o objs/parsing/token_utils.o objs/parsing/types.o objs/parsing/lexer.o objs/parsing/expand.o objs/parsing/expand_utils.o objs/parsing/conv_to_cmd.o objs/parsing/cmd_creat.o objs/parsing/parser.o objs/parsing/utils_comparison.o objs/parsing/utils_comparison2.o objs/redirections/check_access.o objs/redirections/heredoc_run.o objs/redirections/heredoc_set.o objs/redirections/open.o objs/redirections/set_redir.o objs/redirections/pipeline_red.o objs/redirections/single_red.o objs/redirections/utils.o objs/exec/cmd_execve.o objs/exec/cmd_path.o objs/exec/launch.o objs/exec/launch_builtin.o objs/exec/launch_pipeline.o objs/exec/launch_single.o objs/exec/wait.o objs/exec/builtins/cd.o objs/exec/builtins/echo.o objs/exec/builtins/env.o objs/exec/builtins/exit.o objs/exec/builtins/export.o objs/exec/builtins/pwd.o objs/exec/builtins/unset.o libft/libft.a Makefile
+minishell: objs/main.o objs/clear.o objs/close.o objs/error.o objs/exit.o objs/init.o objs/input.o objs/prompt.o objs/reset.o objs/signals.o objs/parsing/tokenizer.o objs/parsing/token_utils.o objs/parsing/types.o objs/parsing/lexer.o objs/parsing/expand.o objs/parsing/expand_utils.o objs/parsing/conv_to_cmd.o objs/parsing/cmd_creat.o objs/parsing/cmd_init.o objs/parsing/parser.o objs/parsing/utils_comparison.o objs/parsing/utils_comparison2.o objs/redirections/check_access.o objs/redirections/heredoc_run.o objs/redirections/heredoc_set.o objs/redirections/open.o objs/redirections/set_redir.o objs/redirections/pipeline_red.o objs/redirections/single_red.o objs/redirections/utils.o objs/exec/cmd_execve.o objs/exec/cmd_path.o objs/exec/launch.o objs/exec/launch_builtin.o objs/exec/launch_pipeline.o objs/exec/launch_single.o objs/exec/wait.o objs/exec/builtins/cd.o objs/exec/builtins/echo.o objs/exec/builtins/env.o objs/exec/builtins/exit.o objs/exec/builtins/export.o objs/exec/builtins/pwd.o objs/exec/builtins/unset.o libft/libft.a Makefile
 #  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-#  recipe to execute (from 'Makefile', line 86):
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+ 
+# Load=0/32=0%, Rehash=0, Collisions=0/9=0%
+#  recipe to execute (from 'Makefile', line 89):
 	@${COMP} ${LD_FLAGS} ${OBJS} -o ${TARGET} -lft
 	@echo "${TARGET} created"
 
 # Not a target:
-objs/parsing/tokenizer.o:
+objs/exit.d:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-30 01:07:14.570300599
+#  File has been updated.
+#  Successfully updated.
+
+objs/parsing/tokenizer.o: srcs/parsing/tokenizer.c includes/parsing.h includes/extern_libs.h libft/includes/libft.h libft/includes/ft_printf.h includes/structs.h includes/redir.h includes/exec.h includes/builtins.h includes/error.h includes/exit.h includes/clear.h includes/close.h includes/signals.h
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
 libft/libft.a:
 #  Implicit rule search has not been done.
-#  Implicit/static pattern stem: ''
-#  File does not exist.
+#  Last modified 2022-07-30 01:03:58.166294797
 #  File has been updated.
-#  Needs to be updated (-q is set).
-# automatic
-# @ := libft/libft.a
-# automatic
-# % := 
-# automatic
-# * := 
-# automatic
-# + := 
-# automatic
-# | := 
-# automatic
-# < := 
-# automatic
-# ^ := 
-# automatic
-# ? := 
-# variable set hash-table stats:
-# Load=8/32=25%, Rehash=0, Collisions=2/12=17%
-#  recipe to execute (from 'Makefile', line 83):
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 86):
 	@make -C ${LIBFT_DIR}
 
 # Not a target:
-objs/redirections/pipeline_red.o:
+srcs/exec/builtins/cd.c:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+ 
+#  File has not been updated.
+
+objs/redirections/pipeline_red.o: srcs/redirections/pipeline_red.c includes/redir.h includes/extern_libs.h libft/includes/libft.h libft/includes/ft_printf.h includes/structs.h includes/parsing.h includes/error.h includes/exit.h includes/clear.h includes/close.h includes/exec.h includes/builtins.h includes/signals.h
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
 # Not a target:
-objs/redirections/open.o:
+srcs/exec/builtins/env.c:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
- 
+
+objs/redirections/open.o: srcs/redirections/open.c includes/redir.h includes/extern_libs.h libft/includes/libft.h libft/includes/ft_printf.h includes/structs.h includes/parsing.h includes/error.h includes/exit.h includes/clear.h includes/close.h includes/exec.h includes/builtins.h includes/signals.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 fclean: clean
 #  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 103):
+#  recipe to execute (from 'Makefile', line 106):
 	@make fclean -C libft
 	@${RM} ${TARGET}
 	@echo "program deleted"
 
-# Not a target:
-objs/exec/launch.o:
+objs/exec/launch.o: srcs/exec/launch.c includes/exec.h includes/extern_libs.h libft/includes/libft.h libft/includes/ft_printf.h includes/structs.h includes/builtins.h includes/error.h includes/exit.h includes/clear.h includes/close.h includes/redir.h includes/parsing.h includes/signals.h
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
 # Not a target:
-objs/init.o:
+srcs/parsing/lexer.c:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
 # Not a target:
-objs/redirections/check_access.o:
+srcs/parsing/types.c:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
 # Not a target:
-objs/exec/cmd_path.o:
+srcs/input.c:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+objs/init.o: srcs/init.c includes/minishell.h includes/extern_libs.h libft/includes/libft.h libft/includes/ft_printf.h includes/structs.h includes/parsing.h includes/redir.h includes/exec.h includes/builtins.h includes/error.h includes/exit.h includes/clear.h includes/close.h includes/signals.h includes/reset.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+objs/redirections/check_access.o: srcs/redirections/check_access.c includes/redir.h includes/extern_libs.h libft/includes/libft.h libft/includes/ft_printf.h includes/structs.h includes/parsing.h includes/error.h includes/exit.h includes/clear.h includes/close.h includes/exec.h includes/builtins.h includes/signals.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/redirections/set_redir.c:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+objs/exec/cmd_path.o: srcs/exec/cmd_path.c includes/exec.h includes/extern_libs.h libft/includes/libft.h libft/includes/ft_printf.h includes/structs.h includes/builtins.h includes/error.h includes/exit.h includes/clear.h includes/close.h includes/redir.h includes/parsing.h includes/signals.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/exec/cmd_execve.c:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -738,32 +924,51 @@ objs/exec/cmd_path.o:
 # Not a target:
 objs/exec/builtins/pwd.d:
 #  Implicit rule search has been done.
-#  File does not exist.
+#  Last modified 2022-07-30 01:07:18.750300723
 #  File has been updated.
-#  Failed to be updated.
+#  Successfully updated.
+ 
 
 # Not a target:
 objs/exec/builtins/cd.d:
 #  Implicit rule search has been done.
-#  File does not exist.
+#  Last modified 2022-07-30 01:07:18.230300707
 #  File has been updated.
-#  Failed to be updated.
+#  Successfully updated.
 
 # Not a target:
 objs/exec/launch_single.d:
 #  Implicit rule search has been done.
-#  File does not exist.
+#  Last modified 2022-07-30 01:07:17.9863007
 #  File has been updated.
-#  Failed to be updated.
+#  Successfully updated.
 
-# Not a target:
-objs/parsing/utils_comparison.o:
+objs/parsing/utils_comparison.o: srcs/parsing/utils_comparison.c includes/parsing.h includes/extern_libs.h libft/includes/libft.h libft/includes/ft_printf.h includes/structs.h includes/redir.h includes/exec.h includes/builtins.h includes/error.h includes/exit.h includes/clear.h includes/close.h includes/signals.h
+ 
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
 # Not a target:
-objs/parsing/expand_utils.o:
+srcs/parsing/cmd_init.c:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/redirections/single_red.c:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/exit.c:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+ 
+objs/parsing/expand_utils.o: srcs/parsing/expand_utils.c includes/parsing.h includes/extern_libs.h libft/includes/libft.h libft/includes/ft_printf.h includes/structs.h includes/redir.h includes/exec.h includes/builtins.h includes/error.h includes/exit.h includes/clear.h includes/close.h includes/signals.h
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -771,22 +976,17 @@ objs/parsing/expand_utils.o:
 # Not a target:
 objs/parsing/token_utils.d:
 #  Implicit rule search has been done.
-#  File does not exist.
+ 
+#  Last modified 2022-07-30 01:07:15.298300621
 #  File has been updated.
-#  Failed to be updated.
+#  Successfully updated.
 
 # Not a target:
 objs/exec/wait.d:
 #  Implicit rule search has been done.
-#  File does not exist.
+#  Last modified 2022-07-30 01:07:18.094300703
 #  File has been updated.
-#  Failed to be updated.
-
-# Not a target:
-objs/exitclear.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Successfully updated.
 
 # Not a target:
 .DEFAULT:
@@ -794,14 +994,18 @@ objs/exitclear.o:
 #  Modification time never checked.
 #  File has not been updated.
 
-# Not a target:
-objs/exec/launch_pipeline.o:
+objs/exec/launch_pipeline.o: srcs/exec/launch_pipeline.c includes/exec.h includes/extern_libs.h libft/includes/libft.h libft/includes/ft_printf.h includes/structs.h includes/builtins.h includes/error.h includes/exit.h includes/clear.h includes/close.h includes/redir.h includes/parsing.h includes/signals.h
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
 # Not a target:
-objs/parsing/cmd_creat.o:
+srcs/signals.c:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+objs/parsing/cmd_creat.o: srcs/parsing/cmd_creat.c includes/parsing.h includes/extern_libs.h libft/includes/libft.h libft/includes/ft_printf.h includes/structs.h includes/redir.h includes/exec.h includes/builtins.h includes/error.h includes/exit.h includes/clear.h includes/close.h includes/signals.h
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -809,23 +1013,49 @@ objs/parsing/cmd_creat.o:
 # Not a target:
 objs/parsing/lexer.d:
 #  Implicit rule search has been done.
-#  File does not exist.
+#  Last modified 2022-07-30 01:07:15.62630063
 #  File has been updated.
-#  Failed to be updated.
+#  Successfully updated.
 
 # Not a target:
 objs/parsing/expand.d:
 #  Implicit rule search has been done.
-#  File does not exist.
+ 
+#  Last modified 2022-07-30 01:07:15.734300634
 #  File has been updated.
-#  Failed to be updated.
+#  Successfully updated.
 
 # Not a target:
 objs/exec/builtins/echo.d:
 #  Implicit rule search has been done.
-#  File does not exist.
+#  Last modified 2022-07-30 01:07:18.32630071
 #  File has been updated.
-#  Failed to be updated.
+#  Successfully updated.
+
+# Not a target:
+srcs/redirections/open.c:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/parsing/tokenizer.c:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+./srcs/main.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-30 00:57:18.042282978
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+srcs/redirections/pipeline_red.c:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 re: fclean all
 #  Phony target (prerequisite of .PHONY).
@@ -833,27 +1063,32 @@ re: fclean all
 #  File does not exist.
 #  File has not been updated.
 
-# Not a target:
-objs/exec/builtins/unset.o:
+objs/exec/builtins/unset.o: srcs/exec/builtins/unset.c includes/exec.h includes/extern_libs.h libft/includes/libft.h libft/includes/ft_printf.h includes/structs.h includes/builtins.h includes/error.h includes/exit.h includes/clear.h includes/close.h includes/redir.h includes/parsing.h includes/signals.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+ 
+#  File has not been updated.
+
+objs/parsing/parser.o: srcs/parsing/parser.c includes/parsing.h includes/extern_libs.h libft/includes/libft.h libft/includes/ft_printf.h includes/structs.h includes/redir.h includes/exec.h includes/builtins.h includes/error.h includes/exit.h includes/clear.h includes/close.h includes/signals.h
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
 # Not a target:
-objs/parsing/parser.o:
+srcs/exec/launch.c:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
 # Not a target:
 objs/exec/builtins/export.d:
+ 
 #  Implicit rule search has been done.
-#  File does not exist.
+#  Last modified 2022-07-30 01:07:18.64630072
 #  File has been updated.
-#  Failed to be updated.
+#  Successfully updated.
 
-# Not a target:
-objs/clear.o:
+objs/clear.o: srcs/clear.c includes/clear.h includes/extern_libs.h libft/includes/libft.h libft/includes/ft_printf.h includes/structs.h includes/close.h
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -861,12 +1096,11 @@ objs/clear.o:
 # Not a target:
 objs/parsing/utils_comparison2.d:
 #  Implicit rule search has been done.
-#  File does not exist.
+#  Last modified 2022-07-30 01:07:16.454300655
 #  File has been updated.
-#  Failed to be updated.
+#  Successfully updated.
 
-# Not a target:
-objs/prompt.o:
+objs/prompt.o: srcs/prompt.c includes/minishell.h includes/extern_libs.h libft/includes/libft.h libft/includes/ft_printf.h includes/structs.h includes/parsing.h includes/redir.h includes/exec.h includes/builtins.h includes/error.h includes/exit.h includes/clear.h includes/close.h includes/signals.h includes/reset.h
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -874,57 +1108,124 @@ objs/prompt.o:
 # Not a target:
 objs/redirections/utils.d:
 #  Implicit rule search has been done.
-#  File does not exist.
+#  Last modified 2022-07-30 01:07:17.334300681
 #  File has been updated.
-#  Failed to be updated.
+#  Successfully updated.
+
+# Not a target:
+ 
+srcs/redirections/check_access.c:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/exec/cmd_path.c:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+objs/exit.o: srcs/exit.c includes/exit.h includes/extern_libs.h libft/includes/libft.h libft/includes/ft_printf.h includes/structs.h includes/clear.h includes/close.h includes/error.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/parsing/utils_comparison.c:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/parsing/expand_utils.c:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+objs/reset.d:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-30 01:03:59.570294839
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+objs/redirections/heredoc_run.d:
+ 
+#  Implicit rule search has been done.
+ 
+#  Last modified 2022-07-30 01:07:16.658300661
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
 objs/main.d:
 #  Implicit rule search has been done.
-#  File does not exist.
+#  Last modified 2022-07-30 01:07:14.358300593
 #  File has been updated.
-#  Failed to be updated.
+#  Successfully updated.
 
 # Not a target:
 objs/exec/launch_builtin.d:
 #  Implicit rule search has been done.
-#  File does not exist.
+#  Last modified 2022-07-30 01:07:17.746300693
 #  File has been updated.
-#  Failed to be updated.
+#  Successfully updated.
+
+# Not a target:
+srcs/exec/launch_pipeline.c:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 objs/error.d:
 #  Implicit rule search has been done.
-#  File does not exist.
+#  Last modified 2022-07-30 01:07:14.462300596
 #  File has been updated.
-#  Failed to be updated.
+#  Successfully updated.
 
-# Not a target:
-objs/exec/builtins/pwd.o:
+objs/exec/builtins/pwd.o: srcs/exec/builtins/pwd.c includes/exec.h includes/extern_libs.h libft/includes/libft.h libft/includes/ft_printf.h includes/structs.h includes/builtins.h includes/error.h includes/exit.h includes/clear.h includes/close.h includes/redir.h includes/parsing.h includes/signals.h
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
 # Not a target:
-objs/exec/builtins/cd.o:
+srcs/parsing/cmd_creat.c:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+objs/exec/builtins/cd.o: srcs/exec/builtins/cd.c includes/parsing.h includes/extern_libs.h libft/includes/libft.h libft/includes/ft_printf.h includes/structs.h includes/redir.h includes/exec.h includes/builtins.h includes/error.h includes/exit.h includes/clear.h includes/close.h includes/signals.h
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
 # Not a target:
-objs/exec/launch_single.o:
+includes/exec.h:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-30 01:06:44.334299706
+#  File has been updated.
+#  Successfully updated.
+
+objs/exec/launch_single.o: srcs/exec/launch_single.c includes/exec.h includes/extern_libs.h libft/includes/libft.h libft/includes/ft_printf.h includes/structs.h includes/builtins.h includes/error.h includes/exit.h includes/clear.h includes/close.h includes/redir.h includes/parsing.h includes/signals.h
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
 # Not a target:
-objs/parsing/token_utils.o:
+includes/builtins.h:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-30 00:30:42.238235838
+#  File has been updated.
+#  Successfully updated.
+
+objs/parsing/token_utils.o: srcs/parsing/token_utils.c includes/parsing.h includes/extern_libs.h libft/includes/libft.h libft/includes/ft_printf.h includes/structs.h includes/redir.h includes/exec.h includes/builtins.h includes/error.h includes/exit.h includes/clear.h includes/close.h includes/signals.h
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
-# Not a target:
-objs/exec/wait.o:
+objs/exec/wait.o: srcs/exec/wait.c includes/exec.h includes/extern_libs.h libft/includes/libft.h libft/includes/ft_printf.h includes/structs.h includes/builtins.h includes/error.h includes/exit.h includes/clear.h includes/close.h includes/redir.h includes/parsing.h includes/signals.h
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -932,31 +1233,90 @@ objs/exec/wait.o:
 # Not a target:
 objs/redirections/heredoc_set.d:
 #  Implicit rule search has been done.
-#  File does not exist.
+ 
+#  Last modified 2022-07-30 01:07:16.762300664
 #  File has been updated.
-#  Failed to be updated.
+#  Successfully updated.
 
 # Not a target:
-objs/redirections/heredoc_run.d:
+srcs/clear.c:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+includes/clear.h:
+#  Implicit rule search has been done.
+ 
+#  Last modified 2022-07-30 00:58:32.342285173
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+includes/minishell.h:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-30 00:55:38.526280038
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+objs/exec/launch_pipeline.d:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-30 01:07:17.874300697
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+objs/close.d:
 #  Implicit rule search has been done.
 #  File does not exist.
 #  File has been updated.
 #  Failed to be updated.
 
 # Not a target:
-objs/parsing/lexer.o:
+srcs/prompt.c:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+objs/parsing/lexer.o: srcs/parsing/lexer.c includes/parsing.h includes/extern_libs.h libft/includes/libft.h libft/includes/ft_printf.h includes/structs.h includes/redir.h includes/exec.h includes/builtins.h includes/error.h includes/exit.h includes/clear.h includes/close.h includes/signals.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+objs/parsing/expand.o: srcs/parsing/expand.c includes/parsing.h includes/extern_libs.h libft/includes/libft.h libft/includes/ft_printf.h includes/structs.h includes/redir.h includes/exec.h includes/builtins.h includes/error.h includes/exit.h includes/clear.h includes/close.h includes/signals.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+objs/exec/builtins/echo.o: srcs/exec/builtins/echo.c includes/exec.h includes/extern_libs.h libft/includes/libft.h libft/includes/ft_printf.h includes/structs.h includes/builtins.h includes/error.h includes/exit.h includes/clear.h includes/close.h includes/redir.h includes/parsing.h includes/signals.h
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
 # Not a target:
-objs/parsing/expand.o:
+srcs/exec/builtins/unset.c:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
+ 
 # Not a target:
-objs/exec/builtins/echo.o:
+includes/exit.h:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-30 01:07:12.166300528
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+objs/parsing/expand_utils.d:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-30 01:07:15.834300637
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+srcs/parsing/parser.c:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -966,42 +1326,39 @@ clean:
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 97):
+#  recipe to execute (from 'Makefile', line 100):
 	@make clean -C libft
 	@${RM} ${BUILD_DIR}
 	@${RM} ${DEPS}
 	@echo "objs deleted"
 
-# Not a target:
-objs/exec/builtins/export.o:
+objs/exec/builtins/export.o: srcs/exec/builtins/export.c includes/exec.h includes/extern_libs.h libft/includes/libft.h libft/includes/ft_printf.h includes/structs.h includes/builtins.h includes/error.h includes/exit.h includes/clear.h includes/close.h includes/redir.h includes/parsing.h includes/signals.h
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
- 
 # Not a target:
- 
 objs/exec/builtins/env.d:
 #  Implicit rule search has been done.
-#  File does not exist.
+ 
+#  Last modified 2022-07-30 01:07:18.430300713
 #  File has been updated.
-#  Failed to be updated.
+#  Successfully updated.
 
 # Not a target:
 objs/exec/builtins/exit.d:
 #  Implicit rule search has been done.
-#  File does not exist.
+#  Last modified 2022-07-30 01:07:18.542300717
 #  File has been updated.
-#  Failed to be updated.
+#  Successfully updated.
 
-# Not a target:
-objs/parsing/utils_comparison2.o:
+objs/parsing/utils_comparison2.o: srcs/parsing/utils_comparison2.c includes/parsing.h includes/extern_libs.h libft/includes/libft.h libft/includes/ft_printf.h includes/structs.h includes/redir.h includes/exec.h includes/builtins.h includes/error.h includes/exit.h includes/clear.h includes/close.h includes/signals.h
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
 # files hash-table stats:
-# Load=93/1024=9%, Rehash=0, Collisions=11/204=5%
+# Load=157/1024=15%, Rehash=0, Collisions=84/916=9%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
@@ -1009,13 +1366,12 @@ objs/parsing/utils_comparison2.o:
 # General ('VPATH' variable) search path:
 # ./srcs:./includes:./objs
 
-# strcache buffers: 1 (0) / strings = 125 / storage = 2316 B / avg = 18 B
-# current buf: size = 8162 B / used = 2316 B / count = 125 / avg = 18 B
+# strcache buffers: 1 (0) / strings = 224 / storage = 3992 B / avg = 17 B
+# current buf: size = 8162 B / used = 3992 B / count = 224 / avg = 17 B
 
-# strcache performance: lookups = 194 / hit rate = 35%
+# strcache performance: lookups = 925 / hit rate = 75%
 # hash-table stats:
- 
-# Load=125/8192=2%, Rehash=0, Collisions=3/194=2%
-# Finished Make data base on Fri Jul 29 20:11:54 2022
+# Load=224/8192=3%, Rehash=0, Collisions=10/925=1%
+# Finished Make data base on Sat Jul 30 01:08:15 2022
 
  

@@ -1,30 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exitclear.c                                        :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 08:14:07 by user42            #+#    #+#             */
-/*   Updated: 2022/07/28 20:25:44 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/30 01:02:36 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "clearexit.h"
+#include "exit.h"
 
-/* void	exit_subprocess(t_sh *sh, unsigned char exit_code)
+void	exit_clear_child(t_sh *sh, unsigned char exit_code)
 {
-//	(void)sh;
-	clear_cmd_list(sh->cmd_list);
-	reset_sh(sh);
+	clear_sh(sh);
 	exit(exit_code);
-} */
+}
 
-void	exit_clear_process(t_sh *sh, unsigned char exit_code)
+void	exit_clear_minish(t_sh *sh, unsigned char exit_code)
 {
-	(void)sh;
-
 	ft_printerror("exit\n");
-	reset_sh(sh);
+	clear_sh(sh);
 	exit(exit_code);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdankou < mdankou@student.42.fr >          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 14:06:55 by user42            #+#    #+#             */
-/*   Updated: 2022/07/29 16:09:56 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/07/29 23:52:19 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,11 @@ char	**get_env_tab(t_list *env)
 	len = 0;
 	while (env)
 	{
-		tab[len++] = ft_strdup(env->content);
+
+		tab[len] = ft_strdup(env->content);
 		if (!tab[len])
-			break ;
+			return (NULL);
+		len++;
 		env = env->next;
 	}
 	tab[len] = NULL;

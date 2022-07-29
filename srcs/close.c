@@ -1,35 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   close.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/18 17:51:19 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/30 00:34:46 by user42           ###   ########.fr       */
+/*   Created: 2022/07/30 00:42:38 by user42            #+#    #+#             */
+/*   Updated: 2022/07/30 00:44:04 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "close.h"
 
-/*
-*	pwd with no options (and no arguments)
-*	@return 0 Successful completion. >0 An error occurred.
-*/
-
-int	mini_pwd(t_sh *sh, t_cmd *cmd)
+void	close_if_no_std(int fd)
 {
-	char	*name;
+	if (fd > STDERR_FILENO)
+		close(fd);
+}
 
-	(void)sh;
-	(void)cmd;
-	name = getcwd(NULL, 0);
-	if (!name)
-	{
-		error_display("pwd", strerror(errno), 0);
-		return (errno);
-	}
-	printf("%s\n", name);
-	free(name);
-	return (0);
+void	close_cmd_redirs(t_cmd *cmd)
+{
+	close_if_no_std(cmd->redir_in);
+	if (cmd->heredoc_infile)
+		unlink(cmd->infile_name);
+	close_if_no_std(cmd->redir_out);	
 }

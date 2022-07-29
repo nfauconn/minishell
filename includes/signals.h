@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 20:01:13 by user42            #+#    #+#             */
-/*   Updated: 2022/07/28 19:47:49 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/30 00:32:48 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@
 # define HEREDOC 3
 
 # include "extern_libs.h"
-
-//extern unsigned char	g_last_status;
 
 void	signal_catching_mode(int mode);
 

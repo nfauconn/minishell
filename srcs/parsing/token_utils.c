@@ -6,19 +6,18 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 19:57:56 by user42            #+#    #+#             */
-/*   Updated: 2022/07/08 13:21:44 by user42           ###   ########.fr       */
+/*   Updated: 2022/07/30 00:37:19 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-t_list	*skip_token(t_list *token, int to_skip)
+void	skip_token(t_list **token, int to_skip)
 {
-	if (token)
-		token = token->next;
-	if (token && token->type == to_skip)
-		token = token->next;
-	return (token);
+	if (token && *token)
+		*token = (*token)->next;
+	if (token && *token && (*token)->type == to_skip)
+		*token = (*token)->next;
 }
 
 void	display_token_list(t_list *lst)

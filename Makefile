@@ -22,11 +22,13 @@ LIBS := ${addsuffix ${L_EXT}, ${addprefix ${LIBFT_DIR}, \
 SRCS := ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		main \
 		clear \
+		close \
 		error \
-		exitclear \
+		exit \
 		init \
 		input \
 		prompt \
+		reset \
 		signals \
 		${addprefix ${PARSING}, \
 		tokenizer \
@@ -37,6 +39,7 @@ SRCS := ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		expand_utils \
 		conv_to_cmd \
 		cmd_creat \
+		cmd_init \
 		parser \
 		utils_comparison \
 		utils_comparison2} \
@@ -71,7 +74,7 @@ OBJS := ${subst ${SRC_DIR}, ${BUILD_DIR}, ${SRCS:%.c=%.o}}
 VPATH = ${SRC_DIR}:${INC_DIR}:${BUILD_DIR}
 
 CC = clang
-CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror #-g3 -fsanitize=address
 INCLUDES = -I ${INC_DIR} -I ${LIBFT_INC_DIR}
 LD_FLAGS = -L ${LIBFT_DIR} -ltinfo -lreadline
 COMP = ${CC} ${CFLAGS}
@@ -105,11 +108,5 @@ fclean: clean
 	@echo "program deleted"
 
 re: fclean all
-
-git:
-	@git add .
-	@echo "enter the truc after commit -m:"; read tmp; git commit -m "$${tmp}"
-	@git push
-	@echo pushed hihi
 
 .PHONY: all clean fclean re

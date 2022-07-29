@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:22:26 by mdankou           #+#    #+#             */
-/*   Updated: 2022/07/29 21:53:40 by user42           ###   ########.fr       */
+/*   Updated: 2022/07/30 01:06:44 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@
 # define EMPTY_CMD 127
 # define NO_SUCH_FILE 127
 # define IS_DIR 126
-
-//droits d'acces 126
+# define NO_ACCESS_RIGHTS 126
 
 # include "extern_libs.h"
 # include "structs.h"
 # include "builtins.h"
-# include "clearexit.h"
+# include "redir.h"
 # include "error.h"
+# include "exit.h"
 # include "signals.h"
 
 /* PATH */

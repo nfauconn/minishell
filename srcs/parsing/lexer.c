@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 11:36:22 by user42            #+#    #+#             */
-/*   Updated: 2022/07/21 17:08:17 by user42           ###   ########.fr       */
+/*   Updated: 2022/07/29 22:44:47 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	tok_lexer(t_list *token)
 	{
 		if (check_nb_sign(token) == FAILURE)
 			return (FAILURE);
-		token = skip_token(token, BLANK);
+		skip_token(&token, BLANK);
 		if (token && (is_rediroperator(token->type) || is_sep(token->type)))
 			return (next_token_error(token));
 		else if (!token)
@@ -51,7 +51,7 @@ static int	tok_lexer(t_list *token)
 	{
 		if (check_nb_sign(token) == FAILURE)
 			return (FAILURE);
-		token = skip_token(token, BLANK);
+		skip_token(&token, BLANK);
 		if (token && is_sep(token->type))
 			return (next_token_error(token));
 		else if (!token)

@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 19:07:39 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/29 22:03:21 by user42           ###   ########.fr       */
+/*   Updated: 2022/07/30 00:36:53 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,3 @@ void	wait_children(t_sh *sh)
 		cmd = cmd->next;
 	}
 }
-
-//c est le parent qui affiche le retour a la ligne ou le quit
-//quit core dump s affiche seulement si
-// c est le dernier enfant attendu qui recoit un SIGQUIT

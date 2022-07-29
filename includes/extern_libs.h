@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extern_libs.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 20:00:30 by user42            #+#    #+#             */
-/*   Updated: 2022/07/23 00:47:20 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/30 00:30:02 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 
 # define _GNU_SOURCE
 
-# include "libft.h"
-# include "ft_printf.h"
 # include <dirent.h>
 # include <errno.h>
 # include <fcntl.h>
@@ -28,5 +26,7 @@
 # include <sys/stat.h>
 # include <sys/types.h>
 # include <sys/wait.h>
+# include "libft.h"
+# include "ft_printf.h"
 
 #endif

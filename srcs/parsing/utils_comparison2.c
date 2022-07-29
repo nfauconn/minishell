@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils_comparison2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 22:56:44 by user42            #+#    #+#             */
-/*   Updated: 2022/07/27 21:46:11 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/30 01:05:34 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "parsing.h"
 
 int	is_metacharacter(int c)
 {

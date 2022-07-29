@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 20:35:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/27 23:43:49 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/30 00:48:45 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 
 # include "extern_libs.h"
 # include "structs.h"
-# include "error.h"
 # include "parsing.h"
 # include "exec.h"
-# include "signals.h"
+# include "error.h"
+# include "close.h"
 
 /* PARSING__PART */
 void	fill_cmd_redir(t_sh *sh, t_list *token, t_cmd *cmd);

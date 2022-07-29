@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   launch_pipeline.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 13:07:05 by user42            #+#    #+#             */
-/*   Updated: 2022/07/29 00:16:02 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/30 00:37:00 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
-#include "redir.h"
 
 static void	child_job(t_sh *sh, t_cmd *cmd, int p[2], int fd_in)
 {
