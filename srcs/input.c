@@ -6,9 +6,12 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 18:10:00 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/29 01:54:14 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/29 04:22:38 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
+#define BBLU "\e[1;35m"
 
 #include "minishell.h"
 
@@ -17,8 +20,9 @@ static void	readprompt(char **line_read)
 	char	*prompt;
 	char	*cwd;
 
+	prompt = ft_strdup(BBLU"🐱 MINISH 🐱: "BBLU);
 	cwd = getcwd(NULL, 0);
-	prompt = ft_strjoin("🐱MINISH🐱:", cwd);
+	ft_strfjoin(&prompt, cwd);
 	free(cwd);
 	ft_strfjoin(&prompt, "> ");
 	*line_read = readline(prompt);
