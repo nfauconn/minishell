@@ -111,8 +111,7 @@ USER := ${shell env | grep USER | tail --bytes=+6}
 
 git:
 	git add .
-	read tmp
-	git commit -m "$tmp"
+	read tmp; git commit -m "$${tmp}"
 	git push
 
 .PHONY: all clean fclean re
