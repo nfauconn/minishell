@@ -106,12 +106,10 @@ fclean: clean
 
 re: fclean all
 
-TIME = `date +"%d/%m/%Y %Hh%M %Z"`
-USER := ${shell env | grep USER | tail --bytes=+6}
-
 git:
-	git add .
-	read tmp; git commit -m "$${tmp}"
-	git push
+	@git add .
+	@echo "enter the truc after commit -m:"; read tmp; git commit -m "$${tmp}"
+	@git push
+	@echo pushed hihi
 
 .PHONY: all clean fclean re
