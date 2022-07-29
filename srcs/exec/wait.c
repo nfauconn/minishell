@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wait.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 19:07:39 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/29 00:53:31 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/29 20:39:22 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,11 @@ void	wait_child(void)
 	int		signal;
 
 	pid = waitpid(-1, &status, 0);
+	if (pid < 0)
+	{
+		error_display("waitpid", strerror(errno), 0);
+		exit(EXIT_FAILURE);
+	}
 	if (WIFEXITED(status))
 		g_last_status = WEXITSTATUS(status);
 	if (WIFSIGNALED(status))

@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 17:55:15 by user42            #+#    #+#             */
-/*   Updated: 2022/07/28 13:32:52 by user42           ###   ########.fr       */
+/*   Updated: 2022/07/29 20:43:34 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,6 @@
 #include "minishell.h"
 
 unsigned char	g_last_status;
-
-static void	exit_yourself(int sig_num)
-{
-	if (sig_num == SIGQUIT)
-		ft_printerror("Quit (core dumped)\n");
-	exit(sig_num + 128);
-}
-
-static void	exit_heredoc(int sig_num)
-{
-	write(1, "\n", 1);
-	exit(sig_num + 128);
-}
 
 static void	new_line(int sig_num)
 {
@@ -52,12 +39,12 @@ void	signal_catching_mode(int mode)
 	}
 	else if (mode == CHILD_PROCESS)
 	{
-		signal(SIGINT, exit_yourself);
-		signal(SIGQUIT, exit_yourself);
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
 	}
 	else if (mode == HEREDOC)
 	{
-		signal(SIGINT, exit_heredoc);
+		signal(SIGINT, SIG_DFL);
 		signal(SIGQUIT, SIG_IGN);
 	}
 }
