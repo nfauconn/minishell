@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mdankou < mdankou@student.42.fr >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 14:06:55 by user42            #+#    #+#             */
-/*   Updated: 2022/07/29 03:25:31 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/29 16:09:56 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	find_path(t_cmd *cmd, char **paths)
 		if (access(cmd->path, X_OK) != -1)
 			return (1);
 		free(cmd->path);
+		cmd->path = NULL;
 		i++;
 	}
 	return (0);

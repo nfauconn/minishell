@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_execve.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mdankou < mdankou@student.42.fr >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 12:56:04 by user42            #+#    #+#             */
-/*   Updated: 2022/07/29 05:17:59 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/29 16:49:31 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	cmd_execve(t_sh *sh, t_cmd *cmd)
 		error_display(cmd->name, strerror(errno), 0);
 		exit (126);
 	}
-//	error_display(cmd->name, "command not found", 0);
-//	exit(127);
+	//C'était en commentaire, en dessous, ai-je bien fait de les décommenter ?
+	error_display(cmd->name, "command not found", 0);
+	exit(127);
 }

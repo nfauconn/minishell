@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   clear.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mdankou < mdankou@student.42.fr >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 21:14:36 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/28 21:14:38 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/29 15:40:59 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "libft.h"
 
 static void	free_cmd_params(t_cmd *cmd)
 {

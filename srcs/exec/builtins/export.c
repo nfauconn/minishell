@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mdankou < mdankou@student.42.fr >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:53:50 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/27 22:47:55 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/29 15:41:03 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
+#include "libft.h"
 
 static void	sort_str_tab(char **tab)
 {
