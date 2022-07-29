@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 12:11:35 by user42            #+#    #+#             */
-/*   Updated: 2022/07/28 22:05:57 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/29 02:45:35 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ char	*var_value(char *str, size_t len, t_list *env);
 void	add_until_var(char **buf, char **ptr, char *start);
 void	add_expanded_var(char **buf, char **ptr, t_sh *sh);
 t_list	*set_delim_type(t_list *token);
-char	*var_value(char *str, size_t len, t_list *env);
 
 /* PARSER */
 int		parsing(t_sh *sh, t_input *input);

@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 12:56:04 by user42            #+#    #+#             */
-/*   Updated: 2022/07/29 01:22:05 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/29 03:51:52 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void	cmd_execve(t_sh *sh, t_cmd *cmd)
 {
-//	struct stat		mode;
+	struct stat		mode;
 	int				error;
 
 	error = 0;
@@ -26,29 +26,30 @@ void	cmd_execve(t_sh *sh, t_cmd *cmd)
 	}
 	cmd->env = get_env_tab(sh->env);
 	cmd->env_paths = get_path_tab(sh->env);
+	if (!cmd->env_paths || ft_strlen(var_value("PATH", 4, sh->env)) == 0)
+	{
+		error_display(cmd->name, "No such file or directory", 0);
+		exit(127);
+	}
 	if (is_absolute_path(cmd->name))
 	{
+		if (stat(cmd->name, &mode) == 0 && S_ISDIR(mode.st_mode))
+		{
+			error_display(cmd->name, "Is a directory", 0);
+			exit(1);
+		}
 		execve(cmd->name, cmd->args, cmd->env_paths);
-/* 		error_display(cmd->name, strerror(errno), 0);
-		exit(NOT_FOUND); */
+		error_display(cmd->name, strerror(errno), 0);
+		exit(127);
 	}
-	else
+	execve(cmd->name, cmd->args, cmd->env_paths);
+	if (errno == EACCES)
 	{
-		if (!cmd->env_paths || !find_path(cmd, cmd->env_paths))
-		{
-			error_display(cmd->name, "command not found", 0);
-			error = -1;
-		}
-		else
-		{
-			//free tout ce qui n est pas envoye a execve
-			execve(cmd->name, cmd->args, cmd->env_paths);
-			error = errno;
-		}
+		error_display(cmd->name, strerror(errno), 0);
+		exit (126);
 	}
-	if (error > 0)
-		
-	exit(error + 128);
+	error_display(cmd->name, "command not found", 0);
+	exit(127);
 }
 
 /*

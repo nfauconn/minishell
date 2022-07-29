@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 22:41:54 by user42            #+#    #+#             */
-/*   Updated: 2022/07/28 20:21:33 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/29 02:45:38 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,13 @@ t_list	*set_delim_type(t_list *token)
 
 char	*var_value(char *str, size_t len, t_list *env)
 {
+	char	*env_line;
+
 	while (env)
 	{
-		if (!ft_strncmp(str, (char *)env->content, len)
-			&& ((char *)env->content)[len] == '=')
-			return (ft_strchr((char *)env->content, '=') + 1);
+		env_line = (char *)env->content;
+		if (!ft_strncmp(str, env_line, len) && (env_line)[len] == '=')
+			return (ft_strchr(env_line, '=') + 1);
 		env = env->next;
 	}
 	return (NULL);

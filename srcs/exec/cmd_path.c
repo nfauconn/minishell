@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 14:06:55 by user42            #+#    #+#             */
-/*   Updated: 2022/07/29 02:15:19 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/29 03:25:31 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,7 @@ char	**get_env_tab(t_list *env)
 
 char	**get_path_tab(t_list *env)
 {
-	char	**tab;
-
-	while (env && ft_strncmp(env->content, "PATH=", 5))
+	while (env && ft_strncmp(env->content, "PATH=", 5) )
 		env = env->next;
 	if (env)
 		return (ft_split(env->content + 5, ':'));
