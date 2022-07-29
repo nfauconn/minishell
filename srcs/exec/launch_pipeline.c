@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 13:07:05 by user42            #+#    #+#             */
-/*   Updated: 2022/07/27 21:56:00 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/29 00:16:02 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,10 @@ int	launch_pipeline(t_sh *sh, t_cmd *cmd)
 	while (cmd)
 	{
 		if (pipe(p) < 0)
-			return (exec_perror("pipe: ", strerror(errno)));
+			return (exec_perror("pipe", strerror(errno)));
 		pid = fork();
 		if (pid < 0)
-			return (exec_perror("fork: ", strerror(errno)));
+			return (exec_perror("fork", strerror(errno)));
 		if (pid == 0)
 			child_job(sh, cmd, p, fd_in);
 		else

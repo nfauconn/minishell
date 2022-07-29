@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 14:06:55 by user42            #+#    #+#             */
-/*   Updated: 2022/07/28 21:58:25 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/29 02:15:19 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	find_path(t_cmd *cmd, char **paths)
 	{
 		cmd->path = join_path(paths[i], cmd->name);
 		if (!cmd->path)
-			break ;
+			return (0);
 		if (access(cmd->path, X_OK) != -1)
 			return (1);
 		free(cmd->path);
@@ -71,17 +71,13 @@ char	**get_env_tab(t_list *env)
 	return (tab);
 }
 
-//Line 84: DO WE HAVE THE RIGHT TO DO THAT LOL, as bash find a path anyways
 char	**get_path_tab(t_list *env)
 {
 	char	**tab;
 
 	while (env && ft_strncmp(env->content, "PATH=", 5))
 		env = env->next;
-	if (!env)
-	{
-		tab = ft_split("/usr/bin", ':');
-		return (tab);
-	}
-	return (ft_split(env->content + 5, ':'));
+	if (env)
+		return (ft_split(env->content + 5, ':'));
+	return (NULL);
 }

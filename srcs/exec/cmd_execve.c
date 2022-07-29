@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 12:56:04 by user42            #+#    #+#             */
-/*   Updated: 2022/07/28 22:10:49 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/29 01:22:05 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,43 @@
 
 void	cmd_execve(t_sh *sh, t_cmd *cmd)
 {
-//	struct stat	mode;
+//	struct stat		mode;
+	int				error;
 
+	error = 0;
+	if (!*(cmd->name))
+	{
+		error_display("\'\'", "command not found", 0);
+		error = -1;
+	}
 	cmd->env = get_env_tab(sh->env);
 	cmd->env_paths = get_path_tab(sh->env);
-	if (!*(cmd->name))
-		error_exit(cmd->name, NOT_FOUND);
+	if (is_absolute_path(cmd->name))
+	{
+		execve(cmd->name, cmd->args, cmd->env_paths);
+/* 		error_display(cmd->name, strerror(errno), 0);
+		exit(NOT_FOUND); */
+	}
+	else
+	{
+		if (!cmd->env_paths || !find_path(cmd, cmd->env_paths))
+		{
+			error_display(cmd->name, "command not found", 0);
+			error = -1;
+		}
+		else
+		{
+			//free tout ce qui n est pas envoye a execve
+			execve(cmd->name, cmd->args, cmd->env_paths);
+			error = errno;
+		}
+	}
+	if (error > 0)
+		
+	exit(error + 128);
+}
+
+/*
 	if (is_absolute_path(cmd->name))
 	{
 		if (access(cmd->name, F_OK) == SUCCESS)
@@ -30,11 +61,23 @@ void	cmd_execve(t_sh *sh, t_cmd *cmd)
 				error_display(cmd->name, "permission denied", 0);
 				exit(NOT_EXECUTABLE);
 			}
+			if (stat(cmd->name, &mode) == 0 && S_ISDIR(mode.st_mode))
+			{
+				error_display(cmd->name, "Is a directory", 0);
+				exit(IS_DIR);
+			}
 			execve(cmd->name, cmd->args, cmd->env_paths);
 		}
+		else
+		{
+			error_display(cmd->name, "No such file or directory", 0);
+			exit(NO_SUCH_FILE);
+		}
 	}
-	exit(1);//temporaire
-}
+*/
+
+
+
 /* 		if (stat(cmd->name, &mode) == 0 && S_ISDIR(mode.st_mode))
 			error_exit(cmd->name, IS_DIR);
 		error_exit(cmd->name, NO_SUCH_FILE); */

@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 18:19:59 by user42            #+#    #+#             */
-/*   Updated: 2022/07/27 21:53:20 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/29 01:31:54 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static int	open_redir_out(t_cmd *cmd)
 		error_display(cmd->outfile_name, strerror(errno), 0);
 		return (1);
 	}
+	ft_printerror("cmd->redir_out = %d\n", cmd->redir_out);
 	return (0);
 }
 

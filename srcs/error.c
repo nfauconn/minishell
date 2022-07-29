@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 18:49:09 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/28 22:06:27 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/29 00:15:32 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,7 @@ int	lex_error(char *s)
 int	exec_perror(char *s1, char *s2)
 {
 	if (s1 && s2)
-		ft_printerror("minish: %s%s\n", s1, s2);
-	else
-		ft_printerror("please enter 2 valid strings in exec_error\n");
+		ft_printerror("minish: %s: %s\n", s1, s2);
 	return (FAILURE);
 }
 
