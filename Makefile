@@ -109,7 +109,7 @@ re: fclean all
 git:
 	@git add .
 	@echo "enter the truc after commit -m:"; read tmp; git commit -m "$${tmp}"
-	@git push
+	@git push > /dev/null
 	@echo pushed hihi
 
 .PHONY: all clean fclean re
