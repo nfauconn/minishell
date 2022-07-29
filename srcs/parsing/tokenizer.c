@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 16:59:04 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/29 22:28:35 by user42           ###   ########.fr       */
+/*   Updated: 2022/07/30 01:33:04 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int	tokenizer(t_input *input, char *line)
 	char	*start;
 	char	*token;
 
+	input->token_list = NULL;
 	while (line && *line)
 	{
 		start = find_start(line);
@@ -72,7 +73,7 @@ int	tokenizer(t_input *input, char *line)
 		else
 		{
 			line = find_end(input, start);
-			if (!input->line_read)
+			if (!line)
 				return (FAILURE);
 			token = ft_substr(start, 0, line - start);
 			add_token_to_list(&input->token_list, token);

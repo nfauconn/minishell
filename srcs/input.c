@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 18:10:00 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/30 00:13:06 by user42           ###   ########.fr       */
+/*   Updated: 2022/07/30 01:40:51 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	readprompt(char **line_read)
 	char	*prompt;
 	char	*cwd;
 
-	prompt = ft_strdup(BBLU"🐱 MINISH 🐱: "BBLU);
+	prompt = ft_strdup(BBLU"🐱 MINISH 🐱: ");
 	cwd = getcwd(NULL, 0);
 	ft_strfjoin(&prompt, cwd);
 	free(cwd);
@@ -29,7 +29,7 @@ static void	readprompt(char **line_read)
 	free(prompt);
 }
 
-char	*get_input(t_sh *sh)
+char	*get_input(t_sh *sh, t_input *input)
 {
 	char	*line_read;
 
@@ -37,7 +37,7 @@ char	*get_input(t_sh *sh)
 	readprompt(&line_read);
 	if (!line_read)
 	{
-		free(line_read);
+		clear_input(input);
 		exit_clear_minish(sh, 0);
 	}
 	if (line_read && *line_read == '\0')
@@ -50,7 +50,7 @@ char	*get_input(t_sh *sh)
 
 int	init_input(t_sh *sh, t_input *input)
 {
-	input->line_read = get_input(sh);
+	input->line_read = get_input(sh, input);
 	input->token_list = NULL;
 	return (0);
 }

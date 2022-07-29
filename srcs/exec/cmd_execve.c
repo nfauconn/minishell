@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 12:56:04 by user42            #+#    #+#             */
-/*   Updated: 2022/07/29 23:27:10 by user42           ###   ########.fr       */
+/*   Updated: 2022/07/30 01:30:02 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,27 +29,26 @@ void	cmd_execve(t_sh *sh, t_cmd *cmd)
 	if (!cmd->env_paths || ft_strlen(var_value("PATH", 4, sh->env)) == 0)
 	{
 		error_display(cmd->name, "No such file or directory", 0);
-		exit(127);
+		exit_clear_child(sh, 127);
 	}
 	if (is_absolute_path(cmd->name))
 	{
 		if (stat(cmd->name, &mode) == 0 && S_ISDIR(mode.st_mode))
 		{
 			error_display(cmd->name, "Is a directory", 0);
-			exit(1);
+			exit_clear_child(sh, 1);
 		}
 		execve(cmd->name, cmd->args, cmd->env_paths);
 		error_display(cmd->name, strerror(errno), 0);
-		exit(127);
+		exit_clear_child(sh, 127);
 	}
 	find_path(cmd, cmd->env_paths);
 	execve(cmd->path, cmd->args, cmd->env_paths);
 	if (errno == EACCES)
 	{
 		error_display(cmd->name, strerror(errno), 0);
-		exit (126);
+		exit_clear_child(sh, 126);
 	}
-	//C'était en commentaire, en dessous, ai-je bien fait de les décommenter ?
 	error_display(cmd->name, "command not found", 0);
-	exit(127);
+	exit_clear_child(sh, 127);
 }

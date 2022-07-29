@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:22:26 by mdankou           #+#    #+#             */
-/*   Updated: 2022/07/30 01:06:44 by user42           ###   ########.fr       */
+/*   Updated: 2022/07/30 01:50:30 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	cmd_execve(t_sh *sh, t_cmd *cmd);
 
 /* END */
 void	wait_children(t_sh *sh);
-void	wait_child(size_t cmd_nb, size_t cmd_index);
+void	wait_child(t_sh *sh, size_t cmd_index);
 void	wait_heredoc(void);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 12:37:34 by user42            #+#    #+#             */
-/*   Updated: 2022/07/13 20:55:41 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/30 01:48:07 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	heredoc_job(t_sh *sh, char *heredoc_path, char *delim)
 	read_heredoc_nbline(heredoc_path, &nbltotal);
 	fd = open(heredoc_path, O_CREAT | O_TRUNC | O_WRONLY, 0644);
 	if (fd < 0)
-		exit(-1);
+		exit_clear_child(sh, -1);
 	line = readline("> ");
 	while (++nbl && line && (line[0] == '\n' || ft_strcmp(line, delim)))
 	{
@@ -59,7 +59,7 @@ static void	heredoc_job(t_sh *sh, char *heredoc_path, char *delim)
 	write_heredoc_nbline(heredoc_path, nbltotal += nbl);
 	free(line);
 	close(fd);
-	exit(0);
+	exit_clear_child(sh, 0);
 }
 
 void	run_heredoc(t_sh *sh, char *heredoc_path, char *delim)

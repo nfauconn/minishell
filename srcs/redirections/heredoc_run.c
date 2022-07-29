@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_run.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 12:37:34 by user42            #+#    #+#             */
-/*   Updated: 2022/07/28 20:17:33 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/30 01:47:51 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	heredoc_job(t_sh *sh, char *hdoc_path, char *delim, t_bool quoted)
 
 	fd = open(hdoc_path, O_CREAT | O_TRUNC | O_WRONLY, 0644);
 	if (fd < 0)
-		exit(1);
+		exit_clear_child(sh, 1);
 	line = readline("> ");
 	sh->line_nb++;
 	while (line && (line[0] == '\n' || ft_strcmp(line, delim)) != SUCCESS)

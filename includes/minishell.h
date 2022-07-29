@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 18:25:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/30 00:55:38 by user42           ###   ########.fr       */
+/*   Updated: 2022/07/30 01:39:50 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_list	*init_env(char **env_tab);
 
 /* PROMPT LOOP */
 int		init_input(t_sh *sh, t_input *input);
-char	*get_input(t_sh *sh);
+char	*get_input(t_sh *sh, t_input *input);
 void	redisplay_prompt(void);
 
 #endif

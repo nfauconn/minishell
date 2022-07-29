@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipeline_red.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 20:29:41 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/28 20:29:19 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/30 01:44:52 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	pipeline_redir(t_sh *sh, t_cmd *cmd, int p[2], int fd_in)
 	if (error)
 	{
 		close(p[1]);
-		exit(error);
+		exit_clear_child(sh, error);
 	}
 	dup_input(cmd, fd_in);
 	dup_output(cmd, p);
