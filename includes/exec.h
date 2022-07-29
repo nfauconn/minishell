@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:22:26 by mdankou           #+#    #+#             */
-/*   Updated: 2022/07/29 02:56:23 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/29 21:53:40 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	cmd_execve(t_sh *sh, t_cmd *cmd);
 
 /* END */
 void	wait_children(t_sh *sh);
-void	wait_child(void);
+void	wait_child(size_t cmd_nb, size_t cmd_index);
 void	wait_heredoc(void);
 
 #endif

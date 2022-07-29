@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 19:07:39 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/29 20:39:22 by user42           ###   ########.fr       */
+/*   Updated: 2022/07/29 22:03:21 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	wait_heredoc(void)
 	pid = waitpid(-1, &status, 0);
 	if (WIFEXITED(status))
 	{
+		if (WEXITSTATUS(status) == 130)
+			ft_printerror("\n");
 		g_last_status = WEXITSTATUS(status);
 	}
 	if (WIFSIGNALED(status))
@@ -32,7 +34,7 @@ void	wait_heredoc(void)
 	}
 }
 
-void	wait_child(void)
+void	wait_child(size_t cmd_nb, size_t cmd_index)
 {
 	pid_t	pid;
 	int		status;
@@ -56,20 +58,26 @@ void	wait_child(void)
 		else if (signal == SIGINT)
 			ft_printerror("\n");
 		else if (signal == SIGQUIT)
-			ft_printerror("Quit (core dumped)\n");
+		{
+			if (cmd_index == cmd_nb || cmd_nb == 1)
+				ft_printerror("Quit (core dumped)\n");
+		}
 		g_last_status = signal + 128;
 	}
 }
 
 void	wait_children(t_sh *sh)
 {
+	t_cmd	*cmd;
 	size_t	i;
 
 	i = 0;
-	while (i < sh->cmd_nb)
+	cmd = sh->cmd_list;
+	while (i < sh->cmd_nb && cmd)
 	{
-		wait_child();
+		wait_child(sh->cmd_nb, cmd->index);
 		i++;
+		cmd = cmd->next;
 	}
 }
 
