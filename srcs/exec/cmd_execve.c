@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 12:56:04 by user42            #+#    #+#             */
-/*   Updated: 2022/07/29 03:57:50 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/29 05:17:59 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,17 @@ void	cmd_execve(t_sh *sh, t_cmd *cmd)
 			error_display(cmd->name, "Is a directory", 0);
 			exit(1);
 		}
-		execve(cmd->name, cmd->args, cmd->env);
+		execve(cmd->name, cmd->args, cmd->env_paths);
 		error_display(cmd->name, strerror(errno), 0);
 		exit(127);
 	}
-	execve(cmd->name, cmd->args, cmd->env);
+	find_path(cmd, cmd->env_paths);
+	execve(cmd->path, cmd->args, cmd->env_paths);
 	if (errno == EACCES)
 	{
 		error_display(cmd->name, strerror(errno), 0);
 		exit (126);
 	}
-	error_display(cmd->name, "command not found", 0);
-	exit(127);
+//	error_display(cmd->name, "command not found", 0);
+//	exit(127);
 }
