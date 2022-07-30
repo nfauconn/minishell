@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 12:07:25 by user42            #+#    #+#             */
-/*   Updated: 2022/07/28 19:40:57 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/30 19:33:08 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,7 @@ typedef struct s_cmd
 	char			*name;
 	int				built_i;
 	char			**args;
-	char			**env;
-	char			**env_paths;
+	char			**possible_paths;
 	char			*path;
 	int				redir_in;
 	int				redir_out;

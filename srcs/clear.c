@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 21:14:36 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/30 01:00:58 by user42           ###   ########.fr       */
+/*   Updated: 2022/07/30 19:33:59 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,8 @@ static void	clear_cmd_params(t_cmd *cmd)
 {
 	if (cmd->args)
 		ft_strarray_clear(cmd->args);
-	if (cmd->env)
-		ft_strarray_clear(cmd->env);
-	if (cmd->env_paths)
-		ft_strarray_clear(cmd->env_paths);
+	if (cmd->possible_paths)
+		ft_strarray_clear(cmd->possible_paths);
 	if (cmd->path)
 		ft_strdel(&cmd->path);
 	if (cmd->infile_name)

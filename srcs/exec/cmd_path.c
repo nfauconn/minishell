@@ -6,11 +6,31 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 14:06:55 by user42            #+#    #+#             */
-/*   Updated: 2022/07/29 23:52:19 by user42           ###   ########.fr       */
+/*   Updated: 2022/07/30 19:16:34 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
+
+static char	*join_path(char const *penv, char const *pexec)
+{
+	char	*dst;
+	size_t	len1;
+	size_t	len2;
+	size_t	sep;
+
+	len1 = ft_strlen(penv);
+	len2 = ft_strlen(pexec);
+	sep = penv[len1 - 1] != '/';
+	dst = (char *)malloc(sizeof(char) * (len1 + len2 + sep + 1));
+	if (!dst)
+		return (NULL);
+	ft_strlcpy(dst, penv, len1 + 1);
+	if (penv[len1 - 1] != '/')
+		dst[len1] = '/';
+	ft_strlcpy(dst + len1 + (penv[len1 - 1] != '/'), pexec, len2 + 1);
+	return (dst);
+}
 
 int	find_path(t_cmd *cmd, char **paths)
 {
@@ -29,26 +49,6 @@ int	find_path(t_cmd *cmd, char **paths)
 		i++;
 	}
 	return (0);
-}
-
-char	*join_path(char const *penv, char const *pexec)
-{
-	char	*dst;
-	size_t	len1;
-	size_t	len2;
-	size_t	sep;
-
-	len1 = ft_strlen(penv);
-	len2 = ft_strlen(pexec);
-	sep = penv[len1 - 1] != '/';
-	dst = (char *)malloc(sizeof(char) * (len1 + len2 + sep + 1));
-	if (!dst)
-		return (NULL);
-	ft_strlcpy(dst, penv, len1 + 1);
-	if (penv[len1 - 1] != '/')
-		dst[len1] = '/';
-	ft_strlcpy(dst + len1 + (penv[len1 - 1] != '/'), pexec, len2 + 1);
-	return (dst);
 }
 
 char	**get_env_tab(t_list *env)

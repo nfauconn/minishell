@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 22:52:27 by user42            #+#    #+#             */
-/*   Updated: 2022/07/29 23:08:22 by user42           ###   ########.fr       */
+/*   Updated: 2022/07/30 19:34:29 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ t_cmd	*cmd_init(void)
 	new->name = NULL;
 	new->built_i = -1;
 	new->args = NULL;
-	new->env = NULL;
-	new->env_paths = NULL;
+	new->possible_paths = NULL;
 	new->path = NULL;
 	new->redir_in = NO_REDIR;
 	new->redir_out = NO_REDIR;
