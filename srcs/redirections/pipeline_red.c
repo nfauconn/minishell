@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 20:29:41 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/30 01:44:52 by user42           ###   ########.fr       */
+/*   Updated: 2022/07/30 20:06:50 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	dup_output(t_cmd*cmd, int p[2])
 {
-	if (cmd->redir_out > STDOUT_FILENO)
+	if (cmd->redir_out > -1)
 		dup2_close_old(cmd->redir_out, STDOUT_FILENO);
 	else if (cmd->next)
 		dup2(p[1], STDOUT_FILENO);
@@ -23,7 +23,7 @@ static void	dup_output(t_cmd*cmd, int p[2])
 
 static void	dup_input(t_cmd *cmd, int fd_in)
 {
-	if (cmd->redir_in > STDIN_FILENO)
+	if (cmd->redir_in > -1)
 		dup2_close_old(cmd->redir_in, STDIN_FILENO);
 	else if (fd_in)
 		dup2_close_old(fd_in, STDIN_FILENO);

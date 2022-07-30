@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 22:41:54 by user42            #+#    #+#             */
-/*   Updated: 2022/07/29 02:45:38 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/30 20:32:55 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char	*var_value(char *str, size_t len, t_list *env)
 	{
 		env_line = (char *)env->content;
 		if (!ft_strncmp(str, env_line, len) && (env_line)[len] == '=')
-			return (ft_strchr(env_line, '=') + 1);
+			return (ft_strdup(ft_strchr(env_line, '=') + 1));
 		env = env->next;
 	}
 	return (NULL);

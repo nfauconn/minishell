@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 18:19:59 by user42            #+#    #+#             */
-/*   Updated: 2022/07/29 01:31:54 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/30 20:28:37 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,13 @@ int	open_redir(t_cmd *cmd)
 	cmd->redir_out = NO_REDIR;
 	if (cmd->access_error)
 		return (1);
-	if (cmd->infile_name && open_redir_in(cmd) == FAILURE)
+	if (cmd->infile_name
+		&& ft_strcmp(cmd->infile_name, "/dev/stdin") == FAILURE
+		&& open_redir_in(cmd) == FAILURE)
 		return (1);
-	if (cmd->outfile_name && open_redir_out(cmd) == FAILURE)
+	if (cmd->outfile_name
+		&& ft_strcmp(cmd->outfile_name, "/dev/stdout") == FAILURE
+		&& open_redir_out(cmd) == FAILURE)
 		return (1);
 	return (0);
 }

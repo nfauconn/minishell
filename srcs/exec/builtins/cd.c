@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:52:52 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/29 02:45:01 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/30 20:41:15 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,9 @@ static void	update_env(t_list **env)
 
 	cwd = var_value("PWD", 3, *env);
 	if (!cwd)
-		cwd = "\0";
+		cwd = ft_strdup("");
 	tmp = ft_strjoin("OLDPWD=", cwd);
+	free(cwd);
 	do_export(env, tmp);
 	free(tmp);
 	cwd = getcwd(NULL, 0);
@@ -49,6 +50,7 @@ static int	cd_home(t_sh *sh, char *home)
 	}
 	if (!chdir(home))
 		update_env(&sh->env);
+	free(home);
 	return (0);
 }
 
@@ -61,9 +63,9 @@ int	mini_cd(t_sh *sh, t_cmd *cmd)
 	home = var_value("HOME", 4, sh->env);
 	if (!args[1])
 		return (cd_home(sh, home));
-	else if (args[2])
+	if (args[2])
 	{
-		ft_printerror("minish: cd: too many arguments\n");
+		error_display("cd", "too many arguments", 0);
 		return (1);
 	}
 	if (chdir(args[1]) < 0)

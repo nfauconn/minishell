@@ -1,63 +1,23 @@
-BUILTINS
-
-EXPORT 
-variable sans = : ajouter dans l’env, ne la print que si export sans argument DONE
 
 CD
 $CDPATH
-sans argument : $HOME (ou “ HOME non set “ si pas de variable HOME) DONE
-
 _____________________________________________
 
 REDIR 
-DONT OPEN DEV/STDOUT
-handle max opened fd ?
-print access error before exec part ? DONE 07_27
-redir dans dev/stdout/ s’effectue dans pipeline (bash ne le fait pas)
 ambiguous redirect if inexistant var / var with spaces
-heredoc quits with SIGINT but doesn't set sh->last_status DONE
-NEW - a signal in heredoc don’t kill the ENTIRE process and dont set sh->last_status:
-
-
-minish> << EOF cat
-> lol
-> lolilol
-> ^C
-lol
-lolilol
-minish> echo $?
-minish> 0
-user@monordi:~/c/git_minish$<<EOF cat
-> lol
-> lolilol
-> ^C
-user@monordi:~/c/git_minish$ echo $?
-user@monordi:~/c/git_minish$ 130
-
-
-        => Solution ? : rajouter un exit à l’execution si status == 130
-
-SIGNALS
-INTERACTIVE MODE
-need to update last status --> global variable ?
-CHILD PROCESS
-ctrl + \ in child : quit (core dumped) POURQUOI CA AFFICHE PAS : solution: c est le parent qui doit afficher
 
 EXEC
-cmd_path→ not found if PATH unset ou pas d’env (enlever hardcode cmd_path) DONE
+cmd_path→ not found if PATH unset DONE
+		--> if env -i : trouver pourquoi il trouve quand meme les commandes de /usr/bin ?
 man → ne reste pas sur la page du man
 make → segv
-command (find with path) doesn’t exit, bad error and ba message DONE ? (uncomment code)
 
 PARSING
 commande pleine de USER un $ en trop (cf notes.txt)
 
-INIT
-init env (env-i) (de maniere clean) DONE
-
 LEAKS
 child leaks ? ./minishell with valgrind (en enlevant fsanitize)
-solution : exit_clear, même avant d execve il faut free ce qui n est pas envoye en arg
+solution : exit_clear, même avant d execve il faut free ce qui n est pas envoye en arg DONE
 ______________________________________________________________
 
 Tips utiles

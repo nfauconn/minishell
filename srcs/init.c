@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 17:25:43 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/29 23:49:47 by user42           ###   ########.fr       */
+/*   Updated: 2022/07/30 20:44:35 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,13 @@ static void	init_shell_level(t_list *env)
 	int		lvl_int;
 	char	*shlvl;
 
+	lvl_int = 0;
 	lvl_str = var_value("SHLVL", 5, env);
-	lvl_int = ft_atoi(lvl_str);
+	if (lvl_str)
+	{
+		lvl_int = ft_atoi(lvl_str);
+		ft_strdel(lvl_str);
+	}
 	lvl_int++;
 	lvl_str = ft_itoa(lvl_int);
 	shlvl = ft_strjoin("SHLVL=", lvl_str);
@@ -37,7 +42,7 @@ static void	create_minimal_env(t_list **head)
 	content = ft_strjoin("PWD=", tmp);
 	free(tmp);
 	ft_lstadd_back(head, ft_lstnew((void *)content));
-	content = ft_strdup("SHLVL=1");
+	content = ft_strdup("SHLVL=0");
 	ft_lstadd_back(head, ft_lstnew((void *)content));
 	content = ft_strdup("_=/usr/bin/env");
 	ft_lstadd_back(head, ft_lstnew((void *)content));

@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 12:56:04 by user42            #+#    #+#             */
-/*   Updated: 2022/07/30 19:38:03 by user42           ###   ########.fr       */
+/*   Updated: 2022/07/30 20:37:25 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,16 @@ static void	perror_exit(t_sh *sh, char *s1, char *s2, unsigned char exit_code)
 
 static int	no_path_in_env(t_sh *sh, t_cmd *cmd)
 {
-	if (!cmd->possible_paths || ft_strlen(var_value("PATH", 4, sh->env)) == 0)
-		return (1);
-	return (0);
+	int		ret;
+	char	*path_val;
+
+	path_val = var_value("PATH", 4, sh->env);	
+	if (!cmd->possible_paths || !path_val || ft_strlen(path_val) == 0)
+		ret = 1;
+	else
+		ret = 0;
+	free(path_val);
+	return (ret);
 }
 
 static int	cmd_is_dir(char *cmd_name)
