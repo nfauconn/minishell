@@ -37,6 +37,7 @@
 *.hex
 
 minishell
+.vscode/
 
 # Debug files
 *.dSYM/
