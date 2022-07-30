@@ -6,11 +6,13 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 13:07:05 by user42            #+#    #+#             */
-/*   Updated: 2022/07/30 01:47:16 by user42           ###   ########.fr       */
+/*   Updated: 2022/07/30 11:50:07 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
+
+extern unsigned char	g_last_status;
 
 static void	child_job(t_sh *sh, t_cmd *cmd, int p[2], int fd_in)
 {
@@ -19,7 +21,7 @@ static void	child_job(t_sh *sh, t_cmd *cmd, int p[2], int fd_in)
 	if (!cmd->name)
 	{
 		close(p[1]);
-		exit_clear_child(sh, 0);
+		exit_clear_child(sh, g_last_status);
 	}
 	pipeline_redir(sh, cmd, p, fd_in);
 	if (cmd->built_i > -1)

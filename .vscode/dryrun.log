@@ -1,28 +1,17 @@
-make --dry-run --keep-going --print-directory
+make --dry-run --always-make --keep-going --print-directory
 make: Entering directory '/home/user42/minishGithub'
- 
+make -C ./libft
 mkdir -p objs/
- 
 echo create: objs/main.o
- 
 clang -Wall -Wextra -Werror  -MMD -I ./includes -I ./libft/includes -c ./srcs/main.c -o objs/main.o
- 
 mkdir -p objs/
- 
 echo create: objs/clear.o
- 
 clang -Wall -Wextra -Werror  -MMD -I ./includes -I ./libft/includes -c ./srcs/clear.c -o objs/clear.o
- 
 mkdir -p objs/
- 
 echo create: objs/close.o
- 
 clang -Wall -Wextra -Werror  -MMD -I ./includes -I ./libft/includes -c ./srcs/close.c -o objs/close.o
- 
 mkdir -p objs/
- 
 echo create: objs/error.o
- 
 clang -Wall -Wextra -Werror  -MMD -I ./includes -I ./libft/includes -c ./srcs/error.c -o objs/error.o
 mkdir -p objs/
 echo create: objs/exit.o
@@ -45,7 +34,6 @@ clang -Wall -Wextra -Werror  -MMD -I ./includes -I ./libft/includes -c ./srcs/si
 mkdir -p objs/parsing/
 echo create: objs/parsing/tokenizer.o
 clang -Wall -Wextra -Werror  -MMD -I ./includes -I ./libft/includes -c ./srcs/parsing/tokenizer.c -o objs/parsing/tokenizer.o
- 
 mkdir -p objs/parsing/
 echo create: objs/parsing/token_utils.o
 clang -Wall -Wextra -Werror  -MMD -I ./includes -I ./libft/includes -c ./srcs/parsing/token_utils.c -o objs/parsing/token_utils.o
@@ -66,11 +54,8 @@ echo create: objs/parsing/conv_to_cmd.o
 clang -Wall -Wextra -Werror  -MMD -I ./includes -I ./libft/includes -c ./srcs/parsing/conv_to_cmd.c -o objs/parsing/conv_to_cmd.o
 mkdir -p objs/parsing/
 echo create: objs/parsing/cmd_creat.o
- 
 clang -Wall -Wextra -Werror  -MMD -I ./includes -I ./libft/includes -c ./srcs/parsing/cmd_creat.c -o objs/parsing/cmd_creat.o
- 
 mkdir -p objs/parsing/
- 
 echo create: objs/parsing/cmd_init.o
 clang -Wall -Wextra -Werror  -MMD -I ./includes -I ./libft/includes -c ./srcs/parsing/cmd_init.c -o objs/parsing/cmd_init.o
 mkdir -p objs/parsing/
@@ -95,39 +80,23 @@ mkdir -p objs/redirections/
 echo create: objs/redirections/open.o
 clang -Wall -Wextra -Werror  -MMD -I ./includes -I ./libft/includes -c ./srcs/redirections/open.c -o objs/redirections/open.o
 mkdir -p objs/redirections/
- 
 echo create: objs/redirections/set_redir.o
- 
 clang -Wall -Wextra -Werror  -MMD -I ./includes -I ./libft/includes -c ./srcs/redirections/set_redir.c -o objs/redirections/set_redir.o
  
 mkdir -p objs/redirections/
- 
 echo create: objs/redirections/pipeline_red.o
- 
 clang -Wall -Wextra -Werror  -MMD -I ./includes -I ./libft/includes -c ./srcs/redirections/pipeline_red.c -o objs/redirections/pipeline_red.o
- 
 mkdir -p objs/redirections/
- 
 echo create: objs/redirections/single_red.o
- 
 clang -Wall -Wextra -Werror  -MMD -I ./includes -I ./libft/includes -c ./srcs/redirections/single_red.c -o objs/redirections/single_red.o
- 
 mkdir -p objs/redirections/
- 
 echo create: objs/redirections/utils.o
- 
 clang -Wall -Wextra -Werror  -MMD -I ./includes -I ./libft/includes -c ./srcs/redirections/utils.c -o objs/redirections/utils.o
- 
 mkdir -p objs/exec/
- 
 echo create: objs/exec/cmd_execve.o
- 
 clang -Wall -Wextra -Werror  -MMD -I ./includes -I ./libft/includes -c ./srcs/exec/cmd_execve.c -o objs/exec/cmd_execve.o
- 
 mkdir -p objs/exec/
- 
 echo create: objs/exec/cmd_path.o
- 
 clang -Wall -Wextra -Werror  -MMD -I ./includes -I ./libft/includes -c ./srcs/exec/cmd_path.c -o objs/exec/cmd_path.o
 mkdir -p objs/exec/
 echo create: objs/exec/launch.o
@@ -155,32 +124,18 @@ echo create: objs/exec/builtins/env.o
 clang -Wall -Wextra -Werror  -MMD -I ./includes -I ./libft/includes -c ./srcs/exec/builtins/env.c -o objs/exec/builtins/env.o
  
 mkdir -p objs/exec/builtins/
- 
 echo create: objs/exec/builtins/exit.o
- 
 clang -Wall -Wextra -Werror  -MMD -I ./includes -I ./libft/includes -c ./srcs/exec/builtins/exit.c -o objs/exec/builtins/exit.o
- 
 mkdir -p objs/exec/builtins/
- 
 echo create: objs/exec/builtins/export.o
- 
 clang -Wall -Wextra -Werror  -MMD -I ./includes -I ./libft/includes -c ./srcs/exec/builtins/export.c -o objs/exec/builtins/export.o
- 
 mkdir -p objs/exec/builtins/
- 
 echo create: objs/exec/builtins/pwd.o
- 
 clang -Wall -Wextra -Werror  -MMD -I ./includes -I ./libft/includes -c ./srcs/exec/builtins/pwd.c -o objs/exec/builtins/pwd.o
- 
 mkdir -p objs/exec/builtins/
- 
 echo create: objs/exec/builtins/unset.o
- 
 clang -Wall -Wextra -Werror  -MMD -I ./includes -I ./libft/includes -c ./srcs/exec/builtins/unset.c -o objs/exec/builtins/unset.o
- 
 clang -Wall -Wextra -Werror  -L ./libft -ltinfo -lreadline   ./objs/main.o  ./objs/clear.o  ./objs/close.o  ./objs/error.o  ./objs/exit.o  ./objs/init.o  ./objs/input.o  ./objs/prompt.o  ./objs/reset.o  ./objs/signals.o  ./objs/parsing/tokenizer.o  ./objs/parsing/token_utils.o  ./objs/parsing/types.o  ./objs/parsing/lexer.o  ./objs/parsing/expand.o  ./objs/parsing/expand_utils.o  ./objs/parsing/conv_to_cmd.o  ./objs/parsing/cmd_creat.o  ./objs/parsing/cmd_init.o  ./objs/parsing/parser.o  ./objs/parsing/utils_comparison.o  ./objs/parsing/utils_comparison2.o  ./objs/redirections/check_access.o  ./objs/redirections/heredoc_run.o  ./objs/redirections/heredoc_set.o  ./objs/redirections/open.o  ./objs/redirections/set_redir.o  ./objs/redirections/pipeline_red.o  ./objs/redirections/single_red.o  ./objs/redirections/utils.o  ./objs/exec/cmd_execve.o  ./objs/exec/cmd_path.o  ./objs/exec/launch.o  ./objs/exec/launch_builtin.o  ./objs/exec/launch_pipeline.o  ./objs/exec/launch_single.o  ./objs/exec/wait.o  ./objs/exec/builtins/cd.o  ./objs/exec/builtins/echo.o  ./objs/exec/builtins/env.o  ./objs/exec/builtins/exit.o  ./objs/exec/builtins/export.o  ./objs/exec/builtins/pwd.o  ./objs/exec/builtins/unset.o -o minishell -lft
- 
 echo "minishell created"
- 
 make: Leaving directory '/home/user42/minishGithub'
  

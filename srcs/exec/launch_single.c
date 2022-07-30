@@ -6,11 +6,13 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 13:07:55 by user42            #+#    #+#             */
-/*   Updated: 2022/07/30 01:47:01 by user42           ###   ########.fr       */
+/*   Updated: 2022/07/30 11:50:19 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
+
+extern unsigned char	g_last_status;
 
 static void	launch_single_cmd(t_sh *sh, t_cmd *cmd)
 {
@@ -26,7 +28,7 @@ static void	launch_single_cmd(t_sh *sh, t_cmd *cmd)
 		if (single_cmd_redir(cmd) == FAILURE)
 			exit_clear_child(sh, WRONG_REDIR);
 		if (!cmd->name)
-			exit_clear_child(sh, 0);
+			exit_clear_child(sh, g_last_status);
 		cmd_execve(sh, cmd);
 	}
 	wait_children(sh);
