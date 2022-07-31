@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 17:25:43 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/30 20:44:35 by user42           ###   ########.fr       */
+/*   Updated: 2022/07/31 09:21:56 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	init_shell_level(t_list *env)
 	if (lvl_str)
 	{
 		lvl_int = ft_atoi(lvl_str);
-		ft_strdel(lvl_str);
+		ft_strdel(&lvl_str);
 	}
 	lvl_int++;
 	lvl_str = ft_itoa(lvl_int);

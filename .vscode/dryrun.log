@@ -79,6 +79,7 @@ clang -Wall -Wextra -Werror  -MMD -I ./includes -I ./libft/includes -c ./srcs/re
 mkdir -p objs/redirections/
 echo create: objs/redirections/open.o
 clang -Wall -Wextra -Werror  -MMD -I ./includes -I ./libft/includes -c ./srcs/redirections/open.c -o objs/redirections/open.o
+ 
 mkdir -p objs/redirections/
 echo create: objs/redirections/set_redir.o
 clang -Wall -Wextra -Werror  -MMD -I ./includes -I ./libft/includes -c ./srcs/redirections/set_redir.c -o objs/redirections/set_redir.o

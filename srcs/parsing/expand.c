@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:13:37 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/30 01:43:47 by user42           ###   ########.fr       */
+/*   Updated: 2022/07/31 09:39:37 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ static char	*expanded_content(char **s, t_sh *sh)
 {
 	char	*start;
 
-	(*s)++;
 	start = *s;
 	if (*start)
 	{
@@ -53,8 +52,9 @@ char	*expand_string(char *ptr, t_sh *sh)
 	{
 		if (*ptr == '$')
 		{
+			ptr++;
 			var_val = expanded_content(&ptr, sh);
-			new_size = ft_strlen(new) + ft_strlen(var_val) + 1;
+			new_size = new_size + ft_strlen(var_val) + 1;
 			new = ft_realloc(new, new_size);
 			ft_strlcat(new, var_val, new_size);
 /* 			if (var_val)
@@ -63,8 +63,8 @@ char	*expand_string(char *ptr, t_sh *sh)
 		start = ptr;
 		while (*ptr && *ptr != '$')
 			ptr++;
-		new_size += ptr - start + 1;
-		new = ft_realloc(new, new_size);
+		new_size += ptr - start;
+		new = ft_realloc(new, new_size + 1);
 		ft_strlcat(new, start, new_size);
 	}
 	return (new);
