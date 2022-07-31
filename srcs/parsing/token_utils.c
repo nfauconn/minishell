@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 19:57:56 by user42            #+#    #+#             */
-/*   Updated: 2022/07/31 19:05:47 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/07/31 21:24:07 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@ void	skip_token(t_list **token, int to_skip)
 {
 	if (token && *token)
 		*token = (*token)->next;
-	(*token)->type = *(char *)(*token)->content;
-	if (token && *token && (*token)->type == to_skip)
+	if (token && *token && *(char *)(*token)->content == to_skip)
 		*token = (*token)->next;
 }
 

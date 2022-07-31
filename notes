@@ -29,19 +29,3 @@ minish> echo $USER$USER$"$USERcoucou'$USER"  '$USER'     $USER     "-$lol- hehe.
 
 VALGRIND
 	valgrind --suppressions=ignoreleak --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes --verbose ./minishell
-
-SIMPLE COMMAND RETURN
-	The return status (see Exit Status) of a simple command is its exit status, or 128+n if the command was terminated by signal n. 
-
-EXPAND
-	In the context where an assignment statement is assigning a value to a shell variable or array index (see Arrays), the ‘+=’ operator can be used to append to or add to the variable’s previous value. 
-	This includes arguments to builtin commands such as declare that accept assignment statements (declaration commands). 
-	When ‘+=’ is applied to a variable for which the integer attribute has been set, value is evaluated as an arithmetic expression and added to the variable’s current value, which is also evaluated. 
-	When ‘+=’ is applied to an array variable using compound assignment (see Arrays), the variable’s value is not unset (as it is when using ‘=’), and new values are appended to the array beginning at one greater than the array’s maximum index (for indexed arrays), or added as additional key-value pairs in an associative array. 
-	When applied to a string-valued variable, value is expanded and appended to the variable’s value. 
-
-https://codes-sources.commentcamarche.net/forum/affich-10047436-developper-un-shell-de-base
-
-HEREDOC
-	!!!!!!!! if delimiter has quotes -> delimiter is set without it
-									 -> strings will be expanded considering the quoting rule

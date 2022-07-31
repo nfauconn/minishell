@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 22:41:54 by user42            #+#    #+#             */
-/*   Updated: 2022/07/30 20:32:55 by user42           ###   ########.fr       */
+/*   Updated: 2022/07/31 21:31:39 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_list	*set_delim_type(t_list *token)
 
 	start = token;
 	token = token->next;
-	while (token && !is_metacharacter(token->type))
+	while (token && !is_metacharacter(*(char *)token->content))
 	{
 		if (ft_strchr((char *)token->content, QUOTE)
 			|| ft_strchr((char *)token->content, DB_QUOTE))
