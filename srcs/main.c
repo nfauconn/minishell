@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 20:04:06 by user42            #+#    #+#             */
-/*   Updated: 2022/07/30 00:57:16 by user42           ###   ########.fr       */
+/*   Updated: 2022/07/31 18:42:25 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,10 @@ int	main(int ac, char **av, char **env)
 		signal_catching_mode(INTERACTIVE);
 		init_input(&sh, &input);
 		if (parsing(&sh, &input) == SUCCESS)
+		{
+			clear_input(&input);
 			launch(&sh);
-		clear_input(&input);
+		}
 		reset_sh(&sh);
 	}
 }

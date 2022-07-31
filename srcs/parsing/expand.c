@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:13:37 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/31 09:39:37 by user42           ###   ########.fr       */
+/*   Updated: 2022/07/31 18:20:11 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,20 @@ char	*expand_string(char *ptr, t_sh *sh)
 	var_val = NULL;
 	new = NULL;
 	new_size = 0;
+
+	int i = 0;
 	while (*ptr)
 	{
 		if (*ptr == '$')
 		{
 			ptr++;
 			var_val = expanded_content(&ptr, sh);
-			new_size = new_size + ft_strlen(var_val) + 1;
-			new = ft_realloc(new, new_size);
-			ft_strlcat(new, var_val, new_size);
+			if (var_val)
+			{
+				new_size = new_size + ft_strlen(var_val);
+				new = ft_realloc(new, new_size + 1);
+				ft_strlcat(new, var_val, new_size + 1);
+			}
 /* 			if (var_val)
 				ft_strdel(&var_val); */
 		}
@@ -65,7 +70,8 @@ char	*expand_string(char *ptr, t_sh *sh)
 			ptr++;
 		new_size += ptr - start;
 		new = ft_realloc(new, new_size + 1);
-		ft_strlcat(new, start, new_size);
+		ft_strlcat(new, start, new_size + 1);
+		i++;
 	}
 	return (new);
 }

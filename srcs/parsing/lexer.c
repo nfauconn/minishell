@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 11:36:22 by user42            #+#    #+#             */
-/*   Updated: 2022/07/30 01:23:25 by user42           ###   ########.fr       */
+/*   Updated: 2022/07/31 19:04:51 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static int	tok_lexer(t_list *token)
 	{
 		if (check_nb_sign(token) == FAILURE)
 			return (FAILURE);
-		skip_token(&token, BLANK);
+ 		skip_token(&token, BLANK);
 		if (token && is_sep(token->type))
 			return (next_token_error(token));
 		else if (!token)
@@ -67,7 +67,6 @@ int	lexer(t_list *token)
 		return (lex_error("|"));
 	while (token)
 	{
-		token->type = *(char *)token->content;
 		if (tok_lexer(token) == SUCCESS)
 			token = token->next;
 		else
