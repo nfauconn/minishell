@@ -1,13 +1,6 @@
 
 The "keyboard" doesnt send any signals, the line discipline does. Find out what a line discipline is, then read man 1 stty
 
-REDIR
-	- handle max opened fd ?
-	- HEREDOC what path ??? should return a char * so we can set for the cmd (e.g. if there are mutliple heredocs)
-
-BUILTINS
-	- export without arg ==> sorted env
-
 	-	nfauconn@e1r5p17:~/minish_9_7$ export TEST=" ouais ttttttt"
 		nfauconn@e1r5p17:~/minish_9_7$ echo lol > $TEST
 		bash: $TEST: ambiguous redirect
