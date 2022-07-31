@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 14:06:55 by user42            #+#    #+#             */
-/*   Updated: 2022/07/30 19:16:34 by user42           ###   ########.fr       */
+/*   Updated: 2022/07/31 20:09:24 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-static char	*join_path(char const *penv, char const *pexec)
+char	*join_path(char const *penv, char const *pexec)
 {
 	char	*dst;
 	size_t	len1;
