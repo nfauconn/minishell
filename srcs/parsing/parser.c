@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 12:50:49 by user42            #+#    #+#             */
-/*   Updated: 2022/07/31 15:40:55 by user42           ###   ########.fr       */
+/*   Updated: 2022/08/01 18:22:29 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 int	parsing(t_sh *sh, t_input *input)
 {
 	if (!*(input->line_read))
-		return (FAILURE);
+		return (1);
 	if (tokenizer(input, input->line_read))
-		return (FAILURE);
+		return (1);
 	if (!input->token_list || lexer(input->token_list))
-		return (FAILURE);
+		return (1);
 	token_expand(input->token_list, sh);
 	set_token_types(input->token_list);
 	token_to_cmd_lst(sh, input->token_list);

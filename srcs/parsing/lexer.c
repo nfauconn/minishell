@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 11:36:22 by user42            #+#    #+#             */
-/*   Updated: 2022/07/31 19:04:51 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/01 18:23:16 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ static int	tok_lexer(t_list *token)
 
 int	lexer(t_list *token)
 {
-	token->type = *(char *)token->content;
 	if (token->type == PIPE)
 		return (lex_error("|"));
 	while (token)
@@ -70,7 +69,7 @@ int	lexer(t_list *token)
 		if (tok_lexer(token) == SUCCESS)
 			token = token->next;
 		else
-			return (FAILURE);
+			return (1);
 	}
-	return (SUCCESS);
+	return (0);
 }

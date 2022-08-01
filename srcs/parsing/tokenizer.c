@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 16:59:04 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/31 19:05:04 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/01 18:19:51 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	tokenizer(t_input *input, char *line)
 			token = ft_substr(start, 0, line - start);
 			add_token_to_list(&input->token_list, token);
 		}
-		if (line && is_blank(*line))// && !is_rediroperator(*token))
+		if (line && is_blank(*line))
 		{
 			token = ft_strdup(" ");
 			add_token_to_list(&input->token_list, token);
