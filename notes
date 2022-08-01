@@ -1,47 +1,4 @@
-3.1.1 Shell Operation
 
-The following is a brief description of the shell’s operation when it reads and executes a command. Basically, the shell does the following:
-
-    Reads its input from a file (see Shell Scripts), from a string supplied as an argument to the -c invocation option (see Invoking Bash), or from the user’s terminal.
-    Breaks the input into words and operators, obeying the quoting rules described in Quoting. These tokens are separated by metacharacters. Alias expansion is performed by this step (see Aliases).
-    Parses the tokens into simple and compound commands (see Shell Commands).
-    Performs the various shell expansions (see Shell Expansions), breaking the expanded tokens into lists of filenames (see Filename Expansion) and commands and arguments.
-    Performs any necessary redirections (see Redirections) and removes the redirection operators and their operands from the argument list.
-    Executes the command (see Executing Commands).
-    Optionally waits for the command to complete and collects its exit status (see Exit Status). 
-
-SYNTAX
-
-control operator = '|' ou '\n'
-
-field = unit of text that is the result of one of the shell expansions
-		> after expansion, when executing a command, the resulting fields are used as the command name and arguments.
-
-metacharacter = char that, when unquoted, separates words
-		> space, tab, newline, '|', '<', or '>'.
-
-name  = word consisting solely of letters, numbers, and underscores
-		AND beginning with a letter or underscore
-		> used as shell variable and function names
-		> Also referred to as an identifier.
-
-token = sequence of characters considered a single unit by the shell
-		> either a word or an operator.
-
-word = sequence of characters treated as a unit by the shell
-		> may not include unquoted metacharacters. 
-
-WAY TO DO
-- reads its input
-- divides the input into words and operators, employing the quoting rules 
-	> to select which meanings to assign various words and characters
-- parses these tokens into commands and other constructs
-- removes the special meaning of certain words or characters
-- expands others
-- redirects input and output as needed
-- executes the specified command
-- waits for the command exit status
-- makes that exit status available for further inspection or processing. 
 
 The "keyboard" doesnt send any signals, the line discipline does. Find out what a line discipline is, then read man 1 stty
 

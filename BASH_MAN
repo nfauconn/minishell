@@ -14,7 +14,9 @@
 - Optionally waits for the command to complete
 	> and collects its exit status (see Exit Status)
 
+
 ---------------SYNTAX--------------------------
+
 - CTRL OPERATOR
 	> '|' ou '\n'
 

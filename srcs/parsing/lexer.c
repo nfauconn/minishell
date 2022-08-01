@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 11:36:22 by user42            #+#    #+#             */
-/*   Updated: 2022/08/01 18:23:16 by user42           ###   ########.fr       */
+/*   Updated: 2022/08/01 19:44:56 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static int	tok_lexer(t_list *token)
 	}
 	else if (is_sep(token->type))
 	{
-		if (check_nb_sign(token) == FAILURE)
+		if (check_nb_sign(token))
 			return (FAILURE);
  		skip_token(&token, BLANK);
 		if (token && is_sep(token->type))
