@@ -1,4 +1,5 @@
 
+
 The "keyboard" doesnt send any signals, the line discipline does. Find out what a line discipline is, then read man 1 stty
 
 	-	nfauconn@e1r5p17:~/minish_9_7$ export TEST=" ouais ttttttt"
