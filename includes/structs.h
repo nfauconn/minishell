@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 12:07:25 by user42            #+#    #+#             */
-/*   Updated: 2022/07/30 19:33:08 by user42           ###   ########.fr       */
+/*   Updated: 2022/08/01 16:22:45 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,10 @@ typedef struct s_cmd
 	char			**possible_paths;
 	char			*path;
 	int				redir_in;
+	t_bool			expanded_redir_in;
 	int				redir_out;
 	int				redir_out_type;
+	t_bool			expanded_redir_out;
 	char			*infile_name;
 	t_bool			heredoc_infile;
 	t_bool			delim_quote;
