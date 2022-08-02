@@ -6,7 +6,7 @@
 /*   By: mdankou < mdankou@student.42.fr >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:52:52 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/01 22:50:52 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/08/02 18:19:30 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,37 +54,39 @@ static int	cd_home(t_sh *sh, char *home)
 	return (0);
 }
 
-static char	*get_curpath(t_sh *sh, t_cmd *cmd)
+static char	*build_curpath(t_sh *sh, t_cmd *cmd)
 {
 	int			i;
 	char		*path;
 	char		**cdpath;
 	struct stat	mode;
 
-	if (ft_strchr(cmd->args[1], '/') || ft_strchr(cmd->args[1], '.'))
-		path = ft_strdup(cmd->args[1]);
-	else
+	i = -1;
+	path = var_value("CDPATH", 6, sh->env);
+	if (!path)
+		return (NULL);
+	cdpath = ft_split(path, ':');
+	free(path);
+	while (cdpath && cdpath[++i])
 	{
-		i = -1;
-		path = var_value("CDPATH", 6, sh->env);
-		if (!path)
-			return (NULL);
-		cdpath = ft_split(path, ':');
-		free(path);
-		while (cdpath && cdpath[++i])
+		path = join_path(cdpath[i], cmd->args[1]);
+		if (!path || (stat(path, &mode) == 0 && S_ISDIR(mode.st_mode)
+				&& !access(path, X_OK)))
 		{
-			path = join_path(cdpath[i], cmd->args[1]);
-			if (!path || (stat(path, &mode) == 0 && S_ISDIR(mode.st_mode)
-					&& !access(path, X_OK)))
-			{
-				ft_putendl_fd(path, 1);
-				break ;
-			}
-			ft_strdel(&path);
+			ft_putendl_fd(path, 1);
+			break ;
 		}
-		ft_strarray_clear(cdpath);
+		ft_strdel(&path);
 	}
+	ft_strarray_clear(cdpath);
 	return (path);
+}
+
+static char	*get_curpath(t_sh *sh, t_cmd *cmd)
+{
+	if (ft_strchr(cmd->args[1], '/') || ft_strchr(cmd->args[1], '.'))
+		return (ft_strdup(cmd->args[1]));
+	return (build_curpath(sh, cmd));
 }
 
 int	mini_cd(t_sh *sh, t_cmd *cmd)
