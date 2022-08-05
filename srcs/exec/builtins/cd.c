@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdankou < mdankou@student.42.fr >          +#+  +:+       +#+        */
+/*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:52:52 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/02 18:19:30 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/08/05 15:57:30 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,11 @@ static void	update_env(t_list **env)
 	free(cwd);
 }
 
-static int	cd_home(t_sh *sh, char *home)
+static int	cd_home(t_sh *sh)
 {
+	char	*home;
+
+	home = var_value("HOME", 4, sh->env);
 	if (!home)
 	{
 		ft_printerror("minish: cd: HOME not set\n");
@@ -92,13 +95,11 @@ static char	*get_curpath(t_sh *sh, t_cmd *cmd)
 int	mini_cd(t_sh *sh, t_cmd *cmd)
 {
 	char	**args;
-	char	*home;
 	char	*path;
 
 	args = cmd->args;
-	home = var_value("HOME", 4, sh->env);
 	if (!args[1])
-		return (cd_home(sh, home));
+		return (cd_home(sh));
 	if (args[2])
 	{
 		error_display("cd", "too many arguments", 0);
