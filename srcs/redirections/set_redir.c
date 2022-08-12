@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_redir.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 20:28:23 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/12 21:37:45 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/12 22:02:02 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static t_bool	set_redir_append(t_sh *sh, t_cmd *cmd, char *token)
 	while (is_blank(*token))
 		token++;
 	cmd->redir_out.is_append = 1;
-	(void)sh;
+	cmd->redir_out.filename = expand(token, sh);
 	//to_continue-------------------------------------------------
 	return (0);
 }
@@ -81,6 +81,7 @@ static t_bool	set_redir_infile(t_sh *sh, t_cmd *cmd, char *token)
 	}
 /* 	if (expand(token, &cmd->redir_in.filename, sh))
 		return (1); */
+	cmd->redir_in.filename = expand(token, sh);
 	return(check_access(cmd->redir_in.filename, F_OK | R_OK));
 }
 

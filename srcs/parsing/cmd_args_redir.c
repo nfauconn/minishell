@@ -49,7 +49,7 @@ t_bool	get_args_and_redir(t_sh *sh, t_list *token, t_cmd *cmd)
 	while (token && token->type != '|')
 	{
 		if (is_rediroperator(token->type))
-			ret = set_redirections(sh, cmd, (char *)token->content);
+			cmd->redir_error = set_redirections(sh, cmd, (char *)token->content);
 		else
 			ret = fill_arg(sh, cmd->args, &i, (char *)token->content);
 		if (ret == FAIL)
