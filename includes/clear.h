@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clear.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 00:25:19 by user42            #+#    #+#             */
-/*   Updated: 2022/07/30 00:58:32 by user42           ###   ########.fr       */
+/*   Updated: 2022/08/12 22:37:40 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include "extern_libs.h"
 # include "structs.h"
-# include "close.h"
 
 void	clear_input(t_input *input);
 void	clear_sh(t_sh *sh);

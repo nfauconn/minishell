@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipeline_red.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 20:29:41 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/30 20:06:50 by user42           ###   ########.fr       */
+/*   Updated: 2022/08/12 22:08:03 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	pipeline_redir(t_sh *sh, t_cmd *cmd, int p[2], int fd_in)
 {
 	int	error;
 
-	(void)sh;
 	error = 0;
 	if (cmd->access_error)
 		error = WRONG_REDIR;

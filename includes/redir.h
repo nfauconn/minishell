@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 20:35:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/12 19:21:04 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/12 22:39:42 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include "parse.h"
 # include "exec.h"
 # include "error.h"
-# include "close.h"
 
 /* PARSING__PART */
 t_bool	set_redirections(t_sh *sh, t_cmd *cmd, char *token);
@@ -31,12 +30,11 @@ t_bool	wait_heredoc(void);
 t_bool	is_ambiguous_redir(t_sh *sh, char *token);
 
 /* EXEC_PART */
-void	pipeline_redir(t_sh *sh, t_cmd *cmd, int p[2], int fd_in);
+t_bool	pipeline_redir(t_sh *sh, t_cmd *cmd, int p[2], int fd_in);
 int		single_cmd_redir(t_cmd *cmd);
 int		open_redir(t_cmd *cmd);
 
 /* UTILS */
-int		open_w_err_check(int fd, char *file_path, int flag);
 void	close_if_opened(int fd);
 void	dup2_close_old(int old_fd, int new_fd);
 

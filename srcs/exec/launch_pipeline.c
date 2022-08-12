@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 13:07:05 by user42            #+#    #+#             */
-/*   Updated: 2022/08/11 22:11:31 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/12 22:35:42 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ static void	parent_job(t_cmd *cmd, int p[2], int *fd)
 	else
 	{
 		close(p[1]);
-		close_if_opened(*fd);
+		if (*fd)
+			close(*fd);
 		*fd = p[0];
 	}
 }

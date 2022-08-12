@@ -6,15 +6,22 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 20:40:54 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/12 19:55:00 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/12 22:09:00 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "redir.h"
 
-int	single_cmd_redir(t_cmd *cmd)
+t_bool	single_cmd_redir(t_cmd *cmd)
 {
-	if (open_redir(cmd) == 1)
+	int	error;
+
+	error = 0;
+	if (cmd->access_error)
+		error = WRONG_REDIR;
+	else
+		error = open_redir(cmd);
+	if (error)
 		return (1);
 	if (cmd->redir_in.fd > -1)
 		dup2_close_old(cmd->redir_in.fd, STDIN_FILENO);

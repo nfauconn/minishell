@@ -23,7 +23,6 @@ LIBS := ${addsuffix ${L_EXT}, ${addprefix ${LIBFT_DIR}, \
 SRCS := ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		main \
 		clear \
-		close \
 		error \
 		exit \
 		init \
