@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 12:50:49 by user42            #+#    #+#             */
-/*   Updated: 2022/08/10 22:26:43 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/12 19:48:37 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_bool	parse(t_sh *sh, t_input *input)
 		return (1);
  	if (!input->token_list)
 		return (1);
+	
 	// print token list
 	if (input->token_list)
 	{
@@ -33,10 +34,12 @@ t_bool	parse(t_sh *sh, t_input *input)
 		ft_printerror("___________\n\n");
 	}
 	//end of print
+
 	if (lexer(input->token_list))
 		return (1);
 	if (build_cmd_lst(sh, input->token_list))
 		return (1);
+	
 	//print cmd_lst
 	ft_printf("CMD_LST :\n");
 	t_cmd	*tmp = sh->cmd_list;
@@ -57,8 +60,6 @@ t_bool	parse(t_sh *sh, t_input *input)
 		tmp = tmp->next;
 	}
 	//end of print
-
-/*	set_token_types(input->token_list); */
 	return (0);
 }
 

@@ -60,7 +60,7 @@ t_bool		lexer(t_list *tokens);
 t_bool		lex_perror(char *s);
 
 /* EXPAND */
-t_bool		expand(char *token, char **to_expand, t_sh *sh);
+char		*expand(char *token, t_sh *sh);
 char		*expand_quotes(char *ptr, t_sh *sh);
 char		*expand_string(char *ptr, t_sh *sh);
 char		*expanded_content(char **s, t_sh *sh);

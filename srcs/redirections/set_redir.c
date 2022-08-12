@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 20:28:23 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/12 19:27:26 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/12 21:37:45 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,8 @@ static t_bool	set_redir_infile(t_sh *sh, t_cmd *cmd, char *token)
 		error_display(token, "ambiguous redirect", 0);
 		return (1);
 	}
-	if (expand(token, &cmd->redir_in.filename, sh))
-		return (1);
+/* 	if (expand(token, &cmd->redir_in.filename, sh))
+		return (1); */
 	return(check_access(cmd->redir_in.filename, F_OK | R_OK));
 }
 

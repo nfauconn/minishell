@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_realloc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:09:55 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/12 16:08:38 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/12 21:28:27 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,19 @@ char	*ft_realloc_str(char *str, size_t newsize)
 
 	new_str = NULL;
 	if (!str)
-		return ((char *)malloc(sizeof(char) * (newsize + 1)));
-	oldsize = ft_strlen(str);
-	if (newsize <= oldsize)
-		return (str);
+		oldsize = 0;
+	else
+		oldsize = ft_strlen(str);
 	new_str = (char *)malloc(sizeof(char) * (newsize + 1));
 	if (!new_str)
 		return (NULL);
-	ft_memcpy(new_str, str, oldsize);
-	new_str[oldsize] = '\0';
-	free(str);
+	if (oldsize)
+	{
+		ft_memcpy(new_str, str, oldsize);
+		new_str[oldsize] = '\0';
+		free(str);
+	}
+	else
+		ft_bzero(new_str, oldsize + 1);
 	return (new_str);
 }

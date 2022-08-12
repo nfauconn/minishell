@@ -29,3 +29,6 @@ Makefile_toadd
 		export \
 		pwd \
 		unset}}
+
+
+change name cmd_args_redir --> cmd_args_and_redir

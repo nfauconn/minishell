@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 18:19:59 by user42            #+#    #+#             */
-/*   Updated: 2022/08/11 22:11:31 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/12 19:53:39 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,26 @@
 
 static int	open_redir_out(t_cmd *cmd)
 {
-	if (cmd->redir_out_type == APPEND_OUTFILE_NAME)
-		cmd->redir_out = open(cmd->outfile_name, \
+	if (cmd->redir_out.is_append)
+		cmd->redir_out.fd = open(cmd->redir_out.filename, \
 			O_CREAT | O_APPEND | O_WRONLY, 0644);
 	else
-		cmd->redir_out = open(cmd->outfile_name, \
+		cmd->redir_out.fd = open(cmd->redir_out.filename, \
 			O_CREAT | O_TRUNC | O_WRONLY, 0644);
-	if (cmd->redir_out < 0)
+	if (cmd->redir_out.fd < 0)
 	{
-		error_display(cmd->outfile_name, strerror(errno), 0);
+		error_display(cmd->redir_out.filename, strerror(errno), 0);
 		return (1);
 	}
-	ft_printerror("cmd->redir_out = %d\n", cmd->redir_out);
 	return (0);
 }
 
 static int	open_redir_in(t_cmd *cmd)
 {
-	cmd->redir_in = open(cmd->infile_name, O_RDONLY);
-	if (cmd->redir_in < 0)
+	cmd->redir_in.fd = open(cmd->redir_in.filename, O_RDONLY);
+	if (cmd->redir_in.fd < 0)
 	{
-		error_display(cmd->infile_name, strerror(errno), 0);
+		error_display(cmd->redir_in.filename, strerror(errno), 0);
 		return (1);
 	}
 	return (0);
@@ -43,17 +42,13 @@ static int	open_redir_in(t_cmd *cmd)
 int	open_redir(t_cmd *cmd)
 {
 	errno = 0;
-	cmd->redir_in = NO_REDIR;
-	cmd->redir_out = NO_REDIR;
+	cmd->redir_in.fd = NO_REDIR;
+	cmd->redir_out.fd = NO_REDIR;
 	if (cmd->access_error)
 		return (1);
-	if (cmd->infile_name && open_redir_in(cmd) == FAIL)
+	if (cmd->redir_in.filename && open_redir_in(cmd) == FAIL)
 		return (1);
-	if (cmd->outfile_name && open_redir_out(cmd) == FAIL)
+	if (cmd->redir_out.filename && open_redir_out(cmd) == FAIL)
 		return (1);
 	return (0);
 }
-/*
-&& ft_strcmp(cmd->infile_name, "/dev/stdin") == FAIL
-&& ft_strcmp(cmd->outfile_name, "/dev/stdout") == FAIL
-*/

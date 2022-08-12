@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 19:19:46 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/12 19:31:01 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/12 19:51:57 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,10 @@ t_bool	is_ambiguous_redir(t_sh *sh, char *token)
 		return (0);
 	ret = 0;
 	if (ft_strchr(token, '\'') || ft_strchr(token, '\"'))
+	{
+		
 		return (0);
+	}
 	ret = check_ambig_value(token, sh);
 	return (ret);
 }

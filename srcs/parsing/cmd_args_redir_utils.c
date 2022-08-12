@@ -28,7 +28,7 @@ size_t	get_args_nb(t_list *token)
 	char	*content;
 	size_t	i;
 
-	count = 1;
+	count = 0;
 	while (token && !is_sep_operator(token->type))
 	{
 		if (!is_rediroperator(token->type))
