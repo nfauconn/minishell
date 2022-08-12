@@ -6,7 +6,7 @@
 /*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 20:28:23 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/12 22:02:02 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/08/13 00:37:35 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,12 @@ static t_bool	set_redir_append(t_sh *sh, t_cmd *cmd, char *token)
 	while (is_blank(*token))
 		token++;
 	cmd->redir_out.is_append = 1;
+	if (*token == '$' && is_ambiguous_redir(sh, token))
+	{
+		error_display(token, "ambiguous redirect", 0);
+		return (1);
+	}
 	cmd->redir_out.filename = expand(token, sh);
-	//to_continue-------------------------------------------------
 	return (0);
 }
 
@@ -35,13 +39,24 @@ static t_bool	set_redir_outfile(t_sh *sh, t_cmd *cmd, char *token)
 	while (is_blank(*token))
 		token++;
 	cmd->redir_out.is_append = 0;
-	(void)sh;
-	//to_continue---------------------------------------------------
+	if (*token == '$' && is_ambiguous_redir(sh, token))
+	{
+		error_display(token, "ambiguous redirect", 0);
+		return (1);
+	}
+	cmd->redir_out.filename = expand(token, sh);
 	return (0);
 }
 
 static t_bool	set_redir_heredoc(t_sh *sh, t_cmd *cmd, char *token)
 {
+	/*
+	char	*tmp;
+	char	*start;
+	char	quote;
+	size_t	new_size;
+	char	*ret;
+	*/
 	if (cmd->redir_in.filename)
 	{
 		if (cmd->redir_in.is_heredoc)
@@ -57,8 +72,27 @@ static t_bool	set_redir_heredoc(t_sh *sh, t_cmd *cmd, char *token)
 		cmd->redir_in.quoted_delim = 1;
 	else
 		cmd->redir_in.quoted_delim = 0;
-	//remove quotes delim---------------------------------------------
-	return (heredoc_set(sh, cmd, token));	
+	/*
+	new_size = 0;
+	ret = NULL;
+	tmp = token;
+	while (*tmp)
+	{
+		if (is_quote(*tmp))
+		{
+			quote = *tmp;
+			start = ++tmp;
+		}	
+		while (*tmp && tmp != quote)
+			token++;
+		new_size += token - start;
+		ret = ft_realloc_str(ret, new_size);
+		ft_strlcat(ret, start, new_size + 1);
+		if (tmp == quote)
+			++tmp;
+	}
+	*/
+	return (heredoc_set(sh, cmd, token));
 }
 
 static t_bool	set_redir_infile(t_sh *sh, t_cmd *cmd, char *token)
@@ -79,8 +113,6 @@ static t_bool	set_redir_infile(t_sh *sh, t_cmd *cmd, char *token)
 		error_display(token, "ambiguous redirect", 0);
 		return (1);
 	}
-/* 	if (expand(token, &cmd->redir_in.filename, sh))
-		return (1); */
 	cmd->redir_in.filename = expand(token, sh);
 	return(check_access(cmd->redir_in.filename, F_OK | R_OK));
 }

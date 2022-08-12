@@ -70,6 +70,9 @@ for file in `find -name "linux_*.mp4"`; do mv "$file" "${file/linux_/}" ; done
 
 minish> echo $USER$USER$"$USERcoucou'$USER"  '$USER'     $USER     "-$lol- hehe..."
 
+mdankou@e1r3p5:~/Documents/git_minish$ > ""
+bash: : No such file or directory
+
 
 VALGRIND
 	valgrind --suppressions=ignoreleak --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes --verbose ./minishell
