@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   check_access.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 00:57:11 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/27 21:52:51 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/12 15:20:58 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "redir.h"
 
-int	check_access(char *filename, int flag)
+t_bool	check_access(char *filename, int flag)
 {
 	if (access(filename, flag) < 0)
 	{

@@ -3,27 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   clear.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 21:14:36 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/30 19:33:59 by user42           ###   ########.fr       */
+/*   Updated: 2022/08/12 11:38:59 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "clear.h"
 
-static void	clear_cmd_params(t_cmd *cmd)
+static void	clear_cmd(t_cmd *cmd)
 {
 	if (cmd->args)
-		ft_strarray_clear(cmd->args);
+		ft_strarrayclear(&cmd->args);
 	if (cmd->possible_paths)
-		ft_strarray_clear(cmd->possible_paths);
+		ft_strarrayclear(&cmd->possible_paths);
 	if (cmd->path)
 		ft_strdel(&cmd->path);
-	if (cmd->infile_name)
-		ft_strdel(&cmd->infile_name);
-	if (cmd->outfile_name)
-		ft_strdel(&cmd->outfile_name);
+	if (cmd->redir_in.filename)
+	{
+		if (cmd->redir_in.fd > STDERR_FILENO)
+			close(cmd->redir_in.fd);
+		if (cmd->redir_in.is_heredoc)
+		{
+			ft_strdel(&cmd->redir_in.delim);
+			unlink(cmd->redir_in.filename);
+		}
+		ft_strdel(&cmd->redir_in.filename);
+	}
+	if (cmd->redir_out.filename)
+	{
+		if (cmd->redir_out.fd > STDERR_FILENO)
+			close(cmd->redir_out.fd);
+		ft_strdel(&cmd->redir_out.filename);
+	}
 }
 
 void	clear_cmd_list(t_cmd *cmd)
@@ -32,8 +45,7 @@ void	clear_cmd_list(t_cmd *cmd)
 
 	while (cmd)
 	{
-		close_cmd_redirs(cmd);
-		clear_cmd_params(cmd);
+		clear_cmd(cmd);
 		to_del = cmd;
 		cmd = cmd->next;
 		free(to_del);

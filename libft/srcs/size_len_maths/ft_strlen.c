@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 15:18:38 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/24 15:52:19 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/12 16:01:16 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@ size_t	ft_strlen(const char *str)
 {
 	size_t	i;
 
+	if (!str)
+		return (0);
 	i = 0;
-	while (str && str[i])
+	while (str[i])
 		i++;
 	return (i);
 }

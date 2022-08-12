@@ -42,7 +42,7 @@ void	launch_forked_builtin(t_sh *sh, t_cmd *cmd)
 
 void	launch_single_builtin(t_sh *sh, t_cmd *cmd)
 {
-	if (open_redir(cmd) == FAILURE)
+	if (open_redir(cmd) == FAIL)
 	{
 		g_last_status = WRONG_REDIR;
 		return ;

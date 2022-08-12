@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 23:20:58 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/01 16:31:44 by user42           ###   ########.fr       */
+/*   Updated: 2022/08/05 14:52:51 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ char	*build_prompt(void)
 	char	*prompt;
 	char	*cwd;
 
-	prompt = ft_strdup(MINISH_COLOR"🐱 MINISH 🐱: "DIRS_COLOR);
+	prompt = ft_strdup("🐱 MINISH 🐱: ");
 	cwd = getcwd(NULL, 0);
 	ft_strfjoin(&prompt, cwd);
 	free(cwd);
-	ft_strfjoin(&prompt, "> "INPUT_COLOR);
+	ft_strfjoin(&prompt, "> ");
 	return (prompt);
 }

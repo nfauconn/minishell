@@ -14,11 +14,11 @@
 - Optionally waits for the command to complete
 	> and collects its exit status (see Exit Status)
 
-
 ---------------SYNTAX--------------------------
-
 - CTRL OPERATOR
 	> '|' ou '\n'
+	> [n]<>word : open for both writing and reading on fd [n] (or 0 if n not specified)
+	> if the file does not exist, it is created. 
 
 - FIELD = unit of text that is the result of one of the shell expansions
 	> after expansion, when executing a command, the resulting fields are used as the command name and arguments.

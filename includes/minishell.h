@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 18:25:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/01 16:33:58 by user42           ###   ########.fr       */
+/*   Updated: 2022/08/06 21:43:45 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 # include "extern_libs.h"
 # include "structs.h"
-# include "parsing.h"
+# include "parse.h"
 # include "exec.h"
 # include "reset.h"
 # include "signals.h"

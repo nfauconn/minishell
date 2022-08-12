@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 18:10:00 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/01 16:34:22 by user42           ###   ########.fr       */
+/*   Updated: 2022/08/04 21:17:15 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,17 @@ char	*get_input(t_sh *sh)
 
 	prompt = build_prompt();
 	line_read = readline(prompt);
-	free(prompt);
 	if (!line_read)
+	{
+		ft_strdel(&prompt);
 		exit_clear_minish(sh, 0);
+	}
 	if (line_read && *line_read == '\0')
 		redisplay_prompt();
 	if (line_read && *line_read)
 		add_history(line_read);
 	sh->line_nb++;
+	free(prompt);
 	return (line_read);
 }
 

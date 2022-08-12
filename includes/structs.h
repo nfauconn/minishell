@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 12:07:25 by user42            #+#    #+#             */
-/*   Updated: 2022/08/01 16:22:45 by user42           ###   ########.fr       */
+/*   Updated: 2022/08/11 21:13:50 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,24 +32,28 @@ typedef struct s_input
 	t_list	*token_list;
 }	t_input;
 
+typedef struct s_redir
+{
+	char	*filename;
+	char	*delim;
+	int		fd;
+	t_bool	is_heredoc;
+	t_bool	quoted_delim;
+	t_bool	is_append;
+//	t_bool	is_ambig;
+}	t_redir;
+
 typedef struct s_cmd
 {
 	size_t			index;
-	char			*name;
 	int				built_i;
 	char			**args;
+	char			*name;
 	char			**possible_paths;
 	char			*path;
-	int				redir_in;
-	t_bool			expanded_redir_in;
-	int				redir_out;
-	int				redir_out_type;
-	t_bool			expanded_redir_out;
-	char			*infile_name;
-	t_bool			heredoc_infile;
-	t_bool			delim_quote;
-	char			*outfile_name;
-	t_bool			access_error;
+	t_redir			redir_in;
+	t_redir			redir_out;
+	t_bool			redir_error;
 	struct s_cmd	*next;
 }	t_cmd;
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wait.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 19:07:39 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/30 11:47:45 by user42           ###   ########.fr       */
+/*   Updated: 2022/08/11 22:11:31 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 extern unsigned char	g_last_status;
 
-void	wait_heredoc(void)
+t_bool	wait_heredoc(void)
 {
 	pid_t	pid;
 	int		status;
@@ -26,6 +26,9 @@ void	wait_heredoc(void)
 	if (WIFEXITED(status))
 	{
 		g_last_status = WEXITSTATUS(status);
+		if (g_last_status == 0)
+			return (0);
+		return (1);
 	}
 	if (WIFSIGNALED(status))
 	{
@@ -33,7 +36,9 @@ void	wait_heredoc(void)
 		if (signal == SIGINT)
 			ft_printerror("\n");
 		g_last_status = signal + 128;
+		return (1);
 	}
+	return (0);
 }
 
 void	wait_child(t_sh *sh, size_t cmd_index)

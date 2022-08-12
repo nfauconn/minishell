@@ -3,36 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 22:52:27 by user42            #+#    #+#             */
-/*   Updated: 2022/07/30 19:34:29 by user42           ###   ########.fr       */
+/*   Updated: 2022/08/12 11:38:14 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "parse.h"
+
+static t_redir	init_redir(void)
+{
+	t_redir	new;
+
+/* 	new = (t_redir *)malloc(sizeof(t_redir));
+	if (!new)
+		return (NULL); */
+	new.filename = NULL;
+	new.delim = NULL;
+	new.fd = 0;
+	new.is_heredoc = 0;
+	new.quoted_delim = 0;
+	new.is_append = 0;
+//	new.is_ambig = 0;
+	return (new);
+}
 
 t_cmd	*cmd_init(void)
 {
-	t_cmd	*new;
+	t_cmd	*cmd;
 
-	new = (t_cmd *)malloc(sizeof(t_cmd));
-	if (!new)
+	cmd = (t_cmd *)malloc(sizeof(t_cmd));
+	if (!cmd)
 		return (NULL);
-	new->index = 0;
-	new->name = NULL;
-	new->built_i = -1;
-	new->args = NULL;
-	new->possible_paths = NULL;
-	new->path = NULL;
-	new->redir_in = NO_REDIR;
-	new->redir_out = NO_REDIR;
-	new->redir_out_type = 0;
-	new->infile_name = NULL;
-	new->heredoc_infile = 0;
-	new->delim_quote = 0;
-	new->outfile_name = NULL;
-	new->access_error = 0;
-	new->next = NULL;
-	return (new);
+	cmd->index = 0;
+	cmd->name = NULL;
+	cmd->built_i = -1;
+	cmd->args = NULL;
+	cmd->possible_paths = NULL;
+	cmd->path = NULL;
+	cmd->redir_in = init_redir();
+	cmd->redir_out = init_redir();
+	cmd->redir_error = 0;
+	cmd->next = NULL;
+	return (cmd);
 }

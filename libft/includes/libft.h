@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 16:22:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/27 22:47:55 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/12 16:07:46 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef unsigned long long	t_ull;
 typedef enum e_bool
 {
 	SUCCESS = 0,
-	FAILURE = 1
+	FAIL = 1
 }	t_bool;
 
 typedef struct s_vector
@@ -86,7 +86,7 @@ int			ft_atoi(const char *s);
 int			ft_atoi_base(const char *s, int base);
 char		*ft_itoa(int n);
 char		**ft_split(char const *s, char c);
-t_list		*ft_str_array_to_lst(char **tab);
+t_list		*ft_strarraytolist(char **tab);
 char		*ft_ulltoa_base(unsigned long long n, int base, size_t maj);
 
 /* DISPLAY */
@@ -115,12 +115,10 @@ void		*ft_calloc(size_t count, size_t size);
 void		*ft_memalloc(size_t size);
 void		ft_memdel(void **ap);
 void		*ft_realloc(void *ptr, size_t newsize);
-void		ft_replace_free_old(void **old, void *new);
-void		ft_strarray_clear(char **tab);
+char		*ft_realloc_str(char *str, size_t newsize);
+void		ft_replacefree(void **old, void *new);
+void		ft_strarrayclear(char ***tab);
 void		ft_strdel(char **as);
-void		ft_strfdup(char **over, char *buff);
-void		ft_strfjoin(char **to_free, char *to_add);
-char		*ft_strfjoinchar(char *str, char c);
 
 /* REPLACE / COPY / JOIN / ITER */
 void		ft_bzero(void *s, size_t n);
@@ -128,8 +126,12 @@ void		*ft_memccpy(void *dst, const void *src, int c, size_t n);
 void		*ft_memcpy(void *dst, const void *src, size_t n);
 void		*ft_memmove(void *dst, const void *src, size_t len);
 void		*ft_memset(void *b, int c, size_t len);
+char		**ft_strarrayfreejoin(char ***prev, char ***to_join);
 char		*ft_strdup(const char *s1);
 char		*ft_strjoin(char const *s1, char const *s2);
+void		ft_strfdup(char **over, char *buff);
+void		ft_strfjoin(char **to_free, char *to_add);
+char		*ft_strfjoinchar(char *str, char c);
 size_t		ft_strlcat(char *dst, const char *src, size_t dstsize);
 size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize);
 char		*ft_strmapi(char const *s, char (*f)(unsigned int, char));
@@ -145,7 +147,7 @@ t_v			ft_operate_vector(t_v vector, char operation, int nb);
 t_ull		ft_power(int nb, int power);
 void		ft_rev_int_tab(int *tab, int size);
 int			*ft_sort_int_tab(int *tab, int size);
-int			ft_str_array_size(char **tab);
+int			ft_strarraysize(char **tab);
 size_t		ft_strlen(const char *str);
 int			ft_square_root(int nb);
 

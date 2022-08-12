@@ -3,73 +3,89 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 11:36:22 by user42            #+#    #+#             */
-/*   Updated: 2022/08/01 19:44:56 by user42           ###   ########.fr       */
+/*   Updated: 2022/08/06 21:43:45 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "parse.h"
 
-static int	check_nb_sign(t_list *token)
+static t_bool	check_nb_sign(char **tok, int type)
 {
+	char	*start;
 	size_t	len;
-	char	*tok;
 
-	tok = (char *)token->content;
-	len = ft_strlen(tok);
-	if (token->type == '<' && len > 2)
-		return (lex_error("<<"));
-	if (token->type == '>' && len > 2)
-		return (lex_error(">>"));
-	if (token->type == PIPE && len > 1)
-		return (lex_error("|"));
-	return (SUCCESS);
+	start = *tok;
+	go_through_same_char(tok);
+	len = *tok - start;
+	if (type == '<' && len == 3)
+		return (sh_perror("does not handle here words"));
+	if (type == '<' && len > 3)
+		return (lex_perror("<<"));
+	if (type == '>' && len > 2)
+		return (lex_perror(">>"));
+	if (type == '|' && len == 2)
+		return (sh_perror("does not handle double pipes"));
+	if (type == '|' && len > 2)
+		return (lex_perror("|"));
+	return (0);
 }
 
-static int	next_token_error(t_list *token)
+static t_bool	lex_redir(char *content)
 {
-	if (check_nb_sign(token) == FAILURE)
-		return (FAILURE);
-	return (lex_error((char *)token->content));
-}
-
-static int	tok_lexer(t_list *token)
-{
-	if (is_rediroperator(token->type))
+	if (!*content)
+		return (lex_perror("newline"));
+	while (is_blank(*content))
+		content++;
+	if (*content == '|')
+		return (lex_perror("|"));
+	else if (is_rediroperator(*content))
 	{
-		if (check_nb_sign(token) == FAILURE)
-			return (FAILURE);
-		skip_token(&token, BLANK);
-		if (token && (is_rediroperator(token->type) || is_sep(token->type)))
-			return (next_token_error(token));
-		else if (!token)
-			return (lex_error("newline"));
-	}
-	else if (is_sep(token->type))
-	{
-		if (check_nb_sign(token))
-			return (FAILURE);
- 		skip_token(&token, BLANK);
-		if (token && is_sep(token->type))
-			return (next_token_error(token));
-		else if (!token)
-			return (lex_error("newline"));
-	}
-	return (SUCCESS);
+		if (check_nb_sign(&content, (int)*content) == SUCCESS)
+		{
+			content--;
+			if (*content == '>')
+				return (lex_perror(">"));
+			else if (*content == '<')
+				return (lex_perror("<"));
+		}
+	}	
+	return (0);
 }
 
-int	lexer(t_list *token)
+static t_bool	tok_lexer(char *content, int type)
 {
-	if (token->type == PIPE)
-		return (lex_error("|"));
+	if (is_operator(type))
+	{
+		if (check_nb_sign(&content, type) == FAIL)
+			return (1);
+		while (*content && is_blank(*content))
+			content++;
+	}
+	if (!*content)
+		return (0);
+	else if (is_rediroperator(type) && lex_redir(content) == FAIL)
+		return (1);
+	return (0);
+}
+
+t_bool	lexer(t_list *token)
+{
+	if (token->type == '|')
+		return (lex_perror("|"));
 	while (token)
 	{
-		if (tok_lexer(token) == SUCCESS)
+		if (tok_lexer((char *)token->content, token->type) == SUCCESS)
+		{
+			if (token->type == '|' && !token->next)
+				return (sh_perror("does not handle ending pipe"));			
 			token = token->next;
+		}	
 		else
 			return (1);
+
 	}
 	return (0);
 }

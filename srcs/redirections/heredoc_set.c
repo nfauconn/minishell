@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_set.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 22:24:41 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/24 16:10:03 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/08/11 21:18:31 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,38 +23,35 @@ static char	*get_heredoc_path(int heredoc_nb)
 	return (heredoc_path);
 }
 
-static char	*get_heredoc_delim(t_list **token, t_cmd *cmd)
+static char	*get_heredoc_delim(char *token)
 {
 	char	*delim;
 
-	if ((*token)->type == QUOTED_HEREDOC_DELIM)
-		cmd->delim_quote = 1;
-	delim = ft_strdup((char *)(*token)->content);
-	while ((*token)->next && ((*token)->next->type == HEREDOC_DELIM
-			|| (*token)->next->type == QUOTED_HEREDOC_DELIM))
-	{
-		if ((*token)->type == QUOTED_HEREDOC_DELIM
-			|| (*token)->next->type == QUOTED_HEREDOC_DELIM)
-			cmd->delim_quote = 1;
-		(*token) = (*token)->next;
-		ft_strfjoin(&delim, (char *)(*token)->content);
-	}
+	while (is_rediroperator(*token))
+		token++;
+	while (is_blank(*token))
+		token++;
+	delim = ft_strdup(token);
 	return (delim);
 }
 
-void	heredoc_set(t_sh *sh, t_list **token, t_cmd *cmd)
+t_bool	heredoc_set(t_sh *sh, t_cmd *cmd, char *token)
 {
 	char	*delim;
+	t_bool	ret;
 
-	if (cmd->infile_name)
+	ret = 0;
+	if (cmd->redir_in.filename)
 	{
-		if (cmd->heredoc_infile)
-			unlink(cmd->infile_name);
-		ft_strdel(&cmd->infile_name);
+		if (cmd->redir_in.is_heredoc)
+			unlink(cmd->redir_in.filename);
+		ft_strdel(&cmd->redir_in.filename);
 	}
 	sh->heredoc_nb++;
-	cmd->infile_name = get_heredoc_path(sh->heredoc_nb);
-	delim = get_heredoc_delim(token, cmd);
-	run_heredoc(sh, cmd->infile_name, delim, cmd->delim_quote);
+	cmd->redir_in.filename = get_heredoc_path(sh->heredoc_nb);
+	delim = get_heredoc_delim(token);
+	if (run_heredoc(sh, cmd->redir_in.filename, delim, cmd->redir_in.quoted_delim))
+		ret = 1;
 	free(delim);
+	return (ret);
 }

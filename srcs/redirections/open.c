@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 18:19:59 by user42            #+#    #+#             */
-/*   Updated: 2022/07/31 17:25:26 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/11 22:11:31 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,13 @@ int	open_redir(t_cmd *cmd)
 	cmd->redir_out = NO_REDIR;
 	if (cmd->access_error)
 		return (1);
-	if (cmd->infile_name && open_redir_in(cmd) == FAILURE)
+	if (cmd->infile_name && open_redir_in(cmd) == FAIL)
 		return (1);
-	if (cmd->outfile_name && open_redir_out(cmd) == FAILURE)
+	if (cmd->outfile_name && open_redir_out(cmd) == FAIL)
 		return (1);
 	return (0);
 }
 /*
-&& ft_strcmp(cmd->infile_name, "/dev/stdin") == FAILURE
-&& ft_strcmp(cmd->outfile_name, "/dev/stdout") == FAILURE
+&& ft_strcmp(cmd->infile_name, "/dev/stdin") == FAIL
+&& ft_strcmp(cmd->outfile_name, "/dev/stdout") == FAIL
 */

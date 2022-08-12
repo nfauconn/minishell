@@ -3,39 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 18:49:09 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/30 01:25:47 by user42           ###   ########.fr       */
+/*   Updated: 2022/08/11 22:11:33 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*perror_and_free(t_input *input, char *s)
+t_bool	sh_perror(char *s)
 {
 	ft_printerror("minish: %s\n", s);
-	clear_input(input);
-	return (NULL);
+	return (1);	
 }
 
-int	lex_error(char *s)
+t_bool	lex_perror(char *s)
 {
 	ft_printerror("minish: syntax error near unexpected token `%s'\n", s);
-	return (FAILURE);
+	return (1);
 }
 
-int	exec_perror(char *s1, char *s2)
+t_bool	error_display(char *s1, char *s2, char *s3)
 {
-	if (s1 && s2)
-		ft_printerror("minish: %s: %s\n", s1, s2);
-	return (FAILURE);
+	ft_printerror("minish: %s: %s%s\n", s1, s2, s3);
+	return (1);
 }
 
-void	error_display(char *s1, char *s2, char *s3)
+void	perror_exit(t_sh *sh, char *s1, char *s2, unsigned char exit_code)
 {
-	if (s1 && !s2 && !s3)
-		ft_printerror("minish: %s\n", s1);
-	else
-		ft_printerror("minish: %s: %s%s\n", s1, s2, s3);
+	error_display(s1, s2, 0);
+	exit_clear_child(sh, exit_code);
 }

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:52:52 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/05 15:57:30 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/08/11 22:11:31 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "parse.h"
 #include "exec.h"
 
 static void	update_env(t_list **env)
@@ -81,7 +81,7 @@ static char	*build_curpath(t_sh *sh, t_cmd *cmd)
 		}
 		ft_strdel(&path);
 	}
-	ft_strarray_clear(cdpath);
+	ft_strarrayclear(&cdpath);
 	return (path);
 }
 

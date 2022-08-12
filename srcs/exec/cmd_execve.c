@@ -3,21 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_execve.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 12:56:04 by user42            #+#    #+#             */
-/*   Updated: 2022/07/30 20:37:25 by user42           ###   ########.fr       */
+/*   Updated: 2022/08/06 21:43:45 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
-#include "parsing.h"
-
-static void	perror_exit(t_sh *sh, char *s1, char *s2, unsigned char exit_code)
-{
-	error_display(s1, s2, 0);
-	exit_clear_child(sh, exit_code);
-}
+#include "parse.h"
 
 static int	no_path_in_env(t_sh *sh, t_cmd *cmd)
 {

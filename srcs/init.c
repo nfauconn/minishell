@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 17:25:43 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/31 09:21:56 by user42           ###   ########.fr       */
+/*   Updated: 2022/08/09 21:12:32 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	init_shell_level(t_list *env)
+/* static void	init_shell_level(t_list *env)
 {
 	char	*lvl_str;
 	int		lvl_int;
@@ -31,7 +31,7 @@ static void	init_shell_level(t_list *env)
 	do_export(&env, shlvl);
 	free(shlvl);
 	free(lvl_str);
-}
+} */
 
 static void	create_minimal_env(t_list **head)
 {
@@ -57,8 +57,8 @@ t_list	*init_env(char **env_tab)
 	env = NULL;
 	if (env_tab && *env_tab)
 	{
-		env = ft_str_array_to_lst(env_tab);
-		init_shell_level(env);
+		env = ft_strarraytolist(env_tab);
+//		init_shell_level(env);
 	}
 	else
 		create_minimal_env(&env);
@@ -66,14 +66,14 @@ t_list	*init_env(char **env_tab)
 }
 
 static void	init_builtins_ptr(t_sh *sh)
-{
-	sh->exec_built[cd] = &mini_cd;
+{(void)sh;
+/* 	sh->exec_built[cd] = &mini_cd;
 	sh->exec_built[echo] = &mini_echo;
 	sh->exec_built[env] = &mini_env;
 	sh->exec_built[exit2] = &mini_exit;
 	sh->exec_built[export] = &mini_export;
 	sh->exec_built[pwd] = &mini_pwd;
-	sh->exec_built[unset] = &mini_unset;	
+	sh->exec_built[unset] = &mini_unset; */	
 }
 
 void	init_sh(t_sh *sh)

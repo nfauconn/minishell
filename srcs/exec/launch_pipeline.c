@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch_pipeline.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 13:07:05 by user42            #+#    #+#             */
-/*   Updated: 2022/07/30 11:50:07 by user42           ###   ########.fr       */
+/*   Updated: 2022/08/11 22:11:31 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	parent_job(t_cmd *cmd, int p[2], int *fd)
 	else
 	{
 		close(p[1]);
-		close_if_no_std(*fd);
+		close_if_opened(*fd);
 		*fd = p[0];
 	}
 }
@@ -58,10 +58,10 @@ int	launch_pipeline(t_sh *sh, t_cmd *cmd)
 	while (cmd)
 	{
 		if (pipe(p) < 0)
-			return (exec_perror("pipe", strerror(errno)));
+			return (error_display("pipe", strerror(errno), 0));
 		pid = fork();
 		if (pid < 0)
-			return (exec_perror("fork", strerror(errno)));
+			return (error_display("fork", strerror(errno), 0));
 		if (pid == 0)
 			child_job(sh, cmd, p, fd_in);
 		else

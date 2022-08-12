@@ -5,45 +5,49 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/26 22:41:54 by user42            #+#    #+#             */
-/*   Updated: 2022/07/31 21:31:39 by nfauconn         ###   ########.fr       */
+/*   Created: 2022/08/12 19:35:30 by nfauconn          #+#    #+#             */
+/*   Updated: 2022/08/12 19:35:31 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "parse.h"
 
-t_list	*set_delim_type(t_list *token)
+char	*expand_doll_quotes_increment_tok(char **token, t_sh *sh)
 {
-	t_list	*start;
+	char	quote;
+	char	*new;
 
-	start = token;
-	token = token->next;
-	while (token && !is_metacharacter(*(char *)token->content))
-	{
-		if (ft_strchr((char *)token->content, QUOTE)
-			|| ft_strchr((char *)token->content, DB_QUOTE))
-		{
-			token = start;
-			break ;
-		}
-		token->type = HEREDOC_DELIM;
-		token = token->next;
-	}
-	if (token == start && token->next)
-		token = set_next_words_type(token, QUOTED_HEREDOC_DELIM);
-	return (start->next);
+	quote = *((*token) + 1);
+	new = expand_quotes(*token, sh);
+	(*token) += 2;
+	while (**token && **token != quote)
+		(*token)++;
+	(*token)++;
+	return (new);
 }
 
-char	*var_value(char *str, size_t len, t_list *env)
+char	*expand_quotes_increment_tok(char **token, t_sh *sh)
 {
-	char	*env_line;
+	char	quote;
+	char	*new;
 
-	while (env)
-	{
-		env_line = (char *)env->content;
-		if (!ft_strncmp(str, env_line, len) && (env_line)[len] == '=')
-			return (ft_strdup(ft_strchr(env_line, '=') + 1));
-		env = env->next;
-	}
-	return (NULL);
+	quote = **token;
+	new = expand_quotes(*token, sh);
+	(*token)++;
+	while (**token && **token != quote)
+		(*token)++;
+	(*token)++;
+	return (new);
+}
+
+char	*expand_str_increment_tok(char **token, t_sh *sh)
+{
+	char	*str;
+
+	str = expand_string(*token, sh);
+	(*token)++;
+	while (**token 
+		&& !is_blank(**token) && !is_quote(**token) && **token != '$')
+		(*token)++;
+	return (str);
 }

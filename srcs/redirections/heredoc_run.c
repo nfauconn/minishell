@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_run.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 12:37:34 by user42            #+#    #+#             */
-/*   Updated: 2022/07/30 11:46:03 by user42           ###   ########.fr       */
+/*   Updated: 2022/08/11 22:11:31 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ static void	putstr_heredoc(t_sh *sh, char **line, int fd, t_bool quoted)
 	char	*new_line;
 
 	if (!quoted)
-		ft_replace_free_old((void **)line, expand_string(*line, sh));
+		ft_replacefree((void **)line, expand_string(*line, sh));
 	ft_putendl_fd(*line, fd);
 	sh->line_nb++;
 	new_line = readline("> ");
-	ft_replace_free_old((void **)line, new_line);
+	ft_replacefree((void **)line, new_line);
 }
 
 static void	heredoc_job(t_sh *sh, char *hdoc_path, char *delim, t_bool quoted)
@@ -55,10 +55,12 @@ static void	heredoc_job(t_sh *sh, char *hdoc_path, char *delim, t_bool quoted)
 	exit_clear_heredoc(sh, &line, fd);
 }
 
-void	run_heredoc(t_sh *sh, char *hdoc_path, char *delim, t_bool quoted)
+t_bool	run_heredoc(t_sh *sh, char *hdoc_path, char *delim, t_bool quoted)
 {
 	pid_t		pid;
+	t_bool		ret;
 
+	ret = 0;
 	signal_catching_mode(PARENT_PROCESS);
 	pid = fork();
 	if (pid < 0)
@@ -68,6 +70,8 @@ void	run_heredoc(t_sh *sh, char *hdoc_path, char *delim, t_bool quoted)
 		signal_catching_mode(HEREDOC);
 		heredoc_job(sh, hdoc_path, delim, quoted);
 	}
-	wait_heredoc();
+	if (wait_heredoc())
+		ret = 1;
 	signal_catching_mode(INTERACTIVE);
+	return (ret);
 }

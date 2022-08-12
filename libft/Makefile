@@ -44,7 +44,7 @@ SRCS := ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		ft_atoi_base \
 		ft_itoa \
 		ft_split \
-		ft_str_array_to_lst \
+		ft_strarraytolist \
 		ft_ulltoa_base} \
 		${addprefix ${DISPLAY}/, \
 		ft_printerror \
@@ -87,15 +87,16 @@ SRCS := ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		ft_memalloc \
 		ft_memdel \
 		ft_realloc \
-		ft_replace_free_old \
-		ft_strarray_clear \
-		ft_strdel \
-		ft_strfdup \
-		ft_strfjoin \
-		ft_strfjoinchar} \
+		ft_replacefree \
+		ft_strarrayclear \
+		ft_strdel} \
 		${addprefix ${REPLACE_WITH_ALLOC}/, \
+		ft_strarrayfreejoin \
 		ft_strdup \
+		ft_strfdup \
 		ft_strjoin \
+		ft_strfjoin \
+		ft_strfjoinchar \
 		ft_strmapi \
 		ft_strtrim \
 		ft_substr} \
@@ -116,7 +117,7 @@ SRCS := ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		ft_power \
 		ft_rev_int_tab \
 		ft_sort_int_tab \
-		ft_str_array_size \
+		ft_strarraysize \
 		ft_strlen \
 		ft_square_root}}}
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:53:50 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/30 00:34:27 by user42           ###   ########.fr       */
+/*   Updated: 2022/08/09 20:59:33 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static void	print_env_tab(t_list *env)
 		}
 		++j;
 	}
-	ft_strarray_clear(tab);
+	ft_strarrayclear(&tab);
 }
 
 void	do_export(t_list **env, char *assign)

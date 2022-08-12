@@ -6,6 +6,7 @@ BUILTINS = builtins/
 EXEC = exec/
 REDIR = redirections/
 PARSING = parsing/
+COMPAR_UTILS = compar_utils/
 BUILD_DIR  = ./objs
 
 LIBFT_DIR = ./libft
@@ -31,43 +32,31 @@ SRCS := ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		reset \
 		signals \
 		${addprefix ${PARSING}, \
-		tokenizer \
-		token_utils \
-		types \
+		parse \
+		tokenize \
+		tokenize_utils \
 		lexer \
+		cmd_list_build \
+		cmd_init \
+		cmd_args_redir \
+		cmd_args_redir_utils \
 		expand \
 		expand_utils \
-		conv_to_cmd \
-		cmd_creat \
-		cmd_init \
-		parser \
-		utils_comparison \
-		utils_comparison2} \
+		expand_quotes \
+		expand_string \
+		expand_var \
+		${addprefix ${COMPAR_UTILS}, \
+		builtins \
+		files \
+		metachars}} \
 		${addprefix ${REDIR}, \
-		check_access \
-		heredoc_run \
-		heredoc_set \
-		open \
 		set_redir \
-		pipeline_red \
-		single_red \
-		utils} \
+		ambiguous_redir \
+		heredoc_set \
+		heredoc_run \
+		check_access} \
 		${addprefix ${EXEC}, \
-		cmd_execve \
-		cmd_path \
-		launch \
-		launch_builtin \
-		launch_pipeline \
-		launch_single \
-		wait \
-		${addprefix ${BUILTINS}, \
-		cd \
-		echo \
-		env \
-		exit \
-		export \
-		pwd \
-		unset}}}}
+		wait}}}
 
 DEPS := ${subst ${SRC_DIR}, ${BUILD_DIR}, ${SRCS:%.c=%.d}}
 OBJS := ${subst ${SRC_DIR}, ${BUILD_DIR}, ${SRCS:%.c=%.o}}
@@ -85,7 +74,7 @@ all: ${LIBFT} ${TARGET}
 ${LIBFT}:
 	@make -C ${LIBFT_DIR}
 
-${TARGET}: ${OBJS} ${LIBFT} Makefile
+${TARGET}: ${OBJS} ${LIBFT} #Makefile
 	@${COMP} ${LD_FLAGS} ${OBJS} -o ${TARGET} -lft
 	@echo "${TARGET} created"
 
