@@ -11,6 +11,7 @@ size_t	arg_len(char *s)
 		if (is_quote(s[i]))
 		{
 			quote = s[i];
+			i++;
 			while (s[i] != quote)
 				i++;
 		}

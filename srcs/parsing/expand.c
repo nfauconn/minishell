@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:13:37 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/13 19:09:44 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/13 20:11:11 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ char	*expand(char *token, t_sh *sh)
 	ret = NULL;
  	while (*token)
 	{
-		printf("token = %s\n", token);
 		if (*token == '$' || is_quote(*token))
 		{
 			if (*token == '$' && is_quote(*(token + 1)))

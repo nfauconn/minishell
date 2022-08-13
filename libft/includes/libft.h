@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 16:22:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/12 16:07:46 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/13 20:47:34 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,8 +114,7 @@ int			ft_lstsize(t_list *lst);
 void		*ft_calloc(size_t count, size_t size);
 void		*ft_memalloc(size_t size);
 void		ft_memdel(void **ap);
-void		*ft_realloc(void *ptr, size_t newsize);
-char		*ft_realloc_str(char *str, size_t newsize);
+char		*ft_realloc_str(char *str, size_t newlen);
 void		ft_replacefree(void **old, void *new);
 void		ft_strarrayclear(char ***tab);
 void		ft_strdel(char **as);

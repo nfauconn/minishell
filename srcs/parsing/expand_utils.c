@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 19:35:30 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/13 19:12:47 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/13 20:10:59 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,11 @@ char	*expand_quotes_increment_tok(char **token, t_sh *sh)
 
 	quote = **token;
 	new = expand_quotes(*token, sh);
-	printf("new = %s | *token = %s\n", new, *token);
 	(*token)++;
-	printf("*token = %s\n", *token);
 	while (**token && **token != quote)
 		(*token)++;
-	printf("*token = %s\n", *token);
 	(*token)++;
+	printf("new = %s | *token = %s\n", new, *token);
 	return (new);
 }
 

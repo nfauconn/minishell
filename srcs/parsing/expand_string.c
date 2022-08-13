@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 19:35:23 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/13 19:06:44 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/13 20:40:42 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,14 @@ char	*expand_string(char *ptr, t_sh *sh)
 		{
 			ptr++;
 			var_val = expanded_content(&ptr, sh);
+			printf("var_val = %s\n", var_val);
 			if (var_val)
 			{
-				new_size = new_size + ft_strlen(var_val);
-				new = ft_realloc(new, new_size + 1);
+				new_size += ft_strlen(var_val);
+				new = ft_realloc_str(new, new_size + 1);
 				ft_strlcat(new, var_val, new_size + 1);
 			}
-			printf("ptr = %s\n", ptr);
+			printf("new = %s | new_size = %zu | ptr = %s\n", new, new_size, ptr);
 		}
 		else
 		{
@@ -42,8 +43,9 @@ char	*expand_string(char *ptr, t_sh *sh)
 			while (*ptr && *ptr != '$') // what if quotes ???? (attention cat expand quotes l appelle btw)
 				ptr++;
 			new_size += ptr - start;
-			new = ft_realloc(new, new_size + 1);
+			new = ft_realloc_str(new, new_size + 1);
 			ft_strlcat(new, start, new_size + 1);
+			printf("new = %s | new_size = %zu | ptr = %s\n\n", new, new_size, ptr);
 		}
 	}
 	free(var_val);
