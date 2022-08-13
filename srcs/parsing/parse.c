@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 12:50:49 by user42            #+#    #+#             */
-/*   Updated: 2022/08/14 01:15:01 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/14 01:19:20 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,10 @@ bool	parse(t_sh *sh, t_input *input)
 	// print token list
 	if (input->token_list)
 	{
-		ft_printerror("TOKEN_LIST :\n");
 		t_list	*lst = input->token_list;
 		while (lst)
 		{
-			printf("tok = [%s] | type = %d\n", (char *)lst->content, lst->type);
+			printf("tok = [%s]\n", (char *)lst->content); //| type = %d\n", (char *)lst->content, lst->type);
 			lst = lst->next;
 		}
 		ft_printerror("___________\n\n");
@@ -41,7 +40,6 @@ bool	parse(t_sh *sh, t_input *input)
 		return (1);
 	
 	//print cmd_lst
-	ft_printf("CMD_LST :\n");
 	t_cmd	*tmp = sh->cmd_list;
 	size_t	i = 0;
 	while(tmp)

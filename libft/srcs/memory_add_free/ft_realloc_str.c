@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:09:55 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/13 20:52:32 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/14 01:23:28 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ char	*ft_realloc_str(char *str, size_t newlen)
 	{
 		ft_memcpy(new_str, str, oldlen + 1);
 		ft_bzero(new_str + oldlen, newlen - oldlen + 1);
-		free(str);
 	}
 	else
 		ft_bzero(new_str, newlen + 1);
+	free(str);
 	return (new_str);
 }
