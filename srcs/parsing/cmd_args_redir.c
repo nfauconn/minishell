@@ -20,12 +20,6 @@ static t_bool	fill_arg(t_sh *sh, char **args, size_t *i, char *token)
 		free(tmp);
 		if (!args[*i])
 			return (1);
-//		args[*i] = ft_strdup(new_val);
-//		free(new_val);
-//		(void)sh;
-//		args[*i] = ft_substr(token, 0, len);
-//		printf("args[%zu] = %p\n", *i, args[*i]);
-
 		(*i)++;
 		token += len;
 		while (is_blank(*token))
@@ -42,19 +36,18 @@ t_bool	get_args_and_redir(t_sh *sh, t_list *token, t_cmd *cmd)
 
 	i = 0;
 	args_nb = get_args_nb(token);
-	printf("args_nb = %zu\n", args_nb);
 	cmd->args = (char **)malloc(sizeof(char *) * (args_nb + 1));
 	if (!cmd->args)
 		return (1);
 	while (token && token->type != '|')
 	{
 		if (is_rediroperator(token->type))
-			cmd->redir_error = set_redirections(sh, cmd, (char *)token->content);
+			ret = set_redirections(sh, cmd, (char *)token->content);
 		else
 			ret = fill_arg(sh, cmd->args, &i, (char *)token->content);
 		if (ret == FAIL)
 		{
-			clear_tab(cmd->args, i);
+ 			clear_tab(cmd->args, i);
 			free(cmd);
 			return (1);
 		}

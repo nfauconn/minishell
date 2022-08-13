@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:13:37 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/12 21:55:42 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/13 19:09:44 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ char	*expand(char *token, t_sh *sh)
 	ret = NULL;
  	while (*token)
 	{
+		printf("token = %s\n", token);
 		if (*token == '$' || is_quote(*token))
 		{
 			if (*token == '$' && is_quote(*(token + 1)))
@@ -33,17 +34,22 @@ char	*expand(char *token, t_sh *sh)
 				to_add = expand_quotes_increment_tok(&token, sh);
 			if (to_add)
 			{
+				printf("to_add = %s\n", to_add);
 				new_size += ft_strlen(to_add);
 				ret = ft_realloc_str(ret, new_size + 1);
 				ft_strlcat(ret, to_add, new_size + 1);
+				free(to_add);
 			}
 		}
-		start = token;
-		while (*token && !is_quote(*token) && *token != '$')
-			token++;
-		new_size += token - start;
-		ret = ft_realloc_str(ret, new_size);
-		ft_strlcat(ret, start, new_size + 1);
+		else
+		{
+			start = token;
+			while (*token && !is_quote(*token) && *token != '$')
+				token++;
+			new_size += token - start;
+			ret = ft_realloc_str(ret, new_size);
+			ft_strlcat(ret, start, new_size + 1);
+		}
 	}
 	return (ret);
 }

@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 19:35:18 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/12 19:35:20 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/13 18:54:11 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ char	*expand_quotes(char *ptr, t_sh *sh)
 	char	*new;
 	char	*tmp;
 
-	quote = 1;
+	quote = sizeof(char);
 	new = NULL;
-	if (*ptr == '$')
-		ptr++;
+/* 	if (*ptr == '$')
+		ptr++; */
 	start = ptr + quote;
 	if (ft_strlen(ptr) == quote + quote)
 		new = ft_strdup("");
