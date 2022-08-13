@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:13:37 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/13 20:11:11 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/13 21:42:08 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*expand(char *token, t_sh *sh)
 				to_add = expand_quotes_increment_tok(&token, sh);
 			if (to_add)
 			{
-				printf("to_add = %s\n", to_add);
+//				printf("to_add = %s\n", to_add);
 				new_size += ft_strlen(to_add);
 				ret = ft_realloc_str(ret, new_size + 1);
 				ft_strlcat(ret, to_add, new_size + 1);
