@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 16:22:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/13 20:47:34 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/13 23:04:00 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef enum e_bool
 {
 	SUCCESS = 0,
 	FAIL = 1
-}	t_bool;
+}	bool;
 
 typedef struct s_vector
 {
@@ -127,6 +127,7 @@ void		*ft_memmove(void *dst, const void *src, size_t len);
 void		*ft_memset(void *b, int c, size_t len);
 char		**ft_strarrayfreejoin(char ***prev, char ***to_join);
 char		*ft_strdup(const char *s1);
+void		ft_striteri(char *s, void (*f)(unsigned int, char *));
 char		*ft_strjoin(char const *s1, char const *s2);
 void		ft_strfdup(char **over, char *buff);
 void		ft_strfjoin(char **to_free, char *to_add);

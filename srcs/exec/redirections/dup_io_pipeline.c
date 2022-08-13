@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipeline_red.c                                     :+:      :+:    :+:   */
+/*   dup_io_pipeline.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 20:29:41 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/12 22:08:03 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/13 23:45:16 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "redir.h"
 
-static void	dup_output(t_cmd*cmd, int p[2])
+static void	dup_output(t_cmd *cmd, int p[2])
 {
-	if (cmd->redir_out > -1)
-		dup2_close_old(cmd->redir_out, STDOUT_FILENO);
+	if (cmd->redir_out.fd > -1)
+		dup2_close_old(cmd->redir_out.fd, STDOUT_FILENO);
 	else if (cmd->next)
 		dup2(p[1], STDOUT_FILENO);
 	close(p[1]);
@@ -23,18 +23,18 @@ static void	dup_output(t_cmd*cmd, int p[2])
 
 static void	dup_input(t_cmd *cmd, int fd_in)
 {
-	if (cmd->redir_in > -1)
-		dup2_close_old(cmd->redir_in, STDIN_FILENO);
+	if (cmd->redir_in.fd > -1)
+		dup2_close_old(cmd->redir_in.fd, STDIN_FILENO);
 	else if (fd_in)
 		dup2_close_old(fd_in, STDIN_FILENO);
 }
 
-void	pipeline_redir(t_sh *sh, t_cmd *cmd, int p[2], int fd_in)
+bool	dup_io_pipeline(t_sh *sh, t_cmd *cmd, int p[2], int fd_in)
 {
-	int	error;
+	bool	error;
 
 	error = 0;
-	if (cmd->access_error)
+	if (cmd->redir_error)
 		error = WRONG_REDIR;
 	else
 		error = open_redir(cmd);
@@ -45,4 +45,5 @@ void	pipeline_redir(t_sh *sh, t_cmd *cmd, int p[2], int fd_in)
 	}
 	dup_input(cmd, fd_in);
 	dup_output(cmd, p);
+	return (0);
 }

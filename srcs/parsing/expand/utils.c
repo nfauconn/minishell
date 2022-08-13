@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 19:35:30 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/13 21:42:14 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/13 21:59:00 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,6 @@ char	*expand_str_increment_tok(char **token, t_sh *sh)
 /* 	if (is_quote(**token))
 		expand_quotes_increment_tok(token, sh);
 	if (**token == '$')
-		expand */
+		expand_cmd */
 	return (str);
 }

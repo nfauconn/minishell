@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:48:38 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/27 22:06:19 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/13 23:48:25 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ static void	handle_redirection(t_sh *sh, t_cmd *cmd)
 {
 	if (sh->cmd_nb > 1)
 	{
-		cmd->redir_in = STDIN_FILENO;
-		cmd->redir_out = STDOUT_FILENO;
+		cmd->redir_in.fd = STDIN_FILENO;
+		cmd->redir_out.fd = STDOUT_FILENO;
 	}
 }
 
@@ -58,12 +58,12 @@ int	mini_echo(t_sh *sh, t_cmd *cmd)
 	handle_redirection(sh, cmd);
 	while (args[j])
 	{
-		ft_putstr_fd(args[j], cmd->redir_out);
+		ft_putstr_fd(args[j], cmd->redir_out.fd);
 		if (args[j + 1])
-			ft_putstr_fd(" ", cmd->redir_out);
+			ft_putstr_fd(" ", cmd->redir_out.fd);
 		++j;
 	}
 	if (nl_flag)
-		ft_putstr_fd("\n", cmd->redir_out);
+		ft_putstr_fd("\n", cmd->redir_out.fd);
 	return (0);
 }

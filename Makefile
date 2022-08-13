@@ -2,11 +2,17 @@ TARGET = minishell
 
 INC_DIR = ./includes
 SRC_DIR  = ./srcs
-BUILTINS = builtins/
+
 EXEC = exec/
+BUILTINS = builtins/
 REDIR = redirections/
+
 PARSING = parsing/
+CMD_BUILD = cmd_build/
 COMPAR_UTILS = compar_utils/
+EXPAND = expand/
+TOKENIZER = tokenizer/
+
 BUILD_DIR  = ./objs
 
 LIBFT_DIR = ./libft
@@ -32,30 +38,52 @@ SRCS := ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		signals \
 		${addprefix ${PARSING}, \
 		parse \
-		tokenize \
-		tokenize_utils \
 		lexer \
-		cmd_list_build \
+		${addprefix ${TOKENIZER}, \
+		tokenize \
+		utils} \
+		${addprefix ${CMD_BUILD}, \
+		list \
+		cmd \
 		cmd_init \
-		cmd_args_redir \
-		cmd_args_redir_utils \
-		expand \
-		expand_utils \
-		expand_quotes \
-		expand_string \
-		expand_var \
+		args_redir \
+		args_redir_utils} \
+		${addprefix ${EXPAND}, \
+		cmd \
+		quotes \
+		string \
+		var \
+		utils} \
+		${addprefix ${REDIR}, \
+		check \
+		heredoc_set \
+		heredoc_run \
+		set} \
 		${addprefix ${COMPAR_UTILS}, \
 		builtins \
 		files \
 		metachars}} \
-		${addprefix ${REDIR}, \
-		set_redir \
-		ambiguous_redir \
-		heredoc_set \
-		heredoc_run \
-		check_access} \
 		${addprefix ${EXEC}, \
-		wait}}}
+		cmd_execve \
+		cmd_path \
+		launch \
+		launch_builtin \
+		launch_pipeline \
+		launch_single \
+		wait \
+		${addprefix ${REDIR}, \
+		dup_io_pipeline \
+		dup_io_singlecmd \
+		open \
+		utils} \
+		${addprefix ${BUILTINS}, \
+		cd \
+		echo \
+		env \
+		exit \
+		export \
+		pwd \
+		unset}}}}
 
 DEPS := ${subst ${SRC_DIR}, ${BUILD_DIR}, ${SRCS:%.c=%.d}}
 OBJS := ${subst ${SRC_DIR}, ${BUILD_DIR}, ${SRCS:%.c=%.o}}
@@ -68,12 +96,12 @@ LD_FLAGS = -L ${LIBFT_DIR} -ltinfo -lreadline
 COMP = ${CC} ${CFLAGS}
 RM	 = rm -rf
 
-all: ${LIBFT} ${TARGET}
+all: libftcreat ${TARGET}
 
-${LIBFT}:
-	@make -C ${LIBFT_DIR}
+libftcreat:
+	@make -sC ${LIBFT_DIR}
 
-${TARGET}: ${OBJS} ${LIBFT} #Makefile
+${TARGET}: ${OBJS} ${LIBFT} Makefile
 	@${COMP} ${LD_FLAGS} ${OBJS} -o ${TARGET} -lft
 	@echo "${TARGET} created"
 
@@ -97,4 +125,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re libftcreat

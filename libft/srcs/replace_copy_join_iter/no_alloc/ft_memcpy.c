@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 16:35:16 by nfauconn          #+#    #+#             */
-/*   Updated: 2021/08/18 12:22:05 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/13 23:17:07 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	unsigned char		*dest;
 	const unsigned char	*source;
 
-	if (dst == NULL && src == NULL)
+	if (!dst && !src)
 		return (NULL);
 	dest = (unsigned char *)dst;
 	source = (const unsigned char *)src;

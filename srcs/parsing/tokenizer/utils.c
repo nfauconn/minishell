@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenizer_utils.c                                  :+:      :+:    :+:   */
+/*   tokenize_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 19:57:56 by user42            #+#    #+#             */
-/*   Updated: 2022/08/06 21:43:45 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/13 22:32:57 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-t_bool	go_through_same_char(char **s)
+bool	go_through_same_char(char **s)
 {
 	int	c;
 
@@ -27,7 +27,7 @@ t_bool	go_through_same_char(char **s)
 	return (0);
 }
 
-t_bool	tokenize_redir(char **s)
+bool	tokenize_redir(char **s)
 {
 	while (is_operator(**s))
 		(*s)++;
@@ -44,7 +44,7 @@ t_bool	tokenize_redir(char **s)
 	return (0);
 }
 
-t_bool	check_closing_quote(char **s, char quote)
+bool	check_closing_quote(char **s, char quote)
 {
 	while (**s)
 		if (*(++(*s)) == quote)

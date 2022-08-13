@@ -6,13 +6,13 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 18:19:59 by user42            #+#    #+#             */
-/*   Updated: 2022/08/12 19:53:39 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/13 23:46:23 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "redir.h"
 
-static int	open_redir_out(t_cmd *cmd)
+static bool	open_redir_out(t_cmd *cmd)
 {
 	if (cmd->redir_out.is_append)
 		cmd->redir_out.fd = open(cmd->redir_out.filename, \
@@ -28,7 +28,7 @@ static int	open_redir_out(t_cmd *cmd)
 	return (0);
 }
 
-static int	open_redir_in(t_cmd *cmd)
+static bool	open_redir_in(t_cmd *cmd)
 {
 	cmd->redir_in.fd = open(cmd->redir_in.filename, O_RDONLY);
 	if (cmd->redir_in.fd < 0)
@@ -39,12 +39,11 @@ static int	open_redir_in(t_cmd *cmd)
 	return (0);
 }
 
-int	open_redir(t_cmd *cmd)
+bool	open_redir(t_cmd *cmd)
 {
-	errno = 0;
 	cmd->redir_in.fd = NO_REDIR;
 	cmd->redir_out.fd = NO_REDIR;
-	if (cmd->access_error)
+	if (cmd->redir_error)
 		return (1);
 	if (cmd->redir_in.filename && open_redir_in(cmd) == FAIL)
 		return (1);

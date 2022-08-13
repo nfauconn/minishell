@@ -21,7 +21,7 @@ static int	no_args(t_cmd *cmd)
 	return (0);
 }
 
-static t_bool	not_executable_in_pipeline(t_cmd *cmd, char built_i)
+static bool	not_executable_in_pipeline(t_cmd *cmd, char built_i)
 {
 	if ((built_i == cd || (built_i == export && !no_args(cmd))
 		|| built_i == unset))
@@ -47,9 +47,9 @@ void	launch_single_builtin(t_sh *sh, t_cmd *cmd)
 		g_last_status = WRONG_REDIR;
 		return ;
 	}
-	if (cmd->redir_in == NO_REDIR)
-		cmd->redir_in = STDIN_FILENO;
-	if (cmd->redir_out == NO_REDIR)
-		cmd->redir_out = STDOUT_FILENO;
+	if (cmd->redir_in.fd == NO_REDIR)
+		cmd->redir_in.fd = STDIN_FILENO;
+	if (cmd->redir_out.fd == NO_REDIR)
+		cmd->redir_out.fd = STDOUT_FILENO;
 	g_last_status = sh->exec_built[cmd->built_i](sh, cmd);
 }

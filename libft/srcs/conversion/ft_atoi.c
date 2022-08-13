@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 16:07:02 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/09 18:10:31 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/13 22:48:26 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	ft_atoi(const char *s)
 		nbr = (nbr * 10) + (*s - '0');
 		s++;
 	}
-	if (nbr == 2147483648 && sign == -1)
-		return (-2147483648);
+	if (nbr > 9223372036854775807)
+		return ((-1) * sign);
 	return ((int)(nbr * sign));
 }

@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_access.c                                     :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/23 00:57:11 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/12 15:20:58 by noe              ###   ########.fr       */
+/*   Created: 2022/08/07 01:10:45 by nfauconn          #+#    #+#             */
+/*   Updated: 2022/08/13 23:03:37 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "redir.h"
+#include "libft.h"
 
-t_bool	check_access(char *filename, int flag)
+void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 {
-	if (access(filename, flag) < 0)
+	unsigned int	i;
+
+	if (!s)
+		return ;
+	i = 0;
+	while (*s)
 	{
-		error_display(filename, strerror(errno), 0);
-		return (1);
+		f(i, s);
+		i++;
+		s++;
 	}
-	return (0);
 }

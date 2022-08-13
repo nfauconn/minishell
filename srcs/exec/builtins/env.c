@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:53:16 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/24 14:32:39 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/08/13 23:49:48 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ int	mini_env(t_sh *sh, t_cmd *cmd)
 		return (1);
 	}
 	l = sh->env;
-	if (cmd->redir_out == REDIR_FAIL)
-		return (WRONG_REDIR);
-	if (cmd->redir_out == NO_REDIR)
-		cmd->redir_out = STDIN_FILENO;
+	if (cmd->redir_error)
+		return (1);
+	if (cmd->redir_out.fd == NO_REDIR)
+		cmd->redir_out.fd = STDIN_FILENO;
 	while (l)
 	{
 		if (ft_strchr((char *)l->content, '='))

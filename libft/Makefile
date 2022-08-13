@@ -106,6 +106,7 @@ SRCS := ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		ft_memcpy \
 		ft_memmove \
 		ft_memset \
+		ft_striteri \
 		ft_strlcat \
 		ft_strlcpy \
 		ft_tolower \

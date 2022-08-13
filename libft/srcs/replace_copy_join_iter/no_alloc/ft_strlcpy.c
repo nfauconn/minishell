@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 14:08:15 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/24 17:34:52 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/13 23:07:00 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 	i = 0;
 	if (dst && dstsize)
 	{
-		while (src[i] && i < dstsize - 1)
+		while (i < dstsize - 1 && src[i])
 		{
 			dst[i] = src[i];
 			i++;

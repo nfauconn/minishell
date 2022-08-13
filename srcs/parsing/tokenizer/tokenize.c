@@ -12,7 +12,7 @@
 
 #include "parse.h"
 
-static t_bool	find_end(char **s)
+static bool	find_end(char **s)
 {
 	if (is_sep_operator(**s))
 		return (go_through_same_char(s));
@@ -34,7 +34,7 @@ static char	*find_start(char **s)
 	return (*s);
 }
 
-t_bool	tokenize(t_input *input)
+bool	tokenize(t_input *input)
 {
 	char	*line;
 	char	*start;

@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 15:27:40 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/13 20:53:30 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/13 23:06:42 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 	size_t	j;
 	size_t	dst_len;
 
-	if (!dst || !src)
+	if (!dst && !src)
 		return (0);
 	dst_len = ft_strlen(dst);
 	if (dstsize <= dst_len)
@@ -26,7 +26,9 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 	i = 0;
 	j = dst_len;
 	while (src[i] && j < dstsize - 1)
+	{
 		dst[j++] = src[i++];
+	}
 	dst[j] = '\0';
 	return (dst_len + ft_strlen(src));
 }

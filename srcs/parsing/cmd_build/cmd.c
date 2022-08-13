@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exitclear.c                                        :+:      :+:    :+:   */
+/*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/28 08:14:07 by user42            #+#    #+#             */
-/*   Updated: 2022/07/28 20:25:44 by nfauconn         ###   ########.fr       */
+/*   Created: 2022/08/14 00:25:15 by nfauconn          #+#    #+#             */
+/*   Updated: 2022/08/14 00:40:09 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "clearexit.h"
+#include "parse.h"
 
-/* void	exit_subprocess(t_sh *sh, unsigned char exit_code)
-{
-//	(void)sh;
-	clear_cmd_list(sh->cmd_list);
-	reset_sh(sh);
-	exit(exit_code);
-} */
-
-void	exit_clear_process(t_sh *sh, unsigned char exit_code)
+t_cmd	*build_cmd(t_sh *sh, t_list *token, size_t i)
 {
 	(void)sh;
+	t_cmd	*cmd;
 
-	ft_printerror("exit\n");
-	reset_sh(sh);
-	exit(exit_code);
+	cmd = cmd_init();
+	if (!cmd)
+		return (NULL);
+	if (get_args_and_redir(sh, token, cmd))
+		return (NULL);
+	else
+		cmd->name = cmd->args[0];
+	cmd->built_i = is_builtin(cmd->name);
+	cmd->index = i;
+	return (cmd);
 }

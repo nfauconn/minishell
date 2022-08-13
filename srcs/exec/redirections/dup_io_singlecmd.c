@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   single_red.c                                       :+:      :+:    :+:   */
+/*   dup_io_singlecmd.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 20:40:54 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/12 22:09:00 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/13 23:33:36 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "redir.h"
 
-t_bool	single_cmd_redir(t_cmd *cmd)
+bool	dup_io_singlecmd(t_cmd *cmd)
 {
 	int	error;
 
 	error = 0;
-	if (cmd->access_error)
+	if (cmd->redir_error)
 		error = WRONG_REDIR;
 	else
 		error = open_redir(cmd);

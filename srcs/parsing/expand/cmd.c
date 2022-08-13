@@ -6,13 +6,13 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:13:37 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/13 21:42:08 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/13 21:59:15 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-char	*expand(char *token, t_sh *sh)
+char	*expand_cmd(char *token, t_sh *sh)
 {
 	char	*start;
 	char	*to_add;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 17:53:30 by nfauconn          #+#    #+#             */
-/*   Updated: 2021/09/08 10:47:29 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/13 23:15:07 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,20 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 {
 	char	*dest;
 	char	*source;
-	char	*lastd;
-	char	*lasts;
 
-	if (dst == NULL && src == NULL)
+	if (!dst && !src)
 		return (NULL);
 	dest = (char *)dst;
 	source = (char *)src;
 	if (dest < source)
-	{
 		while (len--)
 			*dest++ = *source++;
-	}
 	else
 	{
-		lastd = dest + (len - 1);
-		lasts = source + (len - 1);
+		dest += len - 1;
+		source += len - 1;
 		while (len--)
-			*lastd-- = *lasts--;
+			*dest-- = *source--;
 	}
 	return (dst);
 }

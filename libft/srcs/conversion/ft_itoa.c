@@ -3,55 +3,58 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 17:01:03 by nfauconn          #+#    #+#             */
-/*   Updated: 2021/09/08 15:01:05 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/13 22:54:06 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char	*negative_case(int num, char *str, int i, int count)
+static int	nb_len(long n)
 {
-	int	neg;
+	int	i;
 
-	str[0] = '-';
-	neg = -num;
-	while (neg > 0)
+	i = 0;
+	if (n == 0)
+		return (1);
+	if (n < 0)
 	{
-		str[i] = '0' + (neg % 10);
-		neg = neg / 10;
-		i--;
+		n = -n;
+		i++;
 	}
-	str[count] = '\0';
-	return (str);
+	while (n > 0)
+	{
+		n = n / 10;
+		i++;
+	}
+	return (i);
 }
 
-char	*ft_itoa(int num)
+char	*ft_itoa(int n)
 {
-	char	*str;
-	int		count;
-	int		i;
+	char	*nombre;
+	int		len;
+	long	nb;
 
-	count = ft_nbrlen_base(num, 10);
-	str = (char *)malloc((count + 1) * sizeof (char));
-	if (!str)
+	nb = (long)n;
+	len = nb_len(nb);
+	nombre = (char *)malloc(sizeof(char) * (len + 1));
+	if (!nombre)
 		return (NULL);
-	i = count - 1;
-	if (num == 0)
-		str[0] = '0';
-	if (num < 0)
-		return (negative_case(num, str, i, count));
-	else
+	nombre[len--] = '\0';
+	if (nb == 0)
+		nombre[len] = '0';
+	if (nb < 0)
 	{
-		while (num > 0)
-		{
-			str[i] = '0' + (num % 10);
-			num = num / 10;
-			i--;
-		}
+		nombre[0] = '-';
+		nb = -nb;
 	}
-	str[count] = '\0';
-	return (str);
+	while (nb > 0)
+	{
+		nombre[len--] = nb % 10 + '0';
+		nb = nb / 10;
+	}
+	return (nombre);
 }

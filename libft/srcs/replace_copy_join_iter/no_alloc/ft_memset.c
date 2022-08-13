@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 11:55:17 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/24 17:33:20 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/13 23:00:57 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,15 @@
 
 void	*ft_memset(void *b, int c, size_t len)
 {
-	unsigned char	*mem;
+	size_t			i;
+	unsigned char	*b1;
 
-	mem = (unsigned char *)b;
-	while (len--)
-		*mem++ = (unsigned char)c;
+	i = 0;
+	b1 = (unsigned char *)b;
+	while (i < len)
+	{
+		b1[i] = (unsigned char)c;
+		i++;
+	}
 	return (b);
 }

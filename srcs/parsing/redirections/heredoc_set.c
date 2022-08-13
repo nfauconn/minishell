@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_set.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 22:24:41 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/13 17:50:16 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/08/13 22:32:57 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,10 @@ static char	*get_heredoc_delim(char *token)
 	return (delim);
 }
 
-t_bool	heredoc_set(t_sh *sh, t_cmd *cmd, char *token)
+bool	heredoc_set(t_sh *sh, t_cmd *cmd, char *token)
 {
 	char	*delim;
-	t_bool	ret;
+	bool	ret;
 
 	ret = 0;
 	if (cmd->redir_in.filename)

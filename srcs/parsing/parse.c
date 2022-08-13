@@ -6,13 +6,13 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 12:50:49 by user42            #+#    #+#             */
-/*   Updated: 2022/08/12 19:48:37 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/14 01:15:01 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-t_bool	parse(t_sh *sh, t_input *input)
+bool	parse(t_sh *sh, t_input *input)
 {
 	if (!*(input->line_read))
 		return (1);
@@ -50,13 +50,20 @@ t_bool	parse(t_sh *sh, t_input *input)
 		i = 0;
 		while (tmp->args && tmp->args[i])
 		{
-			printf("%s", tmp->args[i++]);
+			printf("[%s]", tmp->args[i++]);
 			printf(" ");
 		}
 		printf("\n");
-		printf("cmd->redir_in.filename = %s | ", tmp->redir_in.filename);
-		printf("cmd->redir_in.is_heredoc = %d\n", tmp->redir_in.is_heredoc);
-		printf("\n");
+		printf("\tredir_error = %d\n", tmp->redir_error);
+		if (!tmp->redir_error)
+		{
+			printf("\tredir_in.filename = %s  | ", tmp->redir_in.filename);
+			printf("redir_in.is_heredoc = %d | ", tmp->redir_in.is_heredoc);
+			printf("redir_in.quoted_delim = %d\n", tmp->redir_in.quoted_delim);
+			printf("\tredir_out.filename = %s | ", tmp->redir_out.filename);
+			printf("redir_out.is_append = %d\n", tmp->redir_out.is_append);
+			printf("\n");
+		}
 		tmp = tmp->next;
 	}
 	//end of print

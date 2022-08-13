@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 13:07:05 by user42            #+#    #+#             */
-/*   Updated: 2022/08/12 22:35:42 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/13 23:32:55 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	child_job(t_sh *sh, t_cmd *cmd, int p[2], int fd_in)
 		close(p[1]);
 		exit_clear_child(sh, g_last_status);
 	}
-	pipeline_redir(sh, cmd, p, fd_in);
+	dup_io_pipeline(sh, cmd, p, fd_in);
 	if (cmd->built_i > -1)
 		launch_forked_builtin(sh, cmd);
 	else

@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 19:35:18 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/13 20:06:36 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/13 22:32:57 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*expand_quotes(char *ptr, t_sh *sh)
 {
-//	t_bool	quote;
+//	bool	quote;
 //	char	*start;
 	char	*new;
 //	char	*tmp;

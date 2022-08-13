@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_init.c                                         :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 22:52:27 by user42            #+#    #+#             */
-/*   Updated: 2022/08/12 11:38:14 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/14 00:26:30 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,12 @@ static t_redir	init_redir(void)
 {
 	t_redir	new;
 
-/* 	new = (t_redir *)malloc(sizeof(t_redir));
-	if (!new)
-		return (NULL); */
 	new.filename = NULL;
 	new.delim = NULL;
 	new.fd = 0;
 	new.is_heredoc = 0;
 	new.quoted_delim = 0;
 	new.is_append = 0;
-//	new.is_ambig = 0;
 	return (new);
 }
 

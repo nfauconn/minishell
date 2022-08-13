@@ -6,7 +6,7 @@ size_t	arg_len(char *s)
 	char	quote;
 
 	i = 0;
-	while (s && s[i] && !is_operator(s[i]))
+	while (s && s[i])
 	{
 		if (is_quote(s[i]))
 		{
@@ -14,10 +14,12 @@ size_t	arg_len(char *s)
 			i++;
 			while (s[i] != quote)
 				i++;
+			i++;
 		}
-		if (is_blank(s[i]))
+		else if (is_blank(s[i]))
 			return (i);
-		i++;
+		else
+			i++;
 	}
 	return (i);
 }
@@ -41,16 +43,17 @@ size_t	get_args_nb(t_list *token)
 			{
 				if (is_quote(content[i]))
 				{
-					quote = content[i];
-					i++;
+					quote = content[i++];
 					while (content[i] != quote)
 						i++;
+					i++;
 				}
-				if (is_blank(content[i]))
+				else if (is_blank(content[i]))
 				{
-					count++;
 					while (is_blank(content[i]))
 						i++;
+					if (content[i])
+						count++;
 				}
 				else
 					i++;

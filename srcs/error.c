@@ -6,25 +6,25 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 18:49:09 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/11 22:11:33 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/13 22:32:57 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_bool	sh_perror(char *s)
+bool	sh_perror(char *s)
 {
 	ft_printerror("minish: %s\n", s);
 	return (1);	
 }
 
-t_bool	lex_perror(char *s)
+bool	lex_perror(char *s)
 {
 	ft_printerror("minish: syntax error near unexpected token `%s'\n", s);
 	return (1);
 }
 
-t_bool	error_display(char *s1, char *s2, char *s3)
+bool	error_display(char *s1, char *s2, char *s3)
 {
 	ft_printerror("minish: %s: %s%s\n", s1, s2, s3);
 	return (1);

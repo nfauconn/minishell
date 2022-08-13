@@ -5,30 +5,29 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/01 09:20:44 by mdankou           #+#    #+#             */
-/*   Updated: 2022/08/05 15:31:20 by nfauconn         ###   ########.fr       */
+/*   Created: 2022/08/13 22:54:36 by nfauconn          #+#    #+#             */
+/*   Updated: 2022/08/13 22:57:15 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
 
 void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	t_list	*curr;
+	t_list	*tmp;
 	t_list	*next;
 
-	curr = *lst;
-	if (curr)
-		next = curr->next;
-	while (curr)
+	tmp = *lst;
+	if (tmp)
+		next = tmp->next;
+	while (tmp)
 	{
-		if (curr->content)
-			del(curr->content);
-		free(curr);
-		curr = next;
-		if (curr)
-			next = curr->next;
+		if (tmp->content)
+			del(tmp->content);
+		free(tmp);
+		tmp = next;
+		if (tmp)
+			next = tmp->next;
 	}
 	*lst = NULL;
 }
