@@ -6,7 +6,7 @@
 /*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 20:28:23 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/13 00:37:35 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/08/13 18:00:45 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,6 @@ static t_bool	set_redir_outfile(t_sh *sh, t_cmd *cmd, char *token)
 
 static t_bool	set_redir_heredoc(t_sh *sh, t_cmd *cmd, char *token)
 {
-	/*
-	char	*tmp;
-	char	*start;
-	char	quote;
-	size_t	new_size;
-	char	*ret;
-	*/
 	if (cmd->redir_in.filename)
 	{
 		if (cmd->redir_in.is_heredoc)
@@ -72,26 +65,6 @@ static t_bool	set_redir_heredoc(t_sh *sh, t_cmd *cmd, char *token)
 		cmd->redir_in.quoted_delim = 1;
 	else
 		cmd->redir_in.quoted_delim = 0;
-	/*
-	new_size = 0;
-	ret = NULL;
-	tmp = token;
-	while (*tmp)
-	{
-		if (is_quote(*tmp))
-		{
-			quote = *tmp;
-			start = ++tmp;
-		}	
-		while (*tmp && tmp != quote)
-			token++;
-		new_size += token - start;
-		ret = ft_realloc_str(ret, new_size);
-		ft_strlcat(ret, start, new_size + 1);
-		if (tmp == quote)
-			++tmp;
-	}
-	*/
 	return (heredoc_set(sh, cmd, token));
 }
 

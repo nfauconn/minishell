@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_set.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 22:24:41 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/11 21:18:31 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/13 17:50:16 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,30 @@ static char	*get_heredoc_path(int heredoc_nb)
 
 static char	*get_heredoc_delim(char *token)
 {
+	char	*start;
+	char	quote;
+	size_t	new_size;
 	char	*delim;
 
-	while (is_rediroperator(*token))
-		token++;
-	while (is_blank(*token))
-		token++;
-	delim = ft_strdup(token);
+	new_size = 0;
+	quote = 0;
+	delim = NULL;
+	while (*token)
+	{
+		start = token;
+		while (*token &&
+			!((!quote && is_quote(*token)) || (quote && quote == *token)))
+			token++;
+		if (!quote && is_quote(*token))
+			quote = *token;
+		else if (quote && quote == *token)
+			quote = 0;
+		new_size += token - start;
+		delim = ft_realloc_str(delim, new_size);
+		ft_strlcat(delim, start, new_size + 1);
+		if (is_quote(*token))
+			start = ++token;
+	}
 	return (delim);
 }
 
