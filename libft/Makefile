@@ -52,7 +52,7 @@ SRCS := ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		ft_putendl_fd \
 		ft_putnbr_fd \
 		ft_putstr_fd \
-		ft_str_array_display \
+		ft_printstrarray \
 		${addprefix ${FT_PRINTF}/, \
 		pf_conv_c \
 		pf_conv_s \
@@ -86,12 +86,11 @@ SRCS := ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		ft_calloc \
 		ft_memalloc \
 		ft_memdel \
-		ft_realloc_str \
+		ft_reallocstr \
 		ft_replacefree \
 		ft_strarrayclear \
 		ft_strdel} \
 		${addprefix ${REPLACE_WITH_ALLOC}/, \
-		ft_strarrayfreejoin \
 		ft_strdup \
 		ft_strfdup \
 		ft_strjoin \

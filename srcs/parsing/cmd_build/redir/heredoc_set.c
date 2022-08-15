@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_set.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 22:24:41 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/13 22:32:57 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/15 18:14:39 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static char	*get_heredoc_delim(char *token)
 		else if (quote && quote == *token)
 			quote = 0;
 		new_size += token - start;
-		delim = ft_realloc_str(delim, new_size);
+		delim = ft_reallocstr(delim, new_size);
 		ft_strlcat(delim, start, new_size + 1);
 		if (is_quote(*token))
 			start = ++token;

@@ -16,7 +16,7 @@ static bool	find_end(char **s)
 {
 	if (is_sep_operator(**s))
 		return (go_through_same_char(s));
-	if (is_rediroperator(**s))
+	if (is_redir(**s))
 		return (tokenize_redir(s));
 	while (**s && !is_operator(**s))
 	{

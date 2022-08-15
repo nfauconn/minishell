@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_run.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 12:37:34 by user42            #+#    #+#             */
-/*   Updated: 2022/08/13 22:32:57 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/16 00:19:31 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	putstr_heredoc(t_sh *sh, char **line, int fd, bool quoted)
 	char	*new_line;
 
 	if (!quoted)
-		ft_replacefree((void **)line, expand_string(*line, sh));
+		ft_replacefree((void **)line, expand_str(*line, ft_strlen(*line), sh));
 	ft_putendl_fd(*line, fd);
 	sh->line_nb++;
 	new_line = readline("> ");
@@ -48,7 +48,7 @@ static void	heredoc_job(t_sh *sh, char *hdoc_path, char *delim, bool quoted)
 	line = readline("> ");
 	if (sh->heredoc_nb > 1)
 		sh->line_nb++;
-	while (line && (line[0] == '\n' || ft_strcmp(line, delim)) != SUCCESS)
+	while (line && (line[0] == '\n' || ft_strcmp(line, delim)) != OK)
 		putstr_heredoc(sh, &line, fd, quoted);
 	if (!line)
 		display_warning(sh, delim);

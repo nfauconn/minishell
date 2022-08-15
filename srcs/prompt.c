@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 23:20:58 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/12 19:56:40 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/15 22:34:17 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ char	*build_prompt(void)
 	char	*prompt;
 	char	*cwd;
 
-	prompt = ft_strdup("🐱 MINISH 🐱: ");
+	prompt = ft_strdup(B_GREEN "🐱 MINISH 🐱:"B_MAGENTA);
 	cwd = getcwd(NULL, 0);
 	ft_strfjoin(&prompt, cwd);
 	free(cwd);
-	ft_strfjoin(&prompt, "> ");
+	ft_strfjoin(&prompt, NEUTRAL"$ ");
 	return (prompt);
 }

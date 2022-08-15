@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 11:36:22 by user42            #+#    #+#             */
-/*   Updated: 2022/08/13 22:32:57 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/16 00:19:44 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ static bool	lex_redir(char *content)
 		content++;
 	if (*content == '|')
 		return (lex_perror("|"));
-	else if (is_rediroperator(*content))
+	else if (is_redir(*content))
 	{
-		if (check_nb_sign(&content, (int)*content) == SUCCESS)
+		if (check_nb_sign(&content, (int)*content) == OK)
 		{
 			content--;
 			if (*content == '>')
@@ -66,7 +66,7 @@ static bool	tok_lexer(char *content, int type)
 	}
 	if (!*content)
 		return (0);
-	else if (is_rediroperator(type) && lex_redir(content) == FAIL)
+	else if (is_redir(type) && lex_redir(content) == FAIL)
 		return (1);
 	return (0);
 }
@@ -77,7 +77,7 @@ bool	lexer(t_list *token)
 		return (lex_perror("|"));
 	while (token)
 	{
-		if (tok_lexer((char *)token->content, token->type) == SUCCESS)
+		if (tok_lexer((char *)token->content, token->type) == OK)
 		{
 			if (token->type == '|' && !token->next)
 				return (sh_perror("does not handle ending pipe"));			

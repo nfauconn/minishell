@@ -5,12 +5,11 @@ SRC_DIR  = ./srcs
 
 EXEC = exec/
 BUILTINS = builtins/
-REDIR = redirections/
+REDIR = redir/
 
 PARSING = parsing/
 CMD_BUILD = cmd_build/
 COMPAR_UTILS = compar_utils/
-EXPAND = expand/
 TOKENIZER = tokenizer/
 
 BUILD_DIR  = ./objs
@@ -19,14 +18,9 @@ LIBFT_DIR = ./libft
 LIBFT_INC_DIR = ./libft/includes
 LIBFT = ./libft/libft.a
 
-L_EXT = .a
-H_EXT = .h
 S_EXT = .c
 
-LIBS := ${addsuffix ${L_EXT}, ${addprefix ${LIBFT_DIR}, \
-		libft}}
-
-SRCS := ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
+SRCS = ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		main \
 		clear \
 		error \
@@ -39,26 +33,20 @@ SRCS := ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		${addprefix ${PARSING}, \
 		parse \
 		lexer \
+		expand \
 		${addprefix ${TOKENIZER}, \
 		tokenize \
 		utils} \
 		${addprefix ${CMD_BUILD}, \
-		list \
-		cmd \
-		cmd_init \
-		args_redir \
-		args_redir_utils} \
-		${addprefix ${EXPAND}, \
-		cmd \
-		quotes \
-		string \
-		var \
-		utils} \
+		build_list \
+		build_cmd \
+		params \
+		params_utils \
 		${addprefix ${REDIR}, \
-		check \
+		redir_set \
 		heredoc_set \
 		heredoc_run \
-		set} \
+		redir_check}} \
 		${addprefix ${COMPAR_UTILS}, \
 		builtins \
 		files \
@@ -85,8 +73,8 @@ SRCS := ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		pwd \
 		unset}}}}
 
-DEPS := ${subst ${SRC_DIR}, ${BUILD_DIR}, ${SRCS:%.c=%.d}}
-OBJS := ${subst ${SRC_DIR}, ${BUILD_DIR}, ${SRCS:%.c=%.o}}
+DEPS = ${subst ${SRC_DIR}, ${BUILD_DIR}, ${SRCS:%.c=%.d}}
+OBJS = ${subst ${SRC_DIR}, ${BUILD_DIR}, ${SRCS:%.c=%.o}}
 VPATH = ${SRC_DIR}:${INC_DIR}:${BUILD_DIR}
 
 CC = clang

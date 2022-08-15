@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_redir.c                                        :+:      :+:    :+:   */
+/*   redir_set.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 20:28:23 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/13 23:37:30 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/15 02:26:44 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static bool	set_redir_append(t_sh *sh, t_cmd *cmd, char *token)
 {
 	if (cmd->redir_out.filename)
 		ft_strdel(&cmd->redir_out.filename);
-	while (is_rediroperator(*token))
+	while (is_redir(*token))
 		token++;
 	while (is_blank(*token))
 		token++;
@@ -26,7 +26,7 @@ static bool	set_redir_append(t_sh *sh, t_cmd *cmd, char *token)
 		error_display(token, "ambiguous redirect", 0);
 		return (1);
 	}
-	cmd->redir_out.filename = expand_cmd(token, sh);
+	cmd->redir_out.filename = expand(token, sh);
 	return (0);
 }
 
@@ -34,7 +34,7 @@ static bool	set_redir_outfile(t_sh *sh, t_cmd *cmd, char *token)
 {
 	if (cmd->redir_out.filename)
 		ft_strdel(&cmd->redir_out.filename);
-	while (is_rediroperator(*token))
+	while (is_redir(*token))
 		token++;
 	while (is_blank(*token))
 		token++;
@@ -44,7 +44,7 @@ static bool	set_redir_outfile(t_sh *sh, t_cmd *cmd, char *token)
 		error_display(token, "ambiguous redirect", 0);
 		return (1);
 	}
-	cmd->redir_out.filename = expand_cmd(token, sh);
+	cmd->redir_out.filename = expand(token, sh);
 	return (0);
 }
 
@@ -56,7 +56,7 @@ static bool	set_redir_heredoc(t_sh *sh, t_cmd *cmd, char *token)
 			unlink(cmd->redir_in.filename);
 		ft_strdel(&cmd->redir_in.filename);
 	}
-	while (is_rediroperator(*token))
+	while (is_redir(*token))
 		token++;
 	while (is_blank(*token))
 		token++;
@@ -76,7 +76,7 @@ static bool	set_redir_infile(t_sh *sh, t_cmd *cmd, char *token)
 			unlink(cmd->redir_in.filename);
 		ft_strdel(&cmd->redir_in.filename);
 	}
-	while (is_rediroperator(*token))
+	while (is_redir(*token))
 		token++;
 	while (is_blank(*token))
 		token++;
@@ -86,11 +86,11 @@ static bool	set_redir_infile(t_sh *sh, t_cmd *cmd, char *token)
 		error_display(token, "ambiguous redirect", 0);
 		return (1);
 	}
-	cmd->redir_in.filename = expand_cmd(token, sh);
+	cmd->redir_in.filename = expand(token, sh);
 	return(check_access(cmd->redir_in.filename, F_OK | R_OK));
 }
 
-bool	set_redirections(t_sh *sh, t_cmd *cmd, char *token)
+bool	set_redir(t_sh *sh, t_cmd *cmd, char *token)
 {
 	bool	ret;
 

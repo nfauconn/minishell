@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 16:22:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/13 23:04:00 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/16 00:20:20 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <fcntl.h>
 # include <limits.h>
 # include <stdarg.h>
+# include <stdbool.h>
 # include <stddef.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -26,15 +27,10 @@
 
 # define BUFFER_SIZE 100
 # define FD_MAX 10240
+# define OK 0
+# define FAIL 1
 
-typedef unsigned int		t_uint;
-typedef unsigned long long	t_ull;
-
-typedef enum e_bool
-{
-	SUCCESS = 0,
-	FAIL = 1
-}	bool;
+typedef unsigned long long t_ull;
 
 typedef struct s_vector
 {
@@ -54,6 +50,19 @@ typedef struct s_double_vector
 	double	y;
 }	t_double_vector;
 
+typedef struct s_newstr
+{
+	char	*str;
+	size_t	len;
+}	t_newstr;
+
+typedef struct s_indexes
+{
+	size_t	start;
+	size_t	curr;
+}	t_indexes;
+
+
 typedef struct s_list
 {
 	void			*content;
@@ -68,6 +77,9 @@ int			ft_isalpha(int c);
 int			ft_isascii(int c);
 int			ft_isdigit(int c);
 int			ft_isprint(int c);
+int			is_blank(int c);
+int			is_identifier(int c);
+int			is_quote(int c);
 void		*ft_memchr(const void *s, int c, size_t n);
 int			ft_memcmp(const void *s1, const void *s2, size_t n);
 int			ft_str_isdigit(char *str);
@@ -77,9 +89,6 @@ int			ft_strend_cmp(char *name, char *end);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
 char		*ft_strnstr(const char *haystack, const char *needle, size_t len);
 char		*ft_strrchr(const char *s, int c);
-int			is_blank(int c);
-int			is_identifier(int c);
-int			is_quote(int c);
 
 /* CONVERSION */
 int			ft_atoi(const char *s);
@@ -94,7 +103,7 @@ void		ft_putchar_fd(char c, int fd);
 void		ft_putendl_fd(char *s, int fd);
 void		ft_putnbr_fd(int n, int fd);
 void		ft_putstr_fd(char *s, int fd);
-void		ft_str_array_display(char **tab);
+void		ft_printstrarray(char **tab);
 
 /* GNL */
 int			get_next_line(int fd, char **line);
@@ -114,7 +123,7 @@ int			ft_lstsize(t_list *lst);
 void		*ft_calloc(size_t count, size_t size);
 void		*ft_memalloc(size_t size);
 void		ft_memdel(void **ap);
-char		*ft_realloc_str(char *str, size_t newlen);
+char		*ft_reallocstr(char *str, size_t newlen);
 void		ft_replacefree(void **old, void *new);
 void		ft_strarrayclear(char ***tab);
 void		ft_strdel(char **as);
@@ -125,7 +134,6 @@ void		*ft_memccpy(void *dst, const void *src, int c, size_t n);
 void		*ft_memcpy(void *dst, const void *src, size_t n);
 void		*ft_memmove(void *dst, const void *src, size_t len);
 void		*ft_memset(void *b, int c, size_t len);
-char		**ft_strarrayfreejoin(char ***prev, char ***to_join);
 char		*ft_strdup(const char *s1);
 void		ft_striteri(char *s, void (*f)(unsigned int, char *));
 char		*ft_strjoin(char const *s1, char const *s2);

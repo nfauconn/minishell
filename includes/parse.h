@@ -34,7 +34,7 @@ void		skip_token(t_list **token, int to_skip);
 
 /* CHAR_COMPAR */
 bool		is_operator(char c);
-bool		is_rediroperator(char c);
+bool		is_redir(char c);
 bool		is_sep_operator(char c);
 bool		is_metachar(char c);
 
@@ -52,20 +52,16 @@ bool		lexer(t_list *tokens);
 bool		lex_perror(char *s);
 
 /* EXPAND */
-char		*expand_cmd(char *token, t_sh *sh);
-char		*expand_quotes(char *ptr, t_sh *sh);
-char		*expand_string(char *ptr, t_sh *sh);
-char		*expanded_content(char **s, t_sh *sh);
-char		*var_value(char *str, size_t len, t_list *env);
-char		*expand_str_increment_tok(char **token, t_sh *sh);
-char		*expand_quotes_increment_tok(char **token, t_sh *sh);
-char		*expand_doll_quotes_increment_tok(char **token, t_sh *sh);
+char		*expand(char *ptr, t_sh *sh);
+char		*expand_str(char *ptr, size_t len, t_sh *sh);
+char		*expand_var(char **s, t_sh *sh);
+char		*var_value(char *ptr, size_t len, t_list *env);
 
 /* CMD_LIST_BUILD */
 bool		build_cmd_lst(t_sh *sh, t_list *token);
 t_cmd		*build_cmd(t_sh *sh, t_list *token, size_t i);
 t_cmd		*cmd_init(void);
-bool		get_args_and_redir(t_sh *sh, t_list *token, t_cmd *cmd);
+bool		set_cmd_params(t_sh *sh, t_list *token, t_cmd *cmd);
 void		add_cmd_to_list(t_cmd **head, t_cmd *new);
 
 /* CMD_BUILD_UTILS */

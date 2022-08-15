@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_realloc_str.c                                   :+:      :+:    :+:   */
+/*   ft_reallocstr.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:09:55 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/14 01:23:28 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/16 00:53:09 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_realloc_str(char *str, size_t newlen)
+char	*ft_reallocstr(char *str, size_t newlen)
 {
 	char	*new_str;
 	size_t	oldlen;
@@ -28,10 +28,13 @@ char	*ft_realloc_str(char *str, size_t newlen)
 	if (oldlen)
 	{
 		ft_memcpy(new_str, str, oldlen + 1);
-		ft_bzero(new_str + oldlen, newlen - oldlen + 1);
+		ft_bzero(new_str + oldlen, newlen + 1 - oldlen + 1);
+		free(str);
 	}
 	else
+	{
 		ft_bzero(new_str, newlen + 1);
-	free(str);
+		free(str);
+	}
 	return (new_str);
 }

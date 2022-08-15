@@ -3,16 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 18:10:00 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/04 21:17:15 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/15 22:19:14 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#define MINISH_COLOR "\e[1;35m"
-#define DIRS_COLOR "\e[1;36m"
-#define INPUT_COLOR "\e[0m"
 
 #include "minishell.h"
 
