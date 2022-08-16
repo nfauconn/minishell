@@ -6,7 +6,7 @@
 /*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 16:20:06 by noe               #+#    #+#             */
-/*   Updated: 2022/08/16 16:25:04 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/16 17:17:15 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ char	*remove_quote(char *str)
 	while (*str)
 	{
 		start = str;
-		while (*str &&
-			!((!quote && is_quote(*str)) || (quote && *str == quote)))
+		while (*str
+			&& !((!quote && is_quote(*str)) || (quote && *str == quote)))
 			str++;
 		if (!quote && is_quote(*str))
 			quote = *str;

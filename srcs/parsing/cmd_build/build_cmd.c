@@ -6,7 +6,7 @@
 /*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 00:25:15 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/15 01:01:33 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/16 17:19:15 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ t_cmd	*cmd_init(void)
 
 t_cmd	*build_cmd(t_sh *sh, t_list *token, size_t i)
 {
-	(void)sh;
 	t_cmd	*cmd;
 
 	cmd = cmd_init();

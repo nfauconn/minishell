@@ -6,13 +6,13 @@
 /*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 12:37:34 by user42            #+#    #+#             */
-/*   Updated: 2022/08/16 09:00:04 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/16 17:23:14 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "redir.h"
 
-static void exit_clear_heredoc(t_sh *sh, char **line, int fd)
+static void	exit_clear_heredoc(t_sh *sh, char **line, int fd)
 {
 	ft_strdel(line);
 	close(fd);

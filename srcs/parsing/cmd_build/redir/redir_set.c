@@ -6,7 +6,7 @@
 /*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 20:28:23 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/16 09:00:04 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/16 17:20:04 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ static t_bool	set_redir_infile(t_sh *sh, t_cmd *cmd, char *token)
 		return (1);
 	}
 	cmd->redir_in.filename = expand(token, sh);
-	return(check_access(cmd->redir_in.filename, F_OK | R_OK));
+	return (check_access(cmd->redir_in.filename, F_OK | R_OK));
 }
 
 t_bool	set_redir(t_sh *sh, t_cmd *cmd, char *token)

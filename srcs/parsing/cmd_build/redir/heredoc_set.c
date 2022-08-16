@@ -6,7 +6,7 @@
 /*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 22:24:41 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/16 09:00:04 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/16 17:22:39 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ static char	*get_heredoc_delim(char *token)
 	while (*token)
 	{
 		start = token;
-		while (*token &&
-			!((!quote && is_quote(*token)) || (quote && quote == *token)))
+		while (*token
+			&& !((!quote && is_quote(*token)) || (quote && quote == *token)))
 			token++;
 		if (!quote && is_quote(*token))
 			quote = *token;
@@ -55,6 +55,7 @@ static char	*get_heredoc_delim(char *token)
 t_bool	heredoc_set(t_sh *sh, t_cmd *cmd, char *token)
 {
 	char	*delim;
+	char	*hdoc_path;
 	t_bool	ret;
 
 	ret = 0;
@@ -67,8 +68,8 @@ t_bool	heredoc_set(t_sh *sh, t_cmd *cmd, char *token)
 	sh->heredoc_nb++;
 	cmd->redir_in.filename = get_heredoc_path(sh->heredoc_nb);
 	delim = get_heredoc_delim(token);
-	if (run_heredoc(sh, cmd->redir_in.filename, delim, cmd->redir_in.quoted_delim))
-		ret = 1;
+	hdoc_path = cmd->redir_in.filename;
+	ret = run_heredoc(sh, hdoc_path, delim, cmd->redir_in.quoted_delim);
 	free(delim);
 	return (ret);
 }

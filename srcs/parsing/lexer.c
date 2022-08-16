@@ -6,7 +6,7 @@
 /*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 11:36:22 by user42            #+#    #+#             */
-/*   Updated: 2022/08/16 09:00:04 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/16 17:12:43 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,11 @@ t_bool	lexer(t_list *token)
 		if (tok_lexer((char *)token->content, token->type) == OK)
 		{
 			if (token->type == '|' && !token->next)
-				return (sh_perror("does not handle ending pipe"));			
+				return (sh_perror("does not handle ending pipe"));
 			token = token->next;
 		}	
 		else
 			return (1);
-
 	}
 	return (0);
 }

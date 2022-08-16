@@ -6,7 +6,7 @@
 /*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 12:50:49 by user42            #+#    #+#             */
-/*   Updated: 2022/08/16 16:37:27 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/16 17:12:17 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_bool	parse(t_sh *sh, t_input *input)
 		return (1);
 	if (tokenize(input))
 		return (1);
- 	if (!input->token_list)
+	if (!input->token_list)
 		return (1);
 	print_token_list(input);//DEBUG
 	if (lexer(input->token_list))

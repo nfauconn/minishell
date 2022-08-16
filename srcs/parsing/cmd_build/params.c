@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   params.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/16 17:18:20 by noe               #+#    #+#             */
+/*   Updated: 2022/08/16 17:18:44 by noe              ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "parse.h"
 
@@ -63,7 +74,7 @@ t_bool	set_cmd_params(t_sh *sh, t_list *token, t_cmd *cmd)
 			set_redir(sh, cmd, (char *)token->content);
 		else if (fill_arg(sh, cmd->args, &arg_no, (char *)token->content))
 		{
- 			clear_tab(cmd->args, arg_no);
+			clear_tab(cmd->args, arg_no);
 			free(cmd);
 			return (1);
 		}
