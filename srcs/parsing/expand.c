@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 19:35:18 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/16 23:36:05 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/17 01:49:46 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,25 +74,53 @@ char	*expand_str(char *ptr, size_t len, t_sh *sh)
 	p.end = ptr + len;
 	while (*ptr && ptr != p.end)
 	{
-		if (*ptr == '$')
-		{
-			if (++ptr != p.end)
-				to_add.str = expand_var(&ptr, sh);
-			else
-				to_add.str = ft_strdup("$");
-		}
+		if (*ptr == '$' && (ptr + 1) != p.end)
+			to_add.str = expand_var(&ptr, sh);
+		else if (*ptr == '$' && ! ++ptr)
+			to_add.str = ft_strdup("$");
 		else
 		{
 			p.start = ptr;
 			while (*ptr && ptr != p.end && *ptr != '$')
 				ptr++;
-			to_add.len = ptr - p.start;
-			to_add.str = ft_substr(p.start, 0, to_add.len);
+			to_add.str = ft_substr(p.start, 0, ptr - p.start);
 		}
 		add_to_new(&new, &to_add);
 	}
 	return (new.str);
 }
+
+static char	*handle_quoted(char *ptr, t_indexes *i, t_sh *sh)
+{
+	char	*ret;
+
+	ret = NULL;
+	if (ptr[i->curr] == '$')
+		i->curr++;
+	i->start = i->curr;
+	if (ptr[i->curr] == '\'')
+	{
+		i->curr++;
+		while (ptr[i->curr] != '\'')
+			i->curr++;
+		i->curr++;
+		ret = ft_substr(ptr, i->start, i->curr - i->start);
+	}
+	else if (ptr[i->curr] == '\"')
+	{
+		i->curr++;
+		while (ptr[i->curr] != '\"')
+			i->curr++;
+		i->curr++;
+		ret = expand_str(ptr + i->start, i->curr - i->start, sh);
+	}
+	return (ret);
+}
+
+// before return (ret):
+//	ft_replacefree(&ret, ft_substr(ret, 1, ft_strlen(ret) - 1));
+// ??????????? pour regler quotes inside quotes apres expand ??
+// ou technique d ismael, char *= -1 a l interieur des quotes
 
 char	*expand(char *ptr, t_sh *sh)
 {
@@ -107,27 +135,7 @@ char	*expand(char *ptr, t_sh *sh)
 		i.start = i.curr;
 		if (is_quote(ptr[i.curr]) || is_doll_then_quote(&ptr[i.curr]))
 		{
-			if (ptr[i.curr] == '$')
-				i.curr++;
-			i.start = i.curr;
-			if (ptr[i.curr] == '\'')
-			{
-				i.curr++;
-				while (ptr[i.curr] != '\'')
-					i.curr++;
-				i.curr++;
-				to_add.str = ft_substr(ptr, i.start, i.curr - i.start);
-			}
-			else if (ptr[i.curr] == '\"')
-			{
-				i.curr++;
-				while (ptr[i.curr] != '\"')
-					i.curr++;
-				i.curr++;
-				to_add.str = expand_str(ptr + i.start, i.curr - i.start, sh);
-			}
-			// if a part to_add.str[0] & to_add.str[to_add.len - 1] == quote
-			// ce char *= -1;
+			to_add.str = handle_quoted(ptr, &i, sh);
 		}
 		else
 		{

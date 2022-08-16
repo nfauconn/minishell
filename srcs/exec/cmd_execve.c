@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 12:56:04 by user42            #+#    #+#             */
-/*   Updated: 2022/08/16 22:29:06 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/17 01:46:30 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,14 @@ static int	cmd_is_dir(char *cmd_name)
 	return (0);
 }
 
+static void	exec_absolute_path(t_sh *sh, t_cmd *cmd)
+{
+	if (cmd_is_dir(cmd->name))
+		perror_exit(sh, cmd->name, "Is a directory", 1);
+	execve(cmd->name, cmd->args, cmd->envp);
+	perror_exit(sh, cmd->name, strerror(errno), 127);
+}
+
 void	cmd_execve(t_sh *sh, t_cmd *cmd)
 {
 	size_t	i;
@@ -47,12 +55,7 @@ void	cmd_execve(t_sh *sh, t_cmd *cmd)
 	if (no_path_in_env(sh, cmd))
 		perror_exit(sh, cmd->name, "No such file or directory", 127);
 	if (is_absolute_path(cmd->name))
-	{
-		if (cmd_is_dir(cmd->name))
-			perror_exit(sh, cmd->name, "Is a directory", 1);
-		execve(cmd->name, cmd->args, cmd->envp);
-		perror_exit(sh, cmd->name, strerror(errno), 127);
-	}
+		exec_absolute_path(sh, cmd);
 	i = 0;
 	errno = 0;
 	while (cmd->possible_paths[i])

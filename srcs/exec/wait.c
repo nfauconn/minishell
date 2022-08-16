@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 19:07:39 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/16 23:06:40 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/17 01:48:52 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,21 @@ t_bool	wait_heredoc(void)
 	return (0);
 }
 
+static void	handle_termsig(t_sh *sh, size_t cmd_index, int signal)
+{
+	if (signal == SIGSEGV)
+		ft_printerror("Segmentation fault (core dumped)\n");
+	else if (signal == SIGBUS)
+		ft_printerror("Bus error (core dumped)\n");
+	else if (signal == SIGINT)
+		ft_printerror("\n");
+	else if (signal == SIGQUIT)
+	{
+		if (cmd_index == sh->cmd_nb || sh->cmd_nb == 1)
+			ft_printerror("Quit (core dumped)\n");
+	}
+}
+
 void	wait_child(t_sh *sh, size_t cmd_index)
 {
 	pid_t	pid;
@@ -58,17 +73,7 @@ void	wait_child(t_sh *sh, size_t cmd_index)
 	if (WIFSIGNALED(status))
 	{
 		signal = WTERMSIG(status);
-		if (signal == SIGSEGV)
-			ft_printerror("Segmentation fault (core dumped)\n");
-		else if (signal == SIGBUS)
-			ft_printerror("Bus error (core dumped)\n");
-		else if (signal == SIGINT)
-			ft_printerror("\n");
-		else if (signal == SIGQUIT)
-		{
-			if (cmd_index == sh->cmd_nb || sh->cmd_nb == 1)
-				ft_printerror("Quit (core dumped)\n");
-		}
+		handle_termsig_display(sh, cmd_index, signal);
 		g_last_status = signal + 128;
 	}
 }
