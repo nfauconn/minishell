@@ -26,9 +26,6 @@ PARSING
 	$"$USERcoucou'$USER" OK 
 	echo $USER$USER$"$USERcoucou'$USER"  '$USER'     $USER     "-$lol- hehe..." OK 
 
-	export QUOTE=" \" "
-	> quote removal devrait laisser la quote valeur de QUOTE (sans backslash en vrai mais les notes croient qu on veut quoter toute la suite)
-
 echo lol > /dev/stdout | sleep 4
 NE DVRAIT PAS ECHO LOL DANS LE STD OUTPUT I DONT COMPREND POURQUOI
 
@@ -46,6 +43,15 @@ VALGRIND
 SHELL_LVL
 	handle
 
-FIELD SPLITTER
-	> pour commande expanded 
 
+EXIT
+	handle overflow
+
+
+FIELD SPLITTER
+	> pour commande expanded qui contient plusieurs mots separes par des espaces
+
+
+
+	export QUOTE=" \" "
+	> quote removal devrait laisser la quote valeur de QUOTE (sans backslash en vrai mais les notes croient qu on veut quoter toute la suite)

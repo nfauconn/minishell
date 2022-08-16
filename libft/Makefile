@@ -94,6 +94,7 @@ SRCS := ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		ft_strdup \
 		ft_strfdup \
 		ft_strjoin \
+		ft_strjoinchar \
 		ft_strfjoin \
 		ft_strfjoinchar \
 		ft_strmapi \

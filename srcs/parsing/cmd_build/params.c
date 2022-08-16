@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:18:20 by noe               #+#    #+#             */
-/*   Updated: 2022/08/16 21:21:22 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/16 23:03:43 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,6 @@ static t_bool	fill_arg(t_sh *sh, char **arg_tab, size_t *index, char *token)
 		tmp = arg_tab[*index];
 		arg_tab[*index] = remove_quote(tmp);
 		free(tmp);
-		if (!arg_tab[*index])
-			return (1);
 		(*index)++;
 		token += len;
 		while (is_blank(*token))

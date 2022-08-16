@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 19:35:18 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/16 20:25:23 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/16 23:36:05 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	*expand_var(char **ptr, t_sh *sh)
 			return (var_value(start, (*ptr) - start, sh->env));
 		}
 		else
-			(*ptr)++;
+			return (ft_strjoinchar("$", *(*ptr)++));
 	}
 	return (ft_strdup(""));
 }
@@ -74,10 +74,12 @@ char	*expand_str(char *ptr, size_t len, t_sh *sh)
 	p.end = ptr + len;
 	while (*ptr && ptr != p.end)
 	{
-		if (*ptr == '$' && ++ptr != p.end)
+		if (*ptr == '$')
 		{
-			to_add.str = expand_var(&ptr, sh);
-			to_add.len = ft_strlen(to_add.str);
+			if (++ptr != p.end)
+				to_add.str = expand_var(&ptr, sh);
+			else
+				to_add.str = ft_strdup("$");
 		}
 		else
 		{

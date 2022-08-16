@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 14:06:55 by user42            #+#    #+#             */
-/*   Updated: 2022/08/16 17:25:23 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/16 22:20:18 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*join_path(char const *penv, char const *pexec)
 	return (dst);
 }
 
-int	find_path(t_cmd *cmd, char **paths)
+/* int	find_path(t_cmd *cmd, char **paths)
 {
 	int	i;
 
@@ -49,7 +49,7 @@ int	find_path(t_cmd *cmd, char **paths)
 		i++;
 	}
 	return (0);
-}
+} */
 
 char	**get_env_tab(t_list *env)
 {

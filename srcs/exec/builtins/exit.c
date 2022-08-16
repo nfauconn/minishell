@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 17:46:29 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/11 22:11:31 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/16 23:35:09 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int	mini_exit(t_sh *sh, t_cmd *cmd)
 	else
 	{
 		exit_code = ft_atoi(cmd->args[1]);
+		//modulo blabla pour mathis
 		builtin_exit_clear(sh, exit_code);
 	}
 	return (1);

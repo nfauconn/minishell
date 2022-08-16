@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 12:56:04 by user42            #+#    #+#             */
-/*   Updated: 2022/08/16 22:13:40 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/16 22:29:06 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ static int	cmd_is_dir(char *cmd_name)
 
 void	cmd_execve(t_sh *sh, t_cmd *cmd)
 {
+	size_t	i;
+
 	if (!*(cmd->name))
 		perror_exit(sh, "\'\'", "command not found", 127);
 	cmd->possible_paths = get_path_tab(sh->env);
@@ -51,18 +53,16 @@ void	cmd_execve(t_sh *sh, t_cmd *cmd)
 		execve(cmd->name, cmd->args, cmd->envp);
 		perror_exit(sh, cmd->name, strerror(errno), 127);
 	}
-/* 	if (find_path(cmd, cmd->envp))
-	{
-		execve(cmd->path, cmd->args, cmd->envp);
-		if (errno == EACCES)
-			perror_exit(sh, cmd->name, strerror(errno), 126);
-	} */
-	size_t i = 0;
+	i = 0;
 	errno = 0;
-	while (cmd->possible_paths[i] 
-		&& execve(cmd->possible_paths[i], cmd->args, cmd->envp) == -1)
+	while (cmd->possible_paths[i])
+	{
+		cmd->path = join_path(cmd->possible_paths[i], cmd->name);
+		execve(cmd->path, cmd->args, cmd->envp);
 		i++;
-	if (errno == EACCES)
+		ft_strdel(&cmd->path);
+	}
+	if (errno != ENOENT)
 		perror_exit(sh, cmd->name, strerror(errno), 126);
 	perror_exit(sh, cmd->name, "command not found", 127);
 }
