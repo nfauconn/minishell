@@ -101,6 +101,7 @@ SRCS := ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		ft_substr} \
 		${addprefix ${REPLACE_NO_ALLOC}/, \
 		ft_bzero \
+		ft_init \
 		ft_memccpy \
 		ft_memcpy \
 		ft_memmove \

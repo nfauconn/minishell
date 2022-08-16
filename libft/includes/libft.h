@@ -6,7 +6,7 @@
 /*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 16:22:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/16 08:59:13 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/16 17:08:10 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # define BUFFER_SIZE 100
 # define FD_MAX 10240
 
-typedef unsigned long long t_ull;
+typedef unsigned long long	t_ull;
 
 typedef enum s_bool
 {
@@ -66,6 +66,11 @@ typedef struct s_indexes
 	size_t	curr;
 }	t_indexes;
 
+typedef struct s_charptr
+{
+	char	*start;
+	char	*end;
+}	t_charptr;
 
 typedef struct s_list
 {
@@ -134,6 +139,7 @@ void		ft_strdel(char **as);
 
 /* REPLACE / COPY / JOIN / ITER */
 void		ft_bzero(void *s, size_t n);
+t_newstr	ft_initnewstr(void);
 void		*ft_memccpy(void *dst, const void *src, int c, size_t n);
 void		*ft_memcpy(void *dst, const void *src, size_t n);
 void		*ft_memmove(void *dst, const void *src, size_t len);

@@ -6,7 +6,7 @@
 /*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 19:35:18 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/16 16:26:37 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/16 17:05:38 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,33 +64,26 @@ char	*expand_var(char **ptr, t_sh *sh)
 char	*expand_str(char *ptr, size_t len, t_sh *sh)
 {
 	t_newstr	new;
-	char		*start;
-	char		*end;
+	t_charptr	p;
 	t_newstr	to_add;
 
-	new.str = NULL;
-	new.len = 0;
-	to_add.str = NULL;
-	to_add.len = 0;
-	end = ptr + len;
- 	while (*ptr && ptr != end)
+	new = ft_initnewstr();
+	to_add = ft_initnewstr();
+	p.end = ptr + len;
+	while (*ptr && ptr != p.end)
 	{
-		if (*ptr == '$')
+		if (*ptr == '$' && ++ptr != p.end)
 		{
-			ptr++;
-			if (ptr != end)
-			{
-				to_add.str = expand_var(&ptr, sh);
-				to_add.len = ft_strlen(to_add.str);
-			}
+			to_add.str = expand_var(&ptr, sh);
+			to_add.len = ft_strlen(to_add.str);
 		}
 		else
 		{
-			start = ptr;
-			while (*ptr && ptr != end && *ptr != '$')
+			p.start = ptr;
+			while (*ptr && ptr != p.end && *ptr != '$')
 				ptr++;
-			to_add.len = ptr - start;
-			to_add.str = ft_substr(start, 0, to_add.len);
+			to_add.len = ptr - p.start;
+			to_add.str = ft_substr(p.start, 0, to_add.len);
 		}
 		add_to_new(&new, &to_add);
 	}
@@ -103,8 +96,7 @@ char	*expand(char *ptr, t_sh *sh)
 	t_indexes	i;
 	t_newstr	to_add;
 
-	new.str = NULL;
-	new.len = 0;
+	new = ft_initnewstr();
 	i.curr = 0;
 	while (ptr[i.curr])
 	{
