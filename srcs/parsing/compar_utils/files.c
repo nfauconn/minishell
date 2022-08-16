@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   files.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 22:56:44 by user42            #+#    #+#             */
-/*   Updated: 2022/08/14 00:40:36 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/16 09:00:04 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-bool	is_absolute_path(char *filename)
+t_bool	is_absolute_path(char *filename)
 {
 	if (ft_strchr(filename, '/'))
 		return (1);

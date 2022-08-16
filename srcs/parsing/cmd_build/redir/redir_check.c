@@ -6,13 +6,13 @@
 /*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 00:57:11 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/16 00:43:58 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/16 09:00:04 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "redir.h"
 
-bool	check_access(char *filename, int flag)
+t_bool	check_access(char *filename, int flag)
 {
 	if (access(filename, flag) < 0)
 	{
@@ -22,10 +22,10 @@ bool	check_access(char *filename, int flag)
 	return (0);
 }
 
-static bool	check_ambig_value(char *var, t_sh *sh)
+static t_bool	check_ambig_value(char *var, t_sh *sh)
 {
 	char	*value;
-	bool	ret;
+	t_bool	ret;
 	int		i;
 
 	ret = 0;
@@ -50,7 +50,7 @@ static bool	check_ambig_value(char *var, t_sh *sh)
 	return (ret);
 }
 
-bool	check_ambig(t_sh *sh, char *token)
+t_bool	check_ambig(t_sh *sh, char *token)
 {
 	token++;
 	if (!*token)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wait.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 19:07:39 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/13 22:32:57 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/16 09:00:04 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 extern unsigned char	g_last_status;
 
-bool	wait_heredoc(void)
+t_bool	wait_heredoc(void)
 {
 	pid_t	pid;
 	int		status;

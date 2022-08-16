@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 12:50:49 by user42            #+#    #+#             */
-/*   Updated: 2022/08/14 01:19:20 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/16 09:00:04 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-bool	parse(t_sh *sh, t_input *input)
+t_bool	parse(t_sh *sh, t_input *input)
 {
 	if (!*(input->line_read))
 		return (1);

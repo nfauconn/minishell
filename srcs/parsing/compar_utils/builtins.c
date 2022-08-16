@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 23:52:53 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/13 22:32:57 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/16 09:00:04 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-bool	is_builtin(char *cmd_name)
+t_bool	is_builtin(char *cmd_name)
 {
 	int			i;
 	static char	*builtins[8] = {"cd", "echo", "env", "exit", "export", \

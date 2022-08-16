@@ -6,7 +6,7 @@
 /*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 12:37:34 by user42            #+#    #+#             */
-/*   Updated: 2022/08/16 00:19:31 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/16 09:00:04 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	display_warning(t_sh *sh, char *delim)
 	" at line %d delimited by end-of-file (wanted `%s')\n", sh->line_nb, delim);
 }
 
-static void	putstr_heredoc(t_sh *sh, char **line, int fd, bool quoted)
+static void	putstr_heredoc(t_sh *sh, char **line, int fd, t_bool quoted)
 {
 	char	*new_line;
 
@@ -37,7 +37,7 @@ static void	putstr_heredoc(t_sh *sh, char **line, int fd, bool quoted)
 	ft_replacefree((void **)line, new_line);
 }
 
-static void	heredoc_job(t_sh *sh, char *hdoc_path, char *delim, bool quoted)
+static void	heredoc_job(t_sh *sh, char *hdoc_path, char *delim, t_bool quoted)
 {
 	int		fd;
 	char	*line;
@@ -55,10 +55,10 @@ static void	heredoc_job(t_sh *sh, char *hdoc_path, char *delim, bool quoted)
 	exit_clear_heredoc(sh, &line, fd);
 }
 
-bool	run_heredoc(t_sh *sh, char *hdoc_path, char *delim, bool quoted)
+t_bool	run_heredoc(t_sh *sh, char *hdoc_path, char *delim, t_bool quoted)
 {
 	pid_t		pid;
-	bool		ret;
+	t_bool		ret;
 
 	ret = 0;
 	signal_catching_mode(PARENT_PROCESS);

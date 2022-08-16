@@ -24,7 +24,7 @@ size_t	len_until_blank(char *s)
 	return (i);
 }
 
-static bool	fill_arg(t_sh *sh, char **arg_tab, size_t *index, char *token)
+static t_bool	fill_arg(t_sh *sh, char **arg_tab, size_t *index, char *token)
 {
 	size_t	len;
 	char	*tmp;
@@ -47,7 +47,7 @@ static bool	fill_arg(t_sh *sh, char **arg_tab, size_t *index, char *token)
 	return (0);
 }
 
-bool	set_cmd_params(t_sh *sh, t_list *token, t_cmd *cmd)
+t_bool	set_cmd_params(t_sh *sh, t_list *token, t_cmd *cmd)
 {
 	size_t	args_nb;
 	size_t	arg_no;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 12:07:25 by user42            #+#    #+#             */
-/*   Updated: 2022/08/13 22:32:57 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/16 09:00:04 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ typedef struct s_redir
 	char	*filename;
 	char	*delim;
 	int		fd;
-	bool	is_heredoc;
-	bool	quoted_delim;
-	bool	is_append;
-//	bool	is_ambig;
+	t_bool	is_heredoc;
+	t_bool	quoted_delim;
+	t_bool	is_append;
+//	t_bool	is_ambig;
 }	t_redir;
 
 typedef struct s_cmd
@@ -53,7 +53,7 @@ typedef struct s_cmd
 	char			*path;
 	t_redir			redir_in;
 	t_redir			redir_out;
-	bool			redir_error;
+	t_bool			redir_error;
 	struct s_cmd	*next;
 }	t_cmd;
 

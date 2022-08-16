@@ -6,13 +6,13 @@
 /*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 19:57:56 by user42            #+#    #+#             */
-/*   Updated: 2022/08/16 00:19:44 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/16 09:00:04 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-bool	go_through_same_char(char **s)
+t_bool	go_through_same_char(char **s)
 {
 	int	c;
 
@@ -27,7 +27,7 @@ bool	go_through_same_char(char **s)
 	return (0);
 }
 
-bool	tokenize_redir(char **s)
+t_bool	tokenize_redir(char **s)
 {
 	while (is_operator(**s))
 		(*s)++;
@@ -44,7 +44,7 @@ bool	tokenize_redir(char **s)
 	return (0);
 }
 
-bool	check_closing_quote(char **s, char quote)
+t_bool	check_closing_quote(char **s, char quote)
 {
 	while (**s)
 		if (*(++(*s)) == quote)

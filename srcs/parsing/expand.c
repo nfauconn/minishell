@@ -6,7 +6,7 @@
 /*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 19:35:18 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/16 00:49:34 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/16 09:08:26 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,7 @@ char	*expand_var(char **ptr, t_sh *sh)
 	start = *ptr;
 	if (*start)
 	{
-		if (*start == '\"')
-		{
-			(*ptr)++;
-			return (ft_strdup(""));
-		}
-		else if (*start == '?')
+		if (*start == '?')
 		{
 			(*ptr)++;
 			return (ft_itoa(g_last_status));
@@ -106,12 +101,62 @@ char	*expand(char *ptr, t_sh *sh)
 	while (ptr[i.curr])
 	{
 		i.start = i.curr;
+		if (is_quote(ptr[i.curr]) || is_doll_then_quote(&ptr[i.curr]))
+		{
+			if (ptr[i.curr] == '$')
+				i.curr++;
+			i.start = i.curr;
+			if (ptr[i.curr] == '\'')
+			{
+				i.curr++;
+				while (ptr[i.curr] != '\'')
+					i.curr++;
+				i.curr++;
+				to_add = ft_substr(ptr, i.start, i.curr - i.start);
+			}
+			else if (ptr[i.curr] == '\"')
+			{
+				i.curr++;
+				while (ptr[i.curr] != '\"')
+					i.curr++;
+				i.curr++;
+				to_add = expand_str(ptr + i.start, i.curr - i.start, sh);
+			}
+		}
+		else
+		{
+			while (ptr[i.curr] && !is_quote(ptr[i.curr])
+				&& !is_doll_then_quote(&ptr[i.curr]))
+				i.curr++;
+//			printf("i.curr = %zu\n", i.curr);
+			to_add = expand_str(ptr + i.start, i.curr - i.start, sh);
+//			printf("to_add = %s\n", to_add);
+		}
+		add_to_new(&new, to_add);
+	}
+	return (new.str);
+}
+
+/* WORKING EXCEPT FOR SIMPLE QUOTES IN DB QUOTES :}
+char	*expand(char *ptr, t_sh *sh)
+{
+	t_newstr	new;
+	t_indexes	i;
+	char		*to_add;
+
+	new.str = NULL;
+	new.len = 0;
+	i.curr = 0;
+	while (ptr[i.curr])
+	{
+		i.start = i.curr;
 		if (ptr[i.curr] == '\'')
 		{
+			i.curr++;
 			while (ptr[i.curr] != '\'')
 				i.curr++;
 			i.curr++;
-			to_add = ft_substr(ptr, i.start, i.curr);
+			to_add = ft_substr(ptr, i.start, i.curr - i.start);
 		}
 		else
 		{
@@ -122,4 +167,4 @@ char	*expand(char *ptr, t_sh *sh)
 		add_to_new(&new, to_add);
 	}
 	return (new.str);
-}
+} */

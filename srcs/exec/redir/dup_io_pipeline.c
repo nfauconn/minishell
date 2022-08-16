@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dup_io_pipeline.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 20:29:41 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/13 23:45:16 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/16 09:00:04 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ static void	dup_input(t_cmd *cmd, int fd_in)
 		dup2_close_old(fd_in, STDIN_FILENO);
 }
 
-bool	dup_io_pipeline(t_sh *sh, t_cmd *cmd, int p[2], int fd_in)
+t_bool	dup_io_pipeline(t_sh *sh, t_cmd *cmd, int p[2], int fd_in)
 {
-	bool	error;
+	t_bool	error;
 
 	error = 0;
 	if (cmd->redir_error)

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   dup_io_singlecmd.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 20:40:54 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/13 23:33:36 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/16 09:00:04 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "redir.h"
 
-bool	dup_io_singlecmd(t_cmd *cmd)
+t_bool	dup_io_singlecmd(t_cmd *cmd)
 {
 	int	error;
 

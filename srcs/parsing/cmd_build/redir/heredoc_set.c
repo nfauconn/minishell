@@ -6,7 +6,7 @@
 /*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 22:24:41 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/15 18:14:39 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/16 09:00:04 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,10 @@ static char	*get_heredoc_delim(char *token)
 	return (delim);
 }
 
-bool	heredoc_set(t_sh *sh, t_cmd *cmd, char *token)
+t_bool	heredoc_set(t_sh *sh, t_cmd *cmd, char *token)
 {
 	char	*delim;
-	bool	ret;
+	t_bool	ret;
 
 	ret = 0;
 	if (cmd->redir_in.filename)

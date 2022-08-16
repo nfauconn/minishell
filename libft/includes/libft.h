@@ -6,7 +6,7 @@
 /*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 16:22:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/16 00:20:20 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/16 08:59:13 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,14 @@
 
 # define BUFFER_SIZE 100
 # define FD_MAX 10240
-# define OK 0
-# define FAIL 1
 
 typedef unsigned long long t_ull;
+
+typedef enum s_bool
+{
+	OK = 0,
+	FAIL = 1,
+}	t_bool;
 
 typedef struct s_vector
 {

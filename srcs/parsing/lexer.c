@@ -6,13 +6,13 @@
 /*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 11:36:22 by user42            #+#    #+#             */
-/*   Updated: 2022/08/16 00:19:44 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/16 09:00:04 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-static bool	check_nb_sign(char **tok, int type)
+static t_bool	check_nb_sign(char **tok, int type)
 {
 	char	*start;
 	size_t	len;
@@ -33,7 +33,7 @@ static bool	check_nb_sign(char **tok, int type)
 	return (0);
 }
 
-static bool	lex_redir(char *content)
+static t_bool	lex_redir(char *content)
 {
 	if (!*content)
 		return (lex_perror("newline"));
@@ -55,7 +55,7 @@ static bool	lex_redir(char *content)
 	return (0);
 }
 
-static bool	tok_lexer(char *content, int type)
+static t_bool	tok_lexer(char *content, int type)
 {
 	if (is_operator(type))
 	{
@@ -71,7 +71,7 @@ static bool	tok_lexer(char *content, int type)
 	return (0);
 }
 
-bool	lexer(t_list *token)
+t_bool	lexer(t_list *token)
 {
 	if (token->type == '|')
 		return (lex_perror("|"));

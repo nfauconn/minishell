@@ -21,7 +21,7 @@ static int	no_args(t_cmd *cmd)
 	return (0);
 }
 
-static bool	not_executable_in_pipeline(t_cmd *cmd, char built_i)
+static t_bool	not_executable_in_pipeline(t_cmd *cmd, char built_i)
 {
 	if ((built_i == cd || (built_i == export && !no_args(cmd))
 		|| built_i == unset))

@@ -6,13 +6,13 @@
 /*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 20:28:23 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/15 02:26:44 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/16 09:00:04 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "redir.h"
 
-static bool	set_redir_append(t_sh *sh, t_cmd *cmd, char *token)
+static t_bool	set_redir_append(t_sh *sh, t_cmd *cmd, char *token)
 {
 	if (cmd->redir_out.filename)
 		ft_strdel(&cmd->redir_out.filename);
@@ -30,7 +30,7 @@ static bool	set_redir_append(t_sh *sh, t_cmd *cmd, char *token)
 	return (0);
 }
 
-static bool	set_redir_outfile(t_sh *sh, t_cmd *cmd, char *token)
+static t_bool	set_redir_outfile(t_sh *sh, t_cmd *cmd, char *token)
 {
 	if (cmd->redir_out.filename)
 		ft_strdel(&cmd->redir_out.filename);
@@ -48,7 +48,7 @@ static bool	set_redir_outfile(t_sh *sh, t_cmd *cmd, char *token)
 	return (0);
 }
 
-static bool	set_redir_heredoc(t_sh *sh, t_cmd *cmd, char *token)
+static t_bool	set_redir_heredoc(t_sh *sh, t_cmd *cmd, char *token)
 {
 	if (cmd->redir_in.filename)
 	{
@@ -68,7 +68,7 @@ static bool	set_redir_heredoc(t_sh *sh, t_cmd *cmd, char *token)
 	return (heredoc_set(sh, cmd, token));
 }
 
-static bool	set_redir_infile(t_sh *sh, t_cmd *cmd, char *token)
+static t_bool	set_redir_infile(t_sh *sh, t_cmd *cmd, char *token)
 {
 	if (cmd->redir_in.filename)
 	{
@@ -90,9 +90,9 @@ static bool	set_redir_infile(t_sh *sh, t_cmd *cmd, char *token)
 	return(check_access(cmd->redir_in.filename, F_OK | R_OK));
 }
 
-bool	set_redir(t_sh *sh, t_cmd *cmd, char *token)
+t_bool	set_redir(t_sh *sh, t_cmd *cmd, char *token)
 {
-	bool	ret;
+	t_bool	ret;
 
 	ret = 0;
 	if (!ft_strncmp(token, "<<", 2))

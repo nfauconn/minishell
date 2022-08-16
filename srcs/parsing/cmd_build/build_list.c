@@ -6,7 +6,7 @@
 /*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 11:37:25 by user42            #+#    #+#             */
-/*   Updated: 2022/08/15 00:58:38 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/16 09:00:04 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	add_cmd_to_list(t_cmd **head, t_cmd *new)
 	curr->next = new;
 }
 
-bool	build_cmd_lst(t_sh *sh, t_list *token)
+t_bool	build_cmd_lst(t_sh *sh, t_list *token)
 {
 	size_t	cmd_index;
 	t_cmd	*new_cmd;
