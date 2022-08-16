@@ -36,6 +36,8 @@
 *.x86_64
 *.hex
 
+null.d
+objs
 minishell
 .vscode/
 
