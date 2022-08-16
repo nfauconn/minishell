@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 14:06:55 by user42            #+#    #+#             */
-/*   Updated: 2022/08/14 00:23:11 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/16 17:25:23 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ char	**get_env_tab(t_list *env)
 	len = 0;
 	while (env)
 	{
-
 		tab[len] = ft_strdup(env->content);
 		if (!tab[len])
 			return (NULL);
@@ -76,7 +75,7 @@ char	**get_env_tab(t_list *env)
 
 char	**get_path_tab(t_list *env)
 {
-	while (env && ft_strncmp(env->content, "PATH=", 5) )
+	while (env && ft_strncmp(env->content, "PATH=", 5))
 		env = env->next;
 	if (env)
 		return (ft_split(env->content + 5, ':'));

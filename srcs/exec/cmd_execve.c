@@ -6,7 +6,7 @@
 /*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 12:56:04 by user42            #+#    #+#             */
-/*   Updated: 2022/08/16 00:44:13 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/16 17:27:11 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	no_path_in_env(t_sh *sh, t_cmd *cmd)
 	int		ret;
 	char	*path_val;
 
-	path_val = var_value("PATH", 4, sh->env);	
+	path_val = var_value("PATH", 4, sh->env);
 	if (!cmd->possible_paths || !path_val || ft_strlen(path_val) == 0)
 		ret = 1;
 	else

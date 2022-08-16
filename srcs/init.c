@@ -6,7 +6,7 @@
 /*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 17:25:43 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/16 00:44:33 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/16 17:28:22 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,14 +66,14 @@ t_list	*init_env(char **env_tab)
 }
 
 static void	init_builtins_ptr(t_sh *sh)
-{(void)sh;
-/* 	sh->exec_built[cd] = &mini_cd;
+{
+ 	sh->exec_built[cd] = &mini_cd;
 	sh->exec_built[echo] = &mini_echo;
 	sh->exec_built[env] = &mini_env;
 	sh->exec_built[exit2] = &mini_exit;
 	sh->exec_built[export] = &mini_export;
 	sh->exec_built[pwd] = &mini_pwd;
-	sh->exec_built[unset] = &mini_unset; */	
+	sh->exec_built[unset] = &mini_unset;
 }
 
 void	init_sh(t_sh *sh)

@@ -6,7 +6,7 @@
 /*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 18:49:09 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/16 09:00:04 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/16 17:30:15 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 t_bool	sh_perror(char *s)
 {
 	ft_printerror("minish: %s\n", s);
-	return (1);	
+	return (1);
 }
 
 t_bool	lex_perror(char *s)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:53:50 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/24 14:40:15 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/08/16 17:27:35 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	del_elm_mid(t_list	*l, char *var_name)
 			str = (char *)elm->content;
 			var_len = strlen(var_name);
 			if (!ft_strncmp(var_name, str, var_len) && (str[var_len] == '='
-				|| str[var_len] == '\0'))
+					|| str[var_len] == '\0'))
 				break ;
 		}
 		l = l->next;
@@ -62,7 +62,7 @@ static void	do_unset(t_sh *sh, char *id)
 	var_len = ft_strlen(id);
 	if (!ft_strncmp(id, sh->env->content, var_len)
 		&& (((char *)sh->env->content)[var_len] == '='
-			|| ((char *)sh->env->content)[var_len] == '\0'))
+		|| ((char *)sh->env->content)[var_len] == '\0'))
 	{
 		elm = sh->env;
 		sh->env = sh->env->next;

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   launch_forked_builtin.c                                :+:      :+:    :+:   */
+/*   launch_builtin.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/27 20:32:29 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/07/27 20:32:48 by nfauconn         ###   ########.fr       */
+/*   Created: 2022/08/16 17:25:56 by noe               #+#    #+#             */
+/*   Updated: 2022/08/16 17:26:48 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	no_args(t_cmd *cmd)
 static t_bool	not_executable_in_pipeline(t_cmd *cmd, char built_i)
 {
 	if ((built_i == cd || (built_i == export && !no_args(cmd))
-		|| built_i == unset))
+			|| built_i == unset))
 		return (1);
 	return (0);
 }

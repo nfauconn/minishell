@@ -22,9 +22,12 @@ PARSING
 for file in `find -name "linux_*.mp4"`; do mv "$file" "${file/linux_/}" ; done
 
 PARSING
-	$USERll$USER"$USER" OK
-	$"$USERcoucou'$USER" il se melange les pinceaux avec les quotes
-	echo $USER$USER$"$USERcoucou'$USER"  '$USER'     $USER     "-$lol- hehe..."
+	$USERll$USER"$USER" OK with still quotes to remove
+	$"$USERcoucou'$USER" OK with still quotes to remove
+	echo $USER$USER$"$USERcoucou'$USER"  '$USER'     $USER     "-$lol- hehe..." OK with still quotes to remove
+
+SHELL_LVL
+	handle
 
 mdankou@e1r3p5:~/Documents/git_minish$ > ""
 bash: : No such file or directory
