@@ -6,7 +6,7 @@
 /*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 19:35:18 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/16 09:38:35 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/16 09:51:06 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 extern unsigned char	g_last_status;
 
-void	add_to_new(t_newstr *new, char *to_add)
+void	add_to_new(t_newstr *new, t_newstr *to_add)
 {
-	new->len += ft_strlen(to_add);
+	new->len += to_add->len;
 	new->str = ft_reallocstr(new->str, new->len);
-	if (to_add)
-		ft_strlcat(new->str, to_add, new->len + 1);
-	free(to_add);
+	if (to_add->str)
+		ft_strlcat(new->str, to_add->str, new->len + 1);
+	free(to_add->str);
 }
 
 char	*var_value(char *var_name, size_t len, t_list *env)
@@ -66,28 +66,33 @@ char	*expand_str(char *ptr, size_t len, t_sh *sh)
 	t_newstr	new;
 	char		*start;
 	char		*end;
-	char		*to_add;
+	t_newstr	to_add;
 
 	new.str = NULL;
 	new.len = 0;
-	to_add = NULL;
+	to_add.str = NULL;
+	to_add.len = 0;
 	end = ptr + len;
  	while (*ptr && ptr != end)
 	{
 		if (*ptr == '$')
 		{
-			/* ptr++;
+			ptr++;
 			if (ptr != end)
-				 */to_add = expand_var(&ptr, sh);
+			{
+				to_add.str = expand_var(&ptr, sh);
+				to_add.len = ft_strlen(to_add.str);
+			}
 		}
 		else
 		{
 			start = ptr;
 			while (*ptr && ptr != end && *ptr != '$')
 				ptr++;
-			to_add = ft_substr(start, 0, ptr - start);
+			to_add.len = ptr - start;
+			to_add.str = ft_substr(start, 0, to_add.len);
 		}
-		add_to_new(&new, to_add);
+		add_to_new(&new, &to_add);
 	}
 	return (new.str);
 }
@@ -134,13 +139,9 @@ char	*expand(char *ptr, t_sh *sh)
 				&& !is_doll_then_quote(&ptr[i.curr]))
 				i.curr++;
 			to_add.len = i.curr - i.start;
-			if (is_doll_then_quote(&ptr[i.curr]))
-				to_add.len--;
-			printf("to_add.len = %zu\n", to_add.len);
 			to_add.str = expand_str(ptr + i.start, to_add.len, sh);
-			printf("to_add.str = %s\n", to_add.str);
 		}
-		add_to_new(&new, to_add.str);
+		add_to_new(&new, &to_add);
 	}
 	return (new.str);
 }
