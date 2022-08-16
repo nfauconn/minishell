@@ -52,12 +52,6 @@ t_bool		is_absolute_path(char *filename);
 t_bool		lexer(t_list *tokens);
 t_bool		lex_perror(char *s);
 
-/* EXPAND */
-char		*expand(char *ptr, t_sh *sh);
-char		*expand_str(char *ptr, size_t len, t_sh *sh);
-char		*expand_var(char **s, t_sh *sh);
-char		*var_value(char *ptr, size_t len, t_list *env);
-
 /* CMD_LIST_BUILD */
 t_bool		build_cmd_lst(t_sh *sh, t_list *token);
 t_cmd		*build_cmd(t_sh *sh, t_list *token, size_t i);
@@ -69,5 +63,18 @@ void		add_cmd_to_list(t_cmd **head, t_cmd *new);
 void		clear_tab(char **tab, int index);
 size_t		get_args_nb(t_list *token);
 size_t		arg_len(char *s);
+
+/* EXPAND */
+char		*expand(char *ptr, t_sh *sh);
+char		*expand_str(char *ptr, size_t len, t_sh *sh);
+char		*expand_var(char **s, t_sh *sh);
+char		*var_value(char *ptr, size_t len, t_list *env);
+
+/* QUOTE_REMOVAL */
+char		*remove_quote(char *str);
+
+/* DEBUG */
+void		print_token_list(t_input *input);
+void		print_cmd_list(t_sh *sh);
 
 #endif

@@ -31,9 +31,11 @@ SRCS = ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		reset \
 		signals \
 		${addprefix ${PARSING}, \
-		parse \
+		parser \
 		lexer \
 		expand \
+		quote_removal \
+		debug_utils \
 		${addprefix ${TOKENIZER}, \
 		tokenize \
 		utils} \

@@ -1,47 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   debug_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/21 12:50:49 by user42            #+#    #+#             */
-/*   Updated: 2022/08/16 09:00:04 by noe              ###   ########.fr       */
+/*   Created: 2022/08/16 16:28:38 by noe               #+#    #+#             */
+/*   Updated: 2022/08/16 16:35:05 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-t_bool	parse(t_sh *sh, t_input *input)
+void	print_token_list(t_input *input)
 {
-	if (!*(input->line_read))
-		return (1);
-	if (tokenize(input))
-		return (1);
- 	if (!input->token_list)
-		return (1);
-	
-	// print token list
 	if (input->token_list)
 	{
 		t_list	*lst = input->token_list;
 		while (lst)
 		{
-			printf("tok = [%s]\n", (char *)lst->content); //| type = %d\n", (char *)lst->content, lst->type);
+			printf("tok = [%s]\n", (char *)lst->content);
 			lst = lst->next;
 		}
-		ft_printerror("___________\n\n");
+		printf("___________\n\n");
 	}
-	//end of print
+}
 
-	if (lexer(input->token_list))
-		return (1);
-	if (build_cmd_lst(sh, input->token_list))
-		return (1);
+void	print_cmd_list(t_sh *sh)
+{
+	t_cmd	*tmp;
+	size_t	i;
 	
-	//print cmd_lst
-	t_cmd	*tmp = sh->cmd_list;
-	size_t	i = 0;
+	tmp = sh->cmd_list;
+	i = 0;
 	while(tmp)
 	{
 		printf("cmd = ");
@@ -64,12 +55,4 @@ t_bool	parse(t_sh *sh, t_input *input)
 		}
 		tmp = tmp->next;
 	}
-	//end of print
-	return (0);
 }
-
-/*
-
-
-
-*/

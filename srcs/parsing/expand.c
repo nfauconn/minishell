@@ -6,7 +6,7 @@
 /*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 19:35:18 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/16 09:51:06 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/16 16:26:37 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,35 +145,3 @@ char	*expand(char *ptr, t_sh *sh)
 	}
 	return (new.str);
 }
-
-/* WORKING EXCEPT FOR SIMPLE QUOTES IN DB QUOTES :}
-char	*expand(char *ptr, t_sh *sh)
-{
-	t_newstr	new;
-	t_indexes	i;
-	char		*to_add;
-
-	new.str = NULL;
-	new.len = 0;
-	i.curr = 0;
-	while (ptr[i.curr])
-	{
-		i.start = i.curr;
-		if (ptr[i.curr] == '\'')
-		{
-			i.curr++;
-			while (ptr[i.curr] != '\'')
-				i.curr++;
-			i.curr++;
-			to_add = ft_substr(ptr, i.start, i.curr - i.start);
-		}
-		else
-		{
-			while (ptr[i.curr] && ptr[i.curr] != '\'')
-				i.curr++;
-			to_add = expand_str(ptr + i.start, i.curr - i.start, sh);
-		}
-		add_to_new(&new, to_add);
-	}
-	return (new.str);
-} */
