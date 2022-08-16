@@ -22,12 +22,16 @@ PARSING
 for file in `find -name "linux_*.mp4"`; do mv "$file" "${file/linux_/}" ; done
 
 PARSING
-	$USERll$USER"$USER" OK with still quotes to remove
-	$"$USERcoucou'$USER" OK with still quotes to remove
-	echo $USER$USER$"$USERcoucou'$USER"  '$USER'     $USER     "-$lol- hehe..." OK with still quotes to remove
+	$USERll$USER"$USER" OK 
+	$"$USERcoucou'$USER" OK 
+	echo $USER$USER$"$USERcoucou'$USER"  '$USER'     $USER     "-$lol- hehe..." OK 
 
-SHELL_LVL
-	handle
+	export QUOTE=" \" "
+	> quote removal devrait laisser la quote valeur de QUOTE (sans backslash en vrai mais les notes croient qu on veut quoter toute la suite)
+
+echo lol > /dev/stdout | sleep 4
+NE DVRAIT PAS ECHO LOL DANS LE STD OUTPUT I DONT COMPREND POURQUOI
+
 
 mdankou@e1r3p5:~/Documents/git_minish$ > ""
 bash: : No such file or directory
@@ -35,3 +39,13 @@ bash: : No such file or directory
 
 VALGRIND
 	valgrind --suppressions=ignoreleak --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes --verbose ./minishell
+
+
+==============================================TO_DO============================================================
+
+SHELL_LVL
+	handle
+
+FIELD SPLITTER
+	> pour commande expanded 
+

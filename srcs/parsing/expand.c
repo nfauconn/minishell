@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 19:35:18 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/16 17:05:38 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/16 20:25:23 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ extern unsigned char	g_last_status;
 
 void	add_to_new(t_newstr *new, t_newstr *to_add)
 {
+	if (to_add->str)
+		to_add->len = ft_strlen(to_add->str);
 	new->len += to_add->len;
 	new->str = ft_reallocstr(new->str, new->len);
 	if (to_add->str)
@@ -112,8 +114,7 @@ char	*expand(char *ptr, t_sh *sh)
 				while (ptr[i.curr] != '\'')
 					i.curr++;
 				i.curr++;
-				to_add.len = i.curr - i.start;
-				to_add.str = ft_substr(ptr, i.start, to_add.len);
+				to_add.str = ft_substr(ptr, i.start, i.curr - i.start);
 			}
 			else if (ptr[i.curr] == '\"')
 			{
@@ -121,17 +122,17 @@ char	*expand(char *ptr, t_sh *sh)
 				while (ptr[i.curr] != '\"')
 					i.curr++;
 				i.curr++;
-				to_add.len = i.curr - i.start;
-				to_add.str = expand_str(ptr + i.start, to_add.len, sh);
+				to_add.str = expand_str(ptr + i.start, i.curr - i.start, sh);
 			}
+			// if a part to_add.str[0] & to_add.str[to_add.len - 1] == quote
+			// ce char *= -1;
 		}
 		else
 		{
 			while (ptr[i.curr] && !is_quote(ptr[i.curr])
 				&& !is_doll_then_quote(&ptr[i.curr]))
 				i.curr++;
-			to_add.len = i.curr - i.start;
-			to_add.str = expand_str(ptr + i.start, to_add.len, sh);
+			to_add.str = expand_str(ptr + i.start, i.curr - i.start, sh);
 		}
 		add_to_new(&new, &to_add);
 	}

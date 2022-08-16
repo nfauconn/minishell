@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_execve.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 12:56:04 by user42            #+#    #+#             */
-/*   Updated: 2022/08/16 17:27:11 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/16 22:13:40 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,20 +41,28 @@ void	cmd_execve(t_sh *sh, t_cmd *cmd)
 	if (!*(cmd->name))
 		perror_exit(sh, "\'\'", "command not found", 127);
 	cmd->possible_paths = get_path_tab(sh->env);
+	cmd->envp = get_env_tab(sh->env);
 	if (no_path_in_env(sh, cmd))
 		perror_exit(sh, cmd->name, "No such file or directory", 127);
 	if (is_absolute_path(cmd->name))
 	{
 		if (cmd_is_dir(cmd->name))
 			perror_exit(sh, cmd->name, "Is a directory", 1);
-		execve(cmd->name, cmd->args, cmd->possible_paths);
+		execve(cmd->name, cmd->args, cmd->envp);
 		perror_exit(sh, cmd->name, strerror(errno), 127);
 	}
-	if (find_path(cmd, cmd->possible_paths))
+/* 	if (find_path(cmd, cmd->envp))
 	{
-		execve(cmd->path, cmd->args, cmd->possible_paths);
+		execve(cmd->path, cmd->args, cmd->envp);
 		if (errno == EACCES)
 			perror_exit(sh, cmd->name, strerror(errno), 126);
-	}
+	} */
+	size_t i = 0;
+	errno = 0;
+	while (cmd->possible_paths[i] 
+		&& execve(cmd->possible_paths[i], cmd->args, cmd->envp) == -1)
+		i++;
+	if (errno == EACCES)
+		perror_exit(sh, cmd->name, strerror(errno), 126);
 	perror_exit(sh, cmd->name, "command not found", 127);
 }

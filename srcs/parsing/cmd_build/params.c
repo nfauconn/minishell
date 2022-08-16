@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   params.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:18:20 by noe               #+#    #+#             */
-/*   Updated: 2022/08/16 17:18:44 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/16 21:21:22 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,9 @@ static t_bool	fill_arg(t_sh *sh, char **arg_tab, size_t *index, char *token)
 		tmp = ft_substr(token, 0, len);
 		arg_tab[*index] = expand(tmp, sh);
 		free(tmp);
+		tmp = arg_tab[*index];
+		arg_tab[*index] = remove_quote(tmp);
+		free(tmp);
 		if (!arg_tab[*index])
 			return (1);
 		(*index)++;
@@ -72,12 +75,8 @@ t_bool	set_cmd_params(t_sh *sh, t_list *token, t_cmd *cmd)
 	{
 		if (is_redir(token->type) && !cmd->redir_error)
 			set_redir(sh, cmd, (char *)token->content);
-		else if (fill_arg(sh, cmd->args, &arg_no, (char *)token->content))
-		{
-			clear_tab(cmd->args, arg_no);
-			free(cmd);
-			return (1);
-		}
+		else
+			fill_arg(sh, cmd->args, &arg_no, (char *)token->content);
 		token = token->next;
 	}
 	cmd->args[arg_no] = NULL;
