@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:17:29 by noe               #+#    #+#             */
-/*   Updated: 2022/08/17 01:42:16 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/17 01:59:13 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	count_args(char *content, size_t *count)
 			while (is_blank(content[i]))
 				i++;
 			if (content[i])
-				count++;
+				(*count)++;
 		}
 		else
 			i++;
@@ -41,7 +41,6 @@ void	count_args(char *content, size_t *count)
 
 size_t	get_args_nb(t_list *token)
 {
-	char	quote;
 	size_t	count;
 	char	*content;
 

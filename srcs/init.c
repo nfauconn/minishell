@@ -6,13 +6,13 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 17:25:43 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/16 23:35:43 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/17 02:03:25 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/* static void	init_shell_level(t_list *env)
+static void	init_shell_level(t_list *env)
 {
 	char	*lvl_str;
 	int		lvl_int;
@@ -31,7 +31,7 @@
 	do_export(&env, shlvl);
 	free(shlvl);
 	free(lvl_str);
-} */
+}
 
 static void	create_minimal_env(t_list **head)
 {
@@ -58,7 +58,7 @@ t_list	*init_env(char **env_tab)
 	if (env_tab && *env_tab)
 	{
 		env = ft_strarraytolist(env_tab);
-//		init_shell_level(env);
+		init_shell_level(env);
 	}
 	else
 		create_minimal_env(&env);

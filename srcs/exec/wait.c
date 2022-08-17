@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 19:07:39 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/17 01:48:52 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/17 01:56:34 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_bool	wait_heredoc(void)
 	return (0);
 }
 
-static void	handle_termsig(t_sh *sh, size_t cmd_index, int signal)
+static void	handle_termsig_display(t_sh *sh, size_t cmd_index, int signal)
 {
 	if (signal == SIGSEGV)
 		ft_printerror("Segmentation fault (core dumped)\n");
