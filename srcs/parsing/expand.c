@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 19:35:18 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/17 01:49:46 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/18 00:35:49 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,11 @@ char	*expand_str(char *ptr, size_t len, t_sh *sh)
 	while (*ptr && ptr != p.end)
 	{
 		if (*ptr == '$' && (ptr + 1) != p.end)
+		{
+			ptr++;
 			to_add.str = expand_var(&ptr, sh);
-		else if (*ptr == '$' && ! ++ptr)
+		}
+		else if (*ptr == '$' && !++ptr)
 			to_add.str = ft_strdup("$");
 		else
 		{
