@@ -6,11 +6,28 @@
 /*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:18:20 by noe               #+#    #+#             */
-/*   Updated: 2022/08/18 15:44:15 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/18 16:44:07 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
+
+void	reset_quotes_to_ascii(t_list *cmd_args)
+{
+	char	*content;
+
+	while (cmd_args)
+	{
+		content = (char *)cmd_args->content;
+		while (*content)
+		{
+			if (*content < 0)
+				*content *= -1;
+			content++;
+		}
+		cmd_args = cmd_args->next;
+	}
+}
 
 size_t	len_until_blank(char *s)
 {
@@ -86,5 +103,7 @@ t_bool	set_cmd_params(t_sh *sh, t_list *token, t_cmd *cmd)
 			fill_arg(sh, cmd, (char *)token->content);
 		token = token->next;
 	}
+	reset_quotes_to_ascii(cmd->args_lst);
+	cmd->args_tab = ft_lsttoarray(cmd->args_lst);
 	return (0);
 }

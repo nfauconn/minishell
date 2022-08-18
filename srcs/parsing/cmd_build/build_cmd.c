@@ -6,7 +6,7 @@
 /*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 00:25:15 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/18 15:35:11 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/18 16:10:37 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,18 +55,6 @@ t_cmd	*build_cmd(t_sh *sh, t_list *token, size_t i)
 	if (!cmd)
 		return (NULL);
 	set_cmd_params(sh, token, cmd);
-/* while (lst)
-	{
-		tmp = (char *)lst->content
-		while (*tmp)
-		{
-			if *tmp < 0
-				tmp = -tmp;
-			tmp++;
-		}
-		lst = lst->next;
-	}
-	cmd->args_tab = ft_lsttoarray(cmd->args_lst);*/
 	if (cmd->args_tab)
 	{
 		cmd->name = cmd->args_tab[0];
