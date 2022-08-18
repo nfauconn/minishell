@@ -52,7 +52,8 @@ SRCS = ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		${addprefix ${COMPAR_UTILS}, \
 		builtins \
 		files \
-		metachars}} \
+		metachars \
+		str}} \
 		${addprefix ${EXEC}, \
 		cmd_execve \
 		cmd_path \

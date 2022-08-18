@@ -6,7 +6,7 @@
 /*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:18:20 by noe               #+#    #+#             */
-/*   Updated: 2022/08/18 00:53:23 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/18 14:11:52 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,24 +35,34 @@ size_t	len_until_blank(char *s)
 	return (i);
 }
 
-static t_bool	fill_arg(t_sh *sh, char **arg_tab, size_t *index, char *token)
+static t_bool	fill_arg(t_sh *sh, t_cmd *cmd, size_t *index, char *token)
 {
 	size_t	len;
 	char	*tmp;
+	t_bool	to_field_split;
 
 	len = 0;
 	while (*token)
 	{
-		arg_tab[*index] = NULL;
+		to_field_split = 0;
+		cmd->args[*index] = NULL;
 		len = len_until_blank(token);
 		tmp = ft_substr(token, 0, len);
-		arg_tab[*index] = expand(tmp, sh);
+		cmd->args[*index] = expand(tmp, sh);
+		if (!contains_quotes(tmp) && contains_quotes(cmd->args[*index]))
+			to_field_split = 1;
+		/*
+		-> reallouer cmd->args en ajoutant le nombre de words contenus 
+		-> split cmd->args[*index]
+		-> ajouter chaque string a cmd->args a partir de index
+		-> free le split
+		*/
 		free(tmp);
-		if (ft_strchr(arg_tab[*index], '\'')
-			|| ft_strchr(arg_tab[*index], '\"'))
+		if (ft_strchr(cmd->args[*index], '\'')
+			|| ft_strchr(cmd->args[*index], '\"'))
 		{
-			tmp = arg_tab[*index];
-			arg_tab[*index] = remove_quote(tmp);
+			tmp = cmd->args[*index];
+			cmd->args[*index] = remove_quote(tmp);
 			free(tmp);
 		}
 		token += len;
@@ -78,7 +88,7 @@ t_bool	set_cmd_params(t_sh *sh, t_list *token, t_cmd *cmd)
 		if (is_redir(token->type) && !cmd->redir_error)
 			set_redir(sh, cmd, (char *)token->content);
 		else
-			fill_arg(sh, cmd->args, &arg_no, (char *)token->content);
+			fill_arg(sh, cmd-, &arg_no, (char *)token->content);
 		token = token->next;
 	}
 	cmd->args[args_nb] = NULL;

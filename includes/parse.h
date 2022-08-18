@@ -39,6 +39,9 @@ t_bool		is_sep_operator(char c);
 t_bool		is_metachar(char c);
 t_bool		is_doll_then_quote(char *s);
 
+/* STR COMPAR */
+t_bool		contains_quotes(char *str);
+
 /* FILE_COMPAR */
 t_bool		is_infilename(int c);
 t_bool		is_heredoc_delim(int c);
