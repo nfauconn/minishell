@@ -6,7 +6,7 @@
 /*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:18:20 by noe               #+#    #+#             */
-/*   Updated: 2022/08/18 14:13:35 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/18 14:21:23 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,14 @@ static t_bool	fill_arg(t_sh *sh, t_cmd *cmd, size_t *index, char *token)
 	{
 		cmd->args[*index] = NULL;
 		len = len_until_blank(token);
-		tmp = ft_substr(token, 0, len);
-		cmd->args[*index] = expand(tmp, sh);
-		if (!contains_quotes(tmp) && contains_quotes(cmd->args[*index]))
+		tmp = ft_substr(token, 0, len);//tmp = le word (colle a des quotes ou non) qui sera ajoute comme argument
+		cmd->args[*index] = expand(tmp, sh);//on l expand
+		if (!contains_quotes(tmp) && contains_blanks(cmd->args[*index]))
 		{
 			/* dans l ideal, creer une fonction qui s'en occupe en dehors de celle-ci car deja bcp de lignes
 			-> reallouer cmd->args en ajoutant le nombre de words contenus 
 			-> split cmd->args[*index]
+			-> multiplier x -1 les quotes!!!
 			-> ajouter chaque string a cmd->args a partir de index
 			-> free le split
 			*/
@@ -61,7 +62,7 @@ static t_bool	fill_arg(t_sh *sh, t_cmd *cmd, size_t *index, char *token)
 			|| ft_strchr(cmd->args[*index], '\"'))
 		{
 			tmp = cmd->args[*index];
-			cmd->args[*index] = remove_quote(tmp);
+			cmd->args[*index] = remove_quote(tmp);//on remove les quotes
 			free(tmp);
 		}
 		token += len;
@@ -87,7 +88,7 @@ t_bool	set_cmd_params(t_sh *sh, t_list *token, t_cmd *cmd)
 		if (is_redir(token->type) && !cmd->redir_error)
 			set_redir(sh, cmd, (char *)token->content);
 		else
-			fill_arg(sh, cmd-, &arg_no, (char *)token->content);
+			fill_arg(sh, cmd, &arg_no, (char *)token->content);
 		token = token->next;
 	}
 	cmd->args[args_nb] = NULL;
