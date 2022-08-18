@@ -6,7 +6,7 @@
 /*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 11:36:22 by user42            #+#    #+#             */
-/*   Updated: 2022/08/16 17:12:43 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/18 13:56:28 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,23 +35,20 @@ static t_bool	check_nb_sign(char **tok, int type)
 
 static t_bool	lex_redir(char *content)
 {
+	if (check_nb_sign(&content, (int)*content) == OK)
+	{
+		content--;
+		if (*content == '>')
+			return (lex_perror(">"));
+		else if (*content == '<')
+			return (lex_perror("<"));
+	}
 	if (!*content)
 		return (lex_perror("newline"));
 	while (is_blank(*content))
 		content++;
 	if (*content == '|')
 		return (lex_perror("|"));
-	else if (is_redir(*content))
-	{
-		if (check_nb_sign(&content, (int)*content) == OK)
-		{
-			content--;
-			if (*content == '>')
-				return (lex_perror(">"));
-			else if (*content == '<')
-				return (lex_perror("<"));
-		}
-	}	
 	return (0);
 }
 
