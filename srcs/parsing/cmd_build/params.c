@@ -6,7 +6,7 @@
 /*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:18:20 by noe               #+#    #+#             */
-/*   Updated: 2022/08/18 15:41:03 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/18 15:44:15 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,15 @@ static t_bool	fill_arg(t_sh *sh, t_cmd *cmd, char *token)
 		tmp = ft_substr(token, 0, len);//tmp = le word (colle a des quotes ou non) qui sera ajoute comme argument
 		/*if :
 			- on trouve un $identifier PAS ENTRE QUOTES qui a une VAR_VAL
-					>field_splitter_expand(cmd, index) --> split chaque arg en content --> lstnew -->lstaddback
-						-> multiplier x -1 les quotes!!! 
-						-> ajouter chaque string a cmd->args_tab a partir de index
+					>field_splitter_expand(cmd, index) 
+						-> split chaque arg en content 	
+							-> multiplier x -1 les quotes!!! 
+							-> remove quotes ??
+							-> lstnew -->lstaddback
 						-> free le split
 			else
 		*/
-		content = expand(tmp, sh);//on l expand
+		content = expand(tmp, sh);
 		free(tmp);
 		if (ft_strchr(content, '\'')
 			|| ft_strchr(content, '\"'))
