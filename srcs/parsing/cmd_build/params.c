@@ -6,7 +6,7 @@
 /*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:18:20 by noe               #+#    #+#             */
-/*   Updated: 2022/08/18 14:11:52 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/18 14:13:35 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,24 +39,23 @@ static t_bool	fill_arg(t_sh *sh, t_cmd *cmd, size_t *index, char *token)
 {
 	size_t	len;
 	char	*tmp;
-	t_bool	to_field_split;
 
 	len = 0;
 	while (*token)
 	{
-		to_field_split = 0;
 		cmd->args[*index] = NULL;
 		len = len_until_blank(token);
 		tmp = ft_substr(token, 0, len);
 		cmd->args[*index] = expand(tmp, sh);
 		if (!contains_quotes(tmp) && contains_quotes(cmd->args[*index]))
-			to_field_split = 1;
-		/*
-		-> reallouer cmd->args en ajoutant le nombre de words contenus 
-		-> split cmd->args[*index]
-		-> ajouter chaque string a cmd->args a partir de index
-		-> free le split
-		*/
+		{
+			/* dans l ideal, creer une fonction qui s'en occupe en dehors de celle-ci car deja bcp de lignes
+			-> reallouer cmd->args en ajoutant le nombre de words contenus 
+			-> split cmd->args[*index]
+			-> ajouter chaque string a cmd->args a partir de index
+			-> free le split
+			*/
+		}
 		free(tmp);
 		if (ft_strchr(cmd->args[*index], '\'')
 			|| ft_strchr(cmd->args[*index], '\"'))
