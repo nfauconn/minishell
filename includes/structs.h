@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 12:07:25 by user42            #+#    #+#             */
-/*   Updated: 2022/08/16 22:06:50 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/18 15:30:32 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ typedef struct s_cmd
 {
 	size_t			index;
 	int				built_i;
-	char			**args;
+	char			**args_tab;
+	t_list			*args_lst;
 	char			*name;
 	char			**possible_paths;
 	char			**envp;

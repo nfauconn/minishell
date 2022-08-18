@@ -6,7 +6,7 @@
 /*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:25:56 by noe               #+#    #+#             */
-/*   Updated: 2022/08/16 17:26:48 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/18 15:41:03 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ extern unsigned char	g_last_status;
 
 static int	no_args(t_cmd *cmd)
 {
-	if (cmd->name && !cmd->args[1])
+	if (cmd->name && !cmd->args_tab[1])
 		return (1);
 	return (0);
 }

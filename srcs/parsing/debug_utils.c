@@ -6,7 +6,7 @@
 /*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 16:28:38 by noe               #+#    #+#             */
-/*   Updated: 2022/08/16 17:16:29 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/18 15:38:33 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ void	print_cmd_list(t_sh *sh)
 	{
 		printf("cmd = ");
 		i = 0;
-		while (tmp->args && tmp->args[i])
+		while (tmp->args_tab && tmp->args_tab[i])
 		{
-			printf("[%s]", tmp->args[i++]);
+			printf("[%s]", tmp->args_tab[i++]);
 			printf(" ");
 		}
 		printf("\n");

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   params.c                                           :+:      :+:    :+:   */
+/*   params_prev.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -35,15 +35,15 @@ size_t	len_until_blank(char *s)
 	return (i);
 }
 
-static t_bool	fill_arg(t_sh *sh, t_cmd *cmd, char *token)
+static t_bool	fill_arg(t_sh *sh, t_cmd *cmd, size_t *index, char *token)
 {
 	size_t	len;
 	char	*tmp;
-	char	*content;
 
 	len = 0;
 	while (*token)
 	{
+		cmd->args_tab[*index] = NULL;
 		len = len_until_blank(token);
 		tmp = ft_substr(token, 0, len);//tmp = le word (colle a des quotes ou non) qui sera ajoute comme argument
 		/*if :
@@ -54,35 +54,44 @@ static t_bool	fill_arg(t_sh *sh, t_cmd *cmd, char *token)
 						-> free le split
 			else
 		*/
-		content = expand(tmp, sh);//on l expand
+		cmd->args_tab[*index] = expand(tmp, sh);//on l expand
 		free(tmp);
-		if (ft_strchr(content, '\'')
-			|| ft_strchr(content, '\"'))
+		if (ft_strchr(cmd->args_tab[*index], '\'')
+			|| ft_strchr(cmd->args_tab[*index], '\"'))
 		{
-			tmp = content;
-			content = remove_quote(tmp);
+			tmp = cmd->args_tab[*index];
+			cmd->args_tab[*index] = remove_quote(tmp);
 			free(tmp);
 		}
-		ft_lstadd_back(&cmd->args_lst, ft_lstnew(content));
 		token += len;
 		while (is_blank(*token))
 			token++;
+		(*index)++;
 	}
 	return (0);
 }
 
 t_bool	set_cmd_params(t_sh *sh, t_list *token, t_cmd *cmd)
 {
+	size_t	args_nb;
+	size_t	arg_no;
+
+	args_nb = get_args_nb(token);
+	arg_no = 0;
+	cmd->args_tab = (char **)malloc(sizeof(char *) * (args_nb + 1));
+	if (!cmd->args_tab)
+		return (1);
 	while (token && token->type != '|')
 	{
-		if (is_redir(token->type))
+		if (is_redir(token->type) && !cmd->redir_error)
 		{
-			if (!cmd->redir_error)
-				set_redir(sh, cmd, (char *)token->content);
+			printf("cmd->redir_error = %d\n", cmd->redir_error);
+			set_redir(sh, cmd, (char *)token->content);
 		}
-		else
-			fill_arg(sh, cmd, (char *)token->content);
+		else if (!is_redir(token->type))
+			fill_arg(sh, cmd, &arg_no, (char *)token->content);
 		token = token->next;
 	}
+	cmd->args_tab[args_nb] = NULL;
 	return (0);
 }

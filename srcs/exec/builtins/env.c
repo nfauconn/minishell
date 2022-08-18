@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:53:16 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/13 23:49:48 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/18 15:41:03 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	mini_env(t_sh *sh, t_cmd *cmd)
 {
 	t_list	*l;
 
-	if (cmd->args[1])
+	if (cmd->args_tab[1])
 	{
 		ft_printerror("minish: env: does not handle arguments\n");
 		return (1);

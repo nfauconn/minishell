@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:53:50 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/09 20:59:33 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/18 15:41:03 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ int	mini_export(t_sh *sh, t_cmd *cmd)
 	int		status;
 	size_t	j;
 
-	var_assigns = cmd->args;
+	var_assigns = cmd->args_tab;
 	j = 1;
 	status = 0;
 	if (!var_assigns || !var_assigns[j])

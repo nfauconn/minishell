@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   build_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 00:25:15 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/16 22:09:21 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/18 15:35:11 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ t_cmd	*cmd_init(void)
 	cmd->index = 0;
 	cmd->name = NULL;
 	cmd->built_i = -1;
-	cmd->args = NULL;
+	cmd->args_tab = NULL;
+	cmd->args_lst = NULL;
 	cmd->possible_paths = NULL;
 	cmd->path = NULL;
 	cmd->envp = NULL;
@@ -54,9 +55,21 @@ t_cmd	*build_cmd(t_sh *sh, t_list *token, size_t i)
 	if (!cmd)
 		return (NULL);
 	set_cmd_params(sh, token, cmd);
-	if (cmd->args)
+/* while (lst)
 	{
-		cmd->name = cmd->args[0];
+		tmp = (char *)lst->content
+		while (*tmp)
+		{
+			if *tmp < 0
+				tmp = -tmp;
+			tmp++;
+		}
+		lst = lst->next;
+	}
+	cmd->args_tab = ft_lsttoarray(cmd->args_lst);*/
+	if (cmd->args_tab)
+	{
+		cmd->name = cmd->args_tab[0];
 		cmd->built_i = is_builtin(cmd->name);
 		cmd->index = i;
 		return (cmd);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_execve.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 12:56:04 by user42            #+#    #+#             */
-/*   Updated: 2022/08/17 01:46:30 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/18 15:41:03 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	exec_absolute_path(t_sh *sh, t_cmd *cmd)
 {
 	if (cmd_is_dir(cmd->name))
 		perror_exit(sh, cmd->name, "Is a directory", 1);
-	execve(cmd->name, cmd->args, cmd->envp);
+	execve(cmd->name, cmd->args_tab, cmd->envp);
 	perror_exit(sh, cmd->name, strerror(errno), 127);
 }
 
@@ -61,7 +61,7 @@ void	cmd_execve(t_sh *sh, t_cmd *cmd)
 	while (cmd->possible_paths[i])
 	{
 		cmd->path = join_path(cmd->possible_paths[i], cmd->name);
-		execve(cmd->path, cmd->args, cmd->envp);
+		execve(cmd->path, cmd->args_tab, cmd->envp);
 		i++;
 		ft_strdel(&cmd->path);
 	}
