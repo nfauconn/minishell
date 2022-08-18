@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 11:36:22 by user42            #+#    #+#             */
-/*   Updated: 2022/08/18 13:56:28 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/19 00:54:02 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ static t_bool	lex_redir(char *content)
 		else if (*content == '<')
 			return (lex_perror("<"));
 	}
+	while (is_blank(*content))
+		content++;	
 	if (!*content)
 		return (lex_perror("newline"));
-	while (is_blank(*content))
-		content++;
 	if (*content == '|')
 		return (lex_perror("|"));
 	return (0);
@@ -57,6 +57,8 @@ static t_bool	tok_lexer(char *content, int type)
 	if (is_operator(type))
 	{
 		if (check_nb_sign(&content, type) == FAIL)
+			return (1);
+		if (is_redir(type) && lex_redir(content) == FAIL)
 			return (1);
 		while (*content && is_blank(*content))
 			content++;

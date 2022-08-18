@@ -81,7 +81,7 @@ OBJS = ${subst ${SRC_DIR}, ${BUILD_DIR}, ${SRCS:%.c=%.o}}
 VPATH = ${SRC_DIR}:${INC_DIR}:${BUILD_DIR}
 
 CC = clang
-CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror #-g3 -fsanitize=address
 INCLUDES = -I ${INC_DIR} -I ${LIBFT_INC_DIR}
 LD_FLAGS = -L ${LIBFT_DIR} -ltinfo -lreadline
 COMP = ${CC} ${CFLAGS}
@@ -92,7 +92,7 @@ all: libftcreat ${TARGET}
 libftcreat:
 	@make -sC ${LIBFT_DIR}
 
-${TARGET}: ${OBJS} ${LIBFT} Makefile
+${TARGET}: ${OBJS} ${LIBFT}
 	@${COMP} ${LD_FLAGS} ${OBJS} -o ${TARGET} -lft
 	@echo "${TARGET} created"
 
