@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 11:36:22 by user42            #+#    #+#             */
-/*   Updated: 2022/08/19 00:54:02 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/19 01:38:14 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ static t_bool	check_nb_sign(char **tok, int type)
 	size_t	len;
 
 	start = *tok;
-	go_through_same_char(tok);
+	while (**tok == *start)
+		(*tok)++;
 	len = *tok - start;
 	if (type == '<' && len == 3)
 		return (sh_perror("does not handle here words"));
@@ -35,7 +36,13 @@ static t_bool	check_nb_sign(char **tok, int type)
 
 static t_bool	lex_redir(char *content)
 {
-	if (check_nb_sign(&content, (int)*content) == OK)
+	while (is_blank(*content))
+		content++;	
+	if (!*content)
+		return (lex_perror("newline"));
+	if (*content == '|')
+		return (lex_perror("|"));
+	else if (check_nb_sign(&content, (int)*content) == OK)
 	{
 		content--;
 		if (*content == '>')
@@ -43,12 +50,6 @@ static t_bool	lex_redir(char *content)
 		else if (*content == '<')
 			return (lex_perror("<"));
 	}
-	while (is_blank(*content))
-		content++;	
-	if (!*content)
-		return (lex_perror("newline"));
-	if (*content == '|')
-		return (lex_perror("|"));
 	return (0);
 }
 
