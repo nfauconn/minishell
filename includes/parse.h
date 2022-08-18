@@ -79,6 +79,6 @@ char		*remove_quote(char *str);
 
 /* DEBUG */
 void		print_token_list(t_input *input);
-void		print_cmd_list(t_sh *sh);
+void		print_commands(t_sh *sh);
 
 #endif
