@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   params.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: mdankou < mdankou@student.42.fr >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:18:20 by noe               #+#    #+#             */
-/*   Updated: 2022/08/18 17:00:00 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/18 18:42:24 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,55 @@ size_t	len_until_blank(char *s)
 	return (i);
 }
 
+static void field_splitter_expand(char *str, t_cmd *cmd)
+{
+	int		i;
+	int		k;
+	char	*content;
+	t_list *tmp;
+
+	while (*str)
+	{
+		while (*str && is_blank(*str))
+			++str;
+		i = 0;
+		if (!*str)
+			break ;
+		while (str[i] && !is_blank(str[i]))
+			++i;
+		content = ft_substr(str, 0, i);
+		tmp = ft_lstnew(content);
+		/*if (!tmp || !tmp->content)
+		{
+			ft_lstclear(&cmd->args_lst, free);
+		}
+		*/
+		k = -1;
+		while (content[++k])
+			if (content[k])
+				content[k] = content[k] * (-1);
+		ft_lstadd_back(&cmd->args_lst, tmp);
+		str += i;
+	}
+}
+
+static char	*search_id_without_quote(char *str)
+{
+	char *dollar;
+	char *quote;
+
+	dollar = ft_strchr(str, '$');
+	dollar = ft_strchr(str, '$');
+	if (!dollar)
+		return (NULL);
+	if ((dollar == str || !is_quote(*(dollar - 1)))
+		&& is_identifier(dollar[1]))
+	{
+		return (dollar);
+	}
+	return (NULL);
+}
+
 static t_bool	fill_arg(t_sh *sh, t_cmd *cmd, char *token)
 {
 	size_t	len;
@@ -63,6 +112,8 @@ static t_bool	fill_arg(t_sh *sh, t_cmd *cmd, char *token)
 	{
 		len = len_until_blank(token);
 		tmp = ft_substr(token, 0, len);//tmp = le word (colle a des quotes ou non) qui sera ajoute comme argument
+		content = expand(tmp, sh);
+		printf("content = %s\n", content);
 		/*if :
 			- on trouve un $identifier PAS ENTRE QUOTES qui a une VAR_VAL
 					>field_splitter_expand(cmd, index) 
@@ -73,16 +124,23 @@ static t_bool	fill_arg(t_sh *sh, t_cmd *cmd, char *token)
 						-> free le split
 			else
 		*/
-		content = expand(tmp, sh);
-		free(tmp);
-		if (ft_strchr(content, '\'')
-			|| ft_strchr(content, '\"'))
+		if (search_id_without_quote(tmp))
 		{
-			tmp = content;
-			content = remove_quote(tmp);
 			free(tmp);
+			field_splitter_expand(content, cmd);
 		}
-		ft_lstadd_back(&cmd->args_lst, ft_lstnew(content));
+		else
+		{
+			free(tmp);
+			if (ft_strchr(content, '\'')
+				|| ft_strchr(content, '\"'))
+			{
+				tmp = content;
+				content = remove_quote(tmp);
+				free(tmp);
+			}
+			ft_lstadd_back(&cmd->args_lst, ft_lstnew(content));
+		}	
 		token += len;
 		while (is_blank(*token))
 			token++;
