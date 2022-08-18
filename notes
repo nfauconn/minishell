@@ -38,7 +38,7 @@ VALGRIND
 	valgrind --suppressions=ignoreleak --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes --verbose ./minishell
 
 
-==============================================TO_DO============================================================
+=========================================TO_DO==================================
 
 SHELL_LVL
 	handle
@@ -48,10 +48,71 @@ EXIT
 	handle overflow
 
 
-FIELD SPLITTER
-	> pour commande expanded qui contient plusieurs mots separes par des espaces
+==================================FIELD SPLITTER================================
+
+BASH COMPORTEMENT
+
+noe@miaou:~$ $USER"ca"
+			 noeca: command not found
+			 > works like 
+			 noe@miaou:~$ noe"ca"
+
+________________________________________________________________________________
+
+noe@miaou:~$ export LOL="ca va"
+noe@miaou:~$ $USER$LOL
+			 noeca: command not found
+			 
+			 >works like :
+			 noe@miaou:~$ noe$LOL
 
 
+noe@miaou:~$ LOL"ca va"
+			 ca: command not found
+			
+			 > works like :
+			 noe@miaou:~$ ca va"ca va"
 
-	export QUOTE=" \" "
-	> quote removal devrait laisser la quote valeur de QUOTE (sans backslash en vrai mais les notes croient qu on veut quoter toute la suite)
+________________________________________________________________________________
+
+noe@miaou:~$ export LS="ls -l"
+noe@miaou:~$ $LS" -a"
+			 ls: invalid option -- ' '
+			 Try 'ls --help' for more information.
+			
+			 > works like:
+			 noe@miaou:~$ ls -l" -a"
+
+noe@miaou:~$ $LS"-a"
+			 ls: invalid option -- '-'
+			 Try 'ls --help' for more information.
+			 
+			 > works like :
+			 noe@miaou:~$ ls -l"-a"
+
+noe@miaou:~$ $LS -a
+			OK
+			> works like :
+			noe@miaou:~$ ls -l -a
+
+[noe@miaou:~$ ls -l -										]
+[			ls: cannot access '-': No such file or directory]
+
+
+________________________________________________________________________________
+
+noe@miaou:~$ export L="-l -a"
+noe@miaou:~$ ls$L
+			 ls-l: command not found
+
+noe@miaou:~$ export L=" -l -a"
+noe@miaou:~$ ls$L
+			 OK
+
+noe@miaou:~$ ls" "-l
+			 ls -l: command not found
+________________________________________________________________________________
+
+noe@miaou:~$ export QUOTE=" " "
+noe@miaou:~$ echo $QUOTE 
+			  " 
