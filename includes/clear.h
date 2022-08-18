@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 00:25:19 by user42            #+#    #+#             */
-/*   Updated: 2022/08/12 22:37:40 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/19 01:15:44 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,6 @@
 
 void	clear_input(t_input *input);
 void	clear_sh(t_sh *sh);
-void	clear_cmd_list(t_cmd *cmd);
+void	clear_cmd_list(t_cmd **cmd);
 
 #endif
