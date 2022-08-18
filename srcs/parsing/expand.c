@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 19:35:18 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/18 23:39:05 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/18 23:46:35 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,16 +124,9 @@ static char	*handle_quoted(char *ptr, t_indexes *i, t_sh *sh)
 				ret[i] *= -1;
 			i++;
 		}
-//		printf("ret expanded in handle quoted: %s\n", ret);
-
 	}
 	return (ret);
 }
-
-// before return (ret):
-//	ft_replacefree(&ret, ft_substr(ret, 1, ft_strlen(ret) - 1));
-// ??????????? pour regler quotes inside quotes apres expand ??
-// ou technique d ismael, char *= -1 a l interieur des quotes
 
 char	*expand(char *ptr, t_sh *sh)
 {

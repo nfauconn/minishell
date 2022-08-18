@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 12:50:49 by user42            #+#    #+#             */
-/*   Updated: 2022/08/18 17:02:25 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/18 23:50:55 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ t_bool	parse(t_sh *sh, t_input *input)
 		return (1);
 	if (!input->token_list)
 		return (1);
-	print_token_list(input);//DEBUG
+//	print_token_list(input);//DEBUG
 	if (lexer(input->token_list))
 		return (1);
 	if (build_cmd_lst(sh, input->token_list))
 		return (1);
-	print_commands(sh);//DEBUG
+//	print_commands(sh);//DEBUG
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:18:20 by noe               #+#    #+#             */
-/*   Updated: 2022/08/18 23:42:28 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/18 23:48:37 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	reset_quotes_to_ascii(t_list *cmd_args)
 	while (cmd_args)
 	{
 		content = (char *)cmd_args->content;
-		while (*content)
+		while (content && *content)
 		{
 			if (*content < 0)
 				*content *= -1;
