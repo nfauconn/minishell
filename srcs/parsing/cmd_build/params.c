@@ -6,7 +6,7 @@
 /*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:18:20 by noe               #+#    #+#             */
-/*   Updated: 2022/08/18 14:21:23 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/18 14:45:25 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,23 +46,26 @@ static t_bool	fill_arg(t_sh *sh, t_cmd *cmd, size_t *index, char *token)
 		cmd->args[*index] = NULL;
 		len = len_until_blank(token);
 		tmp = ft_substr(token, 0, len);//tmp = le word (colle a des quotes ou non) qui sera ajoute comme argument
+		/*if :
+			- on trouve un $PAS ENTRE QUOTES dans tmp
+			->on va chercher sa valeur
+				>if sa valeur contient des quotes
+					>cmd->args + *index = field_splitter_expand()
+						-> reallouer cmd->args en ajoutant le nombre de words contenus 
+								+ incrementer *index
+						-> split cmd->args[*index] 
+						-> multiplier x -1 les quotes!!!
+						-> ajouter chaque string a cmd->args a partir de index
+						-> free le split
+			else
+		*/
 		cmd->args[*index] = expand(tmp, sh);//on l expand
-		if (!contains_quotes(tmp) && contains_blanks(cmd->args[*index]))
-		{
-			/* dans l ideal, creer une fonction qui s'en occupe en dehors de celle-ci car deja bcp de lignes
-			-> reallouer cmd->args en ajoutant le nombre de words contenus 
-			-> split cmd->args[*index]
-			-> multiplier x -1 les quotes!!!
-			-> ajouter chaque string a cmd->args a partir de index
-			-> free le split
-			*/
-		}
 		free(tmp);
 		if (ft_strchr(cmd->args[*index], '\'')
 			|| ft_strchr(cmd->args[*index], '\"'))
 		{
 			tmp = cmd->args[*index];
-			cmd->args[*index] = remove_quote(tmp);//on remove les quotes
+			cmd->args[*index] = remove_quote(tmp);
 			free(tmp);
 		}
 		token += len;
