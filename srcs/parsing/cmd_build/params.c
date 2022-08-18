@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   params.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:18:20 by noe               #+#    #+#             */
-/*   Updated: 2022/08/17 01:59:48 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/18 00:53:23 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,13 @@ static t_bool	fill_arg(t_sh *sh, char **arg_tab, size_t *index, char *token)
 		tmp = ft_substr(token, 0, len);
 		arg_tab[*index] = expand(tmp, sh);
 		free(tmp);
-		tmp = arg_tab[*index];
-		arg_tab[*index] = remove_quote(tmp);
-		free(tmp);
+		if (ft_strchr(arg_tab[*index], '\'')
+			|| ft_strchr(arg_tab[*index], '\"'))
+		{
+			tmp = arg_tab[*index];
+			arg_tab[*index] = remove_quote(tmp);
+			free(tmp);
+		}
 		token += len;
 		while (is_blank(*token))
 			token++;
@@ -77,6 +81,6 @@ t_bool	set_cmd_params(t_sh *sh, t_list *token, t_cmd *cmd)
 			fill_arg(sh, cmd->args, &arg_no, (char *)token->content);
 		token = token->next;
 	}
-	cmd->args[arg_no] = NULL;
+	cmd->args[args_nb] = NULL;
 	return (0);
 }

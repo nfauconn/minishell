@@ -6,7 +6,7 @@
 /*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 19:35:18 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/18 00:35:49 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/18 13:21:25 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	*expand_var(char **ptr, t_sh *sh)
 			return (var_value(start, (*ptr) - start, sh->env));
 		}
 		else
-			return (ft_strjoinchar("$", *(*ptr)++));
+			(*ptr)++;
 	}
 	return (ft_strdup(""));
 }
