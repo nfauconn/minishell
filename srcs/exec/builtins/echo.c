@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:48:38 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/18 15:41:03 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/18 23:42:28 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	mini_echo(t_sh *sh, t_cmd *cmd)
 	int		nl_flag;
 	size_t	j;
 
-	args = cmd->args_tab;
+	args = cmd->args;
 	args++;
 	j = 0;
 	nl_flag = echo_handle_nlflag(args, &j);

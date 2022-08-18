@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:53:50 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/18 15:41:03 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/18 23:42:28 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	mini_unset(t_sh *sh, t_cmd *cmd)
 	int		status;
 	char	**var_name;
 
-	var_name = cmd->args_tab;
+	var_name = cmd->args;
 	j = 0;
 	status = 0;
 	while (var_name && var_name[++j])

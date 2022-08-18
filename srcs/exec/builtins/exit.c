@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 17:46:29 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/18 15:41:03 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/18 23:42:28 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,13 @@ int	mini_exit(t_sh *sh, t_cmd *cmd)
 
 	i = 0;
 	exit_code = 0;
-	while (cmd->args_tab[i])
+	while (cmd->args[i])
 		i++;
 	if (i == 1)
 		builtin_exit_clear(sh, 0);
-	else if (i == 2 && !ft_atoll_err(cmd->args_tab[1], &exit_code))
+	else if (i == 2 && !ft_atoll_err(cmd->args[1], &exit_code))
 	{
-		error_display("exit", cmd->args_tab[1], ": numeric argument required");
+		error_display("exit", cmd->args[1], ": numeric argument required");
 		builtin_exit_clear(sh, 2);
 	}
 	else if (i > 2)

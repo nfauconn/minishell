@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   params.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdankou < mdankou@student.42.fr >          +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:18:20 by noe               #+#    #+#             */
-/*   Updated: 2022/08/18 18:42:24 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/08/18 23:42:28 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,56 +52,7 @@ size_t	len_until_blank(char *s)
 	return (i);
 }
 
-static void field_splitter_expand(char *str, t_cmd *cmd)
-{
-	int		i;
-	int		k;
-	char	*content;
-	t_list *tmp;
-
-	while (*str)
-	{
-		while (*str && is_blank(*str))
-			++str;
-		i = 0;
-		if (!*str)
-			break ;
-		while (str[i] && !is_blank(str[i]))
-			++i;
-		content = ft_substr(str, 0, i);
-		tmp = ft_lstnew(content);
-		/*if (!tmp || !tmp->content)
-		{
-			ft_lstclear(&cmd->args_lst, free);
-		}
-		*/
-		k = -1;
-		while (content[++k])
-			if (content[k])
-				content[k] = content[k] * (-1);
-		ft_lstadd_back(&cmd->args_lst, tmp);
-		str += i;
-	}
-}
-
-static char	*search_id_without_quote(char *str)
-{
-	char *dollar;
-	char *quote;
-
-	dollar = ft_strchr(str, '$');
-	dollar = ft_strchr(str, '$');
-	if (!dollar)
-		return (NULL);
-	if ((dollar == str || !is_quote(*(dollar - 1)))
-		&& is_identifier(dollar[1]))
-	{
-		return (dollar);
-	}
-	return (NULL);
-}
-
-static t_bool	fill_arg(t_sh *sh, t_cmd *cmd, char *token)
+static t_bool	fill_arg(t_sh *sh, t_list **args_list, char *token)
 {
 	size_t	len;
 	char	*tmp;
@@ -111,36 +62,14 @@ static t_bool	fill_arg(t_sh *sh, t_cmd *cmd, char *token)
 	while (*token)
 	{
 		len = len_until_blank(token);
-		tmp = ft_substr(token, 0, len);//tmp = le word (colle a des quotes ou non) qui sera ajoute comme argument
+		tmp = ft_substr(token, 0, len);
 		content = expand(tmp, sh);
-		printf("content = %s\n", content);
-		/*if :
-			- on trouve un $identifier PAS ENTRE QUOTES qui a une VAR_VAL
-					>field_splitter_expand(cmd, index) 
-						-> split chaque arg en content 	
-							-> multiplier x -1 les quotes!!! 
-							-> remove quotes ??
-							-> lstnew -->lstaddback
-						-> free le split
-			else
-		*/
-		if (search_id_without_quote(tmp))
-		{
-			free(tmp);
-			field_splitter_expand(content, cmd);
-		}
-		else
-		{
-			free(tmp);
-			if (ft_strchr(content, '\'')
-				|| ft_strchr(content, '\"'))
-			{
-				tmp = content;
-				content = remove_quote(tmp);
-				free(tmp);
-			}
-			ft_lstadd_back(&cmd->args_lst, ft_lstnew(content));
-		}	
+//		printf("content = %s\n", content);
+		free(tmp);
+		tmp = content;
+		content = remove_quote(tmp);
+		free(tmp);
+		ft_lstadd_back(args_list, ft_lstnew(content));
 		token += len;
 		while (is_blank(*token))
 			token++;
@@ -150,6 +79,9 @@ static t_bool	fill_arg(t_sh *sh, t_cmd *cmd, char *token)
 
 t_bool	set_cmd_params(t_sh *sh, t_list *token, t_cmd *cmd)
 {
+	t_list	*args_lst;
+
+	args_lst = NULL;
 	while (token && token->type != '|')
 	{
 		if (is_redir(token->type))
@@ -158,10 +90,11 @@ t_bool	set_cmd_params(t_sh *sh, t_list *token, t_cmd *cmd)
 				set_redir(sh, cmd, (char *)token->content);
 		}
 		else
-			fill_arg(sh, cmd, (char *)token->content);
+			fill_arg(sh, &args_lst, (char *)token->content);
 		token = token->next;
 	}
-	reset_quotes_to_ascii(cmd->args_lst);
-	cmd->args_tab = ft_lsttostrarray(cmd->args_lst);
+	reset_quotes_to_ascii(args_lst);
+	cmd->args = ft_lsttostrarray(args_lst);
+	ft_lstclear(&args_lst, free);
 	return (0);
 }

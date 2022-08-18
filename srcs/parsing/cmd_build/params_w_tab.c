@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   params_prev.c                                      :+:      :+:    :+:   */
+/*   params_w_tab.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:18:20 by noe               #+#    #+#             */
-/*   Updated: 2022/08/18 15:41:03 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/18 23:42:28 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,26 +43,14 @@ static t_bool	fill_arg(t_sh *sh, t_cmd *cmd, size_t *index, char *token)
 	len = 0;
 	while (*token)
 	{
-		cmd->args_tab[*index] = NULL;
+		cmd->args[*index] = NULL;
 		len = len_until_blank(token);
-		tmp = ft_substr(token, 0, len);//tmp = le word (colle a des quotes ou non) qui sera ajoute comme argument
-		/*if :
-			- on trouve un $identifier PAS ENTRE QUOTES qui a une VAR_VAL
-					>field_splitter_expand(cmd, index) --> split chaque arg en content --> lstnew -->lstaddback
-						-> multiplier x -1 les quotes!!! 
-						-> ajouter chaque string a cmd->args_tab a partir de index
-						-> free le split
-			else
-		*/
-		cmd->args_tab[*index] = expand(tmp, sh);//on l expand
+		tmp = ft_substr(token, 0, len);
+		cmd->args[*index] = expand(tmp, sh);
 		free(tmp);
-		if (ft_strchr(cmd->args_tab[*index], '\'')
-			|| ft_strchr(cmd->args_tab[*index], '\"'))
-		{
-			tmp = cmd->args_tab[*index];
-			cmd->args_tab[*index] = remove_quote(tmp);
-			free(tmp);
-		}
+		tmp = cmd->args[*index];
+		cmd->args[*index] = remove_quote(tmp);
+		free(tmp);
 		token += len;
 		while (is_blank(*token))
 			token++;
@@ -78,20 +66,20 @@ t_bool	set_cmd_params(t_sh *sh, t_list *token, t_cmd *cmd)
 
 	args_nb = get_args_nb(token);
 	arg_no = 0;
-	cmd->args_tab = (char **)malloc(sizeof(char *) * (args_nb + 1));
-	if (!cmd->args_tab)
+	cmd->args = (char **)malloc(sizeof(char *) * (args_nb + 1));
+	if (!cmd->args)
 		return (1);
 	while (token && token->type != '|')
 	{
-		if (is_redir(token->type) && !cmd->redir_error)
+		if (is_redir(token->type))
 		{
-			printf("cmd->redir_error = %d\n", cmd->redir_error);
-			set_redir(sh, cmd, (char *)token->content);
+			if (!cmd->redir_error)
+				set_redir(sh, cmd, (char *)token->content);
 		}
-		else if (!is_redir(token->type))
+		else
 			fill_arg(sh, cmd, &arg_no, (char *)token->content);
 		token = token->next;
 	}
-	cmd->args_tab[args_nb] = NULL;
+	cmd->args[args_nb] = NULL;
 	return (0);
 }

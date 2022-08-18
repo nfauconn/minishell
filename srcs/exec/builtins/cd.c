@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:52:52 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/18 15:41:03 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/18 23:42:28 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static char	*build_curpath(t_sh *sh, t_cmd *cmd)
 	free(path);
 	while (cdpath && cdpath[++i])
 	{
-		path = join_path(cdpath[i], cmd->args_tab[1]);
+		path = join_path(cdpath[i], cmd->args[1]);
 		if (!path || (stat(path, &mode) == 0 && S_ISDIR(mode.st_mode)
 				&& !access(path, X_OK)))
 		{
@@ -87,8 +87,8 @@ static char	*build_curpath(t_sh *sh, t_cmd *cmd)
 
 static char	*get_curpath(t_sh *sh, t_cmd *cmd)
 {
-	if (ft_strchr(cmd->args_tab[1], '/') || ft_strchr(cmd->args_tab[1], '.'))
-		return (ft_strdup(cmd->args_tab[1]));
+	if (ft_strchr(cmd->args[1], '/') || ft_strchr(cmd->args[1], '.'))
+		return (ft_strdup(cmd->args[1]));
 	return (build_curpath(sh, cmd));
 }
 
@@ -97,7 +97,7 @@ int	mini_cd(t_sh *sh, t_cmd *cmd)
 	char	**args;
 	char	*path;
 
-	args = cmd->args_tab;
+	args = cmd->args;
 	if (!args[1])
 		return (cd_home(sh));
 	if (args[2])
@@ -107,7 +107,7 @@ int	mini_cd(t_sh *sh, t_cmd *cmd)
 	}
 	path = get_curpath(sh, cmd);
 	if (!path)
-		path = ft_strdup(cmd->args_tab[1]);
+		path = ft_strdup(cmd->args[1]);
 	if (chdir(path) < 0)
 		ft_printerror("minish: cd: %s: %s\n", args[1], strerror(errno));
 	else

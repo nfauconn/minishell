@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debug_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 16:28:38 by noe               #+#    #+#             */
-/*   Updated: 2022/08/18 17:10:18 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/18 23:43:30 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,6 @@ static void	print_redir(t_cmd *tmp)
 	printf("\n");
 }
 
-void	print_arg_lst(t_list *arg_lst)
-{
-	printf("cmd->args_lst = ");
-	while (arg_lst)
-	{
-		printf("[%s] ", (char *)arg_lst->content);
-		arg_lst = arg_lst->next;
-	}
-	printf("\n");
-}
-
 void	print_commands(t_sh *sh)
 {
 	t_cmd	*tmp;
@@ -55,12 +44,11 @@ void	print_commands(t_sh *sh)
 	i = 0;
 	while (tmp)
 	{
-		print_arg_lst(tmp->args_lst);
-		printf("cmd->args_tab = ");
+		printf("cmd->args = ");
 		i = 0;
-		while (tmp->args_tab && tmp->args_tab[i])
+		while (tmp->args && tmp->args[i])
 		{
-			printf("[%s]", tmp->args_tab[i++]);
+			printf("[%s]", tmp->args[i++]);
 			printf(" ");
 		}
 		printf("\n");

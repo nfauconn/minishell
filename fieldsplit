@@ -1,0 +1,9 @@
+$IDENTIFIER ($USER)
+	>colle a un word / des quotes sans blank AVANT
+	>colle a des quotes sans blank APRES
+
+$FIELDWBLANKS (export FIELDWBLANKS="ls -l")
+	>premier word colle a un word / des quotes AVANT
+		SAUF si var_val commence par blank
+	>dernier word colle a des quotes sans blank APRES
+		SAUF si var_val commence par blank

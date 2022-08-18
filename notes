@@ -113,6 +113,17 @@ noe@miaou:~$ ls" "-l
 			 ls -l: command not found
 ________________________________________________________________________________
 
-noe@miaou:~$ export QUOTE=" " "
+noe@miaou:~$ export QUOTE=' " '
 noe@miaou:~$ echo $QUOTE 
 			  " 
+
+
+if :
+- on trouve un $identifier PAS ENTRE QUOTES qui a une VAR_VAL
+		>field_splitter_expand(cmd, index) 
+				-> split chaque arg en content 	
+				-> multiplier x -1 les quotes!!! 
+				-> remove quotes ??
+						-> lstnew -->lstaddback
+				-> free le split
+else

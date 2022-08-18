@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 19:35:18 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/18 13:21:25 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/18 23:39:05 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ char	*expand_str(char *ptr, size_t len, t_sh *sh)
 			ptr++;
 			to_add.str = expand_var(&ptr, sh);
 		}
-		else if (*ptr == '$' && !++ptr)
+		else if (*ptr == '$' && ++ptr == p.end)
 			to_add.str = ft_strdup("$");
 		else
 		{
@@ -116,6 +116,16 @@ static char	*handle_quoted(char *ptr, t_indexes *i, t_sh *sh)
 			i->curr++;
 		i->curr++;
 		ret = expand_str(ptr + i->start, i->curr - i->start, sh);
+		printf("ret expanded in handle quoted: %s\n", ret);
+		int i = 1;
+		while (ret[i] && ret[i + 1])
+		{
+			if (ret[i] == '\"')
+				ret[i] *= -1;
+			i++;
+		}
+//		printf("ret expanded in handle quoted: %s\n", ret);
+
 	}
 	return (ret);
 }
