@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lsttostrarray.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 16:47:20 by noe               #+#    #+#             */
-/*   Updated: 2022/08/18 16:59:14 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/18 23:55:53 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	**ft_lsttostrarray(t_list *lst)
 	while (lst)
 	{
 		tab[i] = ft_strdup((char *)lst->content);
-		lst = lst->next;		
+		lst = lst->next;
 		i++;
 	}
 	tab[i] = NULL;

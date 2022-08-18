@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 19:35:18 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/18 23:46:35 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/19 00:05:26 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,16 @@
 
 extern unsigned char	g_last_status;
 
-void	add_to_new(t_newstr *new, t_newstr *to_add)
+void	add_to_new(t_newstr *new, char *to_add)
 {
-	if (to_add->str)
-		to_add->len = ft_strlen(to_add->str);
-	new->len += to_add->len;
+	size_t	len;
+
+	len = ft_strlen(to_add);
+	new->len += len;
 	new->str = ft_reallocstr(new->str, new->len);
-	if (to_add->str)
-		ft_strlcat(new->str, to_add->str, new->len + 1);
-	free(to_add->str);
+	if (to_add)
+		ft_strlcat(new->str, to_add, new->len + 1);
+	free(to_add);
 }
 
 char	*var_value(char *var_name, size_t len, t_list *env)
@@ -67,30 +68,42 @@ char	*expand_str(char *ptr, size_t len, t_sh *sh)
 {
 	t_newstr	new;
 	t_charptr	p;
-	t_newstr	to_add;
+	char		*to_add;
 
 	new = ft_initnewstr();
-	to_add = ft_initnewstr();
 	p.end = ptr + len;
 	while (*ptr && ptr != p.end)
 	{
 		if (*ptr == '$' && (ptr + 1) != p.end)
 		{
 			ptr++;
-			to_add.str = expand_var(&ptr, sh);
+			to_add = expand_var(&ptr, sh);
 		}
 		else if (*ptr == '$' && ++ptr == p.end)
-			to_add.str = ft_strdup("$");
+			to_add = ft_strdup("$");
 		else
 		{
 			p.start = ptr;
 			while (*ptr && ptr != p.end && *ptr != '$')
 				ptr++;
-			to_add.str = ft_substr(p.start, 0, ptr - p.start);
+			to_add = ft_substr(p.start, 0, ptr - p.start);
 		}
-		add_to_new(&new, &to_add);
+		add_to_new(&new, to_add);
 	}
 	return (new.str);
+}
+
+static void	escape_quotes(char *str)
+{
+	size_t	i;
+
+	i = 1;
+	while (str[i] && str[i + 1])
+	{
+		if (str[i] == '\"')
+			str[i] *= -1;
+		i++;
+	}
 }
 
 static char	*handle_quoted(char *ptr, t_indexes *i, t_sh *sh)
@@ -116,14 +129,7 @@ static char	*handle_quoted(char *ptr, t_indexes *i, t_sh *sh)
 			i->curr++;
 		i->curr++;
 		ret = expand_str(ptr + i->start, i->curr - i->start, sh);
-		printf("ret expanded in handle quoted: %s\n", ret);
-		int i = 1;
-		while (ret[i] && ret[i + 1])
-		{
-			if (ret[i] == '\"')
-				ret[i] *= -1;
-			i++;
-		}
+		escape_quotes(ret);
 	}
 	return (ret);
 }
@@ -132,7 +138,7 @@ char	*expand(char *ptr, t_sh *sh)
 {
 	t_newstr	new;
 	t_indexes	i;
-	t_newstr	to_add;
+	char		*to_add;
 
 	new = ft_initnewstr();
 	i.curr = 0;
@@ -141,16 +147,16 @@ char	*expand(char *ptr, t_sh *sh)
 		i.start = i.curr;
 		if (is_quote(ptr[i.curr]) || is_doll_then_quote(&ptr[i.curr]))
 		{
-			to_add.str = handle_quoted(ptr, &i, sh);
+			to_add = handle_quoted(ptr, &i, sh);
 		}
 		else
 		{
 			while (ptr[i.curr] && !is_quote(ptr[i.curr])
 				&& !is_doll_then_quote(&ptr[i.curr]))
 				i.curr++;
-			to_add.str = expand_str(ptr + i.start, i.curr - i.start, sh);
+			to_add = expand_str(ptr + i.start, i.curr - i.start, sh);
 		}
-		add_to_new(&new, &to_add);
+		add_to_new(&new, to_add);
 	}
 	return (new.str);
 }
