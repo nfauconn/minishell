@@ -6,7 +6,7 @@
 /*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:18:20 by noe               #+#    #+#             */
-/*   Updated: 2022/08/18 16:44:07 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/18 17:00:00 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,6 @@ t_bool	set_cmd_params(t_sh *sh, t_list *token, t_cmd *cmd)
 		token = token->next;
 	}
 	reset_quotes_to_ascii(cmd->args_lst);
-	cmd->args_tab = ft_lsttoarray(cmd->args_lst);
+	cmd->args_tab = ft_lsttostrarray(cmd->args_lst);
 	return (0);
 }

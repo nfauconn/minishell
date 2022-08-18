@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 16:22:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/16 23:03:24 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/18 16:57:54 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ char		*ft_itoa(int n);
 char		**ft_split(char const *s, char c);
 t_list		*ft_strarraytolist(char **tab);
 char		*ft_ulltoa_base(unsigned long long n, int base, size_t maj);
+char		**ft_lsttostrarray(t_list *lst);
 
 /* DISPLAY */
 void		ft_putchar_fd(char c, int fd);
