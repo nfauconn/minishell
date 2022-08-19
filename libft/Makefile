@@ -48,12 +48,13 @@ SRCS := ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		ft_strarraytolist \
 		ft_ulltoa_base} \
 		${addprefix ${DISPLAY}/, \
+		ft_lstdisplay \
 		ft_printerror \
 		ft_putchar_fd \
 		ft_putendl_fd \
 		ft_putnbr_fd \
 		ft_putstr_fd \
-		ft_printstrarray \
+		ft_strarraydisplay \
 		${addprefix ${FT_PRINTF}/, \
 		pf_conv_c \
 		pf_conv_s \

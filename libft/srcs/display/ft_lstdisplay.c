@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printstrarray.c                                 :+:      :+:    :+:   */
+/*   ft_lstdisplay.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/15 18:18:58 by noe               #+#    #+#             */
-/*   Updated: 2022/08/15 18:19:02 by noe              ###   ########.fr       */
+/*   Created: 2022/08/19 15:14:29 by noe               #+#    #+#             */
+/*   Updated: 2022/08/19 15:19:15 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_printstrarray(char **tab)
+void	ft_lstdisplay(t_list *lst)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
-	while (tab[i])
+	while (lst)
 	{
-		ft_printf("array[%zu] = |%s|\n", i, tab[i]);
+		ft_printf("elem%d = [%s]\n", i, (char *)lst->content);
+		lst = lst->next;
 		i++;
 	}
 }

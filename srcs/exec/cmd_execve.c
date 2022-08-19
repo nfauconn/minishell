@@ -6,16 +6,16 @@
 /*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 12:56:04 by user42            #+#    #+#             */
-/*   Updated: 2022/08/19 14:43:32 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/19 15:21:52 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 #include "parse.h"
 
-static int	no_path_in_env(char **possible_paths, char **envp)
+static t_bool	no_path_in_env(char **possible_paths, char **envp)
 {
-	int		ret;
+	t_bool	ret;
 	char	*path_val;
 	t_list	*env_lst;
 
@@ -70,8 +70,8 @@ static void	try_env_paths(char **args, char **envp)
 	t_bool				all_paths_tried;
 
 	all_paths_tried = 0;
-	possible_paths = NULL;
-	if (no_path_in_env(envp, possible_paths))
+	possible_paths = get_path_tab(envp);
+	if (no_path_in_env(possible_paths, envp))
 		error = 127;
 	else
 	{

@@ -6,7 +6,7 @@
 /*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 16:22:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/19 13:34:53 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/19 15:16:50 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,11 +109,12 @@ char		*ft_ulltoa_base(unsigned long long n, int base, size_t maj);
 char		**ft_lsttostrarray(t_list *lst);
 
 /* DISPLAY */
+void		ft_lstdisplay(t_list *lst);
 void		ft_putchar_fd(char c, int fd);
 void		ft_putendl_fd(char *s, int fd);
 void		ft_putnbr_fd(int n, int fd);
 void		ft_putstr_fd(char *s, int fd);
-void		ft_printstrarray(char **tab);
+void		ft_strarraydisplay(char **tab);
 
 /* GNL */
 int			get_next_line(int fd, char **line);
