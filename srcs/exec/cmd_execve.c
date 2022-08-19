@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 12:56:04 by user42            #+#    #+#             */
-/*   Updated: 2022/08/18 23:42:28 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/19 02:24:07 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ static int	cmd_is_dir(char *cmd_name)
 {
 	struct stat		mode;
 
+	if (!ft_strcmp(cmd_name, "."))
+		return (1);
 	if (stat(cmd_name, &mode) == 0 && S_ISDIR(mode.st_mode))
 		return (1);
 	return (0);
@@ -61,6 +63,7 @@ void	cmd_execve(t_sh *sh, t_cmd *cmd)
 	while (cmd->possible_paths[i])
 	{
 		cmd->path = join_path(cmd->possible_paths[i], cmd->name);
+//		clear_before_exec(sh);
 		execve(cmd->path, cmd->args, cmd->envp);
 		i++;
 		ft_strdel(&cmd->path);
