@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   params.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mdankou < mdankou@student.42.fr >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:18:20 by noe               #+#    #+#             */
-/*   Updated: 2022/08/18 23:48:37 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/19 18:38:38 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,40 @@ void	reset_quotes_to_ascii(t_list *cmd_args)
 		content = (char *)cmd_args->content;
 		while (content && *content)
 		{
-			if (*content < 0)
+			if (*content == -('\'') || *content == -('\"'))
 				*content *= -1;
 			content++;
 		}
 		cmd_args = cmd_args->next;
+	}
+}
+
+void	set_quotes_to_negative(char *content)
+{
+	char	quote;
+
+	quote = 0;
+	while (*content)
+	{
+		while (*content && !is_quote(*content))
+			++content;
+		quote = *content;
+		if (!*content)
+			return ;
+		if (!ft_strchr(content + 1, quote))
+		{
+			*content *= -1;
+			return ;
+		}
+		while (*(++content) && quote != *content)
+		{
+			if ((quote == '\"' && *content == ('\''))
+				|| (quote == '\'' && *content == ('\"')))
+					*content *= -1;
+		}
+		if (quote == *content)
+			++content;
+		quote = 0;
 	}
 }
 
@@ -64,7 +93,9 @@ static t_bool	fill_arg(t_sh *sh, t_list **args_list, char *token)
 		len = len_until_blank(token);
 		tmp = ft_substr(token, 0, len);
 		content = expand(tmp, sh);
-//		printf("content = %s\n", content);
+		printf("content = %s\n", content);
+		set_quotes_to_negative(content);
+		printf("content = %s\n", content);
 		free(tmp);
 		tmp = content;
 		content = remove_quote(tmp);
@@ -94,6 +125,7 @@ t_bool	set_cmd_params(t_sh *sh, t_list *token, t_cmd *cmd)
 		token = token->next;
 	}
 	reset_quotes_to_ascii(args_lst);
+	ft_lstdisplay(args_lst);
 	cmd->args = ft_lsttostrarray(args_lst);
 	ft_lstclear(&args_lst, free);
 	return (0);
