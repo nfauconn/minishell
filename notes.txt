@@ -47,7 +47,7 @@ minish> echo $USER$USER$"$USERcoucou'$USER"  '$USER'     $USER     "-$lol- hehe.
 
 
 VALGRIND
-	valgrind --suppressions=ignoreleak --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes --verbose ./minishell
+	valgrind --suppressions=ignoreleak --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes --trace-children=yes ./minishell
 
 SIMPLE COMMAND RETURN
 	The return status (see Exit Status) of a simple command is its exit status, or 128+n if the command was terminated by signal n. 
