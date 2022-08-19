@@ -6,7 +6,7 @@
 /*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 12:56:04 by user42            #+#    #+#             */
-/*   Updated: 2022/08/19 16:26:26 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/19 18:59:04 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ static uint8_t	try_possible_paths(char **args, char **envp, char **paths)
 		else
 			all_paths_tried = 1;
 	}
+	ft_strarrayclear(&paths);
 	return (error);
 }
 
