@@ -6,7 +6,7 @@
 /*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 12:56:04 by user42            #+#    #+#             */
-/*   Updated: 2022/08/19 18:59:04 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/20 00:25:33 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,10 @@ static uint8_t	exec_relative_path(char **args, char **envp)
 	else if (error != ENOENT)
 		error_display(args[0], strerror(error), 0);
 	else
+	{
+		error = 127;
 		error_display(args[0], "command not found", 0);
+	}
 	ft_strarrayclear(&possible_paths);
 	return (error);
 }
