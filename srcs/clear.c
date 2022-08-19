@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clear.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 21:14:36 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/19 02:08:22 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/19 13:24:44 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,6 @@ static void	clear_cmd(t_cmd *cmd)
 {
 	if (cmd->args)
 		ft_strarrayclear(&cmd->args);
-	if (cmd->possible_paths)
-		ft_strarrayclear(&cmd->possible_paths);
-	if (cmd->path)
-		ft_strdel(&cmd->path);
-	if (cmd->envp)
-		ft_strarrayclear(&cmd->envp);
 	if (cmd->redir_in.filename)
 	{
 		if (cmd->redir_in.fd > STDERR_FILENO)

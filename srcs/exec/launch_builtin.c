@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch_builtin.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:25:56 by noe               #+#    #+#             */
-/*   Updated: 2022/08/18 23:42:28 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/19 13:24:09 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ extern unsigned char	g_last_status;
 
 static int	no_args(t_cmd *cmd)
 {
-	if (cmd->name && !cmd->args[1])
+	if (cmd->args[0] && !cmd->args[1])
 		return (1);
 	return (0);
 }

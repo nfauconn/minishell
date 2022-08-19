@@ -92,6 +92,7 @@ SRCS := ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		ft_strarrayclear \
 		ft_strdel} \
 		${addprefix ${REPLACE_WITH_ALLOC}/, \
+		ft_strarraydup \
 		ft_strdup \
 		ft_strfdup \
 		ft_strjoin \

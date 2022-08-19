@@ -12,13 +12,13 @@
 
 #include "libft.h"
 
-int	ft_strarraysize(char **array)
+ssize_t	ft_strarraysize(char **array)
 {
-	int	i;
+	ssize_t	i;
 
-	i = 0;
 	if (!array)
 		return (-1);
+	i = 0;
 	while (array[i])
 		i++;
 	return (i);

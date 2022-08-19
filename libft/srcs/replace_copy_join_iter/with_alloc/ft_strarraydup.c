@@ -1,33 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strfjoinchar.c                                  :+:      :+:    :+:   */
+/*   ft_strarraydup.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/13 12:10:16 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/23 16:02:25 by user42           ###   ########.fr       */
+/*   Created: 2022/08/19 13:30:54 by noe               #+#    #+#             */
+/*   Updated: 2022/08/19 13:48:51 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strfjoinchar(char *str, char c)
+char	**ft_strarraydup(char **strarray)
 {
-	char	*new_str;
-	int		i;
+	char	**ret;
+	ssize_t	size;
+	size_t	i;
 
-	new_str = (char *)malloc(sizeof(char) * (ft_strlen(str) + 2));
-	if (!new_str)
-		return (str);
+	size = ft_strarraysize(strarray);
+	if (size < 0)
+		return (NULL);
+	ret = (char **)malloc(sizeof (char *) * (size + 1));
 	i = 0;
-	while (str[i])
+	while (strarray[i])
 	{
-		new_str[i] = str[i];
+		ret[i] = ft_strdup(strarray[i]);
 		i++;
 	}
-	new_str[i] = c;
-	new_str[++i] = '\0';
-	free(str);
-	return (new_str);
+	ret[i] = NULL;
+	return (ret);
 }

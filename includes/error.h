@@ -6,7 +6,7 @@
 /*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 12:58:31 by user42            #+#    #+#             */
-/*   Updated: 2022/08/16 09:00:04 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/19 14:13:37 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,6 @@
 t_bool	sh_perror(char *s);
 t_bool	error_display(char *s1, char *s2, char *s3);
 t_bool	exec_perror(char *s1, char *s2);
-void	perror_exit(t_sh *sh, char *s1, char *s2, unsigned char exit_code);
+void	perror_exit_clear(t_sh *sh, char *s1, char *s2, unsigned char exit_code);
 
 #endif

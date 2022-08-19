@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 14:06:55 by user42            #+#    #+#             */
-/*   Updated: 2022/08/16 22:20:18 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/19 13:24:09 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*join_path(char const *penv, char const *pexec)
 	i = 0;
 	while (paths && paths[i])
 	{
-		cmd->path = join_path(paths[i], cmd->name);
+		cmd->path = join_path(paths[i], cmd->args[0]);
 		if (!cmd->path)
 			return (0);
 		if (access(cmd->path, X_OK) != -1)

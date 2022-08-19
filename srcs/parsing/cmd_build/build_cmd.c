@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   build_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 00:25:15 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/18 23:42:28 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/19 13:25:06 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,8 @@ t_cmd	*cmd_init(void)
 	if (!cmd)
 		return (NULL);
 	cmd->index = 0;
-	cmd->name = NULL;
 	cmd->built_i = -1;
 	cmd->args = NULL;
-	cmd->possible_paths = NULL;
-	cmd->path = NULL;
-	cmd->envp = NULL;
 	cmd->redir_in = init_redir();
 	cmd->redir_out = init_redir();
 	cmd->redir_error = 0;
@@ -56,8 +52,7 @@ t_cmd	*build_cmd(t_sh *sh, t_list *token, size_t i)
 	set_cmd_params(sh, token, cmd);
 	if (cmd->args)
 	{
-		cmd->name = cmd->args[0];
-		cmd->built_i = is_builtin(cmd->name);
+		cmd->built_i = is_builtin(cmd->args[0]);
 		cmd->index = i;
 		return (cmd);
 	}

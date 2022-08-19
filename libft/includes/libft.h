@@ -6,7 +6,7 @@
 /*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 16:22:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/18 16:57:54 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/19 13:34:53 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,7 @@ void		*ft_memccpy(void *dst, const void *src, int c, size_t n);
 void		*ft_memcpy(void *dst, const void *src, size_t n);
 void		*ft_memmove(void *dst, const void *src, size_t len);
 void		*ft_memset(void *b, int c, size_t len);
+char		**ft_strarraydup(char **strarray);
 char		*ft_strdup(const char *s1);
 void		ft_striteri(char *s, void (*f)(unsigned int, char *));
 char		*ft_strjoin(char const *s1, char const *s2);
@@ -167,7 +168,7 @@ t_v			ft_operate_vector(t_v vector, char operation, int nb);
 t_ull		ft_power(int nb, int power);
 void		ft_rev_int_tab(int *tab, int size);
 int			*ft_sort_int_tab(int *tab, int size);
-int			ft_strarraysize(char **tab);
+ssize_t		ft_strarraysize(char **tab);
 size_t		ft_strlen(const char *str);
 int			ft_square_root(int nb);
 

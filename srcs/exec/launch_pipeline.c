@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch_pipeline.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 13:07:05 by user42            #+#    #+#             */
-/*   Updated: 2022/08/13 23:32:55 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/19 13:24:09 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	child_job(t_sh *sh, t_cmd *cmd, int p[2], int fd_in)
 {
 	signal_catching_mode(CHILD_PROCESS);
 	close(p[0]);
-	if (!cmd->name)
+	if (!cmd->args[0])
 	{
 		close(p[1]);
 		exit_clear_child(sh, g_last_status);
