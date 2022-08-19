@@ -6,13 +6,13 @@
 /*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:25:56 by noe               #+#    #+#             */
-/*   Updated: 2022/08/19 13:24:09 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/19 16:18:40 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-extern unsigned char	g_last_status;
+extern uint8_t	g_last_status;
 
 static int	no_args(t_cmd *cmd)
 {

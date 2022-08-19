@@ -6,7 +6,7 @@
 /*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:05:03 by noe               #+#    #+#             */
-/*   Updated: 2022/08/19 15:05:58 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/19 15:35:00 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 void	ft_strarraydisplay(char **tab)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
 	while (tab[i])
 	{
-		printf("array[%zu] = |%s|\n", i, tab[i]);
+		ft_printf("array[%d] = |%s|\n", i, tab[i]);
 		i++;
 	}
 }

@@ -6,13 +6,13 @@
 /*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 20:04:06 by user42            #+#    #+#             */
-/*   Updated: 2022/08/18 17:10:54 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/19 16:18:40 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern unsigned char	g_last_status;
+extern uint8_t	g_last_status;
 
 int	main(int ac, char **av, char **env)
 {

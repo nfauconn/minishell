@@ -6,13 +6,13 @@
 /*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 13:07:55 by user42            #+#    #+#             */
-/*   Updated: 2022/08/19 13:24:09 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/19 16:31:49 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-extern unsigned char	g_last_status;
+extern uint8_t	g_last_status;
 
 static void	launch_single_cmd(t_sh *sh, t_cmd *cmd)
 {
@@ -28,11 +28,10 @@ static void	launch_single_cmd(t_sh *sh, t_cmd *cmd)
 		if (dup_io_singlecmd(cmd) == FAIL)
 			exit_clear_child(sh, WRONG_REDIR);
 		if (!cmd->args[0])
-			exit_clear_child(sh, g_last_status);
+			exit_clear_child(sh, 0);
 		cmd_execve(sh, cmd);
 	}
 	wait_children(sh);
-	signal_catching_mode(PARENT_PROCESS);
 }
 
 void	launch_single(t_sh *sh, t_cmd *cmd)

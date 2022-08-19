@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extern_libs.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 20:00:30 by user42            #+#    #+#             */
-/*   Updated: 2022/07/30 00:30:02 by user42           ###   ########.fr       */
+/*   Updated: 2022/08/19 16:06:05 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <signal.h>
+# include <stddef.h>
 # include <stdio.h>
+# include <stdint.h>
 # include <string.h>
 # include <sys/stat.h>
 # include <sys/types.h>

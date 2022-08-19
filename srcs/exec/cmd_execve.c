@@ -6,7 +6,7 @@
 /*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 12:56:04 by user42            #+#    #+#             */
-/*   Updated: 2022/08/19 15:21:52 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/19 16:26:26 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,22 +30,13 @@ static t_bool	no_path_in_env(char **possible_paths, char **envp)
 	return (ret);
 }
 
-static int	cmd_is_dir(char *cmd_name)
+static uint8_t	exec_absolute_path(char **args, char **envp)
 {
 	struct stat		mode;
+	uint8_t			error;
 
-	if (!ft_strcmp(cmd_name, "."))
-		return (1);
-	if (stat(cmd_name, &mode) == 0 && S_ISDIR(mode.st_mode))
-		return (1);
-	return (0);
-}
-
-static void	exec_absolute_path(char **args, char **envp)
-{
-	unsigned char	error;
-
-	if (cmd_is_dir(args[0]))
+	if (!ft_strcmp(args[0], ".")
+		|| (stat(args[0], &mode) == 0 && S_ISDIR(mode.st_mode)))
 		error = 1;
 	else
 	{
@@ -56,59 +47,63 @@ static void	exec_absolute_path(char **args, char **envp)
 		error_display(args[0], "Is a directory", 0);
 	else
 		error_display(args[0], strerror(error), 0);
-	ft_strarrayclear(&args);
-	ft_strarrayclear(&envp);
-	exit(error);
+	return (error);
 }
 
-static void	try_env_paths(char **args, char **envp)
+static uint8_t	try_possible_paths(char **args, char **envp, char **paths)
 {
-	unsigned char		error;
-	char				**possible_paths;
-	char				*path;
-	size_t				i;
-	t_bool				all_paths_tried;
+	uint8_t		error;
+	size_t		i;
+	t_bool		all_paths_tried;
+	char		*path;
 
+	i = 0;
+	errno = 0;
+	error = 0;
 	all_paths_tried = 0;
+	while (!all_paths_tried)
+	{
+		paths = get_path_tab(envp);
+		if (paths[i])
+		{
+			path = join_path(paths[i], args[0]);
+			ft_strarrayclear(&paths);
+			execve(path, args, envp);
+			error = errno;
+			ft_strdel(&path);
+			i++;
+		}
+		else
+			all_paths_tried = 1;
+	}
+	return (error);
+}
+
+static uint8_t	exec_relative_path(char **args, char **envp)
+{
+	uint8_t		error;
+	char		**possible_paths;
+
 	possible_paths = get_path_tab(envp);
 	if (no_path_in_env(possible_paths, envp))
 		error = 127;
 	else
-	{
-		i = 0;
-		errno = 0;
-		while (!all_paths_tried)
-		{
-			possible_paths = get_path_tab(envp);
-			if (possible_paths[i])
-			{
-				path = join_path(possible_paths[i], args[0]);
-				ft_strarrayclear(&possible_paths);
-				execve(path, args, envp);
-				error = errno;
-				ft_strdel(&path);
-				i++;
-			}
-			else
-				all_paths_tried = 1;
-		}
-	}
+		error = try_possible_paths(args, envp, possible_paths);
 	if (error == 127)
 		error_display(args[0], "No such file or directory", 0);
 	else if (error != ENOENT)
 		error_display(args[0], strerror(error), 0);
 	else
 		error_display(args[0], "command not found", 0);
-	ft_strarrayclear(&args);
 	ft_strarrayclear(&possible_paths);
-	ft_strarrayclear(&envp);
-	exit(error);
+	return (error);
 }
 
 void	cmd_execve(t_sh *sh, t_cmd *cmd)
 {
 	char	**args;
 	char	**envp;
+	uint8_t	exit_code;
 
 	if (!*(cmd->args[0]))
 		perror_exit_clear(sh, "\'\'", "command not found", 127);
@@ -116,7 +111,10 @@ void	cmd_execve(t_sh *sh, t_cmd *cmd)
 	envp = get_env_tab(sh->env);
 	clear_sh(sh);
 	if (is_absolute_path(args[0]))
-		exec_absolute_path(args, envp);
+		exit_code = exec_absolute_path(args, envp);
 	else
-		try_env_paths(args, envp);
+		exit_code = exec_relative_path(args, envp);
+	ft_strarrayclear(&args);
+	ft_strarrayclear(&envp);
+	exit(exit_code);
 }

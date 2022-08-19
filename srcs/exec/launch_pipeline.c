@@ -6,29 +6,28 @@
 /*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 13:07:05 by user42            #+#    #+#             */
-/*   Updated: 2022/08/19 13:24:09 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/19 16:31:37 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-extern unsigned char	g_last_status;
+extern uint8_t	g_last_status;
 
 static void	child_job(t_sh *sh, t_cmd *cmd, int p[2], int fd_in)
 {
 	signal_catching_mode(CHILD_PROCESS);
 	close(p[0]);
+	dup_io_pipeline(sh, cmd, p, fd_in);
 	if (!cmd->args[0])
 	{
 		close(p[1]);
-		exit_clear_child(sh, g_last_status);
+		exit_clear_child(sh, 0);
 	}
-	dup_io_pipeline(sh, cmd, p, fd_in);
 	if (cmd->built_i > -1)
 		launch_forked_builtin(sh, cmd);
 	else
 		cmd_execve(sh, cmd);
-	signal_catching_mode(PARENT_PROCESS);
 }
 
 static void	parent_job(t_cmd *cmd, int p[2], int *fd)
