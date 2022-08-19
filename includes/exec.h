@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mdankou < mdankou@student.42.fr >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:22:26 by mdankou           #+#    #+#             */
-/*   Updated: 2022/08/05 17:06:05 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/19 14:49:05 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 # include "signals.h"
 
 /* PATH */
-char	**get_path_tab(t_list *env);
+char	**get_path_tab(char **env);
 char	**get_env_tab(t_list *env);
 int		find_path(t_cmd *cmd, char **paths);
 char	*join_path(char const *penv, char const *pexec);
