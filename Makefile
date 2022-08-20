@@ -66,8 +66,7 @@ SRCS = ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		${addprefix ${REDIR}, \
 		dup_io_pipeline \
 		dup_io_singlecmd \
-		open \
-		utils} \
+		open} \
 		${addprefix ${BUILTINS}, \
 		cd \
 		echo \

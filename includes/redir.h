@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 20:35:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/16 09:00:04 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/20 16:42:46 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,5 @@ t_bool	check_ambig(t_sh *sh, char *token);
 t_bool	dup_io_pipeline(t_sh *sh, t_cmd *cmd, int p[2], int fd_in);
 t_bool	dup_io_singlecmd(t_cmd *cmd);
 t_bool	open_redir(t_cmd *cmd);
-
-/* UTILS */
-void	close_if_opened(int fd);
-void	dup2_close_old(int old_fd, int new_fd);
 
 #endif
