@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdankou < mdankou@student.42.fr >          +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:22:26 by mdankou           #+#    #+#             */
-/*   Updated: 2022/08/19 14:49:05 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/08/20 15:09:02 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ char	**get_path_tab(char **env);
 char	**get_env_tab(t_list *env);
 int		find_path(t_cmd *cmd, char **paths);
 char	*join_path(char const *penv, char const *pexec);
+t_bool	no_path_in_env(char **envp);
 
 /* LAUNCH */
 void	launch(t_sh *sh);

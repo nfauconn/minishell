@@ -6,13 +6,13 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 17:25:43 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/17 02:03:25 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/20 15:18:44 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	init_shell_level(t_list *env)
+static t_bool	init_shell_level(t_list *env)
 {
 	char	*lvl_str;
 	int		lvl_int;
@@ -20,20 +20,27 @@ static void	init_shell_level(t_list *env)
 
 	lvl_int = 0;
 	lvl_str = var_value("SHLVL", 5, env);
-	if (lvl_str)
-	{
-		lvl_int = ft_atoi(lvl_str);
-		ft_strdel(&lvl_str);
-	}
+	if (!lvl_str)
+		return (1);
+	lvl_int = ft_atoi(lvl_str);
+	ft_strdel(&lvl_str);
 	lvl_int++;
 	lvl_str = ft_itoa(lvl_int);
+	if (!lvl_str)
+		return (1);
 	shlvl = ft_strjoin("SHLVL=", lvl_str);
+	if (!shlvl)
+	{
+		free(lvl_str);
+		return (1);
+	}
 	do_export(&env, shlvl);
 	free(shlvl);
 	free(lvl_str);
+	return (0);
 }
 
-static void	create_minimal_env(t_list **head)
+static t_bool	create_minimal_env(t_list **head)
 {
 	char	*content;
 	char	*tmp;
@@ -41,13 +48,22 @@ static void	create_minimal_env(t_list **head)
 	tmp = getcwd(NULL, 0);
 	content = ft_strjoin("PWD=", tmp);
 	free(tmp);
+	if (!content)
+		return (1);
 	ft_lstadd_back(head, ft_lstnew((void *)content));
 	content = ft_strdup("SHLVL=1");
+	if (!content)
+		return (1);
 	ft_lstadd_back(head, ft_lstnew((void *)content));
 	content = ft_strdup("_=/usr/bin/env");
+	if (!content)
+		return (1);
 	ft_lstadd_back(head, ft_lstnew((void *)content));
 	content = ft_strdup("OLDPWD");
+	if (!content)
+		return (1);
 	ft_lstadd_back(head, ft_lstnew((void *)content));
+	return (0);
 }
 
 t_list	*init_env(char **env_tab)
@@ -58,10 +74,17 @@ t_list	*init_env(char **env_tab)
 	if (env_tab && *env_tab)
 	{
 		env = ft_strarraytolist(env_tab);
-		init_shell_level(env);
+		if (!env || init_shell_level(env))
+		{
+			ft_strarrayclear(&env_tab);
+			return (NULL);
+		}
 	}
 	else
-		create_minimal_env(&env);
+	{
+		if (create_minimal_env(&env))
+			return (NULL);
+	}
 	return (env);
 }
 

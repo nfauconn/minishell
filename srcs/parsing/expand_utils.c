@@ -1,42 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   expand_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/21 12:50:49 by user42            #+#    #+#             */
-/*   Updated: 2022/08/20 15:17:32 by nfauconn         ###   ########.fr       */
+/*   Created: 2022/08/20 15:13:48 by nfauconn          #+#    #+#             */
+/*   Updated: 2022/08/20 15:16:28 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-t_bool	parse(t_sh *sh, t_input *input)
+void	escape_quotes(char *str)
 {
-	if (!*(input->line_read))
-		return (1);
-	if (tokenize(input))
+	size_t	i;
+
+	i = 1;
+	while (str[i] && str[i + 1])
 	{
-		clear_input(input);
-		return (1);
+		if (str[i] == '\"')
+			str[i] *= -1;
+		i++;
 	}
-	if (!input->token_list)
-		return (1);
-	if (lexer(input->token_list))
-	{
-		clear_input(input);
-		return (1);
-	}
-	if (build_cmd_lst(sh, input->token_list))
-	{
-		clear_input(input);
-		return (1);
-	}
-	return (0);
 }
 
-/*
-** print_token_list(input);
-** print_commands(sh);
-*/
+char	*var_value(char *var_name, size_t len, t_list *env)
+{
+	char	*env_line;
+
+	while (env)
+	{
+		env_line = (char *)env->content;
+		if (!ft_strncmp(var_name, env_line, len) && (env_line)[len] == '=')
+			return (ft_strdup(ft_strchr(env_line, '=') + 1));
+		env = env->next;
+	}
+	return (NULL);
+}

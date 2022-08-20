@@ -3,14 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 14:06:55 by user42            #+#    #+#             */
-/*   Updated: 2022/08/19 16:07:59 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/20 15:08:42 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
+
+t_bool	no_path_in_env(char **envp)
+{
+	t_bool	ret;
+	char	*path_val;
+	t_list	*env_lst;
+	char	**possible_paths;
+
+	possible_paths = get_path_tab(envp);
+	env_lst = ft_strarraytolist(envp);
+	path_val = var_value("PATH", 4, env_lst);
+	ft_lstclear(&env_lst, free);
+	if (!possible_paths || !path_val || ft_strlen(path_val) == 0)
+		ret = 1;
+	else
+		ret = 0;
+	free(path_val);
+	ft_strarrayclear(&possible_paths);
+	return (ret);
+}
 
 char	*join_path(char const *penv, char const *pexec)
 {
@@ -31,25 +51,6 @@ char	*join_path(char const *penv, char const *pexec)
 	ft_strlcpy(dst + len1 + (penv[len1 - 1] != '/'), pexec, len2 + 1);
 	return (dst);
 }
-
-/* int	find_path(t_cmd *cmd, char **paths)
-{
-	int	i;
-
-	i = 0;
-	while (paths && paths[i])
-	{
-		cmd->path = join_path(paths[i], cmd->args[0]);
-		if (!cmd->path)
-			return (0);
-		if (access(cmd->path, X_OK) != -1)
-			return (1);
-		free(cmd->path);
-		cmd->path = NULL;
-		i++;
-	}
-	return (0);
-} */
 
 char	**get_env_tab(t_list *env)
 {

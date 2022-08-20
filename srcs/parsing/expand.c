@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 19:35:18 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/19 16:18:40 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/20 15:15:52 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,6 @@ void	add_to_new(t_newstr *new, char *to_add)
 	if (to_add)
 		ft_strlcat(new->str, to_add, new->len + 1);
 	free(to_add);
-}
-
-char	*var_value(char *var_name, size_t len, t_list *env)
-{
-	char	*env_line;
-
-	while (env)
-	{
-		env_line = (char *)env->content;
-		if (!ft_strncmp(var_name, env_line, len) && (env_line)[len] == '=')
-			return (ft_strdup(ft_strchr(env_line, '=') + 1));
-		env = env->next;
-	}
-	return (NULL);
 }
 
 char	*expand_var(char **ptr, t_sh *sh)
@@ -91,19 +77,6 @@ char	*expand_str(char *ptr, size_t len, t_sh *sh)
 		add_to_new(&new, to_add);
 	}
 	return (new.str);
-}
-
-static void	escape_quotes(char *str)
-{
-	size_t	i;
-
-	i = 1;
-	while (str[i] && str[i + 1])
-	{
-		if (str[i] == '\"')
-			str[i] *= -1;
-		i++;
-	}
 }
 
 static char	*handle_quoted(char *ptr, t_indexes *i, t_sh *sh)

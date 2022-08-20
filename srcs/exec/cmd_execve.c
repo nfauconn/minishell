@@ -3,32 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_execve.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 12:56:04 by user42            #+#    #+#             */
-/*   Updated: 2022/08/20 00:25:33 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/20 16:02:07 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 #include "parse.h"
-
-static t_bool	no_path_in_env(char **possible_paths, char **envp)
-{
-	t_bool	ret;
-	char	*path_val;
-	t_list	*env_lst;
-
-	env_lst = ft_strarraytolist(envp);
-	path_val = var_value("PATH", 4, env_lst);
-	ft_lstclear(&env_lst, free);
-	if (!possible_paths || !path_val || ft_strlen(path_val) == 0)
-		ret = 1;
-	else
-		ret = 0;
-	free(path_val);
-	return (ret);
-}
 
 static uint8_t	exec_absolute_path(char **args, char **envp)
 {
@@ -50,12 +33,25 @@ static uint8_t	exec_absolute_path(char **args, char **envp)
 	return (error);
 }
 
-static uint8_t	try_possible_paths(char **args, char **envp, char **paths)
+static uint8_t	try_exec(char **paths, char **args, char **envp, size_t i)
+{
+	char		*path;
+	uint8_t		error;
+
+	path = join_path(paths[i], args[0]);
+	ft_strarrayclear(&paths);
+	execve(path, args, envp);
+	error = errno;
+	ft_strdel(&path);
+	return (error);
+}
+
+static uint8_t	try_possible_paths(char **args, char **envp)
 {
 	uint8_t		error;
 	size_t		i;
 	t_bool		all_paths_tried;
-	char		*path;
+	char		**possible_paths;
 
 	i = 0;
 	errno = 0;
@@ -63,43 +59,41 @@ static uint8_t	try_possible_paths(char **args, char **envp, char **paths)
 	all_paths_tried = 0;
 	while (!all_paths_tried)
 	{
-		paths = get_path_tab(envp);
-		if (paths[i])
+		possible_paths = get_path_tab(envp);
+		if (possible_paths[i])
 		{
-			path = join_path(paths[i], args[0]);
-			ft_strarrayclear(&paths);
-			execve(path, args, envp);
-			error = errno;
-			ft_strdel(&path);
+			error = try_exec(possible_paths, args, envp, i);
 			i++;
 		}
 		else
+		{
 			all_paths_tried = 1;
+			ft_strarrayclear(&possible_paths);
+		}
 	}
-	ft_strarrayclear(&paths);
 	return (error);
 }
 
 static uint8_t	exec_relative_path(char **args, char **envp)
 {
 	uint8_t		error;
-	char		**possible_paths;
 
-	possible_paths = get_path_tab(envp);
-	if (no_path_in_env(possible_paths, envp))
-		error = 127;
-	else
-		error = try_possible_paths(args, envp, possible_paths);
-	if (error == 127)
-		error_display(args[0], "No such file or directory", 0);
-	else if (error != ENOENT)
-		error_display(args[0], strerror(error), 0);
-	else
+	if (no_path_in_env(envp))
 	{
 		error = 127;
-		error_display(args[0], "command not found", 0);
+		error_display(args[0], "No such file or directory", 0);
 	}
-	ft_strarrayclear(&possible_paths);
+	else
+	{
+		error = try_possible_paths(args, envp);
+		if (error != ENOENT)
+			error_display(args[0], strerror(error), 0);
+		else
+		{
+			error = 127;
+			error_display(args[0], "command not found", 0);
+		}
+	}
 	return (error);
 }
 

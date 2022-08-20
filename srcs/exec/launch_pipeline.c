@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch_pipeline.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 13:07:05 by user42            #+#    #+#             */
-/*   Updated: 2022/08/19 16:31:37 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/20 15:54:09 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,20 +30,20 @@ static void	child_job(t_sh *sh, t_cmd *cmd, int p[2], int fd_in)
 		cmd_execve(sh, cmd);
 }
 
-static void	parent_job(t_cmd *cmd, int p[2], int *fd)
+static void	parent_job(t_sh *sh, t_cmd *cmd, int p[2], int *fd)
 {
-	if (!cmd->next)
-	{
-		close(p[0]);
-		close(p[1]);
-		close(*fd);
-	}
-	else
+	if (cmd->index < sh->cmd_nb)
 	{
 		close(p[1]);
 		if (*fd)
 			close(*fd);
 		*fd = p[0];
+	}
+	else
+	{
+		close(p[0]);
+		close(p[1]);
+		close(*fd);
 	}
 }
 
@@ -65,7 +65,7 @@ int	launch_pipeline(t_sh *sh, t_cmd *cmd)
 		if (pid == 0)
 			child_job(sh, cmd, p, fd_in);
 		else
-			parent_job(cmd, p, &fd_in);
+			parent_job(sh, cmd, p, &fd_in);
 		cmd = cmd->next;
 	}
 	wait_children(sh);
