@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 13:07:05 by user42            #+#    #+#             */
-/*   Updated: 2022/08/20 17:45:53 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/24 22:03:57 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	launch_pipeline(t_sh *sh, t_cmd *cmd)
 			parent_job(sh, cmd, p, &fd_in);
 		cmd = cmd->next;
 	}
-	wait_children(sh);
+	wait_children(sh, pid);
 	signal_catching_mode(INTERACTIVE);
 	return (0);
 }

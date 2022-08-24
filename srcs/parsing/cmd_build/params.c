@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   params.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:18:20 by noe               #+#    #+#             */
-/*   Updated: 2022/08/19 19:10:36 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/24 21:15:25 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ static t_bool	fill_arg(t_sh *sh, t_list **args_list, char *token)
 		content = expand(tmp, sh);
 		set_quotes_to_negative(content);
 		free(tmp);
-		tmp = content;
+ 		tmp = content;
 		content = remove_quote(tmp);
 		free(tmp);
 		ft_lstadd_back(args_list, ft_lstnew(content));
@@ -119,7 +119,11 @@ t_bool	set_cmd_params(t_sh *sh, t_list *token, t_cmd *cmd)
 				set_redir(sh, cmd, (char *)token->content);
 		}
 		else
+		{
+			ft_replacefree(&token->content, \
+				expand((char *)token->content, sh));
 			fill_arg(sh, &args_lst, (char *)token->content);
+		}
 		token = token->next;
 	}
 	reset_quotes_to_ascii(args_lst);

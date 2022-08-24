@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:22:26 by mdankou           #+#    #+#             */
-/*   Updated: 2022/08/20 15:09:02 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/24 21:52:59 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	launch_single_builtin(t_sh *sh, t_cmd *cmd);
 void	cmd_execve(t_sh *sh, t_cmd *cmd);
 
 /* END */
-void	wait_children(t_sh *sh);
-void	wait_child(t_sh *sh, size_t cmd_index);
+void	wait_children(t_sh *sh, pid_t last_cmd_pid);
+void	wait_child(t_sh *sh, pid_t last_cmd_pid);
 
 #endif

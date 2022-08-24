@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 19:35:18 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/20 15:15:52 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/24 21:12:45 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	add_to_new(t_newstr *new, char *to_add)
 	size_t	len;
 
 	len = ft_strlen(to_add);
+
 	new->len += len;
 	new->str = ft_reallocstr(new->str, new->len);
 	if (to_add)
