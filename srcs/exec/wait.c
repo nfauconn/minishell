@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 19:07:39 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/24 22:11:42 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/24 22:24:11 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ void	wait_children(t_sh *sh, pid_t last_cmd_pid)
 	i = 0;
 	while (i < sh->cmd_nb)
 	{
-		printf("x_x\n");
 		wait_child(sh, last_cmd_pid);
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 20:29:41 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/20 18:01:55 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/24 22:31:01 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ t_bool	dup_io_pipeline(t_sh *sh, t_cmd *cmd, int p[2], int fd_in)
 		exit_clear_child(sh, error);
 	}
 	dup_input(cmd, fd_in);
-	if (cmd->index < sh->cmd_nb - 1)
-		dup_output(cmd, p);
+	dup_output(cmd, p);
 	return (0);
 }
