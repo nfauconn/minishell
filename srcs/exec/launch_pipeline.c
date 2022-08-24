@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 13:07:05 by user42            #+#    #+#             */
-/*   Updated: 2022/08/20 16:36:22 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/20 17:45:53 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	child_job(t_sh *sh, t_cmd *cmd, int p[2], int fd_in)
 
 static void	parent_job(t_sh *sh, t_cmd *cmd, int p[2], int *fd)
 {
-	if (cmd->index < sh->cmd_nb)
+	if (cmd->index < sh->cmd_nb - 1)
 	{
 		close(p[1]);
 		if (cmd->index != 0)
@@ -59,7 +59,6 @@ int	launch_pipeline(t_sh *sh, t_cmd *cmd)
 	{
 		if (pipe(p) < 0)
 			return (error_display("pipe", strerror(errno), 0));
-		ft_printerror("p[0] = %d | p[1]= %d\n", p[0], p[1]);
 		pid = fork();
 		if (pid < 0)
 			return (error_display("fork", strerror(errno), 0));

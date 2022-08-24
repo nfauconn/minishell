@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_reallocstr.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:09:55 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/16 00:53:09 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/24 19:10:02 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*ft_reallocstr(char *str, size_t newlen)
 	if (oldlen)
 	{
 		ft_memcpy(new_str, str, oldlen + 1);
-		ft_bzero(new_str + oldlen, newlen + 1 - oldlen + 1);
+		ft_bzero(new_str + oldlen, newlen - oldlen + 1);
 		free(str);
 	}
 	else

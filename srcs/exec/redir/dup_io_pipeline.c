@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 20:29:41 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/20 16:43:57 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/20 18:01:55 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	dup_output(t_cmd *cmd, int p[2])
 {
-	if (cmd->redir_out.fd != STDOUT_FILENO && cmd->redir_out.fd != NO_REDIR)
+	if (cmd->redir_out.fd > -1)
 	{
 		dup2(cmd->redir_out.fd, STDOUT_FILENO);
 		close(cmd->redir_out.fd);
@@ -26,14 +26,17 @@ static void	dup_output(t_cmd *cmd, int p[2])
 
 static void	dup_input(t_cmd *cmd, int fd_in)
 {
-	if (cmd->redir_in.fd != STDIN_FILENO && cmd->redir_in.fd != NO_REDIR)
+	if (cmd->redir_in.fd > -1)
 	{
 		dup2(cmd->redir_in.fd, STDIN_FILENO);
 		close(cmd->redir_in.fd);
+		close(fd_in);
 	}
-	else
+	else if (cmd->index != 0)
+	{
 		dup2(fd_in, STDIN_FILENO);
-	close(fd_in);
+		close(fd_in);
+	}
 }
 
 t_bool	dup_io_pipeline(t_sh *sh, t_cmd *cmd, int p[2], int fd_in)
@@ -45,11 +48,11 @@ t_bool	dup_io_pipeline(t_sh *sh, t_cmd *cmd, int p[2], int fd_in)
 		return (0);
 	if (error)
 	{
-		ft_printerror("error\n");
 		close(p[1]);
 		exit_clear_child(sh, error);
 	}
 	dup_input(cmd, fd_in);
-	dup_output(cmd, p);
+	if (cmd->index < sh->cmd_nb - 1)
+		dup_output(cmd, p);
 	return (0);
 }
