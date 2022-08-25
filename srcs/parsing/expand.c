@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 19:35:18 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/25 19:20:48 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/25 19:30:01 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,7 @@ char	*expand_str(char *ptr, size_t len, t_sh *sh)
 				ptr++;
 			to_add = ft_substr(p.start, 0, ptr - p.start);
 		}
-		if (*to_add)
-			add_to_new(&new, to_add);
+		add_to_new(&new, to_add);
 	}
 	return (new.str);
 }
