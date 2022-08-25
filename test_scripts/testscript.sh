@@ -4,7 +4,7 @@
 #		Script must be launched from its repository "script"			#
 #########################################################################
 
-path="script"
+path="test_scripts"
 BUILTIN=( echo ls cd cat env exit export )
 PIPE=( pipe )
 REDIR=( redir_left redir_right )

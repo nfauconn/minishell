@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   params.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:18:20 by noe               #+#    #+#             */
-/*   Updated: 2022/08/24 21:15:25 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/25 19:53:49 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	set_quotes_to_negative(char *content)
 	char	quote;
 
 	quote = 0;
-	while (*content)
+	while (content && *content)
 	{
 		while (*content && !is_quote(*content))
 			++content;
@@ -46,11 +46,12 @@ void	set_quotes_to_negative(char *content)
 			*content *= -1;
 			return ;
 		}
-		while (*(++content) && quote != *content)
+		while (*(content) && quote != *content)
 		{
 			if ((quote == '\"' && *content == ('\''))
 				|| (quote == '\'' && *content == ('\"')))
 					*content *= -1;
+			++content;
 		}
 		if (quote == *content)
 			++content;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quote_removal.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 16:20:06 by noe               #+#    #+#             */
-/*   Updated: 2022/08/24 19:07:27 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/25 19:55:35 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*remove_quote(char *str)
 	new.len = 0;
 	quote = 0;
 	new.str = NULL;
-	while (*str)
+	while (str && *str)
 	{
 		start = str;
 		while (*str
