@@ -17,10 +17,11 @@ make
 
 clean_logs()
 {
-	for log in ${LOGS[*]}
-		do
-			rm "$path"/"$log".log 2> /dev/null
-	done
+	#for log in ${LOGS[*]}
+	#	do
+	#		rm "$path"/"$log".log 2> /dev/null
+	#done
+	rm "$path"/*.log 2> /dev/null
 	exit 0
 }
 
@@ -111,7 +112,7 @@ cut_prompt_in_uslog()
 {
 	for src in ${LOGS[*]}
 		do
-			sed -i -e "/script >>/d" "$path"/us.log
+			sed -i -e "/🐱 minishell 🐱>/d" "$path"/us.log
 	done
 }
 
