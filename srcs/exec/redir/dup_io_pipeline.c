@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 20:29:41 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/24 22:31:01 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/25 18:08:59 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ static void	dup_input(t_cmd *cmd, int fd_in)
 	{
 		dup2(cmd->redir_in.fd, STDIN_FILENO);
 		close(cmd->redir_in.fd);
-		close(fd_in);
+		if (fd_in)
+			close(fd_in);
 	}
 	else if (cmd->index != 0)
 	{
