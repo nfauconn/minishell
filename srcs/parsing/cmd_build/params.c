@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:18:20 by noe               #+#    #+#             */
-/*   Updated: 2022/08/26 17:34:49 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/26 18:50:59 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,14 +91,16 @@ static t_bool	fill_arg(t_list **args_list, char *token)
 	char	*arg;
 
 	len = 0;
+	while (is_blank(*token))
+		token++;
 	while (*token)
 	{
-		printf("*token = %s\n", token);
+//		printf("*token = %s\n", token);
 		len = len_until_blank(token);
 		arg_w_quotes = ft_substr(token, 0, len);
-		printf("arg_w_quotes = %s\n", arg_w_quotes);
+//		printf("arg_w_quotes = %s\n", arg_w_quotes);
 		arg = remove_quote(arg_w_quotes);
-		printf("arg after removing quotes = %s\n", arg);
+//		printf("arg after removing quotes = %s\n", arg);
 		free(arg_w_quotes);
 		ft_lstadd_back(args_list, ft_lstnew(arg));
 		token += len;
@@ -124,9 +126,9 @@ t_bool	set_cmd_params(t_sh *sh, t_list *token, t_cmd *cmd)
 		{
 			ft_replacefree(&token->content, \
 				expand((char *)token->content, sh));
-			printf("expanded token->content = |%s|\n", (char *)token->content);
+//			printf("expanded token->content = |%s|\n", (char *)token->content);
 			set_quotes_to_negative((char *)token->content);
-			printf("escaped_quote token->content = |%s|\n", (char *)token->content);
+//			printf("escaped_quote token->content = |%s|\n", (char *)token->content);
 			fill_arg(&args_lst, (char *)token->content);
 		}
 		token = token->next;

@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 19:35:18 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/26 17:38:18 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/26 18:41:41 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ char	*expand_str(char *ptr, size_t len, t_sh *sh)
 		{
 			p.start = ptr;
 			if (is_blank(*(p.start)) && p.start + 1 == p.end)
-				return (new.str);
+				return (ft_strdup(" "));
 			while (*ptr && ptr != p.end && *ptr != '$')
 				ptr++;
 			to_add = ft_substr(p.start, 0, ptr - p.start);
