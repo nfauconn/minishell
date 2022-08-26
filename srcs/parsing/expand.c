@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 19:35:18 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/25 19:30:01 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/26 16:28:24 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,6 @@ static char	*handle_quoted(char *ptr, t_indexes *i, t_sh *sh)
 			i->curr++;
 		i->curr++;
 		ret = expand_str(ptr + i->start, i->curr - i->start, sh);
-		escape_quotes(ret);
 	}
 	return (ret);
 }

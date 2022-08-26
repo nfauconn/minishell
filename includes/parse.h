@@ -70,7 +70,6 @@ size_t		arg_len(char *s);
 
 /* EXPAND */
 char		*expand(char *ptr, t_sh *sh);
-void		escape_quotes(char *str);
 char		*expand_str(char *ptr, size_t len, t_sh *sh);
 char		*expand_var(char **s, t_sh *sh);
 char		*var_value(char *ptr, size_t len, t_list *env);
