@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 20:29:41 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/25 18:08:59 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/26 15:57:22 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,13 @@ static void	dup_input(t_cmd *cmd, int fd_in)
 	{
 		dup2(cmd->redir_in.fd, STDIN_FILENO);
 		close(cmd->redir_in.fd);
-		if (fd_in)
-			close(fd_in);
 	}
-	else if (cmd->index != 0)
+	else
 	{
 		dup2(fd_in, STDIN_FILENO);
-		close(fd_in);
 	}
+	if (fd_in)
+		close(fd_in);
 }
 
 t_bool	dup_io_pipeline(t_sh *sh, t_cmd *cmd, int p[2], int fd_in)
@@ -45,8 +44,6 @@ t_bool	dup_io_pipeline(t_sh *sh, t_cmd *cmd, int p[2], int fd_in)
 	t_bool	error;
 
 	error = open_redir(cmd);
-	if (!cmd->args || !cmd->args[0])
-		return (0);
 	if (error)
 	{
 		close(p[1]);
