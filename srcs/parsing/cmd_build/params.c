@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:18:20 by noe               #+#    #+#             */
-/*   Updated: 2022/08/26 17:07:18 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/26 17:34:49 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ size_t	len_until_blank(char *s)
 			quote = s[i++];
 			while (s[i] != quote)
 				i++;
-			i++;
+			if (s[i] == quote)
+				i++;
 		}
 		else if (is_blank(s[i]))
 			return (i);
@@ -83,20 +84,23 @@ size_t	len_until_blank(char *s)
 	return (i);
 }
 
-static t_bool	fill_arg(t_sh *sh, t_list **args_list, char *token)
+static t_bool	fill_arg(t_list **args_list, char *token)
 {
 	size_t	len;
-	char	*tmp;
-	char	*content;
+	char	*arg_w_quotes;
+	char	*arg;
 
 	len = 0;
 	while (*token)
 	{
+		printf("*token = %s\n", token);
 		len = len_until_blank(token);
-		tmp = ft_substr(token, 0, len);
-		content = remove_quote(tmp);
-		free(tmp);
-		ft_lstadd_back(args_list, ft_lstnew(content));
+		arg_w_quotes = ft_substr(token, 0, len);
+		printf("arg_w_quotes = %s\n", arg_w_quotes);
+		arg = remove_quote(arg_w_quotes);
+		printf("arg after removing quotes = %s\n", arg);
+		free(arg_w_quotes);
+		ft_lstadd_back(args_list, ft_lstnew(arg));
 		token += len;
 		while (is_blank(*token))
 			token++;
@@ -120,8 +124,10 @@ t_bool	set_cmd_params(t_sh *sh, t_list *token, t_cmd *cmd)
 		{
 			ft_replacefree(&token->content, \
 				expand((char *)token->content, sh));
+			printf("expanded token->content = |%s|\n", (char *)token->content);
 			set_quotes_to_negative((char *)token->content);
-			fill_arg(sh, &args_lst, (char *)token->content);
+			printf("escaped_quote token->content = |%s|\n", (char *)token->content);
+			fill_arg(&args_lst, (char *)token->content);
 		}
 		token = token->next;
 	}

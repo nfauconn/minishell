@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 12:50:49 by user42            #+#    #+#             */
-/*   Updated: 2022/08/25 18:09:24 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/26 16:07:32 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ t_bool	parse(t_sh *sh, t_input *input)
 		clear_input(input);
 		return (1);
 	}
+	print_commands(sh);
 	return (0);
 }
 
