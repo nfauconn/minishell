@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   params.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:18:20 by noe               #+#    #+#             */
-/*   Updated: 2022/08/25 19:53:49 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/08/26 17:07:18 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	set_quotes_to_negative(char *content)
 			*content *= -1;
 			return ;
 		}
+		content++;
 		while (*(content) && quote != *content)
 		{
 			if ((quote == '\"' && *content == ('\''))
@@ -93,10 +94,6 @@ static t_bool	fill_arg(t_sh *sh, t_list **args_list, char *token)
 	{
 		len = len_until_blank(token);
 		tmp = ft_substr(token, 0, len);
-		content = expand(tmp, sh);
-		set_quotes_to_negative(content);
-		free(tmp);
- 		tmp = content;
 		content = remove_quote(tmp);
 		free(tmp);
 		ft_lstadd_back(args_list, ft_lstnew(content));
@@ -123,6 +120,7 @@ t_bool	set_cmd_params(t_sh *sh, t_list *token, t_cmd *cmd)
 		{
 			ft_replacefree(&token->content, \
 				expand((char *)token->content, sh));
+			set_quotes_to_negative((char *)token->content);
 			fill_arg(sh, &args_lst, (char *)token->content);
 		}
 		token = token->next;
