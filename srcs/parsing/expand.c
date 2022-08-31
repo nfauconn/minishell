@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 19:35:18 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/26 18:41:41 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/08/31 14:06:44 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 extern uint8_t	g_last_status;
 
-void	add_to_new(t_newstr *new, char *to_add)
+void	realloc_cat(t_newstr *new, char *to_add)
 {
 	size_t	len;
 
@@ -79,7 +79,7 @@ char	*expand_str(char *ptr, size_t len, t_sh *sh)
 				ptr++;
 			to_add = ft_substr(p.start, 0, ptr - p.start);
 		}
-		add_to_new(&new, to_add);
+		realloc_cat(&new, to_add);
 	}
 	return (new.str);
 }
@@ -133,7 +133,7 @@ char	*expand(char *ptr, t_sh *sh)
 				i.curr++;
 			to_add = expand_str(ptr + i.start, i.curr - i.start, sh);
 		}
-		add_to_new(&new, to_add);
+		realloc_cat(&new, to_add);
 	}
 	return (new.str);
 }

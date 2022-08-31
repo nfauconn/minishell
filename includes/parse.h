@@ -72,6 +72,7 @@ size_t		arg_len(char *s);
 char		*expand(char *ptr, t_sh *sh);
 char		*expand_str(char *ptr, size_t len, t_sh *sh);
 char		*expand_var(char **s, t_sh *sh);
+void		realloc_cat(t_newstr *new, char *to_add);
 char		*var_value(char *ptr, size_t len, t_list *env);
 
 /* QUOTE_REMOVAL */

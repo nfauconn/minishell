@@ -22,19 +22,20 @@ S_EXT = .c
 
 SRCS = ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		main \
-		clear \
-		error \
-		exit \
+		env \
 		init \
 		input \
 		prompt \
-		reset \
 		signals \
+		clear \
+		error \
+		exit \
+		reset \
 		${addprefix ${PARSING}, \
 		parser \
 		lexer \
 		expand \
-		expand_utils \
+		var_value \
 		quote_removal \
 		debug_utils \
 		${addprefix ${TOKENIZER}, \
