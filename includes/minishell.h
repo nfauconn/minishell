@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 18:25:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/15 22:27:34 by noe              ###   ########.fr       */
+/*   Updated: 2022/08/31 19:24:36 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# define B_BLUE "\e[1;30m"
-# define B_RED "\e[1;31m"
-# define B_GREEN "\e[1;32m"
-# define B_YELLOW "\e[1;33m"
-# define B_MAGENTA "\e[1;34m"
-# define B_CYAN "\e[1;36m"
-# define NEUTRAL "\e[0m"
+# define B_BLUE "\001\e[1;30m\002"
+# define B_RED "\001\e[1;31m\002"
+# define B_GREEN "\001\e[1;32m\002"
+# define B_YELLOW "\001\e[1;33m\002"
+# define B_MAGENTA "\001\e[1;34m\002"
+# define B_CYAN "\001\e[1;36m\002"
+# define NEUTRAL "\001\e[0m\002"
 
 # include "extern_libs.h"
 # include "structs.h"
