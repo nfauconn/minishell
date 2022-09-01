@@ -3,20 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_run.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 12:37:34 by user42            #+#    #+#             */
-/*   Updated: 2022/08/16 17:23:14 by noe              ###   ########.fr       */
+/*   Updated: 2022/09/01 19:13:50 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "redir.h"
 
-static void	exit_clear_heredoc(t_sh *sh, char **line, int fd)
+extern uint8_t	g_last_status;
+
+
+static void	clear_heredoc(char **line, int fd)
 {
 	ft_strdel(line);
 	close(fd);
-	exit_clear_child(sh, 0);
+	//exit_clear_child(sh, 0);
 }
 
 static void	display_warning(t_sh *sh, char *delim)
@@ -37,41 +40,40 @@ static void	putstr_heredoc(t_sh *sh, char **line, int fd, t_bool quoted)
 	ft_replacefree((void **)line, new_line);
 }
 
-static void	heredoc_job(t_sh *sh, char *hdoc_path, char *delim, t_bool quoted)
+static t_bool	heredoc_job(t_sh *sh, char *hdoc_path, char *delim, t_bool quoted)
 {
 	int		fd;
+	int		stdin;
 	char	*line;
 
 	fd = open(hdoc_path, O_CREAT | O_TRUNC | O_WRONLY, 0644);
 	if (fd < 0)
-		exit_clear_child(sh, 1);
+	{
+		return 2;
+	}
+	stdin = dup(STDIN_FILENO);
 	line = readline("> ");
 	if (sh->heredoc_nb > 1)
 		sh->line_nb++;
-	while (line && (line[0] == '\n' || ft_strcmp(line, delim)) != OK)
+	while (g_last_status == 0 && line && ft_strcmp(line, delim) != OK)
 		putstr_heredoc(sh, &line, fd, quoted);
-	if (!line)
+	if (g_last_status)
+	{
+		dup2(stdin, STDIN_FILENO);
+		close(stdin);
+	}
+	else if (!line)
 		display_warning(sh, delim);
-	exit_clear_heredoc(sh, &line, fd);
+	clear_heredoc(&line, fd);
+	return (0);
 }
 
 t_bool	run_heredoc(t_sh *sh, char *hdoc_path, char *delim, t_bool quoted)
 {
-	pid_t		pid;
-	t_bool		ret;
-
-	ret = 0;
-	signal_catching_mode(PARENT_PROCESS);
-	pid = fork();
-	if (pid < 0)
-		error_display("fork", strerror(errno), 0);
-	if (pid == 0)
-	{
-		signal_catching_mode(HEREDOC);
-		heredoc_job(sh, hdoc_path, delim, quoted);
-	}
-	if (wait_heredoc())
-		ret = 1;
+	signal_catching_mode(HEREDOC);
+	heredoc_job(sh, hdoc_path, delim, quoted);
 	signal_catching_mode(INTERACTIVE);
-	return (ret);
+	if (g_last_status != 0)
+		return (1);
+	return (0);
 }
