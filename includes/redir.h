@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mdankou < mdankou@student.42.fr >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 20:35:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/20 16:42:46 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/09/04 17:57:13 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 t_bool	set_redir(t_sh *sh, t_cmd *cmd, char *token);
 t_bool	check_access(char *filename, int flag);
 t_bool	heredoc_set(t_sh *sh, t_cmd *cmd, char *token);
-t_bool	run_heredoc(t_sh *sh, char *heredoc_path, char *delim, t_bool quoted);
+t_bool	run_heredoc(t_sh *sh, char *heredoc_path, char *delim, t_cmd *cmd);
 t_bool	wait_heredoc(void);
 
 /* UTILS */

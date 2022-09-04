@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mdankou < mdankou@student.42.fr >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 12:50:49 by user42            #+#    #+#             */
-/*   Updated: 2022/08/26 19:43:09 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/09/02 17:56:33 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,9 @@ t_bool	parse(t_sh *sh, t_input *input)
 		clear_input(input);
 		return (1);
 	}
+	/*Mettre une condition pour stopper l'exec du prog apres le build_cmd si g_last_status es tset à 130 ou non zero*/
+	/*Modifier la condition dans heredoc_run: utiliser REDIR_FAIL ?*/
+	
 //	print_commands(sh);
 	return (0);
 }

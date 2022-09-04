@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: mdankou < mdankou@student.42.fr >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 12:07:25 by user42            #+#    #+#             */
-/*   Updated: 2022/08/19 13:24:33 by noe              ###   ########.fr       */
+/*   Updated: 2022/09/04 17:54:10 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_redir
 	char	*delim;
 	int		fd;
 	t_bool	is_heredoc;
+	t_bool	heredoc_ctrlc;
 	t_bool	quoted_delim;
 	t_bool	is_append;
 }	t_redir;

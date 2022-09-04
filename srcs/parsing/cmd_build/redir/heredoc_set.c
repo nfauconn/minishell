@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_set.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: mdankou < mdankou@student.42.fr >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 22:24:41 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/16 17:22:39 by noe              ###   ########.fr       */
+/*   Updated: 2022/09/04 17:13:25 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ t_bool	heredoc_set(t_sh *sh, t_cmd *cmd, char *token)
 	cmd->redir_in.filename = get_heredoc_path(sh->heredoc_nb);
 	delim = get_heredoc_delim(token);
 	hdoc_path = cmd->redir_in.filename;
-	ret = run_heredoc(sh, hdoc_path, delim, cmd->redir_in.quoted_delim);
+	ret = run_heredoc(sh, hdoc_path, delim, cmd);
 	free(delim);
 	return (ret);
 }

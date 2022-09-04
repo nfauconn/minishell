@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mdankou < mdankou@student.42.fr >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 17:55:15 by user42            #+#    #+#             */
-/*   Updated: 2022/09/01 14:35:00 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/09/04 18:00:21 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,11 @@
 
 uint8_t	g_last_status;
 
-static void sigIntHeredoc(int sig_num)
+static void	sigint_heredoc(int sig_num)
 {
 	if (sig_num == SIGINT)
 	{
 		write(1, "\n", 1);
-		//redisplay_prompt();
 		close(STDIN_FILENO);
 		g_last_status = sig_num + 128;
 	}
@@ -55,7 +54,7 @@ void	signal_catching_mode(int mode)
 	}
 	else if (mode == HEREDOC)
 	{
-		signal(SIGINT, sigIntHeredoc);
+		signal(SIGINT, sigint_heredoc);
 		signal(SIGQUIT, SIG_IGN);
 	}
 }

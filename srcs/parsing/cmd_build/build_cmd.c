@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   build_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: mdankou < mdankou@student.42.fr >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 00:25:15 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/19 13:25:06 by noe              ###   ########.fr       */
+/*   Updated: 2022/09/04 17:43:56 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static t_redir	init_redir(void)
 	new.delim = NULL;
 	new.fd = 0;
 	new.is_heredoc = 0;
+	new.heredoc_ctrlc = 0;
 	new.quoted_delim = 0;
 	new.is_append = 0;
 	return (new);
@@ -56,5 +57,6 @@ t_cmd	*build_cmd(t_sh *sh, t_list *token, size_t i)
 		cmd->index = i;
 		return (cmd);
 	}
+	//free(cmd);
 	return (NULL);
 }
