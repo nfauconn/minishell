@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdankou < mdankou@student.42.fr >          +#+  +:+       +#+        */
+/*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 12:50:49 by user42            #+#    #+#             */
-/*   Updated: 2022/09/05 04:20:40 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/09/06 18:14:23 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ t_bool	parse(t_sh *sh, t_input *input)
 	if (tokenize(input))
 	{
 		clear_input(input);
+		g_last_status = 2;
 		return (1);
 	}
 	if (!input->token_list)

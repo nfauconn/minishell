@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   params.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdankou < mdankou@student.42.fr >          +#+  +:+       +#+        */
+/*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:18:20 by noe               #+#    #+#             */
-/*   Updated: 2022/09/06 11:26:33 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/09/06 18:20:53 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,11 @@ void	set_quotes_to_negative(char *content)
 			*content *= -1;
 			return ;
 		}
-		content++;
-		while (*(content) && quote != *content)
+		while (*(++content) && quote != *content)
 		{
 			if ((quote == '\"' && *content == ('\''))
 				|| (quote == '\'' && *content == ('\"')))
 					*content *= -1;
-			++content;
 		}
 		if (quote == *content)
 			++content;
@@ -95,12 +93,12 @@ static t_bool	fill_arg(t_list **args_list, char *token)
 		token++;
 	while (*token)
 	{
-//		printf("*token = %s\n", token);
+		printf("*token = %s\n", token);
 		len = len_until_blank(token);
 		arg_w_quotes = ft_substr(token, 0, len);
-//		printf("arg_w_quotes = %s\n", arg_w_quotes);
+		printf("arg_w_quotes = %s\n", arg_w_quotes);
 		arg = remove_quote(arg_w_quotes);
-//		printf("arg after removing quotes = %s\n", arg);
+		printf("arg after removing quotes = %s\n", arg);
 		free(arg_w_quotes);
 		ft_lstadd_back(args_list, ft_lstnew(arg));
 		token += len;

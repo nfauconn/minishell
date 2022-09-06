@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_run.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdankou < mdankou@student.42.fr >          +#+  +:+       +#+        */
+/*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 12:37:34 by user42            #+#    #+#             */
-/*   Updated: 2022/09/05 19:22:17 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/09/06 17:09:29 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,10 @@ static t_bool	heredoc_job(t_sh *sh, char *hdoc_path, char *delim, t_cmd *cmd)
 	{
 		cmd->redir_in.heredoc_ctrlc = 1;
 		dup2(stdin, STDIN_FILENO);
-		close(stdin);
 	}
 	else if (!line)
 		display_warning(sh, delim);
+	close(stdin);
 	clear_heredoc(&line, fd);
 	return (0);
 }
