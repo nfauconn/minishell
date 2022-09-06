@@ -6,7 +6,7 @@
 /*   By: mdankou < mdankou@student.42.fr >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 12:37:34 by user42            #+#    #+#             */
-/*   Updated: 2022/09/04 18:02:49 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/09/05 19:22:17 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static t_bool	heredoc_job(t_sh *sh, char *hdoc_path, char *delim, t_cmd *cmd)
 		sh->line_nb++;
 	while (line && ft_strcmp(line, delim) != OK)
 		putstr_heredoc(sh, &line, fd, cmd->redir_in.quoted_delim);
-	if (g_last_status)
+	if (access("/dev/stdin", R_OK))
 	{
 		cmd->redir_in.heredoc_ctrlc = 1;
 		dup2(stdin, STDIN_FILENO);
@@ -71,7 +71,7 @@ t_bool	run_heredoc(t_sh *sh, char *hdoc_path, char *delim, t_cmd *cmd)
 	signal_catching_mode(HEREDOC);
 	heredoc_job(sh, hdoc_path, delim, cmd);
 	signal_catching_mode(INTERACTIVE);
-	if (cmd->redir_in.heredoc_ctrlc != 0)
+	if (cmd->redir_error || cmd->redir_in.heredoc_ctrlc != 0)
 		return (1);
 	return (0);
 }

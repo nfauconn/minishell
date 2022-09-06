@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   clear.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: mdankou < mdankou@student.42.fr >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 21:14:36 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/19 13:24:44 by noe              ###   ########.fr       */
+/*   Updated: 2022/09/05 04:24:51 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "clear.h"
 
-static void	clear_cmd(t_cmd *cmd)
+void	clear_cmd(t_cmd *cmd)
 {
 	if (cmd->args)
 		ft_strarrayclear(&cmd->args);
@@ -72,4 +72,5 @@ void	clear_sh(t_sh *sh)
 	sh->heredoc_nb = 0;
 	if (sh->env)
 		ft_lstclear(&sh->env, free);
+	rl_clear_history();
 }

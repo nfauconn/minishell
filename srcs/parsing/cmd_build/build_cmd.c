@@ -6,7 +6,7 @@
 /*   By: mdankou < mdankou@student.42.fr >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 00:25:15 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/09/04 17:43:56 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/09/06 11:32:06 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,12 @@ t_cmd	*build_cmd(t_sh *sh, t_list *token, size_t i)
 	if (!cmd)
 		return (NULL);
 	set_cmd_params(sh, token, cmd);
+	if (cmd->redir_in.heredoc_ctrlc)
+	{
+		clear_cmd(cmd);
+		free(cmd);
+		return (NULL);
+	}
 	if (cmd->args)
 	{
 		cmd->built_i = is_builtin(cmd->args[0]);
@@ -58,5 +64,5 @@ t_cmd	*build_cmd(t_sh *sh, t_list *token, size_t i)
 		return (cmd);
 	}
 	//free(cmd);
-	return (NULL);
+	return (/*NULL*/cmd);
 }
