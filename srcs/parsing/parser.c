@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 12:50:49 by user42            #+#    #+#             */
-/*   Updated: 2022/09/08 17:22:19 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/09/08 18:07:25 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ t_bool	parse(t_sh *sh, t_input *input)
 	}
 	if (!input->token_list)
 		return (1);
-//	print_token_list(input);
 	if (lexer(input->token_list))
 	{
 		clear_input(input);
@@ -38,7 +37,6 @@ t_bool	parse(t_sh *sh, t_input *input)
 		clear_input(input);
 		return (1);
 	}
-//	print_commands(sh);
 	return (0);
 }
 

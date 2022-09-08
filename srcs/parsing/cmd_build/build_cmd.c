@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   build_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdankou < mdankou@student.42.fr >          +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 00:25:15 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/09/06 11:32:06 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/09/08 18:16:57 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,5 @@ t_cmd	*build_cmd(t_sh *sh, t_list *token, size_t i)
 		cmd->index = i;
 		return (cmd);
 	}
-	//free(cmd);
-	return (/*NULL*/cmd);
+	return (cmd);
 }

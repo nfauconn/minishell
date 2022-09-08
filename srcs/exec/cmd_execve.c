@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_execve.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 12:56:04 by user42            #+#    #+#             */
-/*   Updated: 2022/08/25 20:23:46 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/09/08 18:18:33 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,6 @@ void	cmd_execve(t_sh *sh, t_cmd *cmd)
 	char	**envp;
 	uint8_t	exit_code;
 
-//	ft_printerror("cmd[%d]->args[0] = [%s]\n", (int)cmd->index, cmd->args[0]);
 	if (!*(cmd->args[0]))
 		perror_exit_clear(sh, "\'\'", "command not found", 127);
 	args = ft_strarraydup(cmd->args);

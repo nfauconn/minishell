@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_run.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 12:37:34 by user42            #+#    #+#             */
-/*   Updated: 2022/09/06 17:09:29 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/09/08 18:18:21 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ static void	clear_heredoc(char **line, int fd)
 {
 	ft_strdel(line);
 	close(fd);
-	//exit_clear_child(sh, 0);
 }
 
 static void	display_warning(t_sh *sh, char *delim)

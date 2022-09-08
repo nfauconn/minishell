@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   params.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:18:20 by noe               #+#    #+#             */
-/*   Updated: 2022/09/06 18:20:53 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/09/08 18:16:28 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,9 +120,7 @@ t_bool	set_cmd_params(t_sh *sh, t_list *token, t_cmd *cmd)
 		else
 		{
 			ft_replacefree(&token->content, expand(token->content, sh));
-//			printf("expanded token->content = |%s|\n", (char *)token->content);
 			set_quotes_to_negative((char *)token->content);
-//			printf("escaped_quote token->content = |%s|\n", (char *)token->content);
 			fill_arg(&args_lst, (char *)token->content);
 		}
 		token = token->next;
@@ -133,13 +131,6 @@ t_bool	set_cmd_params(t_sh *sh, t_list *token, t_cmd *cmd)
 			set_redir(sh, cmd, (char *)token->content);
 		token = token->next;
 	}
-	/*
-	if (cmd->redir_error || cmd->redir_in.heredoc_ctrlc)
-	{
-		ft_lstclear(&args_lst, free);
-		return (1);
-	}
-	*/
 	reset_quotes_to_ascii(args_lst);
 	cmd->args = ft_lsttostrarray(args_lst);
 	ft_lstclear(&args_lst, free);

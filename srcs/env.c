@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 14:00:06 by noe               #+#    #+#             */
-/*   Updated: 2022/08/31 14:07:45 by noe              ###   ########.fr       */
+/*   Updated: 2022/09/08 18:07:00 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ t_list	*init_env(char **env_tab)
 		if (!env || init_shell_level(env) || init_shell_var(env))
 		{
 			ft_strarrayclear(&env_tab);
-			// if (env) ?
 			ft_lstclear(&env, free);
 			return (NULL);
 		}
