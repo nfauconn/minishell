@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 18:25:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/31 19:24:36 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/09/08 14:47:38 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_list	*init_env(char **env_tab);
 
 /* PROMPT LOOP */
 int		init_input(t_sh *sh, t_input *input);
-char	*build_prompt(void);
+char	*build_prompt(t_list *env);
 char	*get_input(t_sh *sh);
 void	redisplay_prompt(void);
 

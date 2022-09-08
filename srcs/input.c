@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdankou < mdankou@student.42.fr >          +#+  +:+       +#+        */
+/*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 18:10:00 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/09/07 16:30:32 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/09/08 15:04:02 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ char	*get_input(t_sh *sh)
 	char	*prompt;
 	char	*line_read;
 
-	prompt = build_prompt();
+	prompt = build_prompt(sh->env);
+	if (!prompt)
+		perror_exit_clear(sh, "get_input", "malloc internal error", 2);
 	line_read = readline(prompt);
 	free(prompt);
 	if (!line_read)
