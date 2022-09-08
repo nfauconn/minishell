@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:18:20 by noe               #+#    #+#             */
-/*   Updated: 2022/09/08 18:16:28 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/09/08 18:54:29 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,12 +93,9 @@ static t_bool	fill_arg(t_list **args_list, char *token)
 		token++;
 	while (*token)
 	{
-		printf("*token = %s\n", token);
 		len = len_until_blank(token);
 		arg_w_quotes = ft_substr(token, 0, len);
-		printf("arg_w_quotes = %s\n", arg_w_quotes);
 		arg = remove_quote(arg_w_quotes);
-		printf("arg after removing quotes = %s\n", arg);
 		free(arg_w_quotes);
 		ft_lstadd_back(args_list, ft_lstnew(arg));
 		token += len;
