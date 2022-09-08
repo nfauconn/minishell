@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 23:20:58 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/09/08 14:49:02 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/09/08 16:24:08 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,7 @@ char	*build_prompt(t_list *env)
 	ft_strfjoin(&prompt, cwd);
 	free(cwd);
 	ft_strfjoin(&prompt, NEUTRAL"$ ");
+//	ft_reallocstr(prompt, ft_strlen(prompt) * 2);
+//	ft_strlcat();
 	return (prompt);
 }

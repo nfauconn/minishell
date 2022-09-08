@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 19:35:18 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/31 14:06:44 by noe              ###   ########.fr       */
+/*   Updated: 2022/09/08 17:16:57 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	realloc_cat(t_newstr *new, char *to_add)
 	size_t	len;
 
 	len = ft_strlen(to_add);
-
 	new->len += len;
 	new->str = ft_reallocstr(new->str, new->len);
 	if (to_add)
@@ -63,11 +62,8 @@ char	*expand_str(char *ptr, size_t len, t_sh *sh)
 	p.end = ptr + len;
 	while (*ptr && ptr != p.end)
 	{
- 		if (*ptr == '$' && (ptr + 1) != p.end)
-		{
-			ptr++;
+		if (*ptr == '$' && (ptr + 1) != p.end && ++ptr)
 			to_add = expand_var(&ptr, sh);
-		}
 		else if (*ptr == '$' && ++ptr == p.end)
 			to_add = ft_strdup("$");
 		else
