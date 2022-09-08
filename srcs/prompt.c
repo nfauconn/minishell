@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 23:20:58 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/09/08 16:24:08 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/09/08 18:02:52 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*build_prompt(t_list *env)
 	char	*prompt;
 	char	*cwd;
 
-	prompt = ft_strdup(B_GREEN "🐱 MINISH 🐱:"B_MAGENTA);
+	prompt = ft_strdup("\001\e[1;32m\002MINISH:\001\e[1;33m\002");
 	cwd = getcwd(NULL, 0);
 	if (!cwd)
 		cwd = var_value("PWD", 3, env);
@@ -39,8 +39,6 @@ char	*build_prompt(t_list *env)
 		cwd = ft_strdup(".");
 	ft_strfjoin(&prompt, cwd);
 	free(cwd);
-	ft_strfjoin(&prompt, NEUTRAL"$ ");
-//	ft_reallocstr(prompt, ft_strlen(prompt) * 2);
-//	ft_strlcat();
+	ft_strfjoin(&prompt, "\001\e[0m\002$ ");
 	return (prompt);
 }

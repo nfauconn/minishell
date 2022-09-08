@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 18:25:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/09/08 16:22:53 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/09/08 17:50:12 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # define B_GREEN "\001\e[1;32m\002"
 # define B_YELLOW "\001\e[1;33m\002"
 # define B_MAGENTA "\001\e[1;34m\002"
+# define B_MYSTERE "\001\e[1;35m\002"
 # define B_CYAN "\001\e[1;36m\002"
 # define NEUTRAL "\001\e[0m\002"
 

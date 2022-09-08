@@ -1,14 +1,0 @@
-Script started on 2022-08-25 19:21:44+02:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="160" LINES="60"]
-[1m[7m%[27m[1m[0m                                                                                                                                                                ]2;nfauconn@e1r6p1:~/minishGithub]1;~/minishGithub[0m[27m[24m[J[32m╭─nfauconn@e1r6p1 [00m[33min ~/minishGithub [00m[01;33mon master[00m[31m ✘ [00m[00m[00m[33m(origin/master[33m)[00m
-[32m╰$ [00m[K[?1h=[?2004hmmake[?1l>[?2004l
-]2;make]1;make[1m[7m%[27m[1m[0m                                                                                                                                                                ]2;nfauconn@e1r6p1:~/minishGithub]1;~/minishGithub[0m[27m[24m[J[32m╭─nfauconn@e1r6p1 [00m[33min ~/minishGithub [00m[01;33mon master[00m[31m ✘ [00m[00m[00m[33m(origin/master[33m)[00m
-[32m╰$ [00m[K[?1h=[?2004httest
-[J[00mtest[0m         [00m[0m  [00m[J[34mtest_scripts[00m[0m/[00m[J[A[0m[27m[24m[3Ctest[K
-[J[7mtest         [00m[0m  [00m[J[34mtest_scripts[00m[0m/[00m[J[A[0m[27m[24m[3Ctest[K
-[7mtest         [00m[0m  [00m[7mtest         [00m[0m  [00m[A[0m[27m[24m[3Ctest[K_scripts[1m/[0m
-[15C[7mtest_scripts/[00mtest[0m         [00m[0m  [00m[A[0m[27m[24m[3Ctest_scripts[1m/[0m[K
-[J[A[16C[0m [?1l>[?2004l
-[J]2;test_scripts]1;test_scripts[1m[7m%[27m[1m[0m                                                                                                                                                                ]2;nfauconn@e1r6p1:~/minishGithub/test_scripts]1;../test_scripts[0m[27m[24m[J[32m╭─nfauconn@e1r6p1 [00m[33min ~/minishGithub/test_scripts [00m[01;33mon master[00m[31m ✘ [00m[00m[00m[33m(origin/master[33m)[00m
-[32m╰$ [00m[K[?1h=[?2004h../m .  [?2004l
-
-Script done on 2022-08-25 19:28:29+02:00 [COMMAND_EXIT_CODE="0"]
