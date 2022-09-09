@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 19:35:18 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/09/08 17:16:57 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/09/09 18:39:04 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char	*expand_str(char *ptr, size_t len, t_sh *sh)
 
 	new = ft_initnewstr();
 	p.end = ptr + len;
-	while (*ptr && ptr != p.end)
+	while (*ptr && ptr != p.end && len--)
 	{
 		if (*ptr == '$' && (ptr + 1) != p.end && ++ptr)
 			to_add = expand_var(&ptr, sh);
@@ -69,8 +69,6 @@ char	*expand_str(char *ptr, size_t len, t_sh *sh)
 		else
 		{
 			p.start = ptr;
-			if (is_blank(*(p.start)) && p.start + 1 == p.end)
-				return (ft_strdup(" "));
 			while (*ptr && ptr != p.end && *ptr != '$')
 				ptr++;
 			to_add = ft_substr(p.start, 0, ptr - p.start);
@@ -80,29 +78,30 @@ char	*expand_str(char *ptr, size_t len, t_sh *sh)
 	return (new.str);
 }
 
-static char	*handle_quoted(char *ptr, t_indexes *i, t_sh *sh)
+static char	*handle_quoted(char **ptr, t_sh *sh)
 {
 	char	*ret;
+	char	*start;
 
 	ret = NULL;
-	if (ptr[i->curr] == '$')
-		i->curr++;
-	i->start = i->curr;
-	if (ptr[i->curr] == '\'')
+	if (**ptr == '$')
+		(*ptr)++;
+	start = *ptr;
+	if (**ptr == '\'')
 	{
-		i->curr++;
-		while (ptr[i->curr] != '\'')
-			i->curr++;
-		i->curr++;
-		ret = ft_substr(ptr, i->start, i->curr - i->start);
+		(*ptr)++;
+		while (**ptr != '\'')
+			(*ptr)++;
+		(*ptr)++;
+		ret = ft_substr(start, 0, (*ptr) - start);
 	}
-	else if (ptr[i->curr] == '\"')
+	else if (**ptr == '\"')
 	{
-		i->curr++;
-		while (ptr[i->curr] != '\"')
-			i->curr++;
-		i->curr++;
-		ret = expand_str(ptr + i->start, i->curr - i->start, sh);
+		(*ptr)++;
+		while (**ptr != '\"')
+			(*ptr)++;
+		(*ptr)++;
+		ret = expand_str(start, (*ptr) - start, sh);
 	}
 	return (ret);
 }
@@ -110,24 +109,23 @@ static char	*handle_quoted(char *ptr, t_indexes *i, t_sh *sh)
 char	*expand(char *ptr, t_sh *sh)
 {
 	t_newstr	new;
-	t_indexes	i;
+	char		*start;
 	char		*to_add;
 
 	new = ft_initnewstr();
-	i.curr = 0;
-	while (ptr[i.curr])
+
+	while (*ptr)
 	{
-		i.start = i.curr;
-		if (is_quote(ptr[i.curr]) || is_doll_then_quote(&ptr[i.curr]))
+		if (is_quote(*ptr) || is_doll_then_quote(ptr))
 		{
-			to_add = handle_quoted(ptr, &i, sh);
+			to_add = handle_quoted(&ptr, sh);
 		}
 		else
 		{
-			while (ptr[i.curr] && !is_quote(ptr[i.curr])
-				&& !is_doll_then_quote(&ptr[i.curr]))
-				i.curr++;
-			to_add = expand_str(ptr + i.start, i.curr - i.start, sh);
+			start = ptr;
+			while (*ptr && !is_quote(*ptr) && !is_doll_then_quote(ptr))
+				ptr++;
+			to_add = expand_str(start, ptr - start, sh);
 		}
 		realloc_cat(&new, to_add);
 	}
