@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:51:19 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/09/09 16:27:57 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/09/09 18:49:47 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	mini_pwd(t_sh *sh, t_cmd *cmd)
 		error_display("pwd", strerror(errno), 0);
 		return (errno);
 	}
-	ft_putstr_fd(name, cmd->redir_out.fd);
+	ft_putendl_fd(name, cmd->redir_out.fd);
 	free(name);
 	return (0);
 }
