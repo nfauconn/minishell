@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:48:38 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/18 23:42:28 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/09/09 16:26:52 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	echo_handle_nlflag(char **args, size_t *j)
 			i = 1;
 			while (args[*j][i] == 'n')
 				++i;
-			if (args[*j][i] != '\0')
+			if (i == 1 || args[*j][i] != '\0')
 				break ;
 			nl_flag = 0;
 		}
