@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 12:56:04 by user42            #+#    #+#             */
-/*   Updated: 2022/09/09 16:27:51 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/09/09 18:55:40 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ static uint8_t	exec_absolute_path(char **args, char **envp)
 	uint8_t			error;
 
 	error = 126;
-	if (!ft_strncmp(args[0], ".", 1)
-		|| (stat(args[0], &mode) == 0 && S_ISDIR(mode.st_mode)))
+	if (stat(args[0], &mode) == 0 && S_ISDIR(mode.st_mode))
 		error_display(args[0], "Is a directory", 0);
 	else
 	{
@@ -89,7 +88,9 @@ static uint8_t	exec_relative_path(char **args, char **envp)
 	else
 	{
 		error = try_possible_paths(args, envp);
-		if (error != ENOENT && ft_strcmp(args[0], "."))
+		if (error != ENOENT
+			&& ft_strcmp(args[0], ".") == FAIL
+			&& ft_strcmp(args[0], "..") == FAIL)
 			error_display(args[0], strerror(error), 0);
 		else
 		{
