@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 12:56:04 by user42            #+#    #+#             */
-/*   Updated: 2022/09/08 20:01:03 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/09/09 16:27:51 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,15 @@ static uint8_t	exec_absolute_path(char **args, char **envp)
 	struct stat		mode;
 	uint8_t			error;
 
-	error = 0;
-	if (!ft_strcmp(args[0], ".")
+	error = 126;
+	if (!ft_strncmp(args[0], ".", 1)
 		|| (stat(args[0], &mode) == 0 && S_ISDIR(mode.st_mode)))
-	{
-		error = 126;
 		error_display(args[0], "Is a directory", 0);
-	}
 	else
 	{
 		execve(args[0], args, envp);
 		if (error != ENOENT)
-		{
-			error = 126;
-			error_display(args[0], "permission denied", 0);// DO WE HAVE TO EXEC INSIDE FILES ??:(
-		}
+			error_display(args[0], strerror(errno), 0);
 		else
 		{
 			error = 127;
@@ -95,7 +89,7 @@ static uint8_t	exec_relative_path(char **args, char **envp)
 	else
 	{
 		error = try_possible_paths(args, envp);
-		if (error != ENOENT)
+		if (error != ENOENT && ft_strcmp(args[0], "."))
 			error_display(args[0], strerror(error), 0);
 		else
 		{
