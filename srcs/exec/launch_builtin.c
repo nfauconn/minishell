@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:25:56 by noe               #+#    #+#             */
-/*   Updated: 2022/08/20 16:46:15 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/09/09 19:06:28 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,11 @@
 
 extern uint8_t	g_last_status;
 
-static int	no_args(t_cmd *cmd)
-{
-	if (cmd->args[0] && !cmd->args[1])
-		return (1);
-	return (0);
-}
-
-static t_bool	not_executable_in_pipeline(t_cmd *cmd, char built_i)
-{
-	if ((built_i == cd || (built_i == export && !no_args(cmd))
-			|| built_i == unset))
-		return (1);
-	return (0);
-}
-
 void	launch_forked_builtin(t_sh *sh, t_cmd *cmd)
 {
 	int	ret;
 
-	if (not_executable_in_pipeline(cmd, cmd->built_i))
-		ret = 0;
-	else
-		ret = sh->exec_built[cmd->built_i](sh, cmd);
+	ret = sh->exec_built[cmd->built_i](sh, cmd);
 	exit_clear_child(sh, ret);
 }
 
