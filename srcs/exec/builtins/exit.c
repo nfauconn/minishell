@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 17:46:29 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/24 21:30:38 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/09/09 18:39:12 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exit.h"
+
+extern uint8_t	g_last_status;
 
 static void	builtin_exit_clear(t_sh *sh, uint8_t exit_code)
 {
@@ -62,6 +64,21 @@ static int	ft_atoll_err(char *s, long long *nbr)
 	return (1);
 }
 
+static int	exit_str_isdigit(char *str)
+{
+	if (!*str)
+		return (0);
+	if ((*str == '+' || *str == '-') && ft_isdigit(str[1]))
+		++str;
+	while (*str)
+	{
+		if (!ft_isdigit(*str))
+			return (0);
+		str++;
+	}
+	return (1);
+}
+
 int	mini_exit(t_sh *sh, t_cmd *cmd)
 {
 	int			i;
@@ -72,8 +89,8 @@ int	mini_exit(t_sh *sh, t_cmd *cmd)
 	while (cmd->args[i])
 		i++;
 	if (i == 1)
-		builtin_exit_clear(sh, 0);
-	if ((!ft_str_isdigit(cmd->args[1]))
+		builtin_exit_clear(sh, g_last_status);
+	if ((!exit_str_isdigit(cmd->args[1]))
 		|| !ft_atoll_err(cmd->args[1], &exit_code))
 	{
 		error_display("exit", cmd->args[1], ": numeric argument required");
