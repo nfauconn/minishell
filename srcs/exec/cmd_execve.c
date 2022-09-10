@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_execve.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 12:56:04 by user42            #+#    #+#             */
-/*   Updated: 2022/09/09 18:55:40 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/09/10 16:24:12 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,9 @@ static uint8_t	exec_absolute_path(char **args, char **envp)
 	else
 	{
 		execve(args[0], args, envp);
-		if (error != ENOENT)
-			error_display(args[0], strerror(errno), 0);
-		else
-		{
+		if (errno == ENOENT)
 			error = 127;
-			error_display(args[0], "command not found", 0);
-		}
+		error_display(args[0], strerror(errno), 0);
 	}	
 	return (error);
 }
