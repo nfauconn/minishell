@@ -3,23 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:48:38 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/09/09 16:26:52 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/09/14 20:34:56 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
-
-static void	handle_redirection(t_sh *sh, t_cmd *cmd)
-{
-	if (sh->cmd_nb > 1)
-	{
-		cmd->redir_in.fd = STDIN_FILENO;
-		cmd->redir_out.fd = STDOUT_FILENO;
-	}
-}
 
 static int	echo_handle_nlflag(char **args, size_t *j)
 {
@@ -55,7 +46,8 @@ int	mini_echo(t_sh *sh, t_cmd *cmd)
 	args++;
 	j = 0;
 	nl_flag = echo_handle_nlflag(args, &j);
-	handle_redirection(sh, cmd);
+	if (sh->cmd_nb > 1 || !cmd->redir_out.filename)
+		cmd->redir_out.fd = STDOUT_FILENO;
 	while (args[j])
 	{
 		ft_putstr_fd(args[j], cmd->redir_out.fd);
