@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:53:50 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/20 14:56:07 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/09/14 20:32:05 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,11 @@ static void	sort_str_tab(char **tab)
 	}
 }
 
-static void	print_env_tab(t_list *env)
+static void	print_env_tab(char **tab, int fd_out)
 {
-	char	**tab;
 	int		j;
 	int		i;
 
-	tab = get_env_tab(env);
 	if (!tab)
 		return ;
 	sort_str_tab(tab);
@@ -55,14 +53,16 @@ static void	print_env_tab(t_list *env)
 	{
 		if (ft_strncmp(tab[j], "_=", 2))
 		{
-			ft_printf("declare -x ");
 			i = 0;
 			while (tab[j][i] && tab[j][i] != '=')
-				ft_printf("%c", tab[j][i++]);
+				ft_putchar_fd(tab[j][i++], fd_out);
 			if (tab[j][i] == '=')
-				ft_printf("=\"%s\"\n", &tab[j][i + 1]);
-			else
-				ft_printf("\n");
+			{
+				ft_putstr_fd("=\"", fd_out);
+				ft_putstr_fd(&tab[j][i + 1], fd_out);
+				ft_putstr_fd("\"", fd_out);
+			}
+			ft_putchar_fd('\n', fd_out);
 		}
 		++j;
 	}
@@ -123,7 +123,7 @@ int	mini_export(t_sh *sh, t_cmd *cmd)
 	j = 1;
 	status = 0;
 	if (!var_assigns || !var_assigns[j])
-		print_env_tab(sh->env);
+		print_env_tab(get_env_tab(sh->env), cmd->redir_out.fd);
 	j = 1;
 	while (var_assigns && var_assigns[j])
 	{
