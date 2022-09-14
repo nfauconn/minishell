@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdankou < mdankou@student.42.fr >          +#+  +:+       +#+        */
+/*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:52:52 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/09/14 17:46:17 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/09/14 21:45:55 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,7 @@ static void	update_env(t_sh *sh, t_list **env)
 		free(tmp);
 	}
 	else
-	{
-		ft_printerror("cd: error retrieving current directory: getcwd: "
-			"cannot access parent directories: No such file or directory\n");
 		errno = 1;
-	}
 }
 
 static int	cd_home(t_sh *sh)
@@ -107,7 +103,11 @@ int	mini_cd(t_sh *sh, t_cmd *cmd)
 	if (!path)
 		path = ft_strdup(cmd->args[1]);
 	if (chdir(path) < 0)
+	{
+		if (errno == ESTALE)
+			errno = ENOENT;
 		ft_printerror("minish: cd: %s: %s\n", cmd->args[1], strerror(errno));
+	}
 	else
 		update_env(sh, &sh->env);
 	free(path);
