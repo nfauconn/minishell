@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:48:38 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/09/14 20:34:56 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/09/14 20:46:59 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,11 @@ int	mini_echo(t_sh *sh, t_cmd *cmd)
 	int		nl_flag;
 	size_t	j;
 
+	(void)sh;
 	args = cmd->args;
 	args++;
 	j = 0;
 	nl_flag = echo_handle_nlflag(args, &j);
-	if (sh->cmd_nb > 1 || !cmd->redir_out.filename)
-		cmd->redir_out.fd = STDOUT_FILENO;
 	while (args[j])
 	{
 		ft_putstr_fd(args[j], cmd->redir_out.fd);

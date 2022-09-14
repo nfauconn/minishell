@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:53:16 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/18 23:42:28 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/09/14 20:44:15 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,10 @@ int	mini_env(t_sh *sh, t_cmd *cmd)
 	l = sh->env;
 	if (cmd->redir_error)
 		return (1);
-	if (cmd->redir_out.fd == NO_REDIR)
-		cmd->redir_out.fd = STDIN_FILENO;
 	while (l)
 	{
 		if (ft_strchr((char *)l->content, '='))
-			ft_printf("%s\n", (char *)l->content);
+			ft_putendl_fd((char *)l->content, cmd->redir_out.fd);
 		l = l->next;
 	}
 	return (0);

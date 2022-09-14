@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:25:56 by noe               #+#    #+#             */
-/*   Updated: 2022/09/14 20:20:49 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/09/14 20:40:04 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	launch_single_builtin(t_sh *sh, t_cmd *cmd)
 		g_last_status = WRONG_REDIR;
 		return ;
 	}
-	if (sh->cmd_nb >1  || !cmd->redir_out.filename)
+	if (!cmd->redir_out.filename)
 		cmd->redir_out.fd = STDOUT_FILENO;
 	g_last_status = sh->exec_built[cmd->built_i](sh, cmd);
 }

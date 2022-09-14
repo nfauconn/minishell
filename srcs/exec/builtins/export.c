@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:53:50 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/09/14 20:32:05 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/09/14 20:49:08 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,13 @@ static void	print_env_tab(char **tab, int fd_out)
 	if (!tab)
 		return ;
 	sort_str_tab(tab);
-	j = 0;
-	while (tab[j])
+	j = -1;
+	while (tab[++j])
 	{
 		if (ft_strncmp(tab[j], "_=", 2))
 		{
 			i = 0;
+			ft_putstr_fd("declare -x ", fd_out);
 			while (tab[j][i] && tab[j][i] != '=')
 				ft_putchar_fd(tab[j][i++], fd_out);
 			if (tab[j][i] == '=')
@@ -64,7 +65,6 @@ static void	print_env_tab(char **tab, int fd_out)
 			}
 			ft_putchar_fd('\n', fd_out);
 		}
-		++j;
 	}
 	ft_strarrayclear(&tab);
 }
