@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_run.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdankou < mdankou@student.42.fr >          +#+  +:+       +#+        */
+/*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 12:37:34 by user42            #+#    #+#             */
-/*   Updated: 2022/09/14 15:59:04 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/09/14 22:45:08 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	putstr_heredoc(t_sh *sh, char **line, int fd, t_bool quoted)
 {
 	char	*new_line;
 
-	if (!quoted)
+	if (ft_strcmp(*line, "\0") && !quoted)
 		ft_replacefree((void **)line, expand_str(*line, ft_strlen(*line), sh));
 	ft_putendl_fd(*line, fd);
 	new_line = readline("> ");
