@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 20:28:23 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/09/14 21:21:00 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/09/14 22:31:16 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ static t_bool	set_redir_infile(t_sh *sh, t_cmd *cmd, char *token)
 t_bool	set_redir(t_sh *sh, t_cmd *cmd, char *token)
 {
 	t_bool	ret;
+
 	ret = 0;
 	if (!ft_strncmp(token, "<<", 2))
 		ret = set_redir_heredoc(sh, cmd, token);

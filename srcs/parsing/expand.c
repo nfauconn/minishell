@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 19:35:18 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/09/09 18:39:04 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/09/14 22:13:19 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,6 @@ char	*expand(char *ptr, t_sh *sh)
 	char		*to_add;
 
 	new = ft_initnewstr();
-
 	while (*ptr)
 	{
 		if (is_quote(*ptr) || is_doll_then_quote(ptr))
