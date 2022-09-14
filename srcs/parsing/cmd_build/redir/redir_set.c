@@ -3,14 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   redir_set.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdankou < mdankou@student.42.fr >          +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 20:28:23 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/09/12 18:13:49 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/09/14 21:21:00 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "redir.h"
+
+static t_bool	open_redir_out(t_cmd *cmd)
+{
+	if (cmd->redir_out.is_append)
+		cmd->redir_out.fd = open(cmd->redir_out.filename, \
+			O_CREAT | O_APPEND | O_WRONLY, 0644);
+	else
+		cmd->redir_out.fd = open(cmd->redir_out.filename, \
+			O_CREAT | O_TRUNC | O_WRONLY, 0644);
+	if (cmd->redir_out.fd < 0)
+	{
+		error_display(cmd->redir_out.filename, strerror(errno), 0);
+		return (1);
+	}
+	return (0);
+}
 
 static t_bool	set_redir_outfile(t_sh *sh, t_cmd *cmd, char *token)
 {
@@ -29,18 +45,9 @@ static t_bool	set_redir_outfile(t_sh *sh, t_cmd *cmd, char *token)
 		return (1);
 	}
 	cmd->redir_out.filename = expand(token, sh);
-	//Litteral Copy of open_redir_out 
-	if (cmd->redir_out.is_append)
-		cmd->redir_out.fd = open(cmd->redir_out.filename, \
-			O_CREAT | O_APPEND | O_WRONLY, 0644);
-	else
-		cmd->redir_out.fd = open(cmd->redir_out.filename, \
-			O_CREAT | O_TRUNC | O_WRONLY, 0644);
-	if (cmd->redir_out.fd < 0)
-	{
-		error_display(cmd->redir_out.filename, strerror(errno), 0);
-		return (1);
-	}
+	ft_replacefree((void **)&cmd->redir_out.filename, \
+		remove_quote(cmd->redir_out.filename));
+	open_redir_out(cmd);
 	close(cmd->redir_out.fd);
 	return (0);
 }
@@ -84,6 +91,8 @@ static t_bool	set_redir_infile(t_sh *sh, t_cmd *cmd, char *token)
 		return (1);
 	}
 	cmd->redir_in.filename = expand(token, sh);
+	ft_replacefree((void **)&cmd->redir_in.filename, \
+		remove_quote(cmd->redir_in.filename));
 	return (check_access(cmd->redir_in.filename, F_OK | R_OK));
 }
 

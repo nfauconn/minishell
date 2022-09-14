@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 18:19:59 by user42            #+#    #+#             */
-/*   Updated: 2022/08/16 09:00:04 by noe              ###   ########.fr       */
+/*   Updated: 2022/09/14 21:23:28 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,7 @@ static t_bool	open_redir_out(t_cmd *cmd)
 		cmd->redir_out.fd = open(cmd->redir_out.filename, \
 			O_CREAT | O_TRUNC | O_WRONLY, 0644);
 	if (cmd->redir_out.fd < 0)
-	{
-		error_display(cmd->redir_out.filename, strerror(errno), 0);
 		return (1);
-	}
 	return (0);
 }
 
