@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mdankou < mdankou@student.42.fr >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:52:52 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/18 23:42:28 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/09/14 17:46:17 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 #include "exec.h"
 
-static void	update_env(t_list **env)
+static void	update_env(t_sh *sh, t_list **env)
 {
 	char	*cwd;
 	char	*tmp;
@@ -30,15 +30,15 @@ static void	update_env(t_list **env)
 	{
 		tmp = ft_strjoin("PWD=", cwd);
 		do_export(env, tmp);
+		ft_replacefree((void **)&sh->cwd, cwd);
 		free(tmp);
 	}
 	else
 	{
 		ft_printerror("cd: error retrieving current directory: getcwd: "
 			"cannot access parent directories: No such file or directory\n");
-		errno = 0;
+		errno = 1;
 	}
-	free(cwd);
 }
 
 static int	cd_home(t_sh *sh)
@@ -52,7 +52,7 @@ static int	cd_home(t_sh *sh)
 		return (1);
 	}
 	if (!chdir(home))
-		update_env(&sh->env);
+		update_env(sh, &sh->env);
 	free(home);
 	return (0);
 }
@@ -94,13 +94,11 @@ static char	*get_curpath(t_sh *sh, t_cmd *cmd)
 
 int	mini_cd(t_sh *sh, t_cmd *cmd)
 {
-	char	**args;
 	char	*path;
 
-	args = cmd->args;
-	if (!args[1])
+	if (!cmd->args[1])
 		return (cd_home(sh));
-	if (args[2])
+	if (cmd->args[2])
 	{
 		error_display("cd", "too many arguments", 0);
 		return (1);
@@ -109,9 +107,9 @@ int	mini_cd(t_sh *sh, t_cmd *cmd)
 	if (!path)
 		path = ft_strdup(cmd->args[1]);
 	if (chdir(path) < 0)
-		ft_printerror("minish: cd: %s: %s\n", args[1], strerror(errno));
+		ft_printerror("minish: cd: %s: %s\n", cmd->args[1], strerror(errno));
 	else
-		update_env(&sh->env);
+		update_env(sh, &sh->env);
 	free(path);
 	return (errno != 0);
 }

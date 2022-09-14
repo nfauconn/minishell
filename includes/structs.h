@@ -6,7 +6,7 @@
 /*   By: mdankou < mdankou@student.42.fr >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 12:07:25 by user42            #+#    #+#             */
-/*   Updated: 2022/09/04 17:54:10 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/09/14 16:05:03 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct s_sh
 	t_cmd			*cmd_list;
 	int				heredoc_nb;
 	t_list			*env;
+	char			*cwd;
 	int				(*exec_built[7])(struct s_sh *, t_cmd *);
 }	t_sh;
 

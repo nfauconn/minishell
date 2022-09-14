@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mdankou < mdankou@student.42.fr >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:51:19 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/09/10 15:48:07 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/09/14 16:14:28 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,9 @@ static void	handle_redirection(t_sh *sh, t_cmd *cmd)
 
 int	mini_pwd(t_sh *sh, t_cmd *cmd)
 {
-	char	*name;
-
 	(void)sh;
 	(void)cmd;
-	name = getcwd(NULL, 0);
-	if (!name)
-	{
-		error_display("pwd", strerror(errno), 0);
-		return (errno);
-	}
 	handle_redirection(sh, cmd);
-	ft_putendl_fd(name, cmd->redir_out.fd);
-	free(name);
+	ft_putendl_fd(sh->cwd, cmd->redir_out.fd);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mdankou < mdankou@student.42.fr >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 21:14:36 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/09/05 04:24:51 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/09/14 16:07:10 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ void	clear_input(t_input *input)
 void	clear_sh(t_sh *sh)
 {
 	sh->level = 0;
-	sh->line_nb = 0;
 	sh->cmd_nb = 0;
+	ft_strdel(&sh->cwd);
 	if (sh->cmd_list)
 		clear_cmd_list(&sh->cmd_list);
 	sh->heredoc_nb = 0;

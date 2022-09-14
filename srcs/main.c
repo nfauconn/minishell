@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mdankou < mdankou@student.42.fr >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 20:04:06 by user42            #+#    #+#             */
-/*   Updated: 2022/08/20 14:46:55 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/09/14 16:11:46 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	main(int ac, char **av, char **env)
 	g_last_status = 0;
 	init_sh(&sh);
 	sh.env = init_env(env);
+	sh.cwd = var_value("PWD", 3, sh.env);
 	if (!sh.env)
 		return (sh_perror("malloc failure"));
 	while (1)

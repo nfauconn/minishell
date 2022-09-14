@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: mdankou < mdankou@student.42.fr >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 17:25:43 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/31 14:00:26 by noe              ###   ########.fr       */
+/*   Updated: 2022/09/14 16:09:28 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ static void	init_builtins_ptr(t_sh *sh)
 void	init_sh(t_sh *sh)
 {
 	sh->level = 0;
-	sh->line_nb = 0;
 	sh->cmd_nb = 0;
 	sh->cmd_list = NULL;
 	sh->heredoc_nb = 0;
