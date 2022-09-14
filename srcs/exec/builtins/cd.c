@@ -6,7 +6,7 @@
 /*   By: mdankou <mdankou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:52:52 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/09/14 21:45:55 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/09/14 23:33:57 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static char	*build_curpath(t_sh *sh, t_cmd *cmd)
 		if (!path || (stat(path, &mode) == 0 && S_ISDIR(mode.st_mode)
 				&& !access(path, X_OK)))
 		{
-			ft_putendl_fd(path, 1);
+			ft_putendl_fd(path, cmd->redir_out.fd);
 			break ;
 		}
 		ft_strdel(&path);
