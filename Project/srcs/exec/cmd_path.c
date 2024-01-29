@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 14:06:55 by user42            #+#    #+#             */
-/*   Updated: 2022/08/20 15:08:42 by nfauconn         ###   ########.fr       */
+/*   Updated: 2024/01/29 13:09:34 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char	*join_path(char const *penv, char const *pexec)
 	len1 = ft_strlen(penv);
 	len2 = ft_strlen(pexec);
 	sep = penv[len1 - 1] != '/';
-	dst = (char *)malloc(sizeof(char) * (len1 + len2 + sep + 1));
+	dst = malloc(sizeof(char) * (len1 + len2 + sep + 1));
 	if (!dst)
 		return (NULL);
 	ft_strlcpy(dst, penv, len1 + 1);

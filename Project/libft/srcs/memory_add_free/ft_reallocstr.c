@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 15:09:55 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/24 19:10:02 by nfauconn         ###   ########.fr       */
+/*   Updated: 2024/01/29 13:09:34 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_reallocstr(char *str, size_t newlen)
 		oldlen = 0;
 	else
 		oldlen = ft_strlen(str);
-	new_str = (char *)malloc(sizeof(char) * newlen + 1);
+	new_str = malloc(sizeof(char) * newlen + 1);
 	if (!new_str)
 		return (NULL);
 	if (oldlen)

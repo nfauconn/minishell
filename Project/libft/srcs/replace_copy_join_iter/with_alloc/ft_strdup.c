@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 19:00:05 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/26 18:53:39 by nfauconn         ###   ########.fr       */
+/*   Updated: 2024/01/29 13:09:34 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*ft_strdup(const char *s1)
 	char	*tab;
 	int		i;
 
-	tab = (char *)malloc(sizeof(char) * (ft_strlen(s1) + 1));
+	tab = malloc(sizeof(char) * (ft_strlen(s1) + 1));
 	if (!tab)
 		return (0);
 	i = 0;

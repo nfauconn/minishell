@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 17:05:40 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/13 23:12:08 by nfauconn         ###   ########.fr       */
+/*   Updated: 2024/01/29 13:09:34 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		len = s_len - start;
 	if (start > s_len)
 	{
-		new = (char *)malloc(sizeof(char) * 1);
+		new = malloc(sizeof(char) * 1);
 		if (!new)
 			return (NULL);
 		new[0] = '\0';
 		return (new);
 	}
-	new = (char *)malloc(sizeof(char) * (len + 1));
+	new = malloc(sizeof(char) * (len + 1));
 	if (!new)
 		return (NULL);
 	new = (char *)ft_memcpy(new, s + start, len + 1);
