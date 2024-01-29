@@ -39,7 +39,8 @@
 null.d
 objs
 minishell
-.vscode/
+.vscode
+../.vscode
 
 # Debug files
 *.dSYM/
