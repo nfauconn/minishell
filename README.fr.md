@@ -11,7 +11,7 @@ Ce projet consiste à écrire notre implémentation de bash pour découvrir les 
 
 ```shell
 git clone git@github.com:nfauconn/minishell.git
-cd minishell/Projet
+cd minishell/Project
 make
 ```
 
