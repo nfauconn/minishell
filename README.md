@@ -7,8 +7,8 @@
 
 This project is about creating a little bash to learn about processes and file descriptors.
 
-| Program name | minishell |
 |--|--|
+| Program name | minishell |
 Language | C
 Turn in files | `Makefile`, `*.h`, `*.c`
 Makefile  | `NAME`, `all`, `clean`, `fclean`, `re` 
