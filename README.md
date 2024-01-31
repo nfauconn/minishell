@@ -7,6 +7,7 @@
 
 This project is about creating a little bash to learn about processes and file descriptors.
 
+|||
 |--|--|
 | Program name | minishell |
 Language | C
