@@ -50,7 +50,7 @@ Fonct. externes | `readline`, `rl_clear_history`, `rl_on_new_line`, `rl_replace_
 
 ```shell
 git clone git@github.com:nfauconn/minishell.git
-cd minishell/Projet
+cd minishell/Project
 make
 ```
 
